@@ -25,7 +25,7 @@ export class LoginPage {
       .subscribe(
         response => {
           console.log('Token:', response.token);
-          localStorage.setItem('token', response.token); // Almacena el token
+          this.authService.saveUserData(response.token, response.user); // Guarda el token y los datos del usuario
           this.router.navigate(['/']); // Redirige a la página principal
         },
         (error: HttpErrorResponse) => {
