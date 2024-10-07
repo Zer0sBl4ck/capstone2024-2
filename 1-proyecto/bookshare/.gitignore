@@ -52,3 +52,22 @@ $RECYCLE.BIN/
 
 # Ignorar archivos de compilación de TypeScript (si usas TypeScript)
 *.tsbuildinfo
+
+# Capacitor configuration (if using Capacitor)
+capacitor.config.ts
+
+# Ignorar archivos de Babel
+.babelrc
+.babelrc.js
+.babelrc.json
+babel.config.js
+babel.config.json
+
+# Ignorar archivos de Webpack
+webpack.config.js
+webpack.config.ts
+webpack.config.prod.js
+webpack.config.dev.js
+
+# Ignorar la carpeta de babel-webpack en .angular/cache (para Windows)
+\.angular\cache\**\babel-webpack\
