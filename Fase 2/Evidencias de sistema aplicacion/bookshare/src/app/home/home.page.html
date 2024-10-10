@@ -37,7 +37,11 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button> <!-- Botón para abrir el menú -->
         </ion-buttons>
-        <ion-button type="submit" expand="block" routerLink="/login">Ingresar</ion-button>
+        <ion-item routerLink="/login" style="max-width: 50%; padding: 0;">
+          <span style="display: flex; align-items: center;">
+              <ion-icon name="person-outline" style="font-size: 24px;"></ion-icon>
+          </span>
+      </ion-item>
       </ion-toolbar>
     </ion-header>
 
