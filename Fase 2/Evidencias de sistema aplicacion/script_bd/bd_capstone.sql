@@ -14,7 +14,8 @@ CREATE TABLE libro (
   id_libro INT AUTO_INCREMENT PRIMARY KEY,
   titulo VARCHAR(255),
   autor VARCHAR(255),
-  descripcion TEXT,
+  descripcion VARCHAR(255),
+  genero VARCHAR(255),
   creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   imagen_libro BLOB
 );
