@@ -1,13 +1,60 @@
-<ion-header [translucent]="true">
+<ion-header class="fondo">
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/login">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="titulo">Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content >
+
+  <br>
+  <br>
+  <br>
+
+  <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+    <ion-item>
+      <ion-label position="stacked">Nombre de Usuario</ion-label>
+      <ion-input type="text" [(ngModel)]="nombre_usuario" name="nombre_usuario" required></ion-input>
+    </ion-item>
+
+    <br>
+
+    <ion-item>
+      <ion-label position="stacked">Correo</ion-label>
+      <ion-input type="email" [(ngModel)]="correo" name="correo" required></ion-input>
+    </ion-item>
+
+    <br>
+
+    <ion-item>
+      <ion-label position="stacked">Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="contrasena" name="contrasena" required></ion-input>
+    </ion-item>
+
+    <br>
+
+    <ion-item>
+      <ion-label position="stacked">Ubicación</ion-label>
+      <ion-input type="text" [(ngModel)]="ubicacion" name="ubicacion" required></ion-input>
+    </ion-item>
+
+    <br>
+
+    <ion-button expand="block" type="submit" [disabled]="!registerForm.form.valid">Registrar</ion-button>
+
+    <br>
+
+    <div style="text-align: center;">
+      <a class="aqui" routerLink="/login" style="color: #229E88;">Si tienes cuenta, pulsa <strong>Aquí</strong></a>
+    </div>
+
+
+    <div *ngIf="errorMessage" style="color: red; margin-top: 10px;">
+      {{ errorMessage }}
+    </div>
+  </form>
 </ion-content>
