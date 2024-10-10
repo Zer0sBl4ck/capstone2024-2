@@ -1,6 +1,6 @@
 <ion-app>
   <!-- Side Menu -->
-  <ion-menu contentId="main-content">
+  <ion-menu contentId="main-content" *ngIf="isLoggedIn"> <!-- Muestra el menú solo si está logueado -->
     <ion-header class="menu">
       <ion-toolbar>
         <ion-title></ion-title>
@@ -21,7 +21,7 @@
         <br>
         <br>
         <br>
-        <ion-item routerLink="/login">
+        <ion-item (click)="logout()">
           <ion-icon name="log-out-outline" slot="start"></ion-icon> <!-- Icono para Cerrar Sesión -->
           Cerrar Sesión
         </ion-item>
@@ -37,7 +37,7 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button> <!-- Botón para abrir el menú -->
         </ion-buttons>
-        <ion-item routerLink="/login" style="max-width: 50%; padding: 0;">
+        <ion-item routerLink="/login" style="max-width: 50%; padding: 0;" *ngIf="!isLoggedIn"> <!-- Mostrar solo si no está logueado -->
           <span style="display: flex; align-items: center;">
               <ion-icon name="person-outline" style="font-size: 24px;"></ion-icon>
           </span>
@@ -46,14 +46,9 @@
     </ion-header>
 
     <ion-content>
-
       <div id="container">
-
         <img src="assets/imagenes/logobookshare.png" alt="Logo" style="max-width: 75%; height: auto; margin-bottom: 20px; left: 50%; transform: translateX(15%);" />
-
         <ion-title>BookShare</ion-title>
-        <!--  <ion-searchbar slot="end" placeholder="Buscar..."></ion-searchbar> Search bar -->
-
         <strong>Ready to create an app?</strong>
         <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
       </div>

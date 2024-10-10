@@ -26,7 +26,9 @@ export class LoginPage {
         response => {
           console.log('Token:', response.token);
           this.authService.saveUserData(response.token, response.user); // Guarda el token y los datos del usuario
-          this.router.navigate(['/']); // Redirige a la página principal
+          this.router.navigate(['/']).then(() => {
+            window.location.reload(); 
+          });
         },
         (error: HttpErrorResponse) => {
           console.error('Error al iniciar sesión:', error);
