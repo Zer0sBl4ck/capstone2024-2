@@ -1,40 +1,41 @@
 <ion-app>
   <!-- Side Menu -->
-  <ion-menu contentId="main-content" *ngIf="isLoggedIn"> <!-- Muestra el menú solo si está logueado -->
-    <ion-header class="menu">
+  <ion-menu contentId="main-content" *ngIf="isLoggedIn"> 
+    <ion-header>
       <ion-toolbar>
         <ion-title></ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
-      <ion-list>
-        <ion-item routerLink="/home">
-          <ion-icon name="person-outline" slot="start"></ion-icon> <!-- Icono para Mi perfil -->
+    <ion-content class="menu" >
+      <ion-list style="max-width: 80%; padding: 0 10px">
+        <ion-button routerLink="/home" style="max-width: 100%; padding: 0 10px; border-radius: 7px;">
+          <ion-icon name="person-outline" slot="start"></ion-icon> 
           Mi perfil
-        </ion-item>
-  
+        </ion-button>
+
         <br>
         <br>
-        <ion-item routerLink="/wishlist">
-          <ion-icon name="star-outline" slot="start"></ion-icon> <!-- Icono para Wishlist -->
+
+        <ion-button routerLink="/wishlist" style="max-width: 100%; padding: 0 10px ; border-radius: 7px;">
+          <ion-icon name="star-outline" slot="start"></ion-icon>
           Wishlist
-        </ion-item>
-  
+        </ion-button>
+
         <br>
         <br>
         <!-- Opción Agregar libro solo para admin -->
-        <ion-item *ngIf="userRole === 'admin'">
-          <ion-icon name="book-outline" slot="start"></ion-icon> <!-- Icono para Agregar libro -->
+        <ion-button *ngIf="userRole === 'admin'" style="max-width: 100%; padding: 0 10px ; border-radius: 7px;">
+          <ion-icon name="book-outline" slot="start"></ion-icon> 
           Agregar libro
-        </ion-item>
-  
+        </ion-button>
+
         <br>
         <br>
         <br>
-        <ion-item (click)="logout()">
-          <ion-icon name="log-out-outline" slot="start"></ion-icon> <!-- Icono para Cerrar Sesión -->
+        <ion-button class="cerrar" (click)="logout()" style="max-width: 100%; padding: 0 10px ; border-radius: 7px;">
+          <ion-icon name="log-out-outline" slot="start"></ion-icon>
           Cerrar Sesión
-        </ion-item>
+        </ion-button>
       </ion-list>
     </ion-content>
     <br>
@@ -45,22 +46,43 @@
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button> <!-- Botón para abrir el menú -->
+          <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-item routerLink="/login" style="max-width: 50%; padding: 0;" *ngIf="!isLoggedIn"> <!-- Mostrar solo si no está logueado -->
+        <ion-button routerLink="/login"
+          style="max-width: 50%; padding: 0; left: 80%; transform: translateX(80%);border-radius: 7px;"
+          *ngIf="!isLoggedIn">
           <span style="display: flex; align-items: center;">
-              <ion-icon name="person-outline" style="font-size: 24px;"></ion-icon>
-          </span>
-      </ion-item>
+            <ion-icon name="person-outline" style="font-size: 24px;"></ion-icon>
+          </span>Ingresar
+        </ion-button>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
       <div id="container">
-        <img src="assets/imagenes/logobookshare.png" alt="Logo" style="max-width: 75%; height: auto; margin-bottom: 20px; left: 50%; transform: translateX(15%);" />
-        <ion-title>BookShare</ion-title>
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+        <img src="assets/imagenes/logobookshare.png" alt="Logo"
+          style="max-width: 75%; height: auto; margin-bottom: 20px; left: 50%; transform: translateX(15%);" />
+
+        <ion-title
+          style="left: 50%; transform: translateX(27%); font-size: 25px; font-family: Helvetica;"><strong>BookShare</strong></ion-title>
+
+        <p style="font-size: 12px; font-family: Helvetica; text-align: center;">Bookshare" es una plataforma en línea
+          sin fines <br> de lucro destinada a fomentar la lectura y crear <br>una comunidad de lectores basada en la
+          confianza.</p>
+        <!--  <ion-searchbar slot="end" placeholder="Buscar..."></ion-searchbar> Search bar -->
+
+        <img src="assets/imagenes/personaleyendo.png" alt="Logo"
+          style="max-width: 60%; height: auto; margin-bottom: 20px; left: 50%; transform: translateX(35%);border-radius: 7px;" />
+
+        <p style="font-size: 12px; font-family: Helvetica; left: 50%; text-align: center;">Esta plataforma permitirá a
+          los usuarios registrar, <br> intercambiar y prestar libros entre sí, promoviendo <br> así el acceso a la
+          literatura de manera sostenible <br>y accesible.</p>
+
+        <img src="assets/imagenes/intercambiandolibro.png" alt="Logo"
+          style="max-width: 60%; height: auto; margin-bottom: 20px; left: 50%; transform: translateX(35%);border-radius: 7px;" />
+
+
+
       </div>
     </ion-content>
   </div>

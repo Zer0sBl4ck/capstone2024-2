@@ -1,48 +1,67 @@
-ion-menu {
-  background-color: transparent !important;
+ion-app {
+  /*para menu desplegable*/
 
-  .menu {
-    background-color: #229E88 !important; // Asegura que el header tenga el mismo fondo
+  ion-menu {
+    --background-color: #229E88 !important;
+    --background: var(--background-color) !important;
+
+    /* Aplica la variable de color de fondo */
+    opacity: 80%;
+    border-radius: 7px;
+    max-width: 60%;
+
+    .menu {
+      --background: var(--background-color);
+    
+
+
+      ion-list {
+        background:transparent;
+        margin-top: 100px;
+
+        ion-button {
+
+          
+          ion-icon {}
+        }
+
+        .cerrar {
+
+          margin-top: 200px;
+
+          ion-icon {}
+
+        }
+      }
+
+    }
   }
 
-  ion-list {
-    background-color: #229E88 !important;
+  /* main content*/
+  ion-page {
 
-    ion-item {
-      --background: transparent;
-      color: black; // Color del texto
-      width: 90%;
-      font-family: Helvetica;
+    ion-header {
 
-      ion-icon {
-        color: black; // Color de los iconos
+      ion-toolbar {
+
+        ion-buttons {
+
+          ion-menu-button {
+
+          }
+        }
+
+        ion-button {
+
+        }
+
+        
       }
     }
   }
+
+
+
+
+
 }
-
-.main-content {
-
-  ion-header {
-
-    --background: #229E88 !important;
-
-    ion-toolbar {
-      --background: #229E88 !important;
-      color: #ffffff;
-
-    }
-  }
-
-
-  ion-content {
-
-    ion-tittle {
-      color:#000000;
-      font-family: Helvetica;
-      font-weight: bold;
-      font-size: 25px;
-    }
-  }
-}
-

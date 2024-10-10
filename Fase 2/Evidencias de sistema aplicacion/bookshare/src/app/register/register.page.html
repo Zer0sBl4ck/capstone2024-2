@@ -7,33 +7,44 @@
 <ion-content>
   <form (ngSubmit)="register()">
     <ion-item>
-      <ion-label position="floating">Nombre de usuario</ion-label>
+      <ion-label position="stacked">Nombre de usuario</ion-label>
       <ion-input [(ngModel)]="nombre_usuario" name="nombre_usuario" required></ion-input>
     </ion-item>
 
+    <br>
+
     <ion-item>
-      <ion-label position="floating">Correo</ion-label>
+      <ion-label position="stacked">Correo</ion-label>
       <ion-input [(ngModel)]="correo" name="correo" required></ion-input>
     </ion-item>
 
+    <br>
+
     <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
+      <ion-label position="stacked">Contraseña</ion-label>
       <ion-input [(ngModel)]="contrasena" name="contrasena" type="password" required></ion-input>
     </ion-item>
 
+    <br>
+
     <ion-item>
-      <ion-label position="floating">Teléfono</ion-label>
+      <ion-label position="stacked">Teléfono</ion-label>
       <ion-input [(ngModel)]="telefono" name="telefono" required></ion-input>
     </ion-item>
 
+    <br>
+
     <ion-item>
-      <ion-label position="floating">Ubicación</ion-label>
+      <ion-label position="stacked">Ubicación</ion-label>
       <ion-input [(ngModel)]="ubicacion" name="ubicacion" required></ion-input>
     </ion-item>
 
+    <br>
+
     <!-- Campo para seleccionar la imagen de perfil -->
-    <ion-item>
-      <input type="file" (change)="onImageSelected($event)" accept="image/*" />
+    <ion-item> 
+      <ion-label position="stacked">Foto de perfil</ion-label><br>
+      <input type="file" (change)="onImageSelected($event)" accept="image/*" style="margin-block: 15px ;" />
     </ion-item>
 
     <!-- Mostrar vista previa de la imagen si existe -->
