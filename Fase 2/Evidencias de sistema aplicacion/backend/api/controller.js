@@ -79,4 +79,32 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.post('/libros', async (req, res) => {
+  const { titulo, autor, descripcion, genero, imagen_libro } = req.body;
+
+  // Log para verificar si los datos llegan al servidor
+  console.log('Datos recibidos:', { titulo, autor, descripcion, genero, imagen_libro });
+
+  // Validación de campos requeridos
+  if (!titulo || !autor || !descripcion || !genero) {
+    return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
+  }
+
+  try {
+    // Convierte la cadena base64 en un buffer si se proporciona una imagen
+    const imageBuffer = imagen_libro ? Buffer.from(imagen_libro, 'base64') : null;
+
+    await db.query(
+      `INSERT INTO libro (titulo, autor, descripcion, genero, imagen_libro) VALUES (?, ?, ?, ?, ?)`,
+      [titulo, autor, descripcion, genero, imageBuffer]
+    );
+
+    return res.status(201).json({ message: 'Libro agregado exitosamente.' });
+  } catch (error) {
+    console.error('Error al agregar libro:', error);
+    return res.status(500).json({ message: 'Error interno del servidor.' });
+  }
+});
+
+
 module.exports = router;
