@@ -1,0 +1,7 @@
+{
+  "name": "bookshare",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
