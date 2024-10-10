@@ -25,7 +25,7 @@ export class AuthService {
       contrasena,
       telefono,
       ubicacion,
-      foto_perfil,  // Aquí enviamos la imagen en base64 como parte del objeto JSON
+      foto_perfil,  
     };
 
     return this.http.post(`${this.apiUrl}/usuarios`, userData);
@@ -42,7 +42,8 @@ export class AuthService {
   
   saveUserData(token: string, user: any): void {
     localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(user)); // Guardar datos del usuario como JSON
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('role', user.rol);  // Guardar el rol del usuario
   }
 
  
@@ -63,5 +64,9 @@ export class AuthService {
   }
   isAuthenticated(): boolean {
     return this.getToken() !== null; 
+  }
+
+  getUserRole(): string | null {
+    return localStorage.getItem('role');
   }
 }
