@@ -69,4 +69,17 @@ export class AuthService {
   getUserRole(): string | null {
     return localStorage.getItem('role');
   }
+
+  agregarLibro(titulo: string, autor: string, descripcion: string, genero: string, imagen_libro?: string): Observable<any> {
+    const libroData = {
+      titulo,
+      autor,
+      descripcion,
+      genero,
+      imagen_libro // opcional
+    };
+
+    return this.http.post(`${this.apiUrl}/libros`, libroData);
+  }
+
 }

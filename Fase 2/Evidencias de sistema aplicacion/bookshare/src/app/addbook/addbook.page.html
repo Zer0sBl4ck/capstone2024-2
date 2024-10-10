@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Libro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Título</ion-label>
+      <ion-input [(ngModel)]="titulo" name="titulo" required></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="floating">Autor</ion-label>
+      <ion-input [(ngModel)]="autor" name="autor" required></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-textarea [(ngModel)]="descripcion" name="descripcion" required></ion-textarea>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="floating">Género</ion-label>
+      <ion-input [(ngModel)]="genero" name="genero" required></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>Imagen del Libro</ion-label>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+    </ion-item>
+
+    <!-- Previsualización de la imagen -->
+    <div *ngIf="imagen_libro">
+      <img [src]="imagen_libro" alt="Previsualización" style="max-width: 100%; max-height: 200px; margin-top: 10px;" />
+    </div>
+
+    <ion-button expand="full" type="submit">Agregar Libro</ion-button>
+  </form>
+</ion-content>
