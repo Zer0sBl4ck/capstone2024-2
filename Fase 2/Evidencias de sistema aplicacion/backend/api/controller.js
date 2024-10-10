@@ -7,24 +7,27 @@ const router = express.Router();
 
 
 router.post('/usuarios', async (req, res) => {
-  const { nombre_usuario, correo, contrasena, ubicacion } = req.body;
+  const { nombre_usuario, correo, contrasena, telefono, ubicacion, foto_perfil } = req.body;
 
   try {
-    
-    const [existingUser] = await db.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
+    // Verificar si el usuario ya existe
+    const [existingUser] = await db.query('SELECT * FROM usuario WHERE correo = ?', [correo]);
 
     if (existingUser.length > 0) {
       return res.status(400).json({ message: 'El correo ya está registrado.' });
     }
 
-    
+    // Hashear la contraseña
     const hashedPassword = await bcrypt.hash(contrasena, 10);
 
- 
+    // Convertir la imagen base64 a Buffer
+    const imageBuffer = foto_perfil ? Buffer.from(foto_perfil, 'base64') : null;
+
+    
     await db.query(
-      `INSERT INTO usuarios (nombre_usuario, correo, contrasena, rol, ubicacion, creado_en, reputacion) 
-       VALUES (?, ?, ?, 'normal', ?, NOW(), 0)`,
-      [nombre_usuario, correo, hashedPassword, ubicacion]
+      `INSERT INTO usuario (nombre_usuario, correo, rol, contrasena, telefono, ubicacion, foto_perfil, creado_en) 
+       VALUES (?, ?, 'usuario', ?, ?, ?, ?, NOW())`,
+      [nombre_usuario, correo, hashedPassword, telefono, ubicacion, imageBuffer]
     );
 
     return res.status(201).json({ message: 'Usuario creado exitosamente.' });
@@ -40,7 +43,7 @@ router.post('/login', async (req, res) => {
 
   try {
     
-    const [users] = await db.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
+    const [users] = await db.query('SELECT * FROM usuario WHERE correo = ?', [correo]);
 
    
     if (!users || users.length === 0) {

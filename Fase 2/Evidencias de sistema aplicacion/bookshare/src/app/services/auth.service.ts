@@ -11,11 +11,26 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  // Método para registrar un nuevo usuario
-  register(nombre_usuario: string, correo: string, contrasena: string, ubicacion: string): Observable<any> {
-    const userData = { nombre_usuario, correo, contrasena, ubicacion };
+  register(
+    nombre_usuario: string,
+    correo: string,
+    contrasena: string,
+    telefono: string,
+    ubicacion: string,
+    foto_perfil: string | null
+  ): Observable<any> {
+    const userData = {
+      nombre_usuario,
+      correo,
+      contrasena,
+      telefono,
+      ubicacion,
+      foto_perfil,  // Aquí enviamos la imagen en base64 como parte del objeto JSON
+    };
+
     return this.http.post(`${this.apiUrl}/usuarios`, userData);
   }
+
 
   // Método para iniciar sesión
   login(correo: string, contrasena: string): Observable<any> {
