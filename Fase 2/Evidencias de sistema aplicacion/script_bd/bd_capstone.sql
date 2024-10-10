@@ -2,6 +2,7 @@ CREATE TABLE usuario (
   id_usuario INT AUTO_INCREMENT PRIMARY KEY,
   nombre_usuario VARCHAR(255),
   correo VARCHAR(255) UNIQUE,
+  rol VARCHAR(255),
   contrasena VARCHAR(255),
   telefono VARCHAR(20),
   ubicacion VARCHAR(255),
