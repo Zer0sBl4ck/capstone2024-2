@@ -4,7 +4,7 @@
       <ion-card>
         <ion-card-header>
           <div style="display: flex; justify-content: center;">
-            <!-- Imagen del libro -->
+        
             <img *ngIf="libro.imagen_libro_base64" 
                  [src]="'data:image/jpeg;base64,' + libro.imagen_libro_base64" 
                  alt="Imagen del libro" 
@@ -25,6 +25,14 @@
           <p style="color: #666; font-size: 0.9rem; text-align: center;">
             <strong>Género:</strong> {{ libro.genero }}
           </p>
+          <div style="display: flex; justify-content: center; margin-top: 10px;">
+            <ion-button *ngIf="rol === 'usuario'" expand="full" color="primary" (click)="accionUsuario(libro)">
+              AGREGAR LIBRO BIBLIOTECA
+            </ion-button>
+            <ion-button *ngIf="rol === 'admin'" expand="full" color="danger" (click)="accionAdmin(libro)">
+              MODIFICAR LIBRO
+            </ion-button>
+          </div>
         </ion-card-content>
       </ion-card>
     </ion-item>
