@@ -24,7 +24,7 @@
         <br>
 
         <!-- Opción Agregar libro solo para admin -->
-        <ion-button *ngIf="userRole === 'admin'">
+        <ion-button routerLink="/addbook" *ngIf="userRole === 'admin'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
           Agregar libro
         </ion-button>

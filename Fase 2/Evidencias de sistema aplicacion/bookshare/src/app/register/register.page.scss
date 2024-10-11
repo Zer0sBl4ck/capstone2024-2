@@ -20,6 +20,7 @@
 
 ion-content {
     --background: #ffffff;
+
     ion-item {
         --background: transparent;
         width: 90%;
@@ -30,16 +31,11 @@ ion-content {
             font-family: Helvetica;
         }
 
-        
+
         .opcion {
-            color:#000000; 
+            color: #000000;
             font-size: 15px;
             font-family: Helvetica;
-
-            ion-select-option {
-                background-color: #229E88 !important;
-                
-            }
         }
 
         ion-input {

@@ -1,37 +1,52 @@
-<ion-header>
+<ion-header class="fondo">
   <ion-toolbar>
-    <ion-title>Agregar Libro</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="titulo">Agregar libro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form (ngSubmit)="onSubmit()">
     <ion-item>
-      <ion-label position="floating">Título</ion-label>
+      <ion-label position="stacked">Título</ion-label>
       <ion-input [(ngModel)]="titulo" name="titulo" required></ion-input>
     </ion-item>
     
     <ion-item>
-      <ion-label position="floating">Autor</ion-label>
+      <ion-label position="stacked">Autor</ion-label>
       <ion-input [(ngModel)]="autor" name="autor" required></ion-input>
     </ion-item>
     
     <ion-item>
-      <ion-label position="floating">Descripción</ion-label>
+      <ion-label position="stacked">Descripción</ion-label>
       <ion-textarea [(ngModel)]="descripcion" name="descripcion" required></ion-textarea>
     </ion-item>
     
     <ion-item>
-      <ion-label position="floating">Género</ion-label>
+      <ion-label position="stacked">Género</ion-label>
       <ion-input [(ngModel)]="genero" name="genero" required></ion-input>
+       <ion-select class="opcion" label="Selecciona una opción" >
+        <ion-select-option value="ciencia ficción">Ciencia ficción</ion-select-option>
+        <ion-select-option value="fantasia">Fantasia</ion-select-option>
+        <ion-select-option value="thriller">Thriller</ion-select-option>
+        <ion-select-option value="romance">Romance</ion-select-option>
+        <ion-select-option value="horror">Horror</ion-select-option>
+        <ion-select-option value="aventura">Aventura</ion-select-option>
+        <ion-select-option value="drama">Drama</ion-select-option>
+        <ion-select-option value="novelahistórica">Novela histórica</ion-select-option>
+        <ion-select-option value="ficcióncontemporánea">Ficción contemporánea</ion-select-option>
+      </ion-select>
     </ion-item>
     
     <ion-item>
-      <ion-label>Imagen del Libro</ion-label>
-      <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+      <ion-label position="stacked">Imagen del Libro</ion-label>
+      <input class="foto" type="file" (change)="onFileSelected($event)" accept="image/*" />
     </ion-item>
 
-    <!-- Previsualización de la imagen -->
     <div *ngIf="imagen_libro">
       <img [src]="imagen_libro" alt="Previsualización" style="max-width: 100%; max-height: 200px; margin-top: 10px;" />
     </div>
