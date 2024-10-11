@@ -30,9 +30,28 @@ ion-content {
             font-family: Helvetica;
         }
 
+        
+        .opcion {
+            color:#000000; 
+            font-size: 15px;
+            font-family: Helvetica;
+
+            ion-select-option {
+                background-color: #229E88 !important;
+                
+            }
+        }
+
         ion-input {
             color: #000000;
             font-size: 20px;
+            font-family: Helvetica;
+        }
+
+        .foto {
+            margin-block: 15px;
+            color: #000000;
+            font-size: 14px;
             font-family: Helvetica;
         }
     }
