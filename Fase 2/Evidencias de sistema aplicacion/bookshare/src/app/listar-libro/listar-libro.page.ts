@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service'; // Asegúrate de importar tu servicio
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-listar-libro',
@@ -9,18 +9,21 @@ import { AuthService } from '../services/auth.service'; // Asegúrate de importa
 export class ListarLibroPage implements OnInit {
 
   libros: any[] = []; // Aquí guardaremos los libros
+  rol: string | null = null; // Variable para almacenar el rol del usuario
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.cargarLibros(); // Cargar libros al iniciar
+    this.rol = this.authService.getUserRole(); 
+    console.log(this.rol)
   }
+
   cargarLibros() {
     this.authService.getLibros().subscribe(
       (data) => {
         this.libros = data.map((libro: any) => {
           if (libro.imagen_libro) {
-            // Si el libro tiene imagen en base64, creamos una URL
             libro.imagen_libro = `data:image/jpeg;base64,${libro.imagen_libro}`;
           }
           return libro;
@@ -30,5 +33,16 @@ export class ListarLibroPage implements OnInit {
         console.error('Error al cargar libros:', error);
       }
     );
+  }
+
+  // Funciones para manejar acciones de usuario y administrador
+  accionUsuario(libro: any) {
+    console.log('Acción de usuario para el libro:', libro);
+    // Implementa la lógica correspondiente para el rol de usuario
+  }
+
+  accionAdmin(libro: any) {
+    console.log('Acción de administrador para el libro:', libro);
+    // Implementa la lógica correspondiente para el rol de administrador
   }
 }
