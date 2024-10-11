@@ -1,6 +1,11 @@
-<ion-header>
+<ion-header class="fondo">
   <ion-toolbar>
-    <ion-title>Registro</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/login">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="titulo">Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -36,27 +41,39 @@
 
     <ion-item>
       <ion-label position="stacked">Ubicación</ion-label>
-      <ion-input [(ngModel)]="ubicacion" name="ubicacion" required></ion-input>
+      <!-- <ion-input [(ngModel)]="ubicacion" name="ubicacion" required></ion-input> -->
+      <ion-select class="opcion" label="Selecciona una opción" >
+        <ion-select-option value="Concepción">Concepción</ion-select-option>
+        <ion-select-option value="San Pedro de la Paz">San Pedro de la Paz</ion-select-option>
+        <ion-select-option value="Talcahuano">Talcahuano</ion-select-option>
+        <ion-select-option value="Hualpen">Hualpen</ion-select-option>
+        <ion-select-option value="Chiguayante">Chiguayente</ion-select-option>
+        <ion-select-option value="Hualqui">Hualqui</ion-select-option>
+      </ion-select>
+      
+
     </ion-item>
 
     <br>
 
-    <!-- Campo para seleccionar la imagen de perfil -->
     <ion-item> 
       <ion-label position="stacked">Foto de perfil</ion-label><br>
-      <input type="file" (change)="onImageSelected($event)" accept="image/*" style="margin-block: 15px ;" />
+      <input class="foto" type="file" (change)="onImageSelected($event)" accept="image/*" >
     </ion-item>
 
-    <!-- Mostrar vista previa de la imagen si existe -->
     <ion-item *ngIf="foto_perfil">
       <img [src]="foto_perfil" alt="Vista previa" />
     </ion-item>
 
-    <!-- Mensaje de error (solo se muestra si hay un error) -->
     <ion-item *ngIf="errorMessage">
       <ion-label color="danger">{{ errorMessage }}</ion-label>
     </ion-item>
 
     <ion-button expand="full" type="submit">Registrar</ion-button>
+
+    <div style="text-align: center;">
+      <a class="aqui" routerLink="/login" style="color: #229E88;">Si tienes cuenta, pulsa <strong>Aquí</strong></a>
+    </div>
+  
   </form>
 </ion-content>
