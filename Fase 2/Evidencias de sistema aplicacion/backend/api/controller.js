@@ -91,8 +91,21 @@ router.post('/libros', async (req, res) => {
   }
 
   try {
-    // Convierte la cadena base64 en un buffer si se proporciona una imagen
-    const imageBuffer = imagen_libro ? Buffer.from(imagen_libro, 'base64') : null;
+    // Verificar si la imagen viene con el prefijo 'data:image/...'
+    let imageBuffer = null;
+    if (imagen_libro) {
+      // Verificar si la cadena base64 tiene un prefijo
+      const base64ImagePattern = /^data:image\/\w+;base64,/;
+      if (base64ImagePattern.test(imagen_libro)) {
+        // Extraer solo la parte de los datos de la imagen
+        const base64Data = imagen_libro.replace(base64ImagePattern, "");
+        // Convertir la cadena base64 a un Buffer
+        imageBuffer = Buffer.from(base64Data, 'base64');
+      } else {
+        // Si no tiene el prefijo, asumir que es base64 simple y convertirla directamente
+        imageBuffer = Buffer.from(imagen_libro, 'base64');
+      }
+    }
 
     await db.query(
       `INSERT INTO libro (titulo, autor, descripcion, genero, imagen_libro) VALUES (?, ?, ?, ?, ?)`,
@@ -102,6 +115,18 @@ router.post('/libros', async (req, res) => {
     return res.status(201).json({ message: 'Libro agregado exitosamente.' });
   } catch (error) {
     console.error('Error al agregar libro:', error);
+    return res.status(500).json({ message: 'Error interno del servidor.' });
+  }
+});
+
+router.get('/libros', async (req, res) => {
+  try {
+    const [libros] = await db.query('SELECT titulo, autor, descripcion, genero, TO_BASE64(imagen_libro) AS imagen_libro_base64 FROM libro');
+    
+    // Ahora la imagen ya viene en formato base64, solo la asignamos
+    return res.status(200).json(libros); 
+  } catch (error) {
+    console.error('Error al obtener libros:', error);
     return res.status(500).json({ message: 'Error interno del servidor.' });
   }
 });

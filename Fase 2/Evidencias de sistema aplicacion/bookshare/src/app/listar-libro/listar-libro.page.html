@@ -1,0 +1,32 @@
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let libro of libros" lines="none">
+      <ion-card>
+        <ion-card-header>
+          <div style="display: flex; justify-content: center;">
+            <!-- Imagen del libro -->
+            <img *ngIf="libro.imagen_libro_base64" 
+                 [src]="'data:image/jpeg;base64,' + libro.imagen_libro_base64" 
+                 alt="Imagen del libro" 
+                 style="width: 150px; height: 200px; object-fit: cover; border-radius: 10px;" />
+          </div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-card-title style="font-size: 1.5rem; font-weight: bold; text-align: center;">
+            {{ libro.titulo }}
+          </ion-card-title>
+          <p style="color: #666; font-size: 1rem; text-align: center;">
+            <strong>Autor:</strong> {{ libro.autor }}
+          </p>
+          <p style="color: #666; font-size: 0.9rem; text-align: center;">
+            {{ libro.descripcion }}
+          </p>
+          <p style="color: #666; font-size: 0.9rem; text-align: center;">
+            <strong>Género:</strong> {{ libro.genero }}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

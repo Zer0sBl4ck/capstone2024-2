@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'addbook',
     loadChildren: () => import('./addbook/addbook.module').then( m => m.AddbookPageModule)
   },
+  {
+    path: 'listar-libro',
+    loadChildren: () => import('./listar-libro/listar-libro.module').then( m => m.ListarLibroPageModule)
+  },
 ];
 
 @NgModule({

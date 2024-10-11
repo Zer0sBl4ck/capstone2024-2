@@ -82,4 +82,8 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/libros`, libroData);
   }
 
+  getLibros(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/libros`);
+  }
+
 }
