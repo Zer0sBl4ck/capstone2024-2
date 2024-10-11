@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lista de Libros</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let libro of libros">
+      <ion-thumbnail slot="start">
+        <img [src]="'data:image/jpeg;base64,' + libro.imagen_base64" alt="Imagen del libro" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ libro.titulo }}</h2>
+        <p>Disponible para préstamo: {{ libro.disponible_prestamo ? 'Sí' : 'No' }}</p>
+        <p>Disponible para intercambio: {{ libro.disponible_intercambio ? 'Sí' : 'No' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -2,7 +2,6 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require('../api/db'); 
-
 const router = express.Router();
 
 
@@ -121,7 +120,7 @@ router.post('/libros', async (req, res) => {
 
 router.get('/libros', async (req, res) => {
   try {
-    const [libros] = await db.query('SELECT titulo, autor, descripcion, genero, TO_BASE64(imagen_libro) AS imagen_libro_base64 FROM libro');
+    const [libros] = await db.query('SELECT id_libro,titulo, autor, descripcion, genero, TO_BASE64(imagen_libro) AS imagen_libro_base64 FROM libro');
     
     // Ahora la imagen ya viene en formato base64, solo la asignamos
     return res.status(200).json(libros); 
@@ -130,6 +129,50 @@ router.get('/libros', async (req, res) => {
     return res.status(500).json({ message: 'Error interno del servidor.' });
   }
 });
+
+router.post('/biblioteca', (req, res) => {
+  const { id_usuario, id_libro } = req.body; // Obtén solo los campos necesarios
+
+  const query = `
+    INSERT INTO biblioteca_usuario (id_usuario, id_libro, disponible_prestamo, disponible_intercambio)
+    VALUES (?, ?, false, false)  -- Establece los valores predeterminados como false
+  `;
+
+  db.query(query, [id_usuario, id_libro], (error, results) => {
+    if (error) {
+      console.error('Error al agregar libro a la biblioteca:', error);
+      return res.status(500).json({ message: 'Error al agregar libro a la biblioteca' });
+    }
+    res.status(201).json({ message: 'Libro agregado a la biblioteca', id_biblioteca: results.insertId });
+  });
+});
+
+router.get('/libros/:correo', async (req, res) => {
+  const correo = req.params.correo;
+  console.log(`Recibiendo solicitud para el correo: ${correo}`);
+
+  const query = `
+    SELECT 
+      libro.titulo, 
+      TO_BASE64(libro.imagen_libro) AS imagen_base64, 
+      biblioteca_usuario.disponible_prestamo, 
+      biblioteca_usuario.disponible_intercambio 
+    FROM libro
+    JOIN biblioteca_usuario ON libro.id_libro = biblioteca_usuario.id_libro
+    JOIN usuario ON biblioteca_usuario.id_usuario = usuario.id_usuario
+    WHERE usuario.correo = ?
+  `;
+
+  try {
+    const [results] = await db.query(query, [correo]);
+    console.log('Resultados obtenidos:', results);
+    res.status(200).json(results);
+  } catch (error) {
+    console.error('Error al obtener libros:', error);
+    res.status(500).json({ message: 'Error al obtener libros' });
+  }
+});
+
 
 
 module.exports = router;

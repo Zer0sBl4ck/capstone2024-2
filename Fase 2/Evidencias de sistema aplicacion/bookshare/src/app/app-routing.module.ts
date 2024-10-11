@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'listar-libro',
     loadChildren: () => import('./listar-libro/listar-libro.module').then( m => m.ListarLibroPageModule)
   },
+  {
+    path: 'bookowner/:usuario',  // Definimos el parámetro de la ruta
+    loadChildren: () => import('./bookowner/bookowner.module').then(m => m.BookownerPageModule)
+  },
 ];
 
 @NgModule({
