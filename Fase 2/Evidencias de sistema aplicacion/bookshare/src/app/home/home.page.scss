@@ -31,7 +31,6 @@ ion-app {
           width: 200px;
           --border-radius: 20px;
 
-
           ion-icon {
             color: #000000;
             align-items: start;
@@ -63,7 +62,7 @@ ion-app {
   .ion-page#main-content ion-header {
     --background: #229E88;
     --ion-toolbar-background: #229E88;
-    color: #fff;
+    --color: #ffffff;
 
   }
 
@@ -73,12 +72,26 @@ ion-app {
     color: #ffffff;
   }
 
-  .ion-page#main-content ion-toolbar ion-button {
-    --background: transparent;
-    color: white;
-    font-size: 16px;
-    text-transform: uppercase;
-    border-radius: 7px;
+
+  .ion-page#main-content ion-button {
+    --background: #229E88; /* Color de fondo del botón */
+    --color: #ffffff !important; /* Asegura que el texto sea blanco */
+    font-size: 25px;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    max-width: 50%;
+    padding: 0;
+    left: 80%;
+    transform: translateX(80%);
+    
+
+  }
+
+  .ion-page#main-content ion-button ion-icon {
+    color: #000000;
+    font-weight: bold;
   }
 
   .ion-page#main-content #container {

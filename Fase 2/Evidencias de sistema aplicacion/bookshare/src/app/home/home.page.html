@@ -48,9 +48,9 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-button routerLink="/login" *ngIf="!isLoggedIn">
-          <span style="display: flex; align-items: center;">
-            <ion-icon name="person-outline" style="font-size: 24px;"></ion-icon>
+        <ion-button routerLink="/login" *ngIf="!isLoggedIn" class="login-button">
+          <span class="login-text">
+            <ion-icon name="person-outline" class="login-icon"></ion-icon>
           </span>Ingresar
         </ion-button>
       </ion-toolbar>
@@ -58,22 +58,21 @@
 
     <ion-content>
       <div id="container">
-        <img src="assets/imagenes/logobookshare.png" alt="Logo">
+        <img src="assets/imagenes/logobookshare.png" alt="Logo" class="logo-image">
 
         <ion-title><strong>BookShare</strong></ion-title>
 
-        <p>Bookshare" es una plataforma en línea
+        <p class="description">Bookshare" es una plataforma en línea
           sin fines <br> de lucro destinada a fomentar la lectura y crear <br>una comunidad de lectores basada en la
           confianza.</p>
-        <!--  <ion-searchbar slot="end" placeholder="Buscar..."></ion-searchbar> Search bar -->
 
-        <img src="assets/imagenes/personaleyendo.png" alt="Logo">
+        <img src="assets/imagenes/personaleyendo.png" alt="Personal leyendo" class="image">
 
-        <p>Esta plataforma permitirá a
+        <p class="description">Esta plataforma permitirá a
           los usuarios registrar, <br> intercambiar y prestar libros entre sí, promoviendo <br> así el acceso a la
           literatura de manera sostenible <br>y accesible.</p>
 
-        <img src="assets/imagenes/intercambiandolibro.png" alt="Logo">
+        <img src="assets/imagenes/intercambiandolibro.png" alt="Intercambiando libro" class="image">
 
         <br>
       </div>
