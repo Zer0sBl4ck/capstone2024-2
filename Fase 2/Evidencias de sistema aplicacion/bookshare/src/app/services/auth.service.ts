@@ -86,4 +86,16 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/libros`);
   }
 
+  agregarLibroABiblioteca(id_usuario: number, id_libro: number): Observable<any> {
+    const bibliotecaData = {
+      id_usuario,
+      id_libro
+    };
+
+    return this.http.post(`${this.apiUrl}/biblioteca`, bibliotecaData);
+  }
+
+  getLibrosPorCorreo(correo: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/libros/${correo}`);
+  }
 }

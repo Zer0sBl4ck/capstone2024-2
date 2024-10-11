@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/auth.service'; 
+import { AlertController } from '@ionic/angular'; // Importar AlertController
 
 @Component({
   selector: 'app-listar-libro',
@@ -7,16 +8,12 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./listar-libro.page.scss'],
 })
 export class ListarLibroPage implements OnInit {
+  libros: any[] = []; 
 
-  libros: any[] = []; // Aquí guardaremos los libros
-  rol: string | null = null; // Variable para almacenar el rol del usuario
-
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private alertController: AlertController) { } // Inyectar AlertController
 
   ngOnInit() {
-    this.cargarLibros(); // Cargar libros al iniciar
-    this.rol = this.authService.getUserRole(); 
-    console.log(this.rol)
+    this.cargarLibros(); 
   }
 
   cargarLibros() {
@@ -35,14 +32,34 @@ export class ListarLibroPage implements OnInit {
     );
   }
 
-  // Funciones para manejar acciones de usuario y administrador
-  accionUsuario(libro: any) {
-    console.log('Acción de usuario para el libro:', libro);
-    // Implementa la lógica correspondiente para el rol de usuario
+  async agregarLibroABiblioteca(libro: any) {
+    const usuario = this.authService.getUserData(); // Obtener datos del usuario
+    console.log('Usuario:', usuario); // Verifica si el usuario está definido
+    if (usuario) {
+      this.authService.agregarLibroABiblioteca(usuario.id_usuario, libro.id_libro).subscribe(
+        () => { 
+          console.log('Libro agregado a la biblioteca');
+          this.mostrarAlerta('Éxito', 'El libro se ha agregado a tu biblioteca.'); // Mostrar alerta de éxito
+        },
+        error => {
+          console.error('Error al agregar libro a la biblioteca:', error);
+          this.mostrarAlerta('Error', 'Este libro ya está en tu biblioteca o hubo un problema al agregarlo.'); // Mostrar alerta de error
+        }
+      );
+    } else {
+      console.error('No se ha encontrado el usuario.'); // Log si no se encuentra el usuario
+      this.mostrarAlerta('Error', 'No se ha encontrado el usuario.'); // Alerta si no se encuentra el usuario
+    }
   }
 
-  accionAdmin(libro: any) {
-    console.log('Acción de administrador para el libro:', libro);
-    // Implementa la lógica correspondiente para el rol de administrador
+  // Método para mostrar alertas
+  async mostrarAlerta(titulo: string, mensaje: string) {
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: mensaje,
+      buttons: ['Aceptar'],
+    });
+
+    await alert.present();
   }
 }
