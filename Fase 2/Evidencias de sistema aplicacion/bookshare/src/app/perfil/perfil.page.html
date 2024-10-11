@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Perfil de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="userProfile">
+  <ion-list>
+    <ion-item lines="none">
+      <ion-card>
+        <ion-card-header>
+          <div style="display: flex; justify-content: center;">
+            <img *ngIf="userProfile.foto_perfil_base64" 
+                 [src]="'data:image/jpeg;base64,' + userProfile.foto_perfil_base64" 
+                 alt="Foto de perfil" 
+                 style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;" />
+          </div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-card-title style="font-size: 1.5rem; font-weight: bold; text-align: center;">
+            {{ userProfile.nombre_usuario }}
+          </ion-card-title>
+          <p style="color: #666; font-size: 1rem; text-align: center;">
+            <strong>Correo:</strong> {{ userProfile.correo }}
+          </p>
+          <p style="color: #666; font-size: 0.9rem; text-align: center;">
+            <strong>Teléfono:</strong> {{ userProfile.telefono }}
+          </p>
+          <p style="color: #666; font-size: 0.9rem; text-align: center;">
+            <strong>Ubicación:</strong> {{ userProfile.ubicacion }}
+          </p>
+          <ion-button expand="full" color="primary" >
+            Editar Perfil
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

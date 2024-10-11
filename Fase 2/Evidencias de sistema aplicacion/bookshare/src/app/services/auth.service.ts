@@ -98,4 +98,13 @@ export class AuthService {
   getLibrosPorCorreo(correo: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/libros/${correo}`);
   }
+
+  getUserProfile(correo: string): Observable<any> {
+    const url = `${this.apiUrl}/perfil/${correo}`;
+    return this.http.get(url);
+  }
+
+  updateUserProfile(correo: string, usuarioData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/usuarios/correo/${correo}`, usuarioData);
+  }
 }
