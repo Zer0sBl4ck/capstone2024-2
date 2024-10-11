@@ -23,7 +23,7 @@
     
     <ion-item>
       <ion-label position="stacked">Descripción</ion-label>
-      <ion-textarea [(ngModel)]="descripcion" name="descripcion" required></ion-textarea>
+      <ion-textarea class="descripcion" [(ngModel)]="descripcion" name="descripcion" required></ion-textarea>
     </ion-item>
     
     <ion-item>
@@ -48,7 +48,7 @@
     </ion-item>
 
     <div *ngIf="imagen_libro">
-      <img [src]="imagen_libro" alt="Previsualización" style="max-width: 100%; max-height: 200px; margin-top: 10px;" />
+      <img class="libro" [src]="imagen_libro" alt="Previsualización"/>
     </div>
 
     <ion-button expand="full" type="submit">Agregar Libro</ion-button>
