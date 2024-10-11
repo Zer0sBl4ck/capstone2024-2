@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Actualizar Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="guardarCambios()">Guardar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Nombre de Usuario</ion-label>
+      <ion-input type="text" [(ngModel)]="usuarioData.nombre_usuario"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Teléfono</ion-label>
+      <ion-input type="tel" [(ngModel)]="usuarioData.telefono"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Ubicación</ion-label>
+      <ion-input type="text" [(ngModel)]="usuarioData.ubicacion"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Foto de Perfil</ion-label>
+      <input type="file" (change)="onFileChange($event)" accept="image/*" />
+    </ion-item>
+
+    <ion-item *ngIf="fotoSeleccionada">
+      <ion-label>Previsualización</ion-label>
+      <div style="text-align: center;">
+        <img [src]="fotoSeleccionada" alt="Previsualización de la imagen" style="width: 150px; height: 200px; object-fit: cover; border-radius: 10px;" />
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

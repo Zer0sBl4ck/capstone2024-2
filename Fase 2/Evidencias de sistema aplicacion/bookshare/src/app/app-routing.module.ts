@@ -31,6 +31,18 @@ const routes: Routes = [
     path: 'bookowner/:usuario',  // Definimos el parámetro de la ruta
     loadChildren: () => import('./bookowner/bookowner.module').then(m => m.BookownerPageModule)
   },
+  {
+    path: 'perfil/:correo',  
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+  {
+    path: 'update-perfil',
+    loadChildren: () => import('./update-perfil/update-perfil.module').then( m => m.UpdatePerfilPageModule)
+  },
+  {
+    path: 'update-perfil/:correo', // Asegúrate de tener un parámetro para el correo
+    loadChildren: () => import('./update-perfil/update-perfil.module').then(m => m.UpdatePerfilPageModule)
+  },
 ];
 
 @NgModule({
