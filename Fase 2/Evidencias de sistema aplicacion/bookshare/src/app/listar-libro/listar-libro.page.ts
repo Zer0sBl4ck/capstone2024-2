@@ -9,11 +9,14 @@ import { AlertController } from '@ionic/angular'; // Importar AlertController
 })
 export class ListarLibroPage implements OnInit {
   libros: any[] = []; 
+  esAdmin: boolean = false;
+  rol: string | null = null; // Variable para almacenar el rol del usuario
 
   constructor(private authService: AuthService, private alertController: AlertController) { } // Inyectar AlertController
 
   ngOnInit() {
     this.cargarLibros(); 
+    this.rol = this.authService.getUserRole(); 
   }
 
   cargarLibros() {
@@ -61,5 +64,15 @@ export class ListarLibroPage implements OnInit {
     });
 
     await alert.present();
+  }
+  verificarRol() {
+    const usuario = this.authService.getUserData();
+    if (usuario && usuario.rol === 'admin') {
+      this.esAdmin = true; // Si el usuario es admin, activar la propiedad
+    }
+  }
+  modificarLibro(libro: any) {
+    console.log('Modificar libro:', libro);
+    // Aquí se podría abrir una ventana modal o redirigir a la página de edición del libro
   }
 }

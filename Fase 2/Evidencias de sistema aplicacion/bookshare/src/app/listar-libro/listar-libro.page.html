@@ -24,7 +24,10 @@
           <p style="color: #666; font-size: 0.9rem; text-align: center;">
             <strong>Género:</strong> {{ libro.genero }}
           </p>
-          <ion-button expand="full" (click)="agregarLibroABiblioteca(libro)">Agregar a Biblioteca</ion-button>
+          <ion-button expand="full" *ngIf="rol === 'usuario'" (click)="agregarLibroABiblioteca(libro)">Agregar a Biblioteca</ion-button>
+          <ion-button *ngIf="rol === 'admin'" expand="full" color="danger" >
+            MODIFICAR LIBRO
+          </ion-button>
         </ion-card-content>
       </ion-card>
     </ion-item>
