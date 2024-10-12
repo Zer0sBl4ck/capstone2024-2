@@ -16,7 +16,6 @@
       <ion-input [(ngModel)]="nombre_usuario" name="nombre_usuario" required></ion-input>
     </ion-item>
     <div class="aviso"
-      style="width: 100%; max-width: 80%; padding: 0; left: 80%; transform: translateX(10%); font-size:12px;"
       *ngIf="registroForm.controls['nombre_usuario']?.invalid && (registroForm.controls['nombre_usuario']?.touched || registroForm.submitted)">
       <ion-label color="danger">El nombre de usuario es obligatorio.</ion-label>
     </div>
@@ -28,7 +27,7 @@
       <ion-input [(ngModel)]="correo" name="correo" type="email" required
         pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"></ion-input>
     </ion-item>
-    <div style="width: 100%; max-width: 80%; padding: 0; left: 80%; transform: translateX(10%); font-size:12px;"
+    <div class=aviso
       *ngIf="registroForm.controls['correo']?.invalid && (registroForm.controls['correo']?.touched || registroForm.submitted)">
       <ion-label color="danger">El correo es obligatorio y debe ser válido (ejemplo:
         ejemplo&#64;dominio.com).</ion-label>
@@ -40,7 +39,7 @@
       <ion-label position="stacked">Contraseña</ion-label>
       <ion-input [(ngModel)]="contrasena" name="contrasena" type="password" required minlength="6"></ion-input>
     </ion-item>
-    <div style="width: 100%; max-width: 80%; padding: 0; left: 80%; transform: translateX(10%); font-size:12px;"
+    <div class="aviso"
       *ngIf="registroForm.controls['contrasena']?.invalid && (registroForm.controls['contrasena']?.touched || registroForm.submitted)">
       <ion-label color="danger">
         La contraseña es obligatoria y debe tener al menos 6 caracteres.</ion-label>
