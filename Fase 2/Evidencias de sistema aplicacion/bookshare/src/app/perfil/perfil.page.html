@@ -30,9 +30,12 @@
           <p style="color: #666; font-size: 0.9rem; text-align: center;">
             <strong>Ubicación:</strong> {{ userProfile.ubicacion }}
           </p>
-          <ion-button expand="full" color="primary" >
+          
+          <!-- Mostrar el botón solo si es el perfil del usuario logueado -->
+          <ion-button *ngIf="esMiPerfil()" expand="full" color="primary">
             Editar Perfil
           </ion-button>
+
         </ion-card-content>
       </ion-card>
     </ion-item>

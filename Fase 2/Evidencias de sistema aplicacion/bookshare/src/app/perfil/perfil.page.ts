@@ -11,6 +11,7 @@ export class PerfilPage implements OnInit {
 
   userProfile: any = null;
   correo: string = '';
+  correoLogueado: string | null = '';  // Variable para almacenar el correo del usuario logueado
 
   constructor(
     private route: ActivatedRoute,
@@ -20,12 +21,11 @@ export class PerfilPage implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.correo = params.get('correo') || '';
+      this.correoLogueado = this.authService.getUserData()?.correo || null;  // Obtener el correo del usuario logueado
       if (this.correo) {
         this.authService.getUserProfile(this.correo).subscribe(
           (data) => {
             this.userProfile = data;
-            console.log('Datos del perfil:', this.userProfile);
-            console.log('Foto de perfil base64:', this.userProfile.foto_perfil_base64);
           },
           (error) => {
             console.error('Error al obtener los datos del perfil:', error);
@@ -33,5 +33,10 @@ export class PerfilPage implements OnInit {
         );
       }
     });
+  }
+
+  // Método para comparar si el usuario actual está viendo su propio perfil
+  esMiPerfil(): boolean {
+    return this.correo === this.correoLogueado;
   }
 }
