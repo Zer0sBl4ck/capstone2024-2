@@ -1,0 +1,66 @@
+.fondo {
+    ion-toolbar {
+        --background: #229E88 !important;
+        color: #ffffff;
+
+        ion-title {
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+            font-family: Helvetica;
+            left: 50%;
+            transform: translateX(-10%);
+        }
+
+        ion-icon {
+            color: #ffffff;
+        }
+    }
+}
+
+ion-content {
+    --background: #ffffff !important;
+
+    ion-card {
+        --background: #ffffff !important;
+        border-radius: 10%;
+        margin-top: 10rem;
+
+        .foto {
+            display: flex;
+            justify-content: center;
+
+            img {
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 20%;
+            }
+        }
+    }
+
+    .titulo-card {
+        color: #000000;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .dato {
+        color: #000000;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    .btn-editar {
+        color: #ffffff;
+        --background: #229E88;
+        border-radius: 5px;
+        font-family: Helvetica;
+        margin-top: 16px;
+        padding: 12px 16px;
+        width: 100%;
+        font-size: 16px;
+        font-weight: bold;
+    }
+}
