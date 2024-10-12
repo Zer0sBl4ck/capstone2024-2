@@ -32,7 +32,7 @@
           </p>
           
           <!-- Mostrar el botón solo si es el perfil del usuario logueado -->
-          <ion-button *ngIf="esMiPerfil()" expand="full" color="primary">
+          <ion-button *ngIf="esMiPerfil()" (click)="editarPerfil()" expand="full" color="primary">
             Editar Perfil
           </ion-button>
 
