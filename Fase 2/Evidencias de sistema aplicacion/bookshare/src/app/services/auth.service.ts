@@ -107,4 +107,8 @@ export class AuthService {
   updateUserProfile(correo: string, usuarioData: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/usuarios/correo/${correo}`, usuarioData);
   }
+  getUserEmail(): string | null {
+    const user = this.getUserData(); // Obtiene los datos del usuario almacenados
+    return user ? user.correo : null; // Asume que el campo 'correo' existe en los datos del usuario
+  }
 }

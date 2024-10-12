@@ -7,7 +7,7 @@
     </ion-header>
     <ion-content class="menu">
       <ion-list>
-        <ion-button routerLink="/home">
+        <ion-button (click)="goToProfile()">
           <ion-icon name="person-outline" slot="start"></ion-icon>
           Mi perfil
         </ion-button>
@@ -33,7 +33,7 @@
         <br>
 
         <!-- Opción Mis Libros debe separar cuando es para usuario y para admin -->
-        <ion-button routerLink="/bookowner" *ngIf="userRole === 'admin'">
+        <ion-button (click)="goBookOwner()" *ngIf="userRole === 'admin'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
           Mis Libros
         </ion-button>
