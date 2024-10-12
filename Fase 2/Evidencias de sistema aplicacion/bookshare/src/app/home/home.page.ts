@@ -10,28 +10,40 @@ import { Router } from '@angular/router';
 export class HomePage {
   isLoggedIn = false;  // Para controlar si el usuario está logueado
   userRole: string | null = null;  // Para almacenar el rol del usuario
+  userEmail: string | null = null;  // Para almacenar el correo del usuario
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  // Ejecutar cuando la vista está por mostrarse
   ionViewWillEnter() {
-    this.checkAuthentication(); // Comprobar si está autenticado
+    this.checkAuthentication();
   }
 
-  // Comprobar autenticación y obtener rol
   checkAuthentication() {
     const token = this.authService.getToken();
-    this.isLoggedIn = !!token;  // Si hay token, está logueado
+    this.isLoggedIn = !!token;
 
     if (this.isLoggedIn) {
       this.userRole = this.authService.getUserRole(); // Obtener el rol del usuario
+      this.userEmail = this.authService.getUserEmail(); // Obtener el correo del usuario
     } 
   }
 
-  // Cerrar sesión
+  goToProfile() {
+    if (this.userEmail) {
+      this.router.navigate(['/perfil', this.userEmail],{ replaceUrl: true }); 
+    }
+  }
+
+  goAddBook(){
+    this.router.navigate(['/addbook'],{replaceUrl:true})
+  }
+  goBookOwner(){
+    this.router.navigate(['/bookowner',this.userEmail],{replaceUrl: true})
+  }
+
   logout() {
-    this.authService.logout();  // Llamar al método logout del servicio de autenticación
-    this.checkAuthentication();  // Verificar si sigue autenticado
-    window.location.reload();  // Recargar la página para actualizar el estado
+    this.authService.logout();
+    this.checkAuthentication();
+    window.location.reload();
   }
 }
