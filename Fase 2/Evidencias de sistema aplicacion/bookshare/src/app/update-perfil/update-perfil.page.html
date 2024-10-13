@@ -9,22 +9,27 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-
+  <form (ngSubmit)="guardarCambios()" #perfilForm="ngForm">
     <ion-item>
       <ion-label position="stacked">Nombre de Usuario</ion-label>
-      <ion-input type="text" [(ngModel)]="usuarioData.nombre_usuario"></ion-input>
+      <ion-input type="text" [(ngModel)]="usuarioData.nombre_usuario" name="nombre_usuario" required></ion-input>
     </ion-item>
+    <div class="aviso" *ngIf="perfilForm.controls['nombre_usuario']?.invalid && (perfilForm.controls['nombre_usuario']?.touched || perfilForm.submitted)">
+      <ion-label color="danger">El nombre de usuario es obligatorio.</ion-label>
+    </div>
 
     <ion-item>
       <ion-label position="stacked">Teléfono</ion-label>
-      <ion-input type="tel" [(ngModel)]="usuarioData.telefono"></ion-input>
+      <ion-input type="tel" [(ngModel)]="usuarioData.telefono" name="telefono" required pattern="[0-9]{9,15}"></ion-input>
     </ion-item>
+    <div class="aviso" *ngIf="perfilForm.controls['telefono']?.invalid && (perfilForm.controls['telefono']?.touched || perfilForm.submitted)">
+      <ion-label color="danger">El teléfono es obligatorio y debe ser un número válido.</ion-label>
+    </div>
 
     <ion-item>
       <ion-label position="stacked">Ubicación</ion-label>
-      <ion-select class="opcion" type="text" [(ngModel)]="usuarioData.ubicacion" required label="Seleccione opción">
+      <ion-select class="opcion" [(ngModel)]="usuarioData.ubicacion" name="ubicacion" required label="Seleccione opción">
         <ion-select-option value="concepcion">Concepción</ion-select-option>
         <ion-select-option value="talcahuano">Talcahuano</ion-select-option>
         <ion-select-option value="chiguayante">Chiguayante</ion-select-option>
@@ -32,19 +37,24 @@
         <ion-select-option value="hualqui">Hualqui</ion-select-option>
         <ion-select-option value="sanpedrodelapaz">San Pedro de la Paz</ion-select-option>
         <ion-select-option value="coronel">Coronel</ion-select-option>
-      </ion-select> 
+      </ion-select>
     </ion-item>
+    <div class="aviso" *ngIf="perfilForm.controls['ubicacion']?.invalid && (perfilForm.controls['ubicacion']?.touched || perfilForm.submitted)">
+      <ion-label color="danger">La ubicación es obligatoria.</ion-label>
+    </div>
 
     <ion-item>
       <ion-label position="stacked">Foto de Perfil</ion-label>
-      <input class="foto" type="file" (change)="onFileChange($event)" accept="image/*" />
+      <input class="foto" type="file" (change)="onFileChange($event)" accept="image/*" required />
     </ion-item>
+    <div class="aviso" *ngIf="!fotoSeleccionada && (perfilForm.controls['foto']?.touched || perfilForm.submitted)">
+      <ion-label color="danger">La foto de perfil es obligatoria.</ion-label>
+    </div>
 
     <ion-item *ngIf="fotoSeleccionada">
-        <img class="imagen" [src]="fotoSeleccionada" alt="Previsualización de la imagen" style="border-radius: 10px;"  />
+      <img class="imagen" [src]="fotoSeleccionada" alt="Previsualización de la imagen" style="border-radius: 10px;" />
     </ion-item>
 
-    <ion-button expand="block" type="submit" (click)="guardarCambios()">Guardar</ion-button>
-
-
+    <ion-button expand="block" type="submit" [disabled]="perfilForm.invalid || !fotoSeleccionada">Guardar</ion-button>
+  </form>
 </ion-content>
