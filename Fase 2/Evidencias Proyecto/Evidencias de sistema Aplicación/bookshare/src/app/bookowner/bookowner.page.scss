@@ -1,0 +1,55 @@
+.fondo {
+    ion-toolbar {
+        --background: #229E88 !important;
+        color: #ffffff;
+
+        ion-title {
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+            font-family: Helvetica;
+            left: 50%;
+            transform: translateX(-10%);
+        }
+
+        ion-icon {
+            color: #ffffff;
+        }
+    }
+}
+
+ion-content {
+
+    --background: #ffffff;
+
+    ion-item {
+        --background: transparent !important;
+        max-width: 100%;
+        width:90%;
+
+        ion-thumbnail {
+
+            .imagen {
+                border-radius: 5px;
+            }
+        }
+
+        ion-label {
+
+            .titulo {
+                font-size: 16px;
+                color:#000000;
+                font-family: Helvetica;
+                font-weight: bold;
+            }
+
+            .prestamo,.intercambio {
+                font-size: 12px;
+                color:#000000;
+                font-family: Helvetica;
+            }
+        }
+
+    }
+
+}
