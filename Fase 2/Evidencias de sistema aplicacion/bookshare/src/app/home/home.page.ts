@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  isLoggedIn = false;  // Para controlar si el usuario está logueado
-  userRole: string | null = null;  // Para almacenar el rol del usuario
-  userEmail: string | null = null;  // Para almacenar el correo del usuario
+  isLoggedIn = false;  
+  userRole: string | null = null;  
+  userEmail: string | null = null;  
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -23,8 +23,8 @@ export class HomePage {
     this.isLoggedIn = !!token;
 
     if (this.isLoggedIn) {
-      this.userRole = this.authService.getUserRole(); // Obtener el rol del usuario
-      this.userEmail = this.authService.getUserEmail(); // Obtener el correo del usuario
+      this.userRole = this.authService.getUserRole(); 
+      this.userEmail = this.authService.getUserEmail(); 
     } 
   }
 

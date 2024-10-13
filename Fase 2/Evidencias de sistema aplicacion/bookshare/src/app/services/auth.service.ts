@@ -34,7 +34,7 @@ export class AuthService {
 
 
   login(correo: string, contrasena: string): Observable<any> {
-    const loginData = { correo, contrasena }; // Asegúrate de que la propiedad sea 'contrasena'
+    const loginData = { correo, contrasena }; 
     console.log(loginData);
     return this.http.post(`${this.apiUrl}/login`, loginData);
   }
@@ -43,7 +43,7 @@ export class AuthService {
   saveUserData(token: string, user: any): void {
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('role', user.rol);  // Guardar el rol del usuario
+    localStorage.setItem('role', user.rol);  
   }
 
  
@@ -76,7 +76,7 @@ export class AuthService {
       autor,
       descripcion,
       genero,
-      imagen_libro // opcional
+      imagen_libro 
     };
 
     return this.http.post(`${this.apiUrl}/libros`, libroData);
@@ -108,7 +108,7 @@ export class AuthService {
     return this.http.put<any>(`${this.apiUrl}/usuarios/correo/${correo}`, usuarioData);
   }
   getUserEmail(): string | null {
-    const user = this.getUserData(); // Obtiene los datos del usuario almacenados
-    return user ? user.correo : null; // Asume que el campo 'correo' existe en los datos del usuario
+    const user = this.getUserData(); 
+    return user ? user.correo : null; 
   }
 }

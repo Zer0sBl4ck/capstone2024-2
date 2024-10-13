@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./listar-libro/listar-libro.module').then( m => m.ListarLibroPageModule)
   },
   {
-    path: 'bookowner/:usuario',  // Definimos el parámetro de la ruta
+    path: 'bookowner/:usuario',  
     loadChildren: () => import('./bookowner/bookowner.module').then(m => m.BookownerPageModule)
   },
   {
@@ -40,7 +40,7 @@ const routes: Routes = [
     loadChildren: () => import('./update-perfil/update-perfil.module').then( m => m.UpdatePerfilPageModule)
   },
   {
-    path: 'update-perfil/:correo', // Asegúrate de tener un parámetro para el correo
+    path: 'update-perfil/:correo', 
     loadChildren: () => import('./update-perfil/update-perfil.module').then(m => m.UpdatePerfilPageModule)
   },
 ];
