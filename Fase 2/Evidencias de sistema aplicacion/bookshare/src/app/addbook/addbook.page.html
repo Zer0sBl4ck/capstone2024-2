@@ -10,22 +10,31 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" #libroForm="ngForm">
     <ion-item>
       <ion-label position="stacked">Título</ion-label>
       <ion-input [(ngModel)]="titulo" name="titulo" required></ion-input>
     </ion-item>
-    
+    <div class="aviso" *ngIf="libroForm.controls['titulo']?.invalid && (libroForm.controls['titulo']?.touched || libroForm.submitted)">
+      <ion-label color="danger">El título es obligatorio.</ion-label>
+    </div>
+
     <ion-item>
       <ion-label position="stacked">Autor</ion-label>
       <ion-input [(ngModel)]="autor" name="autor" required></ion-input>
     </ion-item>
-    
+    <div class="aviso" *ngIf="libroForm.controls['autor']?.invalid && (libroForm.controls['autor']?.touched || libroForm.submitted)">
+      <ion-label color="danger">El autor es obligatorio.</ion-label>
+    </div>
+
     <ion-item>
       <ion-label position="stacked">Descripción</ion-label>
       <ion-textarea class="descripcion" [(ngModel)]="descripcion" name="descripcion" required></ion-textarea>
     </ion-item>
-    
+    <div class="aviso" *ngIf="libroForm.controls['descripcion']?.invalid && (libroForm.controls['descripcion']?.touched || libroForm.submitted)">
+      <ion-label color="danger">La descripción es obligatoria.</ion-label>
+    </div>
+
     <ion-item>
       <ion-label position="stacked">Género</ion-label>
       <ion-select class="opcion" [(ngModel)]="genero" name="genero" required label="Seleccione opción">
@@ -40,16 +49,22 @@
         <ion-select-option value="ficcióncontemporánea">Ficción contemporánea</ion-select-option>
       </ion-select>
     </ion-item>
-    
+    <div class="aviso" *ngIf="libroForm.controls['genero']?.invalid && (libroForm.controls['genero']?.touched || libroForm.submitted)">
+      <ion-label color="danger">El género es obligatorio.</ion-label>
+    </div>
+
     <ion-item>
       <ion-label position="stacked">Imagen del Libro</ion-label>
-      <input class="foto" type="file" (change)="onFileSelected($event)" accept="image/*" />
+      <input class="foto" type="file" (change)="onFileSelected($event)" accept="image/*" required />
     </ion-item>
+    <div class="aviso" *ngIf="!imagen_libro && (libroForm.controls['imagen_libro']?.touched || libroForm.submitted)">
+      <ion-label color="danger">La imagen del libro es obligatoria.</ion-label>
+    </div>
 
     <div *ngIf="imagen_libro">
       <img class="libro" [src]="imagen_libro" alt="Previsualización"/>
     </div>
 
-    <ion-button expand="full" type="submit">Agregar Libro</ion-button>
+    <ion-button expand="full" type="submit" [disabled]="libroForm.invalid || !imagen_libro">Agregar Libro</ion-button>
   </form>
 </ion-content>
