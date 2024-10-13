@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router'; // Importa Router
 
 @Component({
   selector: 'app-update-perfil',
@@ -20,7 +20,8 @@ export class UpdatePerfilPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router // Inyecta Router
   ) { }
 
   ngOnInit() {
@@ -47,7 +48,6 @@ export class UpdatePerfilPage implements OnInit {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        // Usamos un tipo de aserción para indicar que e.target.result no será undefined aquí
         this.fotoSeleccionada = e.target?.result as string || ''; // Previsualiza la imagen
         this.usuarioData.foto_perfil = (this.fotoSeleccionada as string).split(',')[1]; // Guarda solo la parte base64
       };
@@ -59,10 +59,19 @@ export class UpdatePerfilPage implements OnInit {
     this.authService.updateUserProfile(this.correo, this.usuarioData).subscribe(
       response => {
         console.log('Perfil actualizado:', response);
+        this.volverAlPerfil() 
       },
       error => {
         console.error('Error al actualizar el perfil:', error);
       }
     );
+  }
+
+  // Método para volver al perfil
+  volverAlPerfil() {
+    const correoLogueado = this.authService.getUserEmail(); // Obtén el correo del usuario logueado
+    if (correoLogueado) {
+      this.router.navigate(['/perfil', correoLogueado]); // Navega a la ruta del perfil
+    }
   }
 }
