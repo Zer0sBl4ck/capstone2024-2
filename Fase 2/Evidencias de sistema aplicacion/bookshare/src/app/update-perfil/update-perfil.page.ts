@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router'; // Importa Router
+import { ActivatedRoute, Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-update-perfil',
@@ -16,12 +16,12 @@ export class UpdatePerfilPage implements OnInit {
   };
 
   correo: string = '';
-  fotoSeleccionada: string | ArrayBuffer | null = ''; // Para la previsualización de la imagen
+  fotoSeleccionada: string | ArrayBuffer | null = ''; 
 
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router // Inyecta Router
+    private router: Router 
   ) { }
 
   ngOnInit() {
@@ -35,7 +35,7 @@ export class UpdatePerfilPage implements OnInit {
     this.authService.getUserProfile(this.correo).subscribe(
       data => {
         this.usuarioData = data;
-        this.fotoSeleccionada = data.foto_perfil; // Cargar la imagen existente
+        this.fotoSeleccionada = data.foto_perfil; 
       },
       error => {
         console.error('Error al obtener el perfil:', error);
@@ -48,10 +48,10 @@ export class UpdatePerfilPage implements OnInit {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.fotoSeleccionada = e.target?.result as string || ''; // Previsualiza la imagen
-        this.usuarioData.foto_perfil = (this.fotoSeleccionada as string).split(',')[1]; // Guarda solo la parte base64
+        this.fotoSeleccionada = e.target?.result as string || ''; 
+        this.usuarioData.foto_perfil = (this.fotoSeleccionada as string).split(',')[1]; 
       };
-      reader.readAsDataURL(file); // Lee el archivo como Data URL
+      reader.readAsDataURL(file); 
     }
   }
 
@@ -67,11 +67,11 @@ export class UpdatePerfilPage implements OnInit {
     );
   }
 
-  // Método para volver al perfil
+  
   volverAlPerfil() {
-    const correoLogueado = this.authService.getUserEmail(); // Obtén el correo del usuario logueado
+    const correoLogueado = this.authService.getUserEmail(); 
     if (correoLogueado) {
-      this.router.navigate(['/perfil', correoLogueado]); // Navega a la ruta del perfil
+      this.router.navigate(['/perfil', correoLogueado]); 
     }
   }
 }
