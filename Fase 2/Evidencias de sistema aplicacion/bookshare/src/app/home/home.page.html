@@ -12,36 +12,21 @@
           Mi perfil
         </ion-button>
 
-        <br>
-        <br>
-
         <ion-button routerLink="/wishlist">
           <ion-icon name="star-outline" slot="start"></ion-icon>
           Wishlist
         </ion-button>
 
-        <br>
-        <br>
-
-        <!-- Opción Agregar libro solo para admin -->
         <ion-button routerLink="/addbook" *ngIf="userRole === 'admin'">
           <ion-icon name="add-outline" slot="start"></ion-icon>
           Agregar libro
         </ion-button>
 
-        <br>
-        <br>
-
-        <!-- Opción Mis Libros debe separar cuando es para usuario y para admin -->
         <ion-button (click)="goBookOwner()" *ngIf="userRole === 'usuario'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
           Mis Libros
         </ion-button>
 
-        <br>
-        <br>
-
-        <!-- Opción Mis Libros debe separar cuando es para usuario y para admin -->
         <ion-button routerLink="/listar-libro">
           <ion-icon name="bookmark-outline" slot="start"></ion-icon>
           Lista de libros

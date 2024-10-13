@@ -38,16 +38,16 @@ ion-content {
             max-height: 100px;
             resize: none;
             border: 1px solid #000000;
-            border-radius: 8px; 
+            border-radius: 8px;
             padding: 10px;
             margin-top: 15px;
         }
 
-        /* .opcion {
+        .opcion {
             color: #000000;
             font-size: 15px;
             font-family: Helvetica;
-        }*/
+        }
 
         ion-input {
             color: #000000;
@@ -64,10 +64,10 @@ ion-content {
     }
 
     .libro {
-        max-width: 80%; 
-        max-height: 200px; 
-        margin-top: 10px; 
-        left: 30%; 
+        max-width: 80%;
+        max-height: 200px;
+        margin-top: 10px;
+        left: 30%;
         transform: translateX(75%);
     }
 
