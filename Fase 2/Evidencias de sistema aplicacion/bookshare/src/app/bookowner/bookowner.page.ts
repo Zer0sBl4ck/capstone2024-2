@@ -8,15 +8,15 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./bookowner.page.scss'],
 })
 export class BookownerPage implements OnInit {
-  libros: any[] = []; // Array para almacenar los libros
-  errorMessage: string | null = null; // Para almacenar mensajes de error
+  libros: any[] = []; 
+  errorMessage: string | null = null; 
 
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const correo = params['usuario']; // Extraer el correo electrónico de la URL
-      this.cargarLibros(correo); // Cargar los libros usando el correo extraído
+      const correo = params['usuario']; 
+      this.cargarLibros(correo); 
     });
   }
 
@@ -24,17 +24,17 @@ export class BookownerPage implements OnInit {
     if (correo) {
       this.authService.getLibrosPorCorreo(correo).subscribe(
         (response) => {
-          this.libros = response; // Almacenar los libros en el array
-          console.log(this.libros); // Verifica que el campo imagen_base64 tenga datos válidos
+          this.libros = response; 
+          console.log(this.libros); 
         },
         (error) => {
           console.error('Error al cargar libros:', error);
-          this.errorMessage = 'No se pudieron cargar los libros. Inténtalo de nuevo más tarde.'; // Mensaje de error
+          this.errorMessage = 'No se pudieron cargar los libros. Inténtalo de nuevo más tarde.'; 
         }
       );
     } else {
-      this.errorMessage = 'No se ha encontrado el usuario. Asegúrate de que estás logueado.'; // Alerta si no se encuentra el usuario
-      this.router.navigate(['/login']); // Redirigir a la página de login si no hay usuario
+      this.errorMessage = 'No se ha encontrado el usuario. Asegúrate de que estás logueado.'; 
+      this.router.navigate(['/login']); 
     }
   }
 }

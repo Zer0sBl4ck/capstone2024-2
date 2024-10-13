@@ -19,7 +19,7 @@ export class AddbookPage implements OnInit {
   ngOnInit() {
   }
 
-  // Método para manejar la selección de archivos
+
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -27,10 +27,10 @@ export class AddbookPage implements OnInit {
       const reader = new FileReader();
 
       reader.onload = (e) => {
-        this.imagen_libro = e.target?.result as string; // Convertir a base64
+        this.imagen_libro = e.target?.result as string; 
       };
 
-      reader.readAsDataURL(file); // Leer el archivo como URL de datos
+      reader.readAsDataURL(file); 
     }
   }
 
@@ -43,22 +43,22 @@ export class AddbookPage implements OnInit {
       .subscribe(
         response => {
           console.log('Libro agregado:', response);
-          this.limpiarFormulario(); // Limpiar el formulario después de agregar el libro
-          this.router.navigate(['/']); // Redirigir a la lista de libros o mostrar un mensaje de éxito
+          this.limpiarFormulario(); 
+          this.router.navigate(['/']); 
         },
         error => {
           console.error('Error al agregar libro:', error);
-          // Aquí podrías mostrar un mensaje de error al usuario
+         
         }
       );
   }
 
-  // Método para limpiar el formulario
+  
   limpiarFormulario() {
     this.titulo = '';
     this.autor = '';
     this.descripcion = '';
     this.genero = '';
-    this.imagen_libro = null; // Reinicia la imagen
+    this.imagen_libro = null; 
   }
 }
