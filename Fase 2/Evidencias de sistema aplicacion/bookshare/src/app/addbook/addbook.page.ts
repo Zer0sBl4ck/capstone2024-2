@@ -43,13 +43,22 @@ export class AddbookPage implements OnInit {
       .subscribe(
         response => {
           console.log('Libro agregado:', response);
-          // Redirigir a la lista de libros o mostrar un mensaje de éxito
-          this.router.navigate(['/']);
+          this.limpiarFormulario(); // Limpiar el formulario después de agregar el libro
+          this.router.navigate(['/']); // Redirigir a la lista de libros o mostrar un mensaje de éxito
         },
         error => {
           console.error('Error al agregar libro:', error);
           // Aquí podrías mostrar un mensaje de error al usuario
         }
       );
+  }
+
+  // Método para limpiar el formulario
+  limpiarFormulario() {
+    this.titulo = '';
+    this.autor = '';
+    this.descripcion = '';
+    this.genero = '';
+    this.imagen_libro = null; // Reinicia la imagen
   }
 }
