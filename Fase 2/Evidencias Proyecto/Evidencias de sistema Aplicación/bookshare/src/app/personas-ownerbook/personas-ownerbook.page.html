@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Personas con el libro ISBN: {{ isbn }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="personas.length > 0; else noData">
+    <ion-item *ngFor="let persona of personas">
+      <ion-avatar slot="start">
+        <img *ngIf="persona.foto_perfil_base64" 
+             [src]="'data:image/jpeg;base64,' + persona.foto_perfil_base64" 
+             alt="Foto de perfil de {{ persona.nombre_usuario }}">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ persona.nombre_usuario }}</h2>
+        <p>Email: {{ persona.correo }}</p>
+        <p>Ubicación: {{ persona.ubicacion }}</p>
+        <p>Disponible intercambio: 
+          <span *ngIf="persona.disponible_intercambio === 1; else noIntercambio">Sí</span>
+          <ng-template #noIntercambio>No</ng-template>
+        </p>
+        
+        <p>Disponible préstamo: 
+          <span *ngIf="persona.disponible_prestamo === 1; else noPrestamo">Sí</span>
+          <ng-template #noPrestamo>No</ng-template>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noData>
+    <p>No se encontraron usuarios con este libro.</p>
+  </ng-template>
+</ion-content>

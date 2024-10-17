@@ -10,7 +10,6 @@
 </ion-header>
 
 <ion-content>
-
   <ion-item *ngFor="let libro of libros" lines="none">
     <ion-card>
       <ion-card-header>
@@ -37,12 +36,17 @@
 
         <ion-button class="agregar" expand="block" *ngIf="rol === 'usuario'"
           (click)="agregarLibroABiblioteca(libro)">Agregar a Biblioteca</ion-button>
+        
         <ion-button class="modificar" *ngIf="rol === 'admin'" expand="block">
           MODIFICAR LIBRO
         </ion-button>
 
+        <!-- Botón para ir a la lista de personas con este libro -->
+        <ion-button expand="block" (click)="irAPersonasConLibro(libro.isbn)">
+          Ver Personas con Este Libro
+        </ion-button>
+        
       </ion-card-content>
     </ion-card>
   </ion-item>
-
 </ion-content>

@@ -37,4 +37,30 @@ export class BookownerPage implements OnInit {
       this.router.navigate(['/login']); 
     }
   }
+
+  cambiarEstadoPrestamo(isbn: string, disponible: boolean) {
+    this.authService.modificarEstadoPrestamo(isbn, disponible).subscribe(
+      (response) => {
+        console.log(response.message);
+        this.cargarLibros(this.route.snapshot.params['usuario']); // Recargar libros para reflejar cambios
+      },
+      (error) => {
+        console.error('Error al cambiar estado de préstamo:', error);
+        this.errorMessage = 'No se pudo cambiar el estado de préstamo. Inténtalo de nuevo más tarde.';
+      }
+    );
+  }
+
+  cambiarEstadoIntercambio(isbn: string, disponible: boolean) {
+    this.authService.modificarEstadoIntercambio(isbn, disponible).subscribe(
+      (response) => {
+        console.log(response.message);
+        this.cargarLibros(this.route.snapshot.params['usuario']); // Recargar libros para reflejar cambios
+      },
+      (error) => {
+        console.error('Error al cambiar estado de intercambio:', error);
+        this.errorMessage = 'No se pudo cambiar el estado de intercambio. Inténtalo de nuevo más tarde.';
+      }
+    );
+  }
 }

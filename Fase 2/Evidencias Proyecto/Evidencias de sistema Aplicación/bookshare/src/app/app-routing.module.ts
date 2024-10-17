@@ -51,6 +51,10 @@ const routes: Routes = [
     path: 'listar-libro-solicitud',
     loadChildren: () => import('./listar-libro-solicitud/listar-libro-solicitud.module').then( m => m.ListarLibroSolicitudPageModule)
   },
+  {
+    path: 'personas-ownerbook/:isbn',
+    loadChildren: () => import('./personas-ownerbook/personas-ownerbook.module').then(m => m.PersonasOwnerbookPageModule)
+  },
 ];
 
 @NgModule({

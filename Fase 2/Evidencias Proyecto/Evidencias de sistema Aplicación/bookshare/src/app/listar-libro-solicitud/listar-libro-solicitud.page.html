@@ -12,19 +12,26 @@
   </ion-header>
 
   <ion-list *ngIf="libros.length > 0; else noBooks">
-    <ion-item *ngFor="let libro of libros">
-      <ion-label>
-        <h2>{{ libro.titulo }}</h2>
-        <p>Autor: {{ libro.autor }}</p>
-        <p>ISBN: {{ libro.isbn }}</p>
-        <p>Estado: {{ libro.estado ? 'Disponible' : 'No disponible' }}</p>
-      </ion-label>
-      <ion-button (click)="modificarEstado(libro.isbn)" slot="end">
-        {{ libro.estado ? 'Marcar como No disponible' : 'Marcar como Disponible' }}
-      </ion-button>
-      <ion-button (click)="eliminarLibro(libro.isbn)" color="danger" slot="end">
-        Eliminar
-      </ion-button>
+    <ion-item *ngFor="let libro of libros" class="book-item">
+      <ion-card>
+        <ion-card-header>
+          <div class="book-image">
+            <img *ngIf="libro.imagen_libro_base64" [src]="'data:image/jpeg;base64,' + libro.imagen_libro_base64" alt="Imagen del libro" />
+          </div>
+          <ion-card-title>{{ libro.titulo }}</ion-card-title>
+          <ion-card-subtitle>Autor: {{ libro.autor }}</ion-card-subtitle>
+          <p>ISBN: {{ libro.isbn }}</p>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-button expand="full" (click)="modificarEstado(libro.isbn)">
+            {{ libro.estado ? 'Marcar como No disponible' : 'Marcar como Disponible' }}
+          </ion-button>
+          <ion-button expand="full" color="danger" (click)="eliminarLibro(libro.isbn)">
+            Eliminar
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
     </ion-item>
   </ion-list>
 
@@ -34,3 +41,14 @@
     </ion-item>
   </ng-template>
 </ion-content>
+
+<style>
+  .book-item {
+    margin-bottom: 16px; /* Espacio entre los libros */
+  }
+
+  .book-image img {
+    width: 100%; /* Asegúrate de que la imagen ocupe el ancho completo del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+  }
+</style>

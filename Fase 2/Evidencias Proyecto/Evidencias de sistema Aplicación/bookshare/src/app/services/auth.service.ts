@@ -136,4 +136,16 @@ export class AuthService {
   eliminarLibro(isbn: string): Observable<any> {
   return this.http.delete<any>(`${this.apiUrl}/libros-eliminar/${isbn}`);
   }
+
+  modificarEstadoPrestamo(isbn: string, disponible_prestamo: boolean): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/libros-cambio-prestamo/${isbn}`, { disponible_prestamo });
+  }
+  
+  modificarEstadoIntercambio(isbn: string, disponible_intercambio: boolean): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/libros-cambio-intercambio/${isbn}`, { disponible_intercambio });
+  }
+  getPersonasConLibro(isbn: string): Observable<any> {
+    const url = `${this.apiUrl}/personas-con-libro/${isbn}`;
+    return this.http.get<any>(url);
+  }
 }

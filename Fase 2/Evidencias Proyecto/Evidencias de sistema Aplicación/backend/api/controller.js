@@ -352,5 +352,89 @@ router.delete('/libros-eliminar/:isbn', async (req, res) => {
   }
 });
 
+router.put('/libros-cambio-prestamo/:isbn', async (req, res) => {
+  const { isbn } = req.params; // Obtiene el ISBN del libro
+  const { disponible_prestamo } = req.body; // Obtiene el nuevo estado de préstamo
+
+  try {
+    const [libro] = await db.query('SELECT * FROM biblioteca_usuario WHERE isbn = ?', [isbn]);
+
+    // Verificar si el libro existe
+    if (!libro || libro.length === 0) {
+      return res.status(404).json({ message: 'Libro no encontrado.' });
+    }
+
+    // Actualiza el estado de préstamo
+    await db.query('UPDATE biblioteca_usuario SET disponible_prestamo = ? WHERE isbn = ?', [disponible_prestamo, isbn]);
+
+    return res.status(200).json({ message: 'Estado de préstamo actualizado.' });
+  } catch (error) {
+    console.error('Error al modificar estado de préstamo:', error);
+    return res.status(500).json({ message: 'Error interno del servidor.' });
+  }
+});
+
+router.put('/libros-cambio-intercambio/:isbn', async (req, res) => {
+  const { isbn } = req.params; // Obtiene el ISBN del libro
+  const { disponible_intercambio } = req.body; // Obtiene el nuevo estado de intercambio
+
+  try {
+    const [libro] = await db.query('SELECT * FROM biblioteca_usuario WHERE isbn = ?', [isbn]);
+
+    // Verificar si el libro existe
+    if (!libro || libro.length === 0) {
+      return res.status(404).json({ message: 'Libro no encontrado.' });
+    }
+
+    // Actualiza el estado de intercambio
+    await db.query('UPDATE biblioteca_usuario SET disponible_intercambio = ? WHERE isbn = ?', [disponible_intercambio, isbn]);
+
+    return res.status(200).json({ message: 'Estado de intercambio actualizado.' });
+  } catch (error) {
+    console.error('Error al modificar estado de intercambio:', error);
+    return res.status(500).json({ message: 'Error interno del servidor.' });
+  }
+});
+
+router.get('/personas-con-libro/:isbn', async (req, res) => {
+  const isbn = req.params.isbn; // Obtener el ISBN del parámetro de la ruta
+  console.log(`Recibiendo solicitud para listar personas con el libro ISBN: ${isbn}`);
+
+  const query = `
+    SELECT 
+      usuario.id_usuario, 
+      usuario.nombre_usuario, 
+      usuario.correo, 
+      usuario.ubicacion, 
+      usuario.telefono, 
+      TO_BASE64(usuario.foto_perfil) AS foto_perfil_base64,  -- Alias para el campo Base64
+      libro.titulo, 
+      libro.genero, 
+      libro.autor,
+      biblioteca_usuario.disponible_intercambio,
+      biblioteca_usuario.disponible_prestamo
+    FROM biblioteca_usuario
+    JOIN libro ON libro.isbn = biblioteca_usuario.isbn
+    JOIN usuario ON usuario.id_usuario = biblioteca_usuario.id_usuario
+    WHERE biblioteca_usuario.isbn = ?
+      AND (biblioteca_usuario.disponible_prestamo = 1 OR biblioteca_usuario.disponible_intercambio = 1)
+      AND libro.estado = 1
+  `;
+
+  try {
+    const [results] = await db.query(query, [isbn]);
+    console.log('Resultados obtenidos:', results);
+    
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'No se encontraron usuarios con este libro disponible para préstamo o intercambio.' });
+    }
+    
+    return res.status(200).json(results);
+  } catch (error) {
+    console.error('Error al obtener usuarios con el libro:', error);
+    return res.status(500).json({ message: 'Error interno del servidor.' });
+  }
+});
+
 
 module.exports = router;

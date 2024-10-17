@@ -17,9 +17,15 @@
       </ion-thumbnail>
       <ion-label>
         <h2 class="titulo">{{ libro.titulo }}</h2>
-        <p class="prestamo">Disponible para préstamo: {{ libro.disponible_prestamo ? 'Sí' : 'No' }}</p>
-        <p class="intercambio">Disponible para intercambio: {{ libro.disponible_intercambio ? 'Sí' : 'No' }}</p>
+        <ion-button (click)="cambiarEstadoPrestamo(libro.isbn, !libro.disponible_prestamo)">
+          {{ libro.disponible_prestamo ? 'Marcar como No Disponible prestamo' : 'Marcar como Disponible prestamo' }}
+        </ion-button>
+        <ion-button (click)="cambiarEstadoIntercambio(libro.isbn, !libro.disponible_intercambio)">
+          {{ libro.disponible_intercambio ? 'Marcar como No Disponible intercambio' : 'Marcar como intercambio Disponible' }}
+        </ion-button>
       </ion-label>
+     <br>
+    
     </ion-item>
 
 </ion-content>

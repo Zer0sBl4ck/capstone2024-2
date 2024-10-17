@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service'; 
 import { AlertController } from '@ionic/angular'; // Importar AlertController
+import { Router } from '@angular/router'; // Importar Router
 
 @Component({
   selector: 'app-listar-libro',
@@ -12,7 +13,11 @@ export class ListarLibroPage implements OnInit {
   esAdmin: boolean = false;
   rol: string | null = null; // Variable para almacenar el rol del usuario
 
-  constructor(private authService: AuthService, private alertController: AlertController) { } // Inyectar AlertController
+  constructor(
+    private authService: AuthService, 
+    private alertController: AlertController,
+    private router: Router // Inyectar Router
+  ) { }
 
   ngOnInit() {
     this.cargarLibros(); 
@@ -55,6 +60,11 @@ export class ListarLibroPage implements OnInit {
       console.error('No se ha encontrado el usuario.'); // Log si no se encuentra el usuario
       this.mostrarAlerta('Error', 'No se ha encontrado el usuario.'); // Alerta si no se encuentra el usuario
     }
+  }
+
+  // Método para ir a la página de personas con el libro
+  irAPersonasConLibro(isbn: string) {
+    this.router.navigate([`/personas-ownerbook/${isbn}`]);
   }
 
   // Método para mostrar alertas
