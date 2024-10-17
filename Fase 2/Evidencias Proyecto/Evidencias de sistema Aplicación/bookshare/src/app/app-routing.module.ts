@@ -43,6 +43,14 @@ const routes: Routes = [
     path: 'update-perfil/:correo', 
     loadChildren: () => import('./update-perfil/update-perfil.module').then(m => m.UpdatePerfilPageModule)
   },
+  {
+    path: 'addbook-user',
+    loadChildren: () => import('./addbook-user/addbook-user.module').then( m => m.AddbookUserPageModule)
+  },
+  {
+    path: 'listar-libro-solicitud',
+    loadChildren: () => import('./listar-libro-solicitud/listar-libro-solicitud.module').then( m => m.ListarLibroSolicitudPageModule)
+  },
 ];
 
 @NgModule({

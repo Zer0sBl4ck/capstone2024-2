@@ -23,6 +23,11 @@
           Agregar libro
         </ion-button>
 
+        <ion-button (click)="goAddBookuser()" *ngIf="userRole === 'usuario'">
+          <ion-icon name="add-outline" slot="start"></ion-icon>
+          Agregar libro
+        </ion-button>
+
         <ion-button (click)="goBookOwner()" *ngIf="userRole === 'usuario'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
           Mis Libros
@@ -31,6 +36,10 @@
         <ion-button routerLink="/listar-libro">
           <ion-icon name="bookmark-outline" slot="start"></ion-icon>
           Lista de libros
+        </ion-button>
+        <ion-button (click)="solicitudesadd()" *ngIf="userRole === 'admin'">
+          <ion-icon name="book-outline" slot="start"></ion-icon>
+          SOLICITUDES LIBROS
         </ion-button>
         
         <ion-button class="cerrar" (click)="logout()">

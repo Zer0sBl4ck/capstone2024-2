@@ -17,6 +17,7 @@ export class ListarLibroPage implements OnInit {
   ngOnInit() {
     this.cargarLibros(); 
     this.rol = this.authService.getUserRole(); 
+    this.verificarRol(); // Asegurarse de verificar el rol del usuario
   }
 
   cargarLibros() {
@@ -39,7 +40,8 @@ export class ListarLibroPage implements OnInit {
     const usuario = this.authService.getUserData(); // Obtener datos del usuario
     console.log('Usuario:', usuario); // Verifica si el usuario está definido
     if (usuario) {
-      this.authService.agregarLibroABiblioteca(usuario.id_usuario, libro.id_libro).subscribe(
+      // Cambiar id_libro a isbn
+      this.authService.agregarLibroABiblioteca(usuario.id_usuario, libro.isbn).subscribe(
         () => { 
           console.log('Libro agregado a la biblioteca');
           this.mostrarAlerta('Éxito', 'El libro se ha agregado a tu biblioteca.'); // Mostrar alerta de éxito
@@ -65,12 +67,14 @@ export class ListarLibroPage implements OnInit {
 
     await alert.present();
   }
+
   verificarRol() {
     const usuario = this.authService.getUserData();
     if (usuario && usuario.rol === 'admin') {
       this.esAdmin = true; // Si el usuario es admin, activar la propiedad
     }
   }
+
   modificarLibro(libro: any) {
     console.log('Modificar libro:', libro);
     // Aquí se podría abrir una ventana modal o redirigir a la página de edición del libro

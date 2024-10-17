@@ -70,8 +70,9 @@ export class AuthService {
     return localStorage.getItem('role');
   }
 
-  agregarLibro(titulo: string, autor: string, descripcion: string, genero: string, imagen_libro?: string): Observable<any> {
+  agregarLibro(isbn: string, titulo: string, autor: string, descripcion: string, genero: string, imagen_libro?: string): Observable<any> {
     const libroData = {
+      isbn,
       titulo,
       autor,
       descripcion,
@@ -86,10 +87,10 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/libros`);
   }
 
-  agregarLibroABiblioteca(id_usuario: number, id_libro: number): Observable<any> {
+  agregarLibroABiblioteca(id_usuario: string, isbn: string): Observable<any> {
     const bibliotecaData = {
       id_usuario,
-      id_libro
+      isbn
     };
 
     return this.http.post(`${this.apiUrl}/biblioteca`, bibliotecaData);
@@ -110,5 +111,29 @@ export class AuthService {
   getUserEmail(): string | null {
     const user = this.getUserData(); 
     return user ? user.correo : null; 
+  }
+
+  agregarLibroEstadoFalse(isbn: string, titulo: string, autor: string, descripcion: string, genero: string, imagen_libro?: string): Observable<any> {
+    const libroData = {
+      isbn,
+      titulo,
+      autor,
+      descripcion,
+      genero,
+      imagen_libro
+    };
+
+    return this.http.post(`${this.apiUrl}/libros/estado-false`, libroData);
+  }
+  listarLibrosEstadoFalse(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/libros-estado-false`);
+  }
+
+  modificarLibroEstado(isbn: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/libros-modificar/${isbn}`, { estado: true });
+  }
+
+  eliminarLibro(isbn: string): Observable<any> {
+  return this.http.delete<any>(`${this.apiUrl}/libros-eliminar/${isbn}`);
   }
 }

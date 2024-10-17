@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Lista de Libros - Solicitud</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Lista de Libros - Solicitud</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list *ngIf="libros.length > 0; else noBooks">
+    <ion-item *ngFor="let libro of libros">
+      <ion-label>
+        <h2>{{ libro.titulo }}</h2>
+        <p>Autor: {{ libro.autor }}</p>
+        <p>ISBN: {{ libro.isbn }}</p>
+        <p>Estado: {{ libro.estado ? 'Disponible' : 'No disponible' }}</p>
+      </ion-label>
+      <ion-button (click)="modificarEstado(libro.isbn)" slot="end">
+        {{ libro.estado ? 'Marcar como No disponible' : 'Marcar como Disponible' }}
+      </ion-button>
+      <ion-button (click)="eliminarLibro(libro.isbn)" color="danger" slot="end">
+        Eliminar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noBooks>
+    <ion-item>
+      <ion-label>No hay libros disponibles.</ion-label>
+    </ion-item>
+  </ng-template>
+</ion-content>

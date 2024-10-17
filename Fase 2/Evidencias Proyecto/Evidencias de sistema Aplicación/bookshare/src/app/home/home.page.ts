@@ -37,6 +37,14 @@ export class HomePage {
   goAddBook(){
     this.router.navigate(['/addbook'],{replaceUrl:true})
   }
+  goAddBookuser(){
+    this.router.navigate(['/addbook-user'],{replaceUrl:true})
+  }
+  solicitudesadd(){
+    this.router.navigate(['/listar-libro-solicitud'],{replaceUrl:true})
+  }
+  
+
   goBookOwner(){
     this.router.navigate(['/bookowner',this.userEmail],{replaceUrl: true})
   }

@@ -88,36 +88,29 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/libros', async (req, res) => {
-  const { titulo, autor, descripcion, genero, imagen_libro } = req.body;
+  const { isbn, titulo, autor, descripcion, genero, imagen_libro } = req.body; // Eliminamos nuevo_campo
 
-  // Log para verificar si los datos llegan al servidor
-  console.log('Datos recibidos:', { titulo, autor, descripcion, genero, imagen_libro });
+  console.log('Datos recibidos:', { isbn, titulo, autor, descripcion, genero, imagen_libro });
 
-  // Validación de campos requeridos
-  if (!titulo || !autor || !descripcion || !genero) {
+  if (!isbn || !titulo || !autor || !descripcion || !genero) { // Verifica que todos los campos obligatorios estén presentes
     return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
   }
 
   try {
-    // Verificar si la imagen viene con el prefijo 'data:image/...'
     let imageBuffer = null;
     if (imagen_libro) {
-      // Verificar si la cadena base64 tiene un prefijo
       const base64ImagePattern = /^data:image\/\w+;base64,/;
       if (base64ImagePattern.test(imagen_libro)) {
-        // Extraer solo la parte de los datos de la imagen
         const base64Data = imagen_libro.replace(base64ImagePattern, "");
-        // Convertir la cadena base64 a un Buffer
         imageBuffer = Buffer.from(base64Data, 'base64');
       } else {
-        // Si no tiene el prefijo, asumir que es base64 simple y convertirla directamente
         imageBuffer = Buffer.from(imagen_libro, 'base64');
       }
     }
 
     await db.query(
-      `INSERT INTO libro (titulo, autor, descripcion, genero, imagen_libro) VALUES (?, ?, ?, ?, ?)`,
-      [titulo, autor, descripcion, genero, imageBuffer]
+      `INSERT INTO libro (isbn, titulo, autor, descripcion, genero, imagen_libro, estado) VALUES (?, ?, ?, ?, ?, ?, ?)`, 
+      [isbn, titulo, autor, descripcion, genero, imageBuffer, true] // Aquí se establece estado en true
     );
 
     return res.status(201).json({ message: 'Libro agregado exitosamente.' });
@@ -127,12 +120,12 @@ router.post('/libros', async (req, res) => {
   }
 });
 
+
 router.get('/libros', async (req, res) => {
   try {
-    const [libros] = await db.query('SELECT id_libro,titulo, autor, descripcion, genero, TO_BASE64(imagen_libro) AS imagen_libro_base64 FROM libro');
+    const [libros] = await db.query('SELECT isbn, titulo, autor, descripcion, genero, TO_BASE64(imagen_libro) AS imagen_libro_base64 FROM libro WHERE estado=1'); // Cambia id_libro por isbn
     
-    // Ahora la imagen ya viene en formato base64, solo la asignamos
-    return res.status(200).json(libros); 
+    return res.status(200).json(libros);
   } catch (error) {
     console.error('Error al obtener libros:', error);
     return res.status(500).json({ message: 'Error interno del servidor.' });
@@ -140,14 +133,14 @@ router.get('/libros', async (req, res) => {
 });
 
 router.post('/biblioteca', (req, res) => {
-  const { id_usuario, id_libro } = req.body; // Obtén solo los campos necesarios
+  const { id_usuario, isbn } = req.body; // Cambiar id_libro a isbn
 
   const query = `
-    INSERT INTO biblioteca_usuario (id_usuario, id_libro, disponible_prestamo, disponible_intercambio)
+    INSERT INTO biblioteca_usuario (id_usuario, isbn, disponible_prestamo, disponible_intercambio)
     VALUES (?, ?, false, false)  -- Establece los valores predeterminados como false
   `;
 
-  db.query(query, [id_usuario, id_libro], (error, results) => {
+  db.query(query, [id_usuario, isbn], (error, results) => {
     if (error) {
       console.error('Error al agregar libro a la biblioteca:', error);
       return res.status(500).json({ message: 'Error al agregar libro a la biblioteca' });
@@ -162,12 +155,13 @@ router.get('/libros/:correo', async (req, res) => {
 
   const query = `
     SELECT 
+      libro.isbn, 
       libro.titulo, 
       TO_BASE64(libro.imagen_libro) AS imagen_base64, 
       biblioteca_usuario.disponible_prestamo, 
-      biblioteca_usuario.disponible_intercambio 
+      biblioteca_usuario.disponible_intercambio
     FROM libro
-    JOIN biblioteca_usuario ON libro.id_libro = biblioteca_usuario.id_libro
+    JOIN biblioteca_usuario ON libro.isbn = biblioteca_usuario.isbn -- Cambia id_libro por isbn
     JOIN usuario ON biblioteca_usuario.id_usuario = usuario.id_usuario
     WHERE usuario.correo = ?
   `;
@@ -259,8 +253,104 @@ router.put('/usuarios/correo/:correo', async (req, res) => {
   }
 });
 
+router.post('/libros/estado-false', async (req, res) => {
+  const { isbn, titulo, autor, descripcion, genero, imagen_libro } = req.body; // Obtén los datos necesarios
+
+  console.log('Datos recibidos:', { isbn, titulo, autor, descripcion, genero, imagen_libro });
+
+  if (!isbn || !titulo || !autor || !descripcion || !genero) {
+    return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
+  }
+
+  try {
+    let imageBuffer = null;
+    // Si hay imagen, convierte de base64 a buffer
+    if (imagen_libro) {
+      const base64ImagePattern = /^data:image\/\w+;base64,/;
+      if (base64ImagePattern.test(imagen_libro)) {
+        const base64Data = imagen_libro.replace(base64ImagePattern, "");
+        imageBuffer = Buffer.from(base64Data, 'base64');
+      } else {
+        imageBuffer = Buffer.from(imagen_libro, 'base64');
+      }
+    }
+
+    // Inserta el libro con estado false
+    await db.query(
+      `INSERT INTO libro (isbn, titulo, autor, descripcion, genero, imagen_libro, estado) VALUES (?, ?, ?, ?, ?, ?, ?)`, 
+      [isbn, titulo, autor, descripcion, genero, imageBuffer, false] // Aquí se establece estado en false
+    );
+
+    return res.status(201).json({ message: 'Libro agregado exitosamente con estado false.' });
+  } catch (error) {
+    console.error('Error al agregar libro:', error);
+    return res.status(500).json({ message: 'Error interno del servidor.' });
+  }
+});
+
+router.get('/libros-estado-false', async (req, res) => {
+  console.log('Request a /libros/estado-false'); // Log para verificar que la ruta se alcanza
+  try {
+    const [libros] = await db.query('SELECT isbn, titulo, autor, descripcion, genero, TO_BASE64(imagen_libro) AS imagen_libro_base64 FROM libro WHERE estado = 0');
+    
+    console.log('Libros encontrados:', libros); // Muestra lo que se recibe de la consulta
+    
+    if (!libros || libros.length === 0) {
+      console.log('No se encontraron libros con estado false.');
+      return res.status(404).json({ message: 'No se encontraron libros.' });
+    }
+
+    return res.status(200).json(libros);
+  } catch (error) {
+    console.error('Error al obtener libros con estado false:', error.message);
+    return res.status(500).json({ message: 'Error interno del servidor.', error: error.message });
+  }
+});
 
 
+// Modificar libro de estado false a true
+router.put('/libros-modificar/:isbn', async (req, res) => {
+  const { isbn } = req.params; // Obtén el ISBN del libro de los parámetros de la ruta
+
+  try {
+    const [libro] = await db.query('SELECT * FROM libro WHERE isbn = ?', [isbn]);
+
+    // Verificar si el libro existe
+    if (!libro || libro.length === 0) {
+      return res.status(404).json({ message: 'Libro no encontrado.' });
+    }
+
+    // Actualizar el estado del libro a true
+    await db.query('UPDATE libro SET estado = true WHERE isbn = ?', [isbn]);
+
+    return res.status(200).json({ message: 'Estado del libro actualizado a true.' });
+  } catch (error) {
+    console.error('Error al modificar estado del libro:', error);
+    return res.status(500).json({ message: 'Error interno del servidor.' });
+  }
+});
+
+// Eliminar libro
+router.delete('/libros-eliminar/:isbn', async (req, res) => {
+  const { isbn } = req.params; // Obtén el ISBN del libro de los parámetros de la ruta
+
+  try {
+    // Verificar si el libro existe
+    const [libro] = await db.query('SELECT * FROM libro WHERE isbn = ?', [isbn]);
+
+    if (!libro || libro.length === 0) {
+      return res.status(404).json({ message: 'Libro no encontrado.' });
+    }
+
+    // Eliminar el libro de la base de datos
+    await db.query('DELETE FROM libro WHERE isbn = ?', [isbn]);
+
+    return res.status(200).json({ message: 'Libro eliminado exitosamente.' });
+  } catch (error) {
+    console.error('Error al eliminar libro:', error);
+    return res.status(500).json({ message: 'Error interno del servidor.' });
+  }
+});
 
 
 module.exports = router;
