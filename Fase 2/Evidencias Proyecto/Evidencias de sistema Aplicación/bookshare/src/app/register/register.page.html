@@ -15,14 +15,13 @@
       <ion-label position="stacked">Nombre de usuario</ion-label>
       <ion-input [(ngModel)]="nombre_usuario" name="nombre_usuario" required pattern="^[a-zA-Z]+$"></ion-input>
     </ion-item>
-    <div class="aviso" *ngIf="registroForm.controls['nombre_usuario']?.invalid && (registroForm.controls['nombre_usuario']?.touched || registroForm.submitted)">
+    <div class="aviso"
+      *ngIf="registroForm.controls['nombre_usuario']?.invalid && (registroForm.controls['nombre_usuario']?.touched || registroForm.submitted)">
       <ion-label color="danger">
         El nombre de usuario es obligatorio y debe contener solo letras.
       </ion-label>
-  
-    </div>
 
-    <br>
+    </div>
 
     <ion-item>
       <ion-label position="stacked">Correo</ion-label>
@@ -35,8 +34,6 @@
         ejemplo&#64;dominio.com).</ion-label>
     </div>
 
-    <br>
-
     <ion-item>
       <ion-label position="stacked">Contraseña</ion-label>
       <ion-input [(ngModel)]="contrasena" name="contrasena" type="password" required minlength="6"></ion-input>
@@ -47,18 +44,14 @@
         La contraseña es obligatoria y debe tener al menos 6 caracteres.</ion-label>
     </div>
 
-    <br>
-
     <ion-item>
       <ion-label position="stacked">Teléfono</ion-label>
       <ion-input [(ngModel)]="telefono" name="telefono" required pattern="^[0-9]*$"></ion-input>
     </ion-item>
-    <div style="width: 100%; max-width: 80%; padding: 0; left: 80%; transform: translateX(10%); font-size:12px;"
+    <div class="aviso"
       *ngIf="registroForm.controls['telefono']?.invalid && (registroForm.controls['telefono']?.touched || registroForm.submitted)">
       <ion-label color="danger">El teléfono es obligatorio.</ion-label>
     </div>
-
-    <br>
 
     <ion-item>
       <ion-label position="stacked">Ubicación</ion-label>
@@ -73,25 +66,24 @@
       </ion-select>
 
     </ion-item>
-    <div style="width: 100%; max-width: 80%; padding: 0; left: 80%; transform: translateX(10%); font-size:12px;"
+    <div class="aviso"
       *ngIf="registroForm.controls['ubicacion']?.invalid && (registroForm.controls['ubicacion']?.touched || registroForm.submitted)">
       <ion-label color="danger">La ubicación es obligatoria.</ion-label>
     </div>
 
-    
+    <!-- Foto de perfil -->
+    <ion-item>
+      <ion-label position="stacked">Foto de perfil</ion-label>
+      <input class="foto" type="file" (change)="onImageSelected($event)" accept="image/*" required>
+    </ion-item>
+    <div class="aviso"
+      *ngIf="!foto_perfil && (registroForm.submitted || registroForm.controls['foto_perfil']?.touched)">
+      <ion-label color="danger">La foto de perfil es obligatoria.</ion-label>
+    </div>
 
-      <!-- Foto de perfil -->
-      <ion-item>
-        <ion-label position="stacked">Foto de perfil</ion-label>
-        <input class="foto" type="file" (change)="onImageSelected($event)" accept="image/*" required>
-      </ion-item>
-      <div class="aviso" *ngIf="!foto_perfil && (registroForm.submitted || registroForm.controls['foto_perfil']?.touched)">
-        <ion-label color="danger">La foto de perfil es obligatoria.</ion-label>
-      </div>
-  
-      <ion-item *ngIf="foto_perfil">
-        <img class="imagen" [src]="foto_perfil" alt="Vista previa" />
-      </ion-item>
+    <ion-item *ngIf="foto_perfil">
+      <img class="imagen" [src]="foto_perfil" alt="Vista previa" />
+    </ion-item>
 
     <ion-item *ngIf="errorMessage">
       <ion-label color="danger">{{ errorMessage }}</ion-label>
