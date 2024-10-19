@@ -2,14 +2,18 @@
     ion-toolbar {
         --background: #229E88 !important;
         color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-        ion-title {
+        .titulo {
             font-weight: bold;
             color: #ffffff;
-            text-align: center;
             font-family: Helvetica;
-            left: 50%;
-            transform: translateX(-10%);
+            font-size: 1.5rem;
+            text-align: center;
+            width: 100%;
+            max-width: 95%;
         }
 
         ion-icon {
@@ -20,10 +24,23 @@
 
 ion-content {
     --background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
 
     ion-item {
         --background: transparent;
-        width: 90%;
+        width: 100%;
+        max-width: 90%;
+        margin-bottom: 1rem;
+        margin-left: 3%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 5px;
+        box-sizing: border-box;
 
         ion-label {
             color: #229E88;
@@ -64,22 +81,24 @@ ion-content {
     }
 
     .aviso{
-        width: 100%; 
-        max-width: 80%; 
-        padding: 0; 
-        left: 80%; 
-        transform: translateX(10%); 
-        font-size:12px;
+        width: 100%;
+        max-width: 80%;
+        text-align: center;
+        font-size: 12px;
+        margin: 10px auto;
+        padding: 0 10px;
+        box-sizing: border-box;
 
         
     }
 
     .libro {
-        max-width: 80%;
-        max-height: 200px;
-        margin-top: 10px;
-        left: 30%;
-        transform: translateX(75%);
+        max-width: 80%; /* Mantiene el tamaño máximo de la imagen */
+        height: auto; /* Asegura que la imagen mantenga su proporción */
+        margin: 10px auto; /* Centra la imagen */
+        display: block; /* Asegura que se comporte como un bloque */
+        border-radius: 10%; /* Bordes redondeados si lo deseas */
+        
     }
 
     ion-button {
@@ -88,9 +107,13 @@ ion-content {
         border-radius: 15px;
         font-family: Helvetica;
         margin-top: 16px;
-        padding: 12px 16px;
         width: 100%;
+        max-width: 60%;
         font-size: 16px;
         font-weight: bold;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        margin-left: 20%;
     }
 }
