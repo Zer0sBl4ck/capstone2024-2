@@ -10,43 +10,55 @@
 </ion-header>
 
 <ion-content>
-  <ion-item *ngFor="let libro of libros" lines="none">
-    <ion-card>
-      <ion-card-header>
-        <div class="foto">
-          <img class="imagen" *ngIf="libro.imagen_libro_base64"
-            [src]="'data:image/jpeg;base64,' + libro.imagen_libro_base64" alt="Imagen del libro" />
-        </div>
-      </ion-card-header>
+  <ion-toolbar>
+    <ion-searchbar 
+      placeholder="Buscar..." 
+      showCancelButton="true" 
+      cancelButtonText="Cancelar" 
+      class="search-bar" 
+      inputmode="search" 
+      (ionInput)="buscarLibros($event)">
+    </ion-searchbar>
+  </ion-toolbar>
 
-      <ion-card-content>
-        <ion-card-title class="titulo-libro">
-          {{ libro.titulo }}
-        </ion-card-title>
-        <p class="autor">
-          <strong>Autor:</strong> {{ libro.autor }}
-        </p>
-        
-        <p class="descripcion">
-          {{ libro.descripcion }}
-        </p>
-        <p class="genero">
-          <strong>Género:</strong> {{ libro.genero }}
-        </p>
+  <ion-list>
+    <ion-item *ngFor="let libro of libros" lines="none">
+      <ion-card>
+        <ion-card-header>
+          <div class="foto">
+            <img class="imagen" *ngIf="libro.imagen_libro_base64"
+              [src]="'data:image/jpeg;base64,' + libro.imagen_libro_base64" 
+              alt="Imagen del libro" />
+          </div>
+        </ion-card-header>
 
-        <ion-button class="agregar" expand="block" *ngIf="rol === 'usuario'"
-          (click)="agregarLibroABiblioteca(libro)">Agregar a Biblioteca</ion-button>
-        
-        <ion-button class="modificar" *ngIf="rol === 'admin'" expand="block">
-          MODIFICAR LIBRO
-        </ion-button>
+        <ion-card-content>
+          <ion-card-title class="titulo-libro">
+            {{ libro.titulo }}
+          </ion-card-title>
+          <p class="autor">
+            <strong>Autor:</strong> {{ libro.autor }}
+          </p>
+          <p class="descripcion">
+            {{ libro.descripcion }}
+          </p>
+          <p class="genero">
+            <strong>Género:</strong> {{ libro.genero }}
+          </p>
 
-        <!-- Botón para ir a la lista de personas con este libro -->
-        <ion-button expand="block" (click)="irAPersonasConLibro(libro.isbn)">
-          Ver Personas con Este Libro
-        </ion-button>
-        
-      </ion-card-content>
-    </ion-card>
-  </ion-item>
+          <ion-button class="agregar" expand="block" *ngIf="rol === 'usuario'"
+            (click)="agregarLibroABiblioteca(libro)">Agregar a Biblioteca</ion-button>
+          
+          <ion-button class="modificar" expand="block" *ngIf="rol === 'admin'">
+            MODIFICAR LIBRO
+          </ion-button>
+
+          <!-- Botón para ir a la lista de personas con este libro -->
+          <ion-button expand="block" (click)="irAPersonasConLibro(libro.isbn)">
+            Ver Personas con Este Libro
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
 </ion-content>

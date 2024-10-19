@@ -1,7 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service'; 
-import { AlertController } from '@ionic/angular'; // Importar AlertController
-import { Router } from '@angular/router'; // Importar Router
+import { AlertController } from '@ionic/angular'; 
+import { Router } from '@angular/router'; 
+
+
+interface Libro {
+  isbn: string;
+  titulo: string;
+  autor: string;
+  descripcion: string;
+  genero: string;
+  imagen_libro_base64?: string; // Si la imagen es opcional
+}
 
 @Component({
   selector: 'app-listar-libro',
@@ -9,7 +19,7 @@ import { Router } from '@angular/router'; // Importar Router
   styleUrls: ['./listar-libro.page.scss'],
 })
 export class ListarLibroPage implements OnInit {
-  libros: any[] = []; 
+  libros: Libro[] = []; // Cambiar el tipo de libros a Libro[]
   esAdmin: boolean = false;
   rol: string | null = null; // Variable para almacenar el rol del usuario
 
@@ -41,7 +51,7 @@ export class ListarLibroPage implements OnInit {
     );
   }
 
-  async agregarLibroABiblioteca(libro: any) {
+  async agregarLibroABiblioteca(libro: Libro) { // Cambiar el tipo a Libro
     const usuario = this.authService.getUserData(); // Obtener datos del usuario
     console.log('Usuario:', usuario); // Verifica si el usuario está definido
     if (usuario) {
@@ -85,8 +95,20 @@ export class ListarLibroPage implements OnInit {
     }
   }
 
-  modificarLibro(libro: any) {
+  modificarLibro(libro: Libro) { // Cambiar el tipo a Libro
     console.log('Modificar libro:', libro);
     // Aquí se podría abrir una ventana modal o redirigir a la página de edición del libro
+  }
+
+  // Función para buscar libros
+  buscarLibros(event: any) {
+    const query = event.target.value.toLowerCase();
+    this.authService.getLibros().subscribe((data) => {
+      this.libros = data.filter((libro: Libro) => // Especificar el tipo aquí
+        libro.titulo.toLowerCase().includes(query) || 
+        libro.autor.toLowerCase().includes(query)|| 
+        libro.genero.toLowerCase().includes(query) 
+      );
+    });
   }
 }
