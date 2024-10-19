@@ -1,0 +1,119 @@
+.fondo {
+    ion-toolbar {
+        --background: #229E88 !important;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .titulo {
+            font-weight: bold;
+            color: #ffffff;
+            font-family: Helvetica;
+            font-size: 1.5rem;
+            text-align: center;
+            width: 100%;
+            max-width: 95%;
+        }
+
+        ion-icon {
+            color: #ffffff;
+        }
+    }
+}
+
+ion-content {
+    --background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+
+    ion-item {
+        --background: transparent;
+        width: 100%;
+        max-width: 90%;
+        margin-bottom: 1rem;
+        margin-left: 3%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 5px;
+        box-sizing: border-box;
+
+        ion-label {
+            color: #229E88;
+            font-size: 25px;
+            font-family: Helvetica;
+        }
+
+        .descripcion {
+            color: #000000;
+            font-size: 12px;
+            font-family: Helvetica;
+            max-height: 100px;
+            resize: none;
+            border: 1px solid #000000;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 15px;
+        }
+
+        .opcion {
+            color: #000000;
+            font-size: 15px;
+            font-family: Helvetica;
+        }
+
+        ion-input {
+            color: #000000;
+            font-size: 15px;
+            font-family: Helvetica;
+        }
+
+        .foto {
+            margin-block: 15px;
+            color: #000000;
+            font-size: 14px;
+            font-family: Helvetica;
+        }
+    }
+
+    .aviso{
+        width: 100%;
+        max-width: 80%;
+        text-align: center;
+        font-size: 12px;
+        margin: 10px auto;
+        padding: 0 10px;
+        box-sizing: border-box;
+
+        
+    }
+
+    .libro {
+        max-width: 80%; /* Mantiene el tamaño máximo de la imagen */
+        height: auto; /* Asegura que la imagen mantenga su proporción */
+        margin: 10px auto; /* Centra la imagen */
+        display: block; /* Asegura que se comporte como un bloque */
+        border-radius: 10%; /* Bordes redondeados si lo deseas */
+        
+    }
+
+    ion-button {
+        color: #ffffff;
+        --background: #229E88;
+        border-radius: 15px;
+        font-family: Helvetica;
+        margin-top: 16px;
+        width: 100%;
+        max-width: 60%;
+        font-size: 16px;
+        font-weight: bold;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        margin-left: 20%;
+    }
+}
