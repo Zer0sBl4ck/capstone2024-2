@@ -493,4 +493,67 @@ router.post('/notificacion_prestamo', (req, res) => {
     return res.status(200).json({ message: 'Notificación insertada con éxito' });
   });
 });
+router.get('/ps/:correo', async (req, res) => {
+  const { correo } = req.params;
+
+  if (!correo) {
+    return res.status(400).json({ error: 'El correo del usuario es requerido.' });
+  }
+
+  // Consulta para obtener las solicitudes de préstamo donde el correo coincide con el prestamista
+  const getSolicitudesQuery = `
+    SELECT p.id_prestamo, p.id_usuario_solicitante, p.id_usuario_prestamista, p.id_biblioteca, 
+           u.nombre_usuario AS prestamista, libro.titulo AS titulo, u.correo ,a.correo AS correo_2, p.estado_prestamo,
+           p.fecha_prestamo
+    FROM prestamo p
+    JOIN usuario u ON p.id_usuario_prestamista = u.id_usuario
+    JOIN usuario a ON p.id_usuario_solicitante = a.id_usuario
+    JOIN biblioteca_usuario ON biblioteca_usuario.id_biblioteca = p.id_biblioteca
+    JOIN libro ON libro.isbn = biblioteca_usuario.isbn
+    WHERE p.id_usuario_prestamista = (
+      SELECT id_usuario FROM usuario WHERE correo = ?
+    )
+  `;
+
+  try {
+    // Usar await para la consulta
+    const [results] = await db.query(getSolicitudesQuery, [correo]);
+    res.status(200).json(results);
+  } catch (error) {
+    console.error('Error al obtener las solicitudes de préstamo:', error);
+    return res.status(500).json({ error: 'Error al obtener las solicitudes de préstamo' });
+  }
+});
+
+router.get('/ss/:correo', async (req, res) => {
+  const { correo } = req.params;
+
+  if (!correo) {
+    return res.status(400).json({ error: 'El correo del usuario es requerido.' });
+  }
+
+  // Consulta para obtener las solicitudes de préstamo donde el correo coincide con el solicitante
+  const getSolicitudesQuery = `
+    SELECT p.id_prestamo, p.id_usuario_solicitante, p.id_usuario_prestamista, p.id_biblioteca, 
+           u.nombre_usuario AS prestamista, libro.titulo AS titulo, u.correo, a.correo AS correo_2, 
+           p.estado_prestamo, p.fecha_prestamo
+    FROM prestamo p
+    JOIN usuario u ON p.id_usuario_prestamista = u.id_usuario
+    JOIN usuario a ON p.id_usuario_solicitante = a.id_usuario
+    JOIN biblioteca_usuario ON biblioteca_usuario.id_biblioteca = p.id_biblioteca
+    JOIN libro ON libro.isbn = biblioteca_usuario.isbn
+    WHERE p.id_usuario_solicitante = (
+      SELECT id_usuario FROM usuario WHERE correo = ?
+    )
+  `;
+
+  try {
+    // Usar await para la consulta
+    const [results] = await db.query(getSolicitudesQuery, [correo]);
+    res.status(200).json(results);
+  } catch (error) {
+    console.error('Error al obtener las solicitudes de préstamo:', error);
+    return res.status(500).json({ error: 'Error al obtener las solicitudes de préstamo' });
+  }
+});
 module.exports = router;

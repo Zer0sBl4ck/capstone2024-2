@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Solicitudes de Préstamo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Mis Solicitudes de Préstamo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Botones para alternar entre solicitudes recibidas y realizadas -->
+  <ion-segment value="recibidas" (ionChange)="alternarSolicitudes($event)">
+    <ion-segment-button value="recibidas">
+      <ion-label>Solicitudes Recibidas</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="realizadas">
+      <ion-label>Solicitudes Realizadas</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Mostrar solicitudes recibidas -->
+  <ng-container *ngIf="mostrarRecibidas">
+    <ion-list *ngIf="solicitudesRecibidas.length > 0; else noSolicitudesRecibidas">
+      <ion-item *ngFor="let solicitud of solicitudesRecibidas">
+        <ion-label>
+          <h2>Libro: {{ solicitud.titulo }}</h2>
+          <p>Estado: {{ solicitud.estado_prestamo }}</p>
+          <p>Correo solicitante: {{solicitud.correo_2}}</p>
+          <p>Fecha: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ng-template #noSolicitudesRecibidas>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>No hay solicitudes recibidas</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Actualmente no tienes solicitudes de préstamo recibidas.
+        </ion-card-content>
+      </ion-card>
+    </ng-template>
+  </ng-container>
+
+  <!-- Mostrar solicitudes realizadas -->
+  <ng-container *ngIf="!mostrarRecibidas">
+    <ion-list *ngIf="solicitudesRealizadas.length > 0; else noSolicitudesRealizadas">
+      <ion-item *ngFor="let solicitud of solicitudesRealizadas">
+        <ion-label>
+          <h2>Libro: {{ solicitud.titulo }}</h2>
+          <p>Estado: {{ solicitud.estado_prestamo }}</p>
+          <p>Correo prestamista: {{solicitud.correo}}</p>
+          <p>Fecha: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ng-template #noSolicitudesRealizadas>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>No hay solicitudes realizadas</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Actualmente no has realizado ninguna solicitud de préstamo.
+        </ion-card-content>
+      </ion-card>
+    </ng-template>
+  </ng-container>
+</ion-content>

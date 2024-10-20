@@ -168,5 +168,14 @@ export class AuthService {
 
     return this.http.post(`${this.apiUrl}/notificacion_prestamo`, notificacionData);
   }
+
+  getSolicitudesPrestamo(correo: string): Observable<any> {
+    const url = `${this.apiUrl}/ps/${correo}`;
+    return this.http.get<any>(url);
+  }
+  getSolicitudesSolicitante(correo: string): Observable<any> {
+    const url = `${this.apiUrl}/ss/${correo}`;
+    return this.http.get<any>(url);
+  }
   
 }

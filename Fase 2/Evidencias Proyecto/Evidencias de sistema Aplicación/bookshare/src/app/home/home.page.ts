@@ -43,6 +43,10 @@ export class HomePage {
   solicitudesadd(){
     this.router.navigate(['/listar-libro-solicitud'],{replaceUrl:true})
   }
+
+  gosoliuser(){
+    this.router.navigate(['/solicitud-user'],{replaceUrl:true})
+  }
   
 
   goBookOwner(){
