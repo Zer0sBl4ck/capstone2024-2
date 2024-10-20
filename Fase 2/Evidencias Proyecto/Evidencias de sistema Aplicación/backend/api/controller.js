@@ -412,7 +412,8 @@ router.get('/personas-con-libro/:isbn', async (req, res) => {
       libro.genero, 
       libro.autor,
       biblioteca_usuario.disponible_intercambio,
-      biblioteca_usuario.disponible_prestamo
+      biblioteca_usuario.disponible_prestamo,
+      biblioteca_usuario.id_biblioteca 
     FROM biblioteca_usuario
     JOIN libro ON libro.isbn = biblioteca_usuario.isbn
     JOIN usuario ON usuario.id_usuario = biblioteca_usuario.id_usuario
@@ -436,5 +437,60 @@ router.get('/personas-con-libro/:isbn', async (req, res) => {
   }
 });
 
+router.post('/prestamo', (req, res) => {
+  const { id_usuario_solicitante, id_usuario_prestamista, id_biblioteca } = req.body;
 
+  // Validar que los campos requeridos estén presentes
+  if (!id_usuario_solicitante || !id_usuario_prestamista || !id_biblioteca) {
+    return res.status(400).json({ error: 'Faltan campos requeridos.' });
+  }
+
+  // Paso 1: Insertar el préstamo en la tabla 'prestamo'
+  const insertQuery = `
+    INSERT INTO prestamo (id_usuario_solicitante, id_usuario_prestamista, id_biblioteca, fecha_prestamo, estado_prestamo) 
+    VALUES (?, ?, ?, CURDATE(), 'pendiente')
+  `;
+
+  db.query(insertQuery, [id_usuario_solicitante, id_usuario_prestamista, id_biblioteca], (error, results) => {
+    if (error) {
+      console.error('Error al insertar el préstamo:', error);
+      return res.status(500).json({ error: 'Error al insertar el préstamo' });
+    }
+
+    // Obtener el ID del préstamo insertado
+    const lastInsertId = results.insertId;
+    console.log('Préstamo insertado con ID:', lastInsertId);
+
+    return res.status(200).json({
+      message: 'Préstamo creado con éxito',
+      prestamoId: lastInsertId,
+      id_usuario_prestamista // Pasar el ID del prestamista para su uso en la notificación
+    });
+  });
+});
+
+router.post('/notificacion_prestamo', (req, res) => {
+  const { correo, titulo, descripcion } = req.body; // Cambié 'correo_prestamista' a 'correo'
+  console.log("hola",correo)
+  // Validar que los campos requeridos estén presentes
+  if (!correo || !titulo || !descripcion) {
+    return res.status(400).json({ error: 'Faltan campos requeridos.' });
+  }
+
+  // Paso 1: Insertar la notificación en la tabla 'notificacion'
+  const insertNotificacionQuery = `
+    INSERT INTO notificacion (correo, titulo, descripcion) 
+    VALUES (?, ?, ?)
+  `;
+
+  db.query(insertNotificacionQuery, [correo, titulo, descripcion], (error, result) => {
+    if (error) {
+      console.error('Error al insertar la notificación:', error);
+      return res.status(500).json({ error: 'Error al insertar la notificación' });
+    }
+
+    console.log('Notificación insertada con éxito:', result);
+    return res.status(200).json({ message: 'Notificación insertada con éxito' });
+  });
+});
 module.exports = router;

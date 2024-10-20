@@ -148,4 +148,25 @@ export class AuthService {
     const url = `${this.apiUrl}/personas-con-libro/${isbn}`;
     return this.http.get<any>(url);
   }
+
+  crearPrestamo(id_usuario_solicitante: string, id_usuario_prestamista: string, id_biblioteca: string): Observable<any> {
+    const prestamoData = {
+      id_usuario_solicitante,
+      id_usuario_prestamista,
+      id_biblioteca
+    };
+
+    return this.http.post(`${this.apiUrl}/prestamo`, prestamoData);
+  }
+  crearNotificacionPrestamo(correo_prestamista: string, titulo: string, descripcion: string): Observable<any> {
+    const notificacionData = {
+      correo: correo_prestamista, // Enviar el correo del prestamista
+      titulo, // Enviar el título de la notificación
+      descripcion // Enviar la descripción de la notificación
+    };
+    console.log(notificacionData)
+
+    return this.http.post(`${this.apiUrl}/notificacion_prestamo`, notificacionData);
+  }
+  
 }

@@ -40,4 +40,42 @@ export class PersonasOwnerbookPage implements OnInit {
     );
   }
 
+  notificacion_prestamo(correo: string): void{
+    const titulo = 'Solicitud de Préstamo';
+    const fechaActual = new Date().toLocaleString(); // Formateamos la fecha actual
+    const descripcion = `Se ha solicitado un préstamo de uno de sus libros el ${fechaActual}.`;
+    this.authService.crearNotificacionPrestamo(correo, titulo, descripcion).subscribe(
+      (notificacionResponse) => {
+        console.log('Notificación creada con éxito:', notificacionResponse);
+        
+      },
+      (notificacionError) => {
+        console.error('Error al crear la notificación:', notificacionError);
+        // Aquí puedes agregar lógica adicional para manejar el error de la notificación
+      }
+    );
+  }
+
+  // Método para solicitar un préstamo
+  solicitarPrestamo(id_usuario_prestamista: string, id_biblioteca: string,correo:string): void {
+    const id_usuario_solicitante = this.authService.getUserData()?.id_usuario; // Obtén el ID del usuario logueado
+    const correoPrestamista = this.authService.getUserData()?.correo; // Obtén el correo del prestamista
+    this.notificacion_prestamo(correo)
+    if (id_usuario_solicitante && correoPrestamista) {
+      this.authService.crearPrestamo(id_usuario_solicitante, id_usuario_prestamista, id_biblioteca).subscribe(
+        (response) => {
+          console.log('Préstamo solicitado exitosamente:', response);
+  
+        },
+        (error) => {
+          console.error('Error al solicitar el préstamo:', error);
+          // Aquí puedes agregar lógica adicional para manejar el error
+        }
+      );
+    } else {
+      console.error('No se pudo obtener el ID del usuario solicitante o el correo del prestamista.');
+    }
+    
+  }
+
 }

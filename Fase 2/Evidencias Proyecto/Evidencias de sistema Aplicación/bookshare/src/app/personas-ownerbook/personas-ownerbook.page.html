@@ -20,12 +20,17 @@
           <span *ngIf="persona.disponible_intercambio === 1; else noIntercambio">Sí</span>
           <ng-template #noIntercambio>No</ng-template>
         </p>
-        
         <p>Disponible préstamo: 
           <span *ngIf="persona.disponible_prestamo === 1; else noPrestamo">Sí</span>
           <ng-template #noPrestamo>No</ng-template>
         </p>
       </ion-label>
+      <ion-button 
+        *ngIf="persona.disponible_prestamo === 1" 
+        (click)="solicitarPrestamo(persona.id_usuario, persona.id_biblioteca, persona.correo)"
+        slot="end">
+        Solicitar Préstamo
+      </ion-button>
     </ion-item>
   </ion-list>
 
