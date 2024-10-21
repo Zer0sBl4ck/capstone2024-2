@@ -4,6 +4,24 @@ const jwt = require('jsonwebtoken');
 const db = require('../api/db'); 
 const router = express.Router();
 
+module.exports = (io) => {
+  // Manejo del evento de conexión de Socket.IO
+  io.on('connection', (socket) => {
+    console.log('Nuevo cliente conectado');
+
+    // Escucha el evento 'nuevo-mensaje' de los clientes
+    socket.on('nuevo-mensaje', (mensaje) => {
+      io.emit('nuevo-mensaje', mensaje); // Emite el nuevo mensaje a todos los clientes
+    });
+
+    // Manejo de desconexión
+    socket.on('disconnect', () => {
+      console.log('Cliente desconectado');
+    });
+  });
+
+
+
 
 router.post('/usuarios', async (req, res) => {
   const { nombre_usuario, correo, contrasena, telefono, ubicacion, foto_perfil } = req.body;
@@ -471,7 +489,6 @@ router.post('/prestamo', (req, res) => {
 
 router.post('/notificacion_prestamo', (req, res) => {
   const { correo, titulo, descripcion } = req.body; // Cambié 'correo_prestamista' a 'correo'
-  console.log("hola",correo)
   // Validar que los campos requeridos estén presentes
   if (!correo || !titulo || !descripcion) {
     return res.status(400).json({ error: 'Faltan campos requeridos.' });
@@ -556,4 +573,197 @@ router.get('/ss/:correo', async (req, res) => {
     return res.status(500).json({ error: 'Error al obtener las solicitudes de préstamo' });
   }
 });
-module.exports = router;
+
+router.delete('/solicitud/:id', async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'El id de la solicitud es requerido.' });
+  }
+
+  const deleteSolicitudQuery = `
+    DELETE FROM prestamo WHERE id_prestamo = ?
+  `;
+
+  try {
+    const [result] = await db.query(deleteSolicitudQuery, [id]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'No se encontró la solicitud para eliminar.' });
+    }
+
+    res.status(200).json({ message: 'Solicitud eliminada exitosamente.' });
+  } catch (error) {
+    console.error('Error al eliminar la solicitud:', error);
+    return res.status(500).json({ error: 'Error al eliminar la solicitud' });
+  }
+});
+router.put('/solicitud/:id/desarrollo', async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'El id de la solicitud es requerido.' });
+  }
+
+  const updateEstadoQuery = `
+    UPDATE prestamo SET estado_prestamo = 'desarrollo' WHERE id_prestamo = ?
+  `;
+
+  try {
+    const [result] = await db.query(updateEstadoQuery, [id]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'No se encontró la solicitud para actualizar.' });
+    }
+
+    res.status(200).json({ message: 'El estado de la solicitud fue actualizado a desarrollo.' });
+  } catch (error) {
+    console.error('Error al actualizar el estado de la solicitud:', error);
+    return res.status(500).json({ error: 'Error al actualizar el estado de la solicitud' });
+  }
+});
+
+router.post('/crear-chat-prestamo/:id', async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'El id del préstamo es requerido.' });
+  }
+
+  // Consulta para obtener los datos del préstamo
+  const getPrestamoQuery = `
+    SELECT id_prestamo, id_biblioteca, estado_prestamo
+    FROM prestamo
+    WHERE id_prestamo = ?
+  `;
+
+  // Consulta para insertar el nuevo chat, dejando el campo id_biblioteca_usuario_solicitante como null
+  const createChatQuery = `
+    INSERT INTO chat (id_biblioteca_usuario_ofertante, id_biblioteca_usuario_solicitante, tipo_chat, id_estado)
+    VALUES (?, NULL, ?, ?)
+  `;
+
+  try {
+    // Obtener los detalles del préstamo
+    const [prestamo] = await db.query(getPrestamoQuery, [id]);
+
+    if (prestamo.length === 0) {
+      return res.status(404).json({ message: 'No se encontró el préstamo.' });
+    }
+
+    const { id_prestamo, id_biblioteca, estado_prestamo } = prestamo[0];
+
+    // Verificar si el estado es "desarrollo"
+    if (estado_prestamo !== 'desarrollo') {
+      return res.status(400).json({ message: 'El préstamo no está en estado "desarrollo".' });
+    }
+
+    // Crear el chat en la base de datos, dejando id_biblioteca_usuario_solicitante como null
+    const [result] = await db.query(createChatQuery, [
+      id_biblioteca,  // Se usa id_biblioteca en lugar de id_biblioteca_usuario_ofertante
+      'prestamo', // El tipo de chat es 'prestamo'
+      id_prestamo  // Asociar el id del préstamo como id_estado
+    ]);
+
+    // Responder con el chat creado
+    res.status(201).json({ message: 'Chat creado exitosamente', chatId: result.insertId });
+  } catch (error) {
+    console.error('Error al crear el chat:', error);
+    return res.status(500).json({ error: 'Error al crear el chat' });
+  }
+});
+
+
+router.get('/listar-chats/:correo_usuario', async (req, res) => {
+  const { correo_usuario } = req.params;
+
+  if (!correo_usuario) {
+    return res.status(400).json({ error: 'El correo del usuario es requerido.' });
+  }
+
+  // Consulta para obtener los chats de tipo 'prestamo' en los que el usuario está involucrado
+  const listarChatsQuery = `
+    SELECT c.id_chat, 
+           u1.correo AS correo_usuario_prestamista, 
+           u2.correo AS correo_usuario_solicitante
+    FROM chat c
+    JOIN prestamo p ON c.id_estado = p.id_prestamo
+    LEFT JOIN usuario u1 ON p.id_usuario_prestamista = u1.id_usuario
+    LEFT JOIN usuario u2 ON p.id_usuario_solicitante = u2.id_usuario
+    WHERE (u1.correo = ? OR u2.correo = ?) 
+    AND c.tipo_chat = 'prestamo'  -- Filtrar solo por chats de tipo 'prestamo'
+  `;
+
+  try {
+    const [chats] = await db.query(listarChatsQuery, [correo_usuario, correo_usuario]);
+
+    if (chats.length === 0) {
+      return res.status(404).json({ message: 'No se encontraron chats de préstamo.' });
+    }
+
+    res.status(200).json({ chats });
+  } catch (error) {
+    console.error('Error al listar los chats:', error);
+    return res.status(500).json({ error: 'Error al listar los chats' });
+  }
+});
+
+router.post('/enviar-mensaje', async (req, res) => {
+  const { id_chat, id_usuario_remitente, contenido } = req.body;
+
+  if (!id_chat || !id_usuario_remitente || !contenido) {
+    return res.status(400).json({ error: 'Faltan datos para enviar el mensaje.' });
+  }
+
+  const crearMensajeQuery = `
+    INSERT INTO mensaje (id_chat, id_usuario_remitente, contenido)
+    VALUES (?, ?, ?)
+  `;
+
+  try {
+    const [result] = await db.query(crearMensajeQuery, [id_chat, id_usuario_remitente, contenido]);
+
+    res.status(201).json({ message: 'Mensaje enviado exitosamente', mensajeId: result.insertId });
+  } catch (error) {
+    console.error('Error al enviar el mensaje:', error);
+    return res.status(500).json({ error: 'Error al enviar el mensaje' });
+  }
+});
+
+
+router.get('/listar-mensajes/:id_chat', async (req, res) => {
+  const { id_chat } = req.params;
+
+  if (!id_chat) {
+    return res.status(400).json({ error: 'El ID del chat es requerido.' });
+  }
+
+  const listarMensajesQuery = `
+    SELECT m.id_mensaje, 
+           m.contenido, 
+           m.enviado_en, 
+           u.correo AS correo_remitente,
+           u.nombre_usuario,
+           u.id_usuario
+    FROM mensaje m
+    JOIN usuario u ON m.id_usuario_remitente = u.id_usuario
+    WHERE m.id_chat = ?
+    ORDER BY m.enviado_en ASC
+  `;
+
+  try {
+    const [mensajes] = await db.query(listarMensajesQuery, [id_chat]);
+
+    if (mensajes.length === 0) {
+      return res.status(404).json({ message: 'No se encontraron mensajes.' });
+    }
+
+    res.status(200).json({ mensajes });
+  } catch (error) {
+    console.error('Error al listar los mensajes:', error);
+    return res.status(500).json({ error: 'Error al listar los mensajes' });
+  }
+});
+
+return router;
+}

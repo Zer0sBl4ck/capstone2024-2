@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mis Chats</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="chats.length > 0">
+    <ion-list>
+      <ion-item *ngFor="let chat of chats">
+        <ion-label>
+          <h2>ID Chat: {{ chat.id_chat }}</h2>
+          <p>Ofertante: {{ chat.correo_usuario_prestamista }}</p>
+          <p>Solicitante: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
+        </ion-label>
+        <ion-button (click)="irAlChat(chat.id_chat)" >
+          Ir al Chat
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="chats.length === 0 && !errorMessage">
+    <p>No tienes chats disponibles.</p>
+  </div>
+</ion-content>

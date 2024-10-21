@@ -177,5 +177,36 @@ export class AuthService {
     const url = `${this.apiUrl}/ss/${correo}`;
     return this.http.get<any>(url);
   }
+  eliminarSolicitud(id_prestamo: number): Observable<any> {
+    const url = `${this.apiUrl}/solicitud/${id_prestamo}`;
+    return this.http.delete(url);
+  }
+
+  actualizarEstadoSolicitud(id_prestamo: number): Observable<any> {
+    const url = `${this.apiUrl}/solicitud/${id_prestamo}/desarrollo`;
+    return this.http.put(url, {});
+  }
+  crearChatPrestamo(id: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/crear-chat-prestamo/${id}`, {});
+  }
+
+  // Método para listar chats por correo del usuario
+  listarChats(correoUsuario: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/listar-chats/${correoUsuario}`);
+  }
+
+  insertarMensaje(idChat: number, idUsuarioRemitente: number, contenido: string): Observable<any> {
+    const body = {
+      id_chat: idChat,
+      id_usuario_remitente: idUsuarioRemitente,
+      contenido: contenido
+    };
+    return this.http.post(`${this.apiUrl}/enviar-mensaje`, body);
+  }
+
+  // Función para listar los mensajes de un chat
+  listarMensajes(idChat: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/listar-mensajes/${idChat}`);
+  }
   
 }

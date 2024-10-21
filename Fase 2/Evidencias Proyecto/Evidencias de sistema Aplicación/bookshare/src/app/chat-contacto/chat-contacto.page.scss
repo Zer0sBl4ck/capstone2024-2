@@ -1,0 +1,25 @@
+.mensaje {
+    margin: 10px; /* Espaciado entre mensajes */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 15px; /* Bordes redondeados */
+    max-width: 70%; /* Ancho máximo del mensaje */
+    position: relative; /* Para posicionar la burbuja correctamente */
+  }
+  
+  .mensaje-remitente {
+    background-color: #2c3029; /* Color de fondo para mensajes del remitente */
+    align-self: flex-end; /* Alinear a la derecha */
+  }
+  
+  .mensaje-receptor {
+    background-color: #f34747; /* Color de fondo para mensajes del receptor */
+    align-self: flex-start; /* Alinear a la izquierda */
+  }
+  
+  /* Asegúrate de que el contenedor de mensajes tenga display: flex */
+  ion-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinear al inicio */
+    padding: 15px; /* Espaciado interno */
+  }

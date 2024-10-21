@@ -54,4 +54,44 @@ export class SolicitudUserPage implements OnInit {
     const tipo = event.detail.value;
     this.mostrarRecibidas = (tipo === 'recibidas');
   }
+
+  // Función para eliminar una solicitud recibida
+  eliminarSolicitud(id_prestamo: number): void {
+    this.authService.eliminarSolicitud(id_prestamo).subscribe(
+      (response) => {
+        console.log('Solicitud eliminada:', response);
+        // Vuelve a cargar las solicitudes después de eliminar
+        this.cargarSolicitudesRecibidas();
+      },
+      (error) => {
+        console.error('Error al eliminar la solicitud:', error);
+      }
+    );
+  }
+
+  // Función para actualizar el estado de una solicitud recibida a 'desarrollo'
+  modificarEstadoSolicitud(id_prestamo: number): void {
+    this.authService.actualizarEstadoSolicitud(id_prestamo).subscribe(
+      (response) => {
+        console.log('Estado de la solicitud actualizado a "desarrollo":', response);
+        
+        // Crear el chat después de actualizar el estado
+        this.authService.crearChatPrestamo(id_prestamo).subscribe(
+          (chatResponse) => {
+            console.log('Chat creado exitosamente:', chatResponse);
+            // Aquí puedes agregar código adicional si necesitas manejar el chat creado
+          },
+          (chatError) => {
+            console.error('Error al crear el chat:', chatError);
+          }
+        );
+  
+        // Vuelve a cargar las solicitudes después de modificar el estado
+        this.cargarSolicitudesRecibidas();
+      },
+      (error) => {
+        console.error('Error al actualizar el estado de la solicitud:', error);
+      }
+    );
+  }
 }

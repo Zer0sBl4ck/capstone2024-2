@@ -28,9 +28,14 @@
         <ion-label>
           <h2>Libro: {{ solicitud.titulo }}</h2>
           <p>Estado: {{ solicitud.estado_prestamo }}</p>
-          <p>Correo solicitante: {{solicitud.correo_2}}</p>
+          <p>Correo solicitante: {{ solicitud.correo_2 }}</p>
           <p>Fecha: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
+          <p>{{ solicitud.nombre_usuario }}</p>
         </ion-label>
+        <!-- Botón Modificar -->
+        <ion-button *ngIf="solicitud.estado_prestamo === 'pendiente'" (click)="modificarEstadoSolicitud(solicitud.id_prestamo)">Modificar</ion-button>
+        <!-- Botón Eliminar -->
+        <ion-button *ngIf="solicitud.estado_prestamo === 'pendiente'" color="danger" (click)="eliminarSolicitud(solicitud.id_prestamo)">Eliminar</ion-button>
       </ion-item>
     </ion-list>
     <ng-template #noSolicitudesRecibidas>
@@ -52,7 +57,7 @@
         <ion-label>
           <h2>Libro: {{ solicitud.titulo }}</h2>
           <p>Estado: {{ solicitud.estado_prestamo }}</p>
-          <p>Correo prestamista: {{solicitud.correo}}</p>
+          <p>Correo prestamista: {{ solicitud.correo }}</p>
           <p>Fecha: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
         </ion-label>
       </ion-item>
