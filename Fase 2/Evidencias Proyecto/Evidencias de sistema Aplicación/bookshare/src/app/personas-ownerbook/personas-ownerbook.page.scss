@@ -17,3 +17,226 @@
         }
     }
 }
+
+ion-content {
+    --background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+
+    ion-list {
+        --background: #ffffff;
+        width: 100%;
+        --border-color: #ffffff;
+
+        ion-item {
+            --background: #ffffff;
+            --ion-item-border-color: transparent;
+
+            ion-avatar {
+
+                .foto {}
+            }
+
+            ion-label {
+
+                h2 {
+                    color: #000000;
+                    font-family: Helvetica;
+                }
+
+                p {
+                    color: #000000;
+                    font-family: Helvetica;
+
+                    span {
+                        color: #000000;
+                        font-family: Helvetica;
+
+                    }
+                }
+            }
+
+            ion-button {
+                --background: #229E88;
+                color: #ffffff;
+                font-family: Helvetica;
+            }
+        }
+    }
+    
+    .nohay {
+            color: #000000;
+            font-family: Helvetica;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+    }
+    
+}
+
+
+@media (min-width: 2560px) {
+    ion-content {
+
+        ion-list {
+            background: transparent;
+            padding: 0 10px;
+            max-width: 80%;
+            margin-left: 25%;
+
+            ion-item {
+                width: 100%;
+                max-width: 60%;
+
+
+                ion-avatar {
+
+                    .foto {}
+                }
+
+                ion-label {
+
+                    h2 {
+                        font-size: 16px;
+
+                    }
+
+                    p {
+                        font-size: 14px;
+
+                        span {
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                ion-button {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1920px) {
+    ion-content {
+
+        ion-list {
+            background: transparent;
+            padding: 0 10px;
+            max-width: 80%;
+            margin-left: 25%;
+
+            ion-item {
+                width: 100%;
+                max-width: 60%;
+
+
+                ion-avatar {
+
+                    .foto {}
+                }
+
+                ion-label {
+
+                    h2 {
+                        font-size: 16px;
+                    }
+
+                    p {
+                        font-size: 14px;
+
+                        span {
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                ion-button {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+
+    ion-content {
+
+        ion-list {
+
+            ion-item {
+
+                ion-avatar {
+
+                    .foto {}
+                }
+
+                ion-label {
+
+                    h2 {
+                        font-size: 14px;
+                    }
+
+                    p {
+                        font-size: 12px;
+
+                        span {
+                            font-size: 12px;
+                        }
+                    }
+                }
+
+                ion-button {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-height: 900px) {
+
+    ion-content {
+
+        ion-list {
+            background: transparent;
+            padding: 0 10px;
+            max-width: 85%;
+            margin-left: 20%;
+
+            ion-item {
+                width: 100%;
+                max-width: 70%;
+
+                ion-avatar {
+
+                    .foto {}
+                }
+
+                ion-label {
+
+                    h2 {
+                        font-size: 16px;
+                    }
+
+                    p {
+                        font-size: 14px;
+
+                        span {
+                            font-size: 14px;
+                        }
+                    }
+                }
+
+                ion-button {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}

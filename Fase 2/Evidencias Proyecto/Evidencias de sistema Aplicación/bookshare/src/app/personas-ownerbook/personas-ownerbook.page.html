@@ -11,12 +11,14 @@
 
 <ion-content>
   <ion-list *ngIf="personas.length > 0; else noData">
+
     <ion-item *ngFor="let persona of personas">
       <ion-avatar slot="start">
-        <img *ngIf="persona.foto_perfil_base64" 
+        <img class="foto" *ngIf="persona.foto_perfil_base64" 
              [src]="'data:image/jpeg;base64,' + persona.foto_perfil_base64" 
              alt="Foto de perfil de {{ persona.nombre_usuario }}">
       </ion-avatar>
+
       <ion-label>
         <h2>{{ persona.nombre_usuario }}</h2>
         <p>Email: {{ persona.correo }}</p>
@@ -30,16 +32,18 @@
           <ng-template #noPrestamo>No</ng-template>
         </p>
       </ion-label>
+
       <ion-button 
         *ngIf="persona.disponible_prestamo === 1" 
         (click)="solicitarPrestamo(persona.id_usuario, persona.id_biblioteca, persona.correo)"
         slot="end">
         Solicitar Préstamo
       </ion-button>
+
     </ion-item>
   </ion-list>
 
   <ng-template #noData>
-    <p>No se encontraron usuarios con este libro.</p>
+    <p class="nohay">No se encontraron usuarios con este libro 🥲</p>
   </ng-template>
 </ion-content>
