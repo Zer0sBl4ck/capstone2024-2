@@ -1,0 +1,19 @@
+.fondo {
+    ion-toolbar {
+        --background: #229E88 !important;
+        color: #ffffff;
+
+        ion-title {
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+            font-family: Helvetica;
+            left: 50%;
+            transform: translateX(-3%);
+        }
+
+        ion-icon {
+            color: #ffffff;
+        }
+    }
+}

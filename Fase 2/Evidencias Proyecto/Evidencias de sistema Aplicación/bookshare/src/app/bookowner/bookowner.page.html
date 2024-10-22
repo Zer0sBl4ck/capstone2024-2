@@ -12,16 +12,20 @@
 <ion-content padding>
 
     <ion-item *ngFor="let libro of libros">
+
       <ion-thumbnail slot="start">
         <img class="imagen" [src]="'data:image/jpeg;base64,' + libro.imagen_base64" alt="Imagen del libro" />
       </ion-thumbnail>
+      
       <ion-label>
         <h2 class="titulo">{{ libro.titulo }}</h2>
-        <ion-button (click)="cambiarEstadoPrestamo(libro.isbn, !libro.disponible_prestamo)">
-          {{ libro.disponible_prestamo ? 'Marcar como No Disponible prestamo' : 'Marcar como Disponible prestamo' }}
+
+        <ion-button class="prestamo" (click)="cambiarEstadoPrestamo(libro.isbn, !libro.disponible_prestamo)">
+          {{ libro.disponible_prestamo ? 'No Disponible para prestamo' : 'Disponible para prestamo' }}
         </ion-button>
-        <ion-button (click)="cambiarEstadoIntercambio(libro.isbn, !libro.disponible_intercambio)">
-          {{ libro.disponible_intercambio ? 'Marcar como No Disponible intercambio' : 'Marcar como intercambio Disponible' }}
+
+        <ion-button class="intercambio" (click)="cambiarEstadoIntercambio(libro.isbn, !libro.disponible_intercambio)">
+          {{ libro.disponible_intercambio ? 'No Disponible para intercambio' : ' Disponible para intercambio ' }}
         </ion-button>
       </ion-label>
      <br>
