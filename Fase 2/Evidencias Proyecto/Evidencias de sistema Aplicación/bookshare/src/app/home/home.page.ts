@@ -53,6 +53,10 @@ export class HomePage {
     this.router.navigate(['/bookowner',this.userEmail],{replaceUrl: true})
   }
 
+  gochat(){
+    this.router.navigate(['/chat'],{replaceUrl: true})
+  }
+
   logout() {
     this.authService.logout();
     this.checkAuthentication();
