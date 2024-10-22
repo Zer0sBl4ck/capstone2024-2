@@ -8,14 +8,15 @@
     </ion-header>
     <ion-content class="menu">
       <ion-list>
+        
         <ion-button (click)="goToProfile()">
           <ion-icon name="person-outline" slot="start"></ion-icon>
-          Mi perfil
+          Perfil cuenta   
         </ion-button>
 
         <ion-button routerLink="/wishlist">
           <ion-icon name="star-outline" slot="start"></ion-icon>
-          Wishlist
+          Lista de deseos
         </ion-button>
 
         <ion-button routerLink="/addbook" *ngIf="userRole === 'admin'">
@@ -47,6 +48,7 @@
           <ion-icon name="bookmark-outline" slot="start"></ion-icon>
           Lista de libros
         </ion-button>
+        
         <ion-button (click)="solicitudesadd()" *ngIf="userRole === 'admin'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
           SOLICITUDES LIBROS
