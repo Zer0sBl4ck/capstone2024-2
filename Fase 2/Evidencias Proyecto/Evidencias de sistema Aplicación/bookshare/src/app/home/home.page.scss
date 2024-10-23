@@ -135,7 +135,29 @@ ion-app {
     text-align: center;
     margin-bottom: 10px;
   }
+  swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Centrar contenido si es necesario
+  justify-content: center; // Centrar contenido verticalmente si es necesario
+  height: 300px; // Ajusta según lo que necesites
 
+  .rating {
+    display: flex;
+    align-items: center; // Centra verticalmente las estrellas
+  }
+  
+  .star {
+    font-size: 24px; // Tamaño de las estrellas
+    color: gold; // Color de las estrellas llenas
+    margin-right: 2px; // Espaciado entre estrellas
+    
+  }
+  
+}
+
+
+ 
   .ion-page#main-content img {
     max-width: 60%;
     height: auto;
