@@ -1,21 +1,22 @@
 <ion-app>
+  
   <!-- Side Menu -->
   <ion-menu contentId="main-content" *ngIf="isLoggedIn">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Menú</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content class="menu">
       <ion-list>
+        
         <ion-button (click)="goToProfile()">
           <ion-icon name="person-outline" slot="start"></ion-icon>
-          Mi perfil
+          Perfil cuenta   
         </ion-button>
 
         <ion-button routerLink="/wishlist">
           <ion-icon name="star-outline" slot="start"></ion-icon>
-          Wishlist
+          Lista de deseos
         </ion-button>
 
         <ion-button routerLink="/addbook" *ngIf="userRole === 'admin'">
@@ -27,7 +28,12 @@
           <ion-icon name="add-outline" slot="start"></ion-icon>
           Agregar libro
         </ion-button>
+        
 
+        <ion-button (click)="gochat()" *ngIf="userRole === 'usuario'">
+          <ion-icon name="add-outline" slot="start"></ion-icon>
+            Chat
+        </ion-button>
         <ion-button (click)="goBookOwner()" *ngIf="userRole === 'usuario'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
           Mis Libros
@@ -35,14 +41,14 @@
 
         <ion-button (click)="gosoliuser()" *ngIf="userRole === 'usuario'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
-          Prestamos
+         Prestamos
         </ion-button>
 
         <ion-button routerLink="/listar-libro">
           <ion-icon name="bookmark-outline" slot="start"></ion-icon>
           Lista de libros
         </ion-button>
-
+        
         <ion-button (click)="solicitudesadd()" *ngIf="userRole === 'admin'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
           SOLICITUDES LIBROS
@@ -64,7 +70,7 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-button routerLink="/login" *ngIf="!isLoggedIn" class="login-button"> 
+        <ion-button routerLink="/login" *ngIf="!isLoggedIn" class="login-button" > 
           <span class="login-text">
             <ion-icon name="person-outline" class="login-icon"></ion-icon>
           </span>
@@ -78,7 +84,7 @@
 
         <ion-title><strong>BookShare</strong></ion-title>
 
-        <p class="description">"Bookshare" es una plataforma en línea
+        <p class="description">Bookshare" es una plataforma en línea
           sin fines <br> de lucro destinada a fomentar la lectura y crear <br>una comunidad de lectores basada en la
           confianza.</p>
 
@@ -91,23 +97,7 @@
         <img src="assets/imagenes/intercambiandolibro.png" alt="Intercambiando libro" class="image">
 
         <br>
-        
-        <!-- Listado de Libros -->
-        <ion-list>
-          <ion-item *ngFor="let libro of libros">
-            <ion-thumbnail slot="start">
-              <img [src]="libro.imagen_libro_base64" *ngIf="libro.imagen_libro_base64" alt="Imagen del libro">
-            </ion-thumbnail>
-            <ion-label>
-              <h2>{{ libro.titulo }}</h2>
-              <h3>{{ libro.autor }}</h3>
-              <p>{{ libro.descripcion }}</p>
-              <p><strong>Género:</strong> {{ libro.genero }}</p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
       </div>
     </ion-content>
   </div>
 </ion-app>
-
