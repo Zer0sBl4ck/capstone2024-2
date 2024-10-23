@@ -11,6 +11,7 @@ export class HomePage {
   isLoggedIn = false;  
   userRole: string | null = null;  
   userEmail: string | null = null;  
+  userName: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -25,6 +26,7 @@ export class HomePage {
     if (this.isLoggedIn) {
       this.userRole = this.authService.getUserRole(); 
       this.userEmail = this.authService.getUserEmail(); 
+      
     } 
   }
 
