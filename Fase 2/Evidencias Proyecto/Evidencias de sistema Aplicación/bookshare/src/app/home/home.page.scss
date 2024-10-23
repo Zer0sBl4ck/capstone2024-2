@@ -111,12 +111,23 @@ ion-app {
   .ion-page#main-content ion-title {
     font-size: 25px;
     color: #000000;
-    font-family: Helvetica, sans-serif;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
+    font-family: 'Rethink Sans', sans-serif; 
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 0px;
+    padding-top: 10px; /* En lugar de margin-top */
   }
+  .ion-page#main-content .sigue-aportando {
+    
+    bottom: 20px; /* Distancia desde el fondo */
 
+    font-size: 18px; /* Tamaño de la fuente */
+    color: #000000; /* Color del texto */
+    font-family: "Rethink Sans", sans-serif; /* Fuente Roboto */
+    font-weight: 100; /* Peso de fuente thin */
+    text-align: left; /* Alineación a la izquierda */
+    margin: 0; /* Eliminar margen si es necesario */
+}
   .ion-page#main-content p {
     font-size: 12px;
     color: #000000;
@@ -137,5 +148,4 @@ ion-app {
     --color: white;
     --background: transparent;
   }
-
 }

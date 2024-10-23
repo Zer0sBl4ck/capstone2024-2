@@ -81,9 +81,11 @@
       <div id="container">
         
         <ion-title *ngIf="isLoggedIn" class="welcome-message">
-          <strong>Bienvenido, {{ userEmail }}</strong>
+          Bienvenido, {{ userEmail }}
         </ion-title>
+        
 
+        <ion-title class="sigue-aportando">¿Que quieres hacer hoy?</ion-title>
         <!-- parausar el nombre del usuario en vez del correo, podrías usar userName aquí -->
 
         <img src="assets/imagenes/logobookshare.png" alt="Logo" class="logo-image">
