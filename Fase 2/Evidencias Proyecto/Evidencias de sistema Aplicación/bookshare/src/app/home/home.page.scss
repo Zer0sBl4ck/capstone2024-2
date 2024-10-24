@@ -131,7 +131,7 @@ ion-app {
   .ion-page#main-content p {
     font-size: 12px;
     color: #000000;
-    font-family: Helvetica, sans-serif;
+    font-family: "Rethink Sans", sans-serif;
     text-align: center;
     margin-bottom: 10px;
   }
@@ -141,6 +141,8 @@ ion-app {
   align-items: center; // Centrar contenido si es necesario
   justify-content: center; // Centrar contenido verticalmente si es necesario
   height: 300px; // Ajusta según lo que necesites
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2); // Sombra detrás de la imagen
+  transition: transform 0.2s, box-shadow 0.2s; // Transición suave al aplicar transformaciones
 
   .rating {
     display: flex;

@@ -39,6 +39,11 @@ export class HomePage {
       image: 'assets/imagenes/harrypotterreliquias.png',
       selectedRating: 0,
     },
+    {
+      title: 'Harry Potter y las reliquias Parte 3',
+      image: 'assets/imagenes/harrypotterreliquias.png',
+      selectedRating: 0,
+    },
   ];
   
   constructor(private authService: AuthService, private router: Router) {}
