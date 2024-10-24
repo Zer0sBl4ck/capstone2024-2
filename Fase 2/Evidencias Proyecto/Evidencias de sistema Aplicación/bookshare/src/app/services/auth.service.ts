@@ -112,6 +112,10 @@ export class AuthService {
     const user = this.getUserData(); 
     return user ? user.correo : null; 
   }
+  getUserName(): string | null {
+    const user = this.getUserData(); 
+    return user ? user.nombre_usuario : null; 
+  }
 
   agregarLibroEstadoFalse(isbn: string, titulo: string, autor: string, descripcion: string, genero: string, imagen_libro?: string): Observable<any> {
     const libroData = {

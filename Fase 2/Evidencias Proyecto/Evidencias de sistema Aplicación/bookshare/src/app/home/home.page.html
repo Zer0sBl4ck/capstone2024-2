@@ -1,6 +1,7 @@
 <ion-app>
+  
   <!-- Side Menu -->
-   <!-- Side Menu -->
+
    <ion-menu contentId="main-content" *ngIf="isLoggedIn">
     <ion-header>
       <ion-toolbar>
@@ -77,13 +78,20 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content>
+    <ion-content style="--background: #ffffff;"
+    > 
       <div id="container">
         <ion-title *ngIf="isLoggedIn" class="welcome-message">
-          Bienvenido, {{ userEmail }}
+          ¡Hola!, {{ userName }} :)
         </ion-title>
         
-        <ion-title class="sigue-aportando">¿Qué quieres hacer hoy?</ion-title>
+        <ion-title *ngIf="isLoggedIn" class="sigue-aportando">Lee, comparte, conecta.</ion-title>
+
+        
+        <div class="book-cover">
+          <img class="banner-image" src="assets/imagenes/banner-02.jpg" alt="">
+        </div>
+        <ion-title  class="recomendaciones">Recomendaciones</ion-title>
 
         <swiper-container [modules]="swiperModules" [slidesPerView]="3" [loop]="true" navigation pagination>
           <swiper-slide *ngFor="let book of books; let i = index">
@@ -98,10 +106,18 @@
               ></span>
             </div>
           </swiper-slide>
+          
         </swiper-container>
         
+       
+
+
+
+       
         <br>
       </div>
     </ion-content>
   </div>
+  
 </ion-app>
+
