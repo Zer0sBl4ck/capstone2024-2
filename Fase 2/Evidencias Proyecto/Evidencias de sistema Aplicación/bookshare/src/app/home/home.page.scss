@@ -112,11 +112,13 @@ ion-app {
     font-size: 25px;
     color: #000000;
     font-family: 'Rethink Sans', sans-serif; 
-    font-weight: 600;
+    font-weight: 500;
+    
     text-align: left;
     margin-bottom: 0px;
     padding-top: 10px; /* En lugar de margin-top */
   }
+  
   .ion-page#main-content .sigue-aportando {
     
     bottom: 20px; /* Distancia desde el fondo */
@@ -125,8 +127,22 @@ ion-app {
     color: #000000; /* Color del texto */
     font-family: "Rethink Sans", sans-serif; /* Fuente Roboto */
     font-weight: 100; /* Peso de fuente thin */
+    font-style: bold;
+
     text-align: left; /* Alineación a la izquierda */
-    margin: 0; /* Eliminar margen si es necesario */
+    margin: 0; /* margen si es necesario */
+}
+.ion-page#main-content .recomendaciones {
+    
+  bottom: 20px; /* Distancia desde el fondo */
+
+  font-size: 21px; /* Tamaño de la fuente */
+  color: #000000; /* Color del texto */
+  font-family: "Rethink Sans", sans-serif; /* Fuente Roboto */
+  font-weight: 300;
+  font-style: italic;
+  text-align: left; /* Alineación a la izquierda */
+  margin: 0; /* Eliminar margen si es necesario */
 }
   .ion-page#main-content p {
     font-size: 12px;
@@ -140,9 +156,10 @@ ion-app {
   flex-direction: column;
   align-items: center; // Centrar contenido si es necesario
   justify-content: center; // Centrar contenido verticalmente si es necesario
-  height: 300px; // Ajusta según lo que necesites
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2); // Sombra detrás de la imagen
+  height: 300px; // 
+  box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.2); // Sombra detrás de la imagen
   transition: transform 0.2s, box-shadow 0.2s; // Transición suave al aplicar transformaciones
+  
 
   .rating {
     display: flex;
@@ -160,14 +177,23 @@ ion-app {
 
 
  
-  .ion-page#main-content img {
-    max-width: 60%;
-    height: auto;
-    margin: 0 auto;
-    border-radius: 7px;
-    display: block;
-  }
+.ion-page#main-content .banner-image {
+  box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.2); // Sombra detrás de la imagen
+  padding-top: 10px;
+  max-width: 100%; 
+  width: 100%; // Full width
+  height: auto; // Maintain aspect ratio
+  border-radius: 7px; // Rounded corners
+  display: block; // Centering effect
+}
 
+.ion-page#main-content img {
+  max-width: 60%; // Other images will have this style
+  height: auto;
+  margin: 0 auto;
+  border-radius: 7px;
+  display: block;
+}
   .ion-page#main-content ion-menu-button {
     --color: white;
     --background: transparent;

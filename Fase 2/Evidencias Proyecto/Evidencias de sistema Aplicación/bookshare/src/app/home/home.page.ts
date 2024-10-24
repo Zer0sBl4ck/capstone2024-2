@@ -59,6 +59,7 @@ export class HomePage {
     if (this.isLoggedIn) {
       this.userRole = this.authService.getUserRole(); 
       this.userEmail = this.authService.getUserEmail(); 
+      this.userName = this.authService.getUserName();
     } 
   }
 
