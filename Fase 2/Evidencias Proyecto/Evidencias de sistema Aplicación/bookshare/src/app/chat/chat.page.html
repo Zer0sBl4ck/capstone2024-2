@@ -1,8 +1,14 @@
-<ion-header>
+<ion-header class="fondo">
   <ion-toolbar>
-    <ion-title>Mis Chats</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="titulo">Mis Chats</ion-title>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content>
   <div *ngIf="errorMessage" class="error-message">
@@ -18,7 +24,7 @@
           <p>Solicitante: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
         </ion-label>
         <ion-button (click)="irAlChat(chat.id_chat)" >
-          Ir al Chat
+          <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
         </ion-button>
       </ion-item>
     </ion-list>
