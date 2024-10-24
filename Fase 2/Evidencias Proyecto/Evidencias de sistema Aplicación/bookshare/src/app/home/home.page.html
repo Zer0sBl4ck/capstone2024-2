@@ -1,12 +1,14 @@
 <ion-app>
   <!-- Side Menu -->
-  <ion-menu contentId="main-content" *ngIf="isLoggedIn">
+   <!-- Side Menu -->
+   <ion-menu contentId="main-content" *ngIf="isLoggedIn">
     <ion-header>
       <ion-toolbar>
       </ion-toolbar>
     </ion-header>
     <ion-content class="menu">
       <ion-list>
+        
         <ion-button (click)="goToProfile()">
           <ion-icon name="person-outline" slot="start"></ion-icon>
           Perfil cuenta   
@@ -17,11 +19,21 @@
           Lista de deseos
         </ion-button>
 
+        <ion-button routerLink="/addbook" *ngIf="userRole === 'admin'">
+          <ion-icon name="add-outline" slot="start"></ion-icon>
+          Agregar libro
+        </ion-button>
+
         <ion-button (click)="goAddBookuser()" *ngIf="userRole === 'usuario'">
           <ion-icon name="add-outline" slot="start"></ion-icon>
           Agregar libro
         </ion-button>
         
+
+        <ion-button (click)="gochat()" *ngIf="userRole === 'usuario'">
+          <ion-icon name="add-outline" slot="start"></ion-icon>
+            Chat
+        </ion-button>
         <ion-button (click)="goBookOwner()" *ngIf="userRole === 'usuario'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
           Mis Libros
@@ -29,14 +41,14 @@
 
         <ion-button (click)="gosoliuser()" *ngIf="userRole === 'usuario'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
-          Prestamos
+         Prestamos
         </ion-button>
 
         <ion-button routerLink="/listar-libro">
           <ion-icon name="bookmark-outline" slot="start"></ion-icon>
           Lista de libros
         </ion-button>
-
+        
         <ion-button (click)="solicitudesadd()" *ngIf="userRole === 'admin'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
           SOLICITUDES LIBROS
