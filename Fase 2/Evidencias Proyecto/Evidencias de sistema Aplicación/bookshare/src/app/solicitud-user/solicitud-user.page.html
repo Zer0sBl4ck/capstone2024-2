@@ -10,25 +10,20 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Mis Solicitudes de Préstamo</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
   <!-- Botones para alternar entre solicitudes recibidas y realizadas -->
-  <ion-segment value="recibidas" (ionChange)="alternarSolicitudes($event)">
-    <ion-segment-button class="recibidas" value="recibidas">
-      <ion-label>Solicitudes Recibidas</ion-label>
+  <ion-segment value="recibi" (ionChange)="alternarSolicitudes($event)">
+    <ion-segment-button class="reci" value="recibidas">Solicitudes Recibidas
     </ion-segment-button>
-    <ion-segment-button class="realizadas" value="realizadas">
-      <ion-label>Solicitudes Realizadas</ion-label>
+
+    <ion-segment-button class="reali" value="realizadas">Solicitudes Realizadas
     </ion-segment-button>
+
   </ion-segment>
 
   <!-- Mostrar solicitudes recibidas -->
-  <ng-container class="solreci" *ngIf="mostrarRecibidas">
-    <ion-list *ngIf="solicitudesRecibidas.length > 0; else noSolicitudesRecibidas">
+  <ng-container *ngIf="mostrarRecibidas">
+    <ion-list class="rec" *ngIf="solicitudesRecibidas.length > 0; else noSolicitudesRecibidas">
       <ion-item *ngFor="let solicitud of solicitudesRecibidas">
         <ion-label>
           <h2>Libro: {{ solicitud.titulo }}</h2>
@@ -37,31 +32,31 @@
           <p>Fecha: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
           <p>{{ solicitud.nombre_usuario }}</p>
         </ion-label>
-        <ion-buttons>
-          <!-- Botón Modificar -->
-          <ion-button class="modificar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
-            (click)="modificarEstadoSolicitud(solicitud.id_prestamo)">Modificar</ion-button>
-          <!-- Botón Eliminar -->
-          <ion-button class="eliminar" *ngIf="solicitud.estado_prestamo === 'pendiente'" color="danger"
-            (click)="eliminarSolicitud(solicitud.id_prestamo)">Eliminar</ion-button>
-        </ion-buttons>
+
+        <!-- Botón Modificar -->
+        <ion-button class="aceptar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
+          (click)="modificarEstadoSolicitud(solicitud.id_prestamo)">Aceptar</ion-button>
+        <!-- Botón Eliminar -->
+        <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
+          (click)="eliminarSolicitud(solicitud.id_prestamo)">Rechazar</ion-button>
+
       </ion-item>
     </ion-list>
-    <ng-template class="nosoli" #noSolicitudesRecibidas>
+    <ng-template #noSolicitudesRecibidas>
       <ion-card>
         <ion-card-header>
-          <ion-card-title>No hay solicitudes recibidas</ion-card-title>
+          <ion-card-title>No hay solicitudes recibidas 🥲</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          Actualmente no tienes solicitudes de préstamo recibidas.
+          <p>Actualmente no tienes solicitudes de préstamo recibidas.</p>
         </ion-card-content>
       </ion-card>
     </ng-template>
   </ng-container>
 
   <!-- Mostrar solicitudes realizadas -->
-  <ng-container class="solreali" *ngIf="!mostrarRecibidas">
-    <ion-list *ngIf="solicitudesRealizadas.length > 0; else noSolicitudesRealizadas">
+  <ng-container *ngIf="!mostrarRecibidas">
+    <ion-list class="rea" *ngIf="solicitudesRealizadas.length > 0; else noSolicitudesRealizadas">
       <ion-item *ngFor="let solicitud of solicitudesRealizadas">
         <ion-label>
           <h2>Libro: {{ solicitud.titulo }}</h2>
@@ -71,13 +66,13 @@
         </ion-label>
       </ion-item>
     </ion-list>
-    <ng-template class="nosol" #noSolicitudesRealizadas>
+    <ng-template #noSolicitudesRealizadas>
       <ion-card>
         <ion-card-header>
-          <ion-card-title>No hay solicitudes realizadas</ion-card-title>
+          <ion-card-title>No hay solicitudes realizadas 🥲</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          Actualmente no has realizado ninguna solicitud de préstamo.
+          <p>Actualmente no has realizado ninguna solicitud de préstamo.</p>
         </ion-card-content>
       </ion-card>
     </ng-template>

@@ -23,196 +23,212 @@
 }
 
 ion-content {
+    --background: #ffffff;
 
     ion-segment {
+        --background: transparent;
+        --ion-color-primary: transparent;
+        margin-top: 1%;
 
-        width: 100%;
-
-        .recibidas {
-            width: 100%;
-            max-width: 80%;
-            color: #ffffff;
+        .reci,
+        .reali {
+            --background: #229E88;
+            color: #000000;
+            border: 1px solid #229E88;
+            border-radius: 4px;
             font-family: Helvetica;
-            font-size: 12px;
-            font-weight: bold;
-
-            ion-label {}
-        }
-
-        .realizadas {
-            width: 100%;
-            max-width: 80%;
-            color: #ffffff;
-            font-family: Helvetica;
-            font-size: 12px;
-            font-weight: bold;
-
-            ion-label {}
         }
     }
 
     /*Mostrar solicitudes recibidas*/
-    .solreci {
+    .rec {
+        background: #4d4d4d;
+        width: 100%;
+        margin-top: 1%;
+        border: 3px solid #229E88;
+        border-radius: 7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-        ion-list {
+        ion-item {
+            --background: #4d4d4d;
+            width: 90%;
+            --ion-item-border-color: #229E88;
 
-            ion-item {
+            ion-label {
+                h2 {
+                    font-family: Helvetica;
 
-                --ion-item-border-color: transparent;
-
-                ion-label {
-
-                    h2 {}
-
-                    p{}
+                    color: #ffffff;
                 }
 
-                ion-buttons {
-
-                    .modificar {}
-
-                    .eliminar {}
+                p {
+                    font-family: Helvetica;
+                    color: #ffffff;
                 }
             }
-        }
 
-        .nosoli {
+            .aceptar {
+                --background: #229E88;
+                color: #ffffff;
+                font-family: Helvetica;
+                border-radius: 7px;
+            }
 
-            ion-card {
-
-                ion-card-header {
-
-                    ion-card-title{}
-                }
+            .rechazar {
+                --background: #9e2222;
+                color: #ffffff;
+                font-family: Helvetica;
+                border-radius: 7px;
+                margin-left: 1%;
             }
         }
     }
 
     /*Mostrar solicitudes realizadas*/
-    .solreali {
+    .rea {
+        background: #4d4d4d;
+        width: 100%;
+        max-width: 80%;
+        margin-top: 1%;
+        border: 3px solid #229E88;
+        border-radius: 7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 10%;
 
-        ion-list {
+        ion-item {
+            --background: #4d4d4d;
+            width: 90%;
+            --ion-item-border-color: #229E88;
+
+            ion-label {
+
+                h2 {
+                    font-family: Helvetica;
+                    font-size: 16px;
+                    color: #ffffff;
+                }
+
+                p {
+                    font-family: Helvetica;
+                    font-size: 16px;
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+
+    /*Mostrar que no hay solicitudes */
+    ion-card {
+        --background: #229E88;
+        width: 100%;
+        border: 3px solid #1e6356;
+        border-radius: 5px;
+
+
+
+        ion-card-header {
+            ion-card-title {
+                font-family: Helvetica;
+                color: #ffffff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        ion-card-content {
+            p {
+                font-family: Helvetica;
+                color: #ffffff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}
+
+@media (min-width: 2560px), (min-width: 1920px) {
+    ion-content {
+
+        ion-segment {
+
+            .reci,
+            .reali {
+                width: 80%;
+                font-size: 14px;
+            }
+        }
+
+        /*Mostrar solicitudes recibidas*/
+        .rec {
+            width: 70%;
+            margin-left: 15%;
 
             ion-item {
+                width: 100%;
 
                 ion-label {
-
-                    h2 {}
-
-                    p {}
-                }
-
-            }
-        }
-
-        .nosol {
-
-            ion-card {
-
-                ion-card-header {
-
-                    ion-card-title {}
-                }
-            }
-        }
-    }
-}
-
-
-
-
-
-@media (min-width: 2560px) {
-
-    ion-content {
-
-        ion-segment {
-    
-    
-            .recibidas {
- 
-                ion-label {}
-            }
-    
-            .realizadas {
-   
-                ion-label {}
-            }
-        }
-    
-        /*Mostrar solicitudes recibidas*/
-        .solreci {
-    
-            ion-list {
-    
-                ion-item {
-    
-                    ion-label {
-    
-                        h2 {}
-    
-                        p{}
+                    h2 {
+                        font-size: 16px;
                     }
-    
-                    ion-buttons {
-    
-                        .modificar {}
-    
-                        .eliminar {}
+
+                    p {
+                        font-size: 14px;
                     }
                 }
-            }
-    
-            .nosoli {
-    
-                ion-card {
-    
-                    ion-card-header {
-    
-                        ion-card-title{}
-                    }
+
+                .aceptar {
+                    font-size: 14px;
+                }
+
+                .rechazar {
+                    margin-left: 1%;
+                    font-size: 14px;
                 }
             }
         }
-    
+
         /*Mostrar solicitudes realizadas*/
-        .solreali {
-    
-            ion-list {
-    
-                ion-item {
-    
-                    ion-label {
-    
-                        h2 {}
-    
-                        p {}
+        .rea {
+            width: 70%;
+            margin-left: 15%;
+
+            ion-item {
+                width: 100%;
+
+                ion-label {
+                    h2 {
+                        font-size: 16px;
                     }
-    
-                }
-            }
-    
-            .nosol {
-    
-                ion-card {
-    
-                    ion-card-header {
-    
-                        ion-card-title {}
+
+                    p {
+                        font-size: 14px;
                     }
                 }
             }
         }
-    }
-}
 
-@media (min-width: 1920px) {
+        /*Mostrar que no hay solicitudes */
+        ion-card {
+            width: 30%;
+            margin-left: 33%;
 
-    ion-content {
+            ion-card-header {
+                ion-card-title {
+                    font-size: 16px;
+                }
+            }
 
-        ion-segment {
-
-            ion-segment-button {}
+            ion-card-content {
+                p {
+                    font-size: 14px;
+                }
+            }
         }
     }
 }
@@ -221,162 +237,160 @@ ion-content {
     ion-content {
 
         ion-segment {
-    
-    
-            .recibidas {
- 
-                ion-label {}
-            }
-    
-            .realizadas {
-   
-                ion-label {}
+            margin-left: 5%;
+
+            .reci,
+            .reali {
+                width: 80%;
+                font-size: 10px;
             }
         }
-    
+
         /*Mostrar solicitudes recibidas*/
-        .solreci {
-    
-            ion-list {
-    
-                ion-item {
-    
-                    ion-label {
-    
-                        h2 {}
-    
-                        p{}
+        .rec {
+            width: 95%;
+            margin-left: 2%;
+
+            ion-item {
+                width: 92%;
+
+                ion-label {
+                    h2 {
+                        font-size: 14px;
                     }
-    
-                    ion-buttons {
-    
-                        .modificar {}
-    
-                        .eliminar {}
+
+                    p {
+                        font-size: 12px;
                     }
                 }
+
+                .aceptar {
+                    font-size: 10px;
+                }
+
+                .rechazar {
+                    margin-left: 1%;
+                    font-size: 10px;
+                }
             }
-    
-            .nosoli {
-    
-                ion-card {
-    
-                    ion-card-header {
-    
-                        ion-card-title{}
+        }
+
+        /*Mostrar solicitudes realizadas*/
+        .rea {
+            width: 80%;
+            margin-left: 10%;
+
+            ion-item {
+                width: 85%;
+
+                ion-label {
+                    h2 {
+                        font-size: 14px;
+                    }
+
+                    p {
+                        font-size: 12px;
                     }
                 }
             }
         }
-    
-        /*Mostrar solicitudes realizadas*/
-        .solreali {
-    
-            ion-list {
-    
-                ion-item {
-    
-                    ion-label {
-    
-                        h2 {}
-    
-                        p {}
-                    }
-    
+
+        /*Mostrar que no hay solicitudes */
+        ion-card {
+            width: 90%;
+            margin-left: 5%;
+
+            ion-card-header {
+                ion-card-title {
+                    font-size: 14px;
                 }
             }
-    
-            .nosol {
-    
-                ion-card {
-    
-                    ion-card-header {
-    
-                        ion-card-title {}
-                    }
+
+            ion-card-content {
+                p {
+                    font-size: 12px;
                 }
             }
         }
     }
 }
 
+
 @media (max-height: 900px) {
     ion-content {
 
         ion-segment {
-    
-    
-            .recibidas {
- 
-                ion-label {}
-            }
-    
-            .realizadas {
-   
-                ion-label {}
+
+            .reci,
+            .reali {
+                width: 80%;
+                font-size: 14px;
             }
         }
-    
+
         /*Mostrar solicitudes recibidas*/
-        .solreci {
-    
-            ion-list {
-    
-                ion-item {
-    
-                    ion-label {
-    
-                        h2 {}
-    
-                        p{}
+        .rec {
+            width: 80%;
+            margin-left: 6%;
+
+            ion-item {
+                width: 90%;
+
+                ion-label {
+                    h2 {
+                        font-size: 16px;
                     }
-    
-                    ion-buttons {
-    
-                        .modificar {}
-    
-                        .eliminar {}
+
+                    p {
+                        font-size: 14px;
                     }
                 }
+
+                .aceptar {
+                    font-size: 14px;
+                }
+
+                .rechazar {
+                    margin-left: 1%;
+                    font-size: 14px;
+                }
             }
-    
-            .nosoli {
-    
-                ion-card {
-    
-                    ion-card-header {
-    
-                        ion-card-title{}
+        }
+
+        /*Mostrar solicitudes realizadas*/
+        .rea {
+            width: 80%;
+            margin-left: 6%;
+
+            ion-item {
+                width: 90%;
+
+                ion-label {
+                    h2 {
+                        font-size: 16px;
+                    }
+
+                    p {
+                        font-size: 14px;
                     }
                 }
             }
         }
-    
-        /*Mostrar solicitudes realizadas*/
-        .solreali {
-    
-            ion-list {
-    
-                ion-item {
-    
-                    ion-label {
-    
-                        h2 {}
-    
-                        p {}
-                    }
-    
+
+        /*Mostrar que no hay solicitudes */
+        ion-card {
+            width: 55%;
+            margin-left: 20%;
+
+            ion-card-header {
+                ion-card-title {
+                    font-size: 16px;
                 }
             }
-    
-            .nosol {
-    
-                ion-card {
-    
-                    ion-card-header {
-    
-                        ion-card-title {}
-                    }
+
+            ion-card-content {
+                p {
+                    font-size: 14px;
                 }
             }
         }
