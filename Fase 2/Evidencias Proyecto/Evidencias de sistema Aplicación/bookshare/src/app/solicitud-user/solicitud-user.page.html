@@ -1,6 +1,11 @@
-<ion-header [translucent]="true">
+<ion-header class="fondo">
   <ion-toolbar>
-    <ion-title>Solicitudes de Préstamo</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="titulo">Solicitudes de Préstamo</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,16 +18,16 @@
 
   <!-- Botones para alternar entre solicitudes recibidas y realizadas -->
   <ion-segment value="recibidas" (ionChange)="alternarSolicitudes($event)">
-    <ion-segment-button value="recibidas">
+    <ion-segment-button class="recibidas" value="recibidas">
       <ion-label>Solicitudes Recibidas</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="realizadas">
+    <ion-segment-button class="realizadas" value="realizadas">
       <ion-label>Solicitudes Realizadas</ion-label>
     </ion-segment-button>
   </ion-segment>
 
   <!-- Mostrar solicitudes recibidas -->
-  <ng-container *ngIf="mostrarRecibidas">
+  <ng-container class="solreci" *ngIf="mostrarRecibidas">
     <ion-list *ngIf="solicitudesRecibidas.length > 0; else noSolicitudesRecibidas">
       <ion-item *ngFor="let solicitud of solicitudesRecibidas">
         <ion-label>
@@ -32,13 +37,17 @@
           <p>Fecha: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
           <p>{{ solicitud.nombre_usuario }}</p>
         </ion-label>
-        <!-- Botón Modificar -->
-        <ion-button *ngIf="solicitud.estado_prestamo === 'pendiente'" (click)="modificarEstadoSolicitud(solicitud.id_prestamo)">Modificar</ion-button>
-        <!-- Botón Eliminar -->
-        <ion-button *ngIf="solicitud.estado_prestamo === 'pendiente'" color="danger" (click)="eliminarSolicitud(solicitud.id_prestamo)">Eliminar</ion-button>
+        <ion-buttons>
+          <!-- Botón Modificar -->
+          <ion-button class="modificar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
+            (click)="modificarEstadoSolicitud(solicitud.id_prestamo)">Modificar</ion-button>
+          <!-- Botón Eliminar -->
+          <ion-button class="eliminar" *ngIf="solicitud.estado_prestamo === 'pendiente'" color="danger"
+            (click)="eliminarSolicitud(solicitud.id_prestamo)">Eliminar</ion-button>
+        </ion-buttons>
       </ion-item>
     </ion-list>
-    <ng-template #noSolicitudesRecibidas>
+    <ng-template class="nosoli" #noSolicitudesRecibidas>
       <ion-card>
         <ion-card-header>
           <ion-card-title>No hay solicitudes recibidas</ion-card-title>
@@ -51,7 +60,7 @@
   </ng-container>
 
   <!-- Mostrar solicitudes realizadas -->
-  <ng-container *ngIf="!mostrarRecibidas">
+  <ng-container class="solreali" *ngIf="!mostrarRecibidas">
     <ion-list *ngIf="solicitudesRealizadas.length > 0; else noSolicitudesRealizadas">
       <ion-item *ngFor="let solicitud of solicitudesRealizadas">
         <ion-label>
@@ -62,7 +71,7 @@
         </ion-label>
       </ion-item>
     </ion-list>
-    <ng-template #noSolicitudesRealizadas>
+    <ng-template class="nosol" #noSolicitudesRealizadas>
       <ion-card>
         <ion-card-header>
           <ion-card-title>No hay solicitudes realizadas</ion-card-title>
