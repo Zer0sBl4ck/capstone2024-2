@@ -48,18 +48,6 @@ ion-content {
             font-family: Helvetica;
         }
 
-        .descripcion {
-            color: #000000;
-            font-size: 12px;
-            font-family: Helvetica;
-            max-height: 100px;
-            resize: none;
-            border: 1px solid #000000;
-            border-radius: 8px;
-            padding: 10px;
-            margin-top: 15px;
-        }
-
         .opcion {
             color: #000000;
             font-size: 15px;
@@ -80,7 +68,34 @@ ion-content {
         }
     }
 
-    .aviso{
+    .descrip {
+        --background: transparent;
+        width: 100%;
+        max-width: 90%;
+        margin-bottom: 1rem;
+        margin-left: 3%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 5px;
+        box-sizing: border-box;
+        --ion-item-border-color: transparent;
+
+        .descripcion {
+            color: #000000;
+            font-size: 12px;
+            font-family: Helvetica;
+            max-height: 100px;
+            resize: none;
+            border: 1px solid #000000;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 15px;
+        }
+    }
+
+    .aviso {
         width: 100%;
         max-width: 80%;
         text-align: center;
@@ -89,16 +104,16 @@ ion-content {
         padding: 0 10px;
         box-sizing: border-box;
 
-        
+
     }
 
     .libro {
-        max-width: 80%; /* Mantiene el tamaño máximo de la imagen */
-        height: auto; /* Asegura que la imagen mantenga su proporción */
-        margin: 10px auto; /* Centra la imagen */
-        display: block; /* Asegura que se comporte como un bloque */
-        border-radius: 10%; /* Bordes redondeados si lo deseas */
-        
+        max-width: 80%;
+        height: auto;
+        margin: 10px auto;
+        display: block;
+        border-radius: 10%;
+
     }
 
     ion-button {

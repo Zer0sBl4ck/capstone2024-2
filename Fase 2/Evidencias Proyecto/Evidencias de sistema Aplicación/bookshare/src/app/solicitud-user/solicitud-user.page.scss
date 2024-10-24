@@ -1,0 +1,384 @@
+.fondo {
+    ion-toolbar {
+        --background: #229E88 !important;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .titulo {
+            font-weight: bold;
+            color: #ffffff;
+            font-family: Helvetica;
+            font-size: 1.5rem;
+            text-align: center;
+            width: 100%;
+            max-width: 95%;
+        }
+
+        ion-icon {
+            color: #ffffff;
+        }
+    }
+}
+
+ion-content {
+
+    ion-segment {
+
+        width: 100%;
+
+        .recibidas {
+            width: 100%;
+            max-width: 80%;
+            color: #ffffff;
+            font-family: Helvetica;
+            font-size: 12px;
+            font-weight: bold;
+
+            ion-label {}
+        }
+
+        .realizadas {
+            width: 100%;
+            max-width: 80%;
+            color: #ffffff;
+            font-family: Helvetica;
+            font-size: 12px;
+            font-weight: bold;
+
+            ion-label {}
+        }
+    }
+
+    /*Mostrar solicitudes recibidas*/
+    .solreci {
+
+        ion-list {
+
+            ion-item {
+
+                --ion-item-border-color: transparent;
+
+                ion-label {
+
+                    h2 {}
+
+                    p{}
+                }
+
+                ion-buttons {
+
+                    .modificar {}
+
+                    .eliminar {}
+                }
+            }
+        }
+
+        .nosoli {
+
+            ion-card {
+
+                ion-card-header {
+
+                    ion-card-title{}
+                }
+            }
+        }
+    }
+
+    /*Mostrar solicitudes realizadas*/
+    .solreali {
+
+        ion-list {
+
+            ion-item {
+
+                ion-label {
+
+                    h2 {}
+
+                    p {}
+                }
+
+            }
+        }
+
+        .nosol {
+
+            ion-card {
+
+                ion-card-header {
+
+                    ion-card-title {}
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+@media (min-width: 2560px) {
+
+    ion-content {
+
+        ion-segment {
+    
+    
+            .recibidas {
+ 
+                ion-label {}
+            }
+    
+            .realizadas {
+   
+                ion-label {}
+            }
+        }
+    
+        /*Mostrar solicitudes recibidas*/
+        .solreci {
+    
+            ion-list {
+    
+                ion-item {
+    
+                    ion-label {
+    
+                        h2 {}
+    
+                        p{}
+                    }
+    
+                    ion-buttons {
+    
+                        .modificar {}
+    
+                        .eliminar {}
+                    }
+                }
+            }
+    
+            .nosoli {
+    
+                ion-card {
+    
+                    ion-card-header {
+    
+                        ion-card-title{}
+                    }
+                }
+            }
+        }
+    
+        /*Mostrar solicitudes realizadas*/
+        .solreali {
+    
+            ion-list {
+    
+                ion-item {
+    
+                    ion-label {
+    
+                        h2 {}
+    
+                        p {}
+                    }
+    
+                }
+            }
+    
+            .nosol {
+    
+                ion-card {
+    
+                    ion-card-header {
+    
+                        ion-card-title {}
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1920px) {
+
+    ion-content {
+
+        ion-segment {
+
+            ion-segment-button {}
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    ion-content {
+
+        ion-segment {
+    
+    
+            .recibidas {
+ 
+                ion-label {}
+            }
+    
+            .realizadas {
+   
+                ion-label {}
+            }
+        }
+    
+        /*Mostrar solicitudes recibidas*/
+        .solreci {
+    
+            ion-list {
+    
+                ion-item {
+    
+                    ion-label {
+    
+                        h2 {}
+    
+                        p{}
+                    }
+    
+                    ion-buttons {
+    
+                        .modificar {}
+    
+                        .eliminar {}
+                    }
+                }
+            }
+    
+            .nosoli {
+    
+                ion-card {
+    
+                    ion-card-header {
+    
+                        ion-card-title{}
+                    }
+                }
+            }
+        }
+    
+        /*Mostrar solicitudes realizadas*/
+        .solreali {
+    
+            ion-list {
+    
+                ion-item {
+    
+                    ion-label {
+    
+                        h2 {}
+    
+                        p {}
+                    }
+    
+                }
+            }
+    
+            .nosol {
+    
+                ion-card {
+    
+                    ion-card-header {
+    
+                        ion-card-title {}
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-height: 900px) {
+    ion-content {
+
+        ion-segment {
+    
+    
+            .recibidas {
+ 
+                ion-label {}
+            }
+    
+            .realizadas {
+   
+                ion-label {}
+            }
+        }
+    
+        /*Mostrar solicitudes recibidas*/
+        .solreci {
+    
+            ion-list {
+    
+                ion-item {
+    
+                    ion-label {
+    
+                        h2 {}
+    
+                        p{}
+                    }
+    
+                    ion-buttons {
+    
+                        .modificar {}
+    
+                        .eliminar {}
+                    }
+                }
+            }
+    
+            .nosoli {
+    
+                ion-card {
+    
+                    ion-card-header {
+    
+                        ion-card-title{}
+                    }
+                }
+            }
+        }
+    
+        /*Mostrar solicitudes realizadas*/
+        .solreali {
+    
+            ion-list {
+    
+                ion-item {
+    
+                    ion-label {
+    
+                        h2 {}
+    
+                        p {}
+                    }
+    
+                }
+            }
+    
+            .nosol {
+    
+                ion-card {
+    
+                    ion-card-header {
+    
+                        ion-card-title {}
+                    }
+                }
+            }
+        }
+    }
+}
