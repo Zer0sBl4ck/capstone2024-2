@@ -1,25 +1,138 @@
-.mensaje {
-    margin: 10px; /* Espaciado entre mensajes */
-    padding: 10px; /* Espaciado interno */
-    border-radius: 15px; /* Bordes redondeados */
-    max-width: 70%; /* Ancho máximo del mensaje */
-    position: relative; /* Para posicionar la burbuja correctamente */
-  }
-  
-  .mensaje-remitente {
-    background-color: #2c3029; /* Color de fondo para mensajes del remitente */
-    align-self: flex-end; /* Alinear a la derecha */
-  }
-  
-  .mensaje-receptor {
-    background-color: #f34747; /* Color de fondo para mensajes del receptor */
-    align-self: flex-start; /* Alinear a la izquierda */
-  }
-  
-  /* Asegúrate de que el contenedor de mensajes tenga display: flex */
-  ion-content {
+.fondo {
+  ion-toolbar {
+    --background: #229E88 !important;
+    color: #ffffff;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Alinear al inicio */
-    padding: 15px; /* Espaciado interno */
+    justify-content: center;
+    align-items: center;
+
+    .titulo {
+      font-weight: bold;
+      color: #ffffff;
+      font-family: Helvetica;
+      font-size: 1.5rem;
+      text-align: center;
+      width: 100%;
+      max-width: 95%;
+    }
+
+    ion-icon {
+      color: #ffffff;
+    }
   }
+}
+
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 15px;
+  gap: 8px;
+  height: 100vh; /* Altura completa de la ventana */
+  --background: #f0dfc0;
+  overflow-y: hidden; /* Evitar que el contenido se desplace en la altura completa */
+
+  .mensajes-container {
+    flex-grow: 1; /* Permitir que el contenedor de mensajes use el espacio disponible */
+    overflow-y: auto; /* Permitir el desplazamiento en el contenedor de mensajes */
+    padding-bottom: 60px; /* Espacio para no cubrir la barra de entrada */
+  }
+
+
+
+  .mensaje-remitente {
+    background-color: #229E88;
+    border-radius: 10px;
+    width: 80%;
+    max-width: auto;
+    max-width: 65%;
+    font-size: 1rem;
+    margin-inline-end: 3%;
+    margin-inline-start: 3%;
+    padding: 1%;
+    font-family: Helvetica;
+    color: #ffffff;
+    margin-bottom: 0.7rem;
+    margin-left: 27%;
+
+    p {
+      text-align: end;
+      margin-inline-end: 3%;
+      margin-inline-start: 3%;
+      font-size: 1rem;
+      ;
+    }
+
+    strong {
+      font-weight: bold;
+      color: #ffffff;
+      font-size: 1rem;
+      font-family: Arial, sans-serif;
+    }
+
+  }
+
+  .mensaje-receptor {
+    background-color: #3b7558;
+    border-radius: 10px;
+    width: 80%;
+    max-width: auto;
+    max-width: 65%;
+    font-size: 1rem;
+    margin-inline-end: 3%;
+    margin-inline-start: 3%;
+    padding: 1%;
+    font-family: Helvetica;
+    color: #ffffff;
+    margin-bottom: 0.7rem;
+    margin-left: 7%;
+
+    p {
+      text-align: start;
+      margin-inline-end: 3%;
+      margin-inline-start: 3%;
+      font-size: 1rem;
+    }
+  }
+
+  .enviar-mensaje {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 50px;
+    background-color: #353333;
+    /* Color de fondo para diferenciar del resto */
+    margin: 0;
+    width: 100%;
+
+
+    ion-input {
+      flex-grow: 1;
+      color: #ffffff;
+      font-size: 1rem;
+      font-family: Helvetica;
+      padding: 10px;
+      box-shadow: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-right: 20px;
+      /* Espacio para escribir más cómodamente */
+      background-color: #353333; /* Color de fondo para diferenciar del resto */
+      border-color: #f0dfc0;
+    }
+
+    ion-button {
+      color: #ffffff;
+      --background: #229E88;
+      font-family: Helvetica;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+  }
+}
