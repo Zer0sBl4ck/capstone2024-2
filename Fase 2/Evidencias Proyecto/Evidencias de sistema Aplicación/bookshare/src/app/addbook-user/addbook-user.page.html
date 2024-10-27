@@ -83,3 +83,10 @@
     <ion-button expand="full" type="submit" [disabled]="libroForm.invalid || !imagen_libro">Agregar Libro</ion-button>
   </form>
 </ion-content>
+<ion-toast
+  [isOpen]="toastMessage.isOpen"
+  [message]="toastMessage.message"
+  [duration]="2000"
+  (didDismiss)="toastMessage.isOpen = false"
+  [color]="toastMessage.color">
+</ion-toast>

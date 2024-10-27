@@ -151,6 +151,18 @@ ion-app {
     text-align: center;
     margin-bottom: 10px;
   }
+  .ion-page#main-content ion-button.list-button {
+    background-color: #ffffff; // Color de fondo del botón
+    color: white; // Color del texto del botón
+    border-radius: 18px; // Bordes redondeados
+    padding: 1px 6px; // Espaciado interno del botón
+    font-size: 10px; // Tamaño de fuente del botón
+    box-shadow: 0 0cap 0px rgba(0, 0, 0, 0.2); // Sombra suave
+    margin-left: 230px; // Empuja el botón hacia la derecha
+
+
+  }
+  
   swiper-slide {
   display: flex;
   flex-direction: column;

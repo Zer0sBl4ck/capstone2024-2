@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service'; // Asegúrate de que la ruta sea correcta
+import { ToastController } from '@ionic/angular'; // Importa ToastController
 
 @Component({
   selector: 'app-addbook-user',
@@ -14,8 +15,9 @@ export class AddbookUserPage implements OnInit {
   descripcion: string = '';
   genero: string = '';
   imagen_libro: string | null = null; 
+  toastMessage = { isOpen: false, message: '', color: '' }; // Manejo del toast
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private toastController: ToastController) { }
 
   ngOnInit() {
   }
@@ -35,10 +37,23 @@ export class AddbookUserPage implements OnInit {
     }
   }
 
+  // Muestra un toast
+  async showToast(message: string, color: string) {
+    this.toastMessage.message = message;
+    this.toastMessage.color = color;
+    this.toastMessage.isOpen = true;
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      color,
+    });
+    toast.present();
+  }
+
   // Maneja el envío del formulario
   onSubmit() {
     if (!this.imagen_libro) {
-      console.error('Por favor, selecciona una imagen antes de agregar el libro.');
+      this.showToast('Por favor, selecciona una imagen antes de agregar el libro.', 'danger');
       return;
     }
 
@@ -47,11 +62,13 @@ export class AddbookUserPage implements OnInit {
       .subscribe(
         response => {
           console.log('Libro de usuario agregado:', response);
+          this.showToast('Libro solicitado con éxito.', 'success'); // Mensaje de éxito
           this.limpiarFormulario(); 
-          this.router.navigate(['/']); // Navegar a la página principal o donde desees
+          this.router.navigate(['/']); 
         },
         error => {
           console.error('Error al agregar libro de usuario:', error);
+          this.showToast('Error al agregar el libro.', 'danger'); // Mensaje de error
         }
       );
   }

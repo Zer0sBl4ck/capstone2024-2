@@ -92,6 +92,9 @@
           <img class="banner-image" src="assets/imagenes/banner-02.jpg" alt="">
         </div>
         <ion-title  class="recomendaciones">Recomendaciones</ion-title>
+       <!--  <ion-button routerLink="/listar-libro" class="list-button">
+          Ver Más
+        </ion-button>-->
 
         <swiper-container [modules]="swiperModules" [slidesPerView]="3" [loop]="true" navigation pagination>
           <swiper-slide *ngFor="let book of books; let i = index">
