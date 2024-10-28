@@ -14,7 +14,17 @@
 
     <!-- Campo para ISBN -->
     <ion-item>
-      <ion-label position="stacked">ISBN</ion-label>
+      <div class="label-button-container">
+        <ion-label position="stacked">ISBN</ion-label>
+        <ion-button class="ejemplo" id="click-trigger">ejemplo</ion-button>
+        <ion-popover trigger="click-trigger" triggerAction="click">
+          <ng-template>
+            <ion-content class="ion-padding">
+              <ion-img src="assets/imagenes/isbn-ejemplo.png" alt=""></ion-img>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+      </div>
       <ion-input [(ngModel)]="isbn" name="isbn" required></ion-input>
     </ion-item>
     <div class="aviso"
