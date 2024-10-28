@@ -623,6 +623,56 @@ router.put('/solicitud/:id/desarrollo', async (req, res) => {
   }
 });
 
+router.put('/solicitud/:id/entregado', async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'El id de la solicitud es requerido.' });
+  }
+
+  const updateEstadoQuery = `
+    UPDATE prestamo SET estado_prestamo = 'entregado' WHERE id_prestamo = ?
+  `;
+
+  try {
+    const [result] = await db.query(updateEstadoQuery, [id]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'No se encontró la solicitud para actualizar.' });
+    }
+
+    res.status(200).json({ message: 'El estado de la solicitud fue actualizado a entregado.' });
+  } catch (error) {
+    console.error('Error al actualizar el estado de la solicitud:', error);
+    return res.status(500).json({ error: 'Error al actualizar el estado de la solicitud' });
+  }
+});
+
+router.put('/solicitud/:id/devolucion', async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'El id de la solicitud es requerido.' });
+  }
+
+  const updateEstadoQuery = `
+    UPDATE prestamo SET estado_prestamo = 'devolucion' WHERE id_prestamo = ?
+  `;
+
+  try {
+    const [result] = await db.query(updateEstadoQuery, [id]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'No se encontró la solicitud para actualizar.' });
+    }
+
+    res.status(200).json({ message: 'El estado de la solicitud fue actualizado a devolucion.' });
+  } catch (error) {
+    console.error('Error al actualizar el estado de la solicitud:', error);
+    return res.status(500).json({ error: 'Error al actualizar el estado de la solicitud' });
+  }
+});
+
 router.post('/crear-chat-prestamo/:id', async (req, res) => {
   const { id } = req.params;
 

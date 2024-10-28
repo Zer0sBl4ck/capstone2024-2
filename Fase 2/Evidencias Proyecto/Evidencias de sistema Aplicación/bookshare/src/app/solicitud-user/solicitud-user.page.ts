@@ -94,4 +94,15 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
+  actualizarEstadoSolicitudAceptado(id_prestamo: number): void {
+    this.authService.actualizarEstadoSolicitudAceptado(id_prestamo).subscribe(
+      (response) => {
+        console.log('Estado de la solicitud actualizado a "Aceptado":', response);
+        this.cargarSolicitudesRecibidas();
+      },
+      (error) => {
+        console.error('Error al actualizar el estado de la solicitud:', error);
+      }
+    );
+  }
 }

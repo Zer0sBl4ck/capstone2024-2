@@ -190,6 +190,14 @@ export class AuthService {
     const url = `${this.apiUrl}/solicitud/${id_prestamo}/desarrollo`;
     return this.http.put(url, {});
   }
+  actualizarEstadoSolicitudAceptado(id_prestamo: number): Observable<any> {
+    const url = `${this.apiUrl}/solicitud/${id_prestamo}/entregado`;
+    return this.http.put(url, {});
+  }
+  actualizarEstadoSolicitudDevolucion(id_prestamo: number): Observable<any> {
+    const url = `${this.apiUrl}/solicitud/${id_prestamo}/devolucion`;
+    return this.http.put(url, {});
+  }
   crearChatPrestamo(id: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/crear-chat-prestamo/${id}`, {});
   }

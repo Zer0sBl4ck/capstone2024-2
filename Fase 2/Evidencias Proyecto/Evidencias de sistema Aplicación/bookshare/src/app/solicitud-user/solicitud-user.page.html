@@ -40,6 +40,12 @@
         <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
           (click)="eliminarSolicitud(solicitud.id_prestamo)">Rechazar</ion-button>
 
+          <ion-button class="aceptar" *ngIf="solicitud.estado_prestamo === 'desarrollo'"
+          (click)="actualizarEstadoSolicitudAceptado(solicitud.id_prestamo)">Emprestar</ion-button>
+        <!-- Botón Eliminar -->
+        <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'desarrollo'"
+          (click)="eliminarSolicitud(solicitud.id_prestamo)">Rechazar</ion-button>
+
       </ion-item>
     </ion-list>
     <ng-template #noSolicitudesRecibidas>
