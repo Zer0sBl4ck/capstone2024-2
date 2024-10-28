@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router'; 
+import { ToastController } from '@ionic/angular'; // Importa ToastController
 
 @Component({
   selector: 'app-update-perfil',
@@ -21,7 +22,8 @@ export class UpdatePerfilPage implements OnInit {
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router 
+    private router: Router,
+    private toastController: ToastController 
   ) { }
 
   ngOnInit() {
@@ -55,11 +57,23 @@ export class UpdatePerfilPage implements OnInit {
     }
   }
 
+  async mostrarToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000, 
+      position: 'bottom', 
+      color: 'success', 
+    });
+
+    await toast.present();
+  }
+
   guardarCambios() {
     this.authService.updateUserProfile(this.correo, this.usuarioData).subscribe(
       response => {
         console.log('Perfil actualizado:', response);
-        this.volverAlPerfil() 
+        this.mostrarToast('Tu perfil ha sido actualizado con éxito.'); 
+        this.volverAlPerfil(); 
       },
       error => {
         console.error('Error al actualizar el perfil:', error);
@@ -67,7 +81,6 @@ export class UpdatePerfilPage implements OnInit {
     );
   }
 
-  
   volverAlPerfil() {
     const correoLogueado = this.authService.getUserEmail(); 
     if (correoLogueado) {

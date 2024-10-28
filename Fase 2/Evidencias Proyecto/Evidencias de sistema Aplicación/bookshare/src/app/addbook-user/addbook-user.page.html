@@ -11,13 +11,14 @@
 
 <ion-content>
   <form (ngSubmit)="onSubmit()" #libroForm="ngForm">
-    
+
     <!-- Campo para ISBN -->
     <ion-item>
       <ion-label position="stacked">ISBN</ion-label>
       <ion-input [(ngModel)]="isbn" name="isbn" required></ion-input>
     </ion-item>
-    <div class="aviso" *ngIf="libroForm.controls['isbn']?.invalid && (libroForm.controls['isbn']?.touched || libroForm.submitted)">
+    <div class="aviso"
+      *ngIf="libroForm.controls['isbn']?.invalid && (libroForm.controls['isbn']?.touched || libroForm.submitted)">
       <ion-label color="danger">El ISBN es obligatorio.</ion-label>
     </div>
 
@@ -26,7 +27,8 @@
       <ion-label position="stacked">Título</ion-label>
       <ion-input [(ngModel)]="titulo" name="titulo" required></ion-input>
     </ion-item>
-    <div class="aviso" *ngIf="libroForm.controls['titulo']?.invalid && (libroForm.controls['titulo']?.touched || libroForm.submitted)">
+    <div class="aviso"
+      *ngIf="libroForm.controls['titulo']?.invalid && (libroForm.controls['titulo']?.touched || libroForm.submitted)">
       <ion-label color="danger">El título es obligatorio.</ion-label>
     </div>
 
@@ -35,7 +37,8 @@
       <ion-label position="stacked">Autor</ion-label>
       <ion-input [(ngModel)]="autor" name="autor" required></ion-input>
     </ion-item>
-    <div class="aviso" *ngIf="libroForm.controls['autor']?.invalid && (libroForm.controls['autor']?.touched || libroForm.submitted)">
+    <div class="aviso"
+      *ngIf="libroForm.controls['autor']?.invalid && (libroForm.controls['autor']?.touched || libroForm.submitted)">
       <ion-label color="danger">El autor es obligatorio.</ion-label>
     </div>
 
@@ -44,26 +47,49 @@
       <ion-label position="stacked">Descripción</ion-label>
       <ion-textarea class="descripcion" [(ngModel)]="descripcion" name="descripcion" required></ion-textarea>
     </ion-item>
-    <div class="aviso" *ngIf="libroForm.controls['descripcion']?.invalid && (libroForm.controls['descripcion']?.touched || libroForm.submitted)">
+    <div class="aviso"
+      *ngIf="libroForm.controls['descripcion']?.invalid && (libroForm.controls['descripcion']?.touched || libroForm.submitted)">
       <ion-label color="danger">La descripción es obligatoria.</ion-label>
     </div>
 
     <!-- Campo para Género -->
     <ion-item>
       <ion-label position="stacked">Género</ion-label>
-      <ion-select class="opcion" [(ngModel)]="genero" name="genero" required label="Seleccione opción">
-        <ion-select-option value="cienciaficción">Ciencia ficción</ion-select-option>
-        <ion-select-option value="fantasia">Fantasia</ion-select-option>
-        <ion-select-option value="thriller">Thriller</ion-select-option>
-        <ion-select-option value="romance">Romance</ion-select-option>
-        <ion-select-option value="horror">Horror</ion-select-option>
+      <ion-select class="opcion" placeholder="Seleccione opciones" [(ngModel)]="genero" name="genero" [multiple]="true"
+        required>
         <ion-select-option value="aventura">Aventura</ion-select-option>
+        <ion-select-option value="autoayuda">Autoayuda</ion-select-option>
+        <ion-select-option value="bibliografiayautobiografia">Bibliografía y autobiografía</ion-select-option>
+        <ion-select-option value="cienciaficción">Ciencia ficción</ion-select-option>
+        <ion-select-option value="comicsynovelagrafica">Comics y novela gráfica</ion-select-option>
+        <ion-select-option value="divulgacioncientifica">Divulgación científica</ion-select-option>
         <ion-select-option value="drama">Drama</ion-select-option>
-        <ion-select-option value="novelahistórica">Novela histórica</ion-select-option>
+        <ion-select-option value="educativo">Educativo</ion-select-option>
+        <ion-select-option value="ensayo">Ensayo</ion-select-option>
+        <ion-select-option value="fantasia">Fantasia</ion-select-option>
+        <ion-select-option value="ficción">Ficción</ion-select-option>
         <ion-select-option value="ficcióncontemporánea">Ficción contemporánea</ion-select-option>
+        <ion-select-option value="historia">Historia</ion-select-option>
+        <ion-select-option value="historico">Histórico</ion-select-option>
+        <ion-select-option value="horror">Horror</ion-select-option>
+        <ion-select-option value="humor">Humor</ion-select-option>
+        <ion-select-option value="juvenil">Juvenil</ion-select-option>
+        <ion-select-option value="literaturaclasica">Literatura clásica</ion-select-option>
+        <ion-select-option value="misterio">Misterio</ion-select-option>
+        <ion-select-option value="novelahistórica">Novela histórica</ion-select-option>
+        <ion-select-option value="poesia">Poesía</ion-select-option>
+        <ion-select-option value="policiaco">Policíaco</ion-select-option>
+        <ion-select-option value="psicologia">Psicología</ion-select-option>
+        <ion-select-option value="religiosoyespiritual">Religioso y espiritual</ion-select-option>
+        <ion-select-option value="romance">Romance</ion-select-option>
+        <ion-select-option value="terror">Terror</ion-select-option>
+        <ion-select-option value="thriller">Thriller</ion-select-option>
+        <ion-select-option value="suspenso">Suspenso</ion-select-option>
       </ion-select>
     </ion-item>
-    <div class="aviso" *ngIf="libroForm.controls['genero']?.invalid && (libroForm.controls['genero']?.touched || libroForm.submitted)">
+
+    <div class="aviso"
+      *ngIf="libroForm.controls['genero']?.invalid && (libroForm.controls['genero']?.touched || libroForm.submitted)">
       <ion-label color="danger">El género es obligatorio.</ion-label>
     </div>
 
@@ -77,9 +103,12 @@
     </div>
 
     <div *ngIf="imagen_libro">
-      <img class="libro" [src]="imagen_libro" alt="Previsualización"/>
+      <img class="libro" [src]="imagen_libro" alt="Previsualización" />
     </div>
 
     <ion-button expand="full" type="submit" [disabled]="libroForm.invalid || !imagen_libro">Agregar Libro</ion-button>
   </form>
 </ion-content>
+<ion-toast [isOpen]="toastMessage.isOpen" [message]="toastMessage.message" [duration]="2000"
+  (didDismiss)="toastMessage.isOpen = false" [color]="toastMessage.color">
+</ion-toast>
