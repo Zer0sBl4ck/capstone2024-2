@@ -1,0 +1,35 @@
+<ion-header class="fondo">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/listar-libro">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <div *ngIf="libro" class="libro-detalle">
+
+    <h2>{{ libro.titulo }}</h2>
+
+    <div *ngIf="libro.imagen_libro_base64" class="imagen-libro">
+      <img [src]="'data:image/jpeg;base64,' + libro.imagen_libro_base64" alt="Imagen del libro" />
+    </div>
+
+    
+    <h3>Autor: {{ libro.autor }}</h3>
+    <p><strong>Género:</strong> {{ libro.genero }}</p>
+    <p><strong>ISBN:</strong> {{ libro.isbn }}</p>
+    
+    <div class="descripcion">
+      <strong>Descripción:</strong>
+      <p>{{ libro.descripcion }}</p>
+    </div>
+
+    
+  </div>
+</ion-content>

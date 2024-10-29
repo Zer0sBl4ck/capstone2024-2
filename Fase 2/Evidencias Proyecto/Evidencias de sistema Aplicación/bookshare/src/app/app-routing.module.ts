@@ -66,7 +66,11 @@ const routes: Routes = [
   {
     path: 'chat-contacto/:id_chat',
     loadChildren: () => import('./chat-contacto/chat-contacto.module').then(m => m.ChatContactoPageModule)
+  },  {
+    path: 'vista-libro',
+    loadChildren: () => import('./vista-libro/vista-libro.module').then( m => m.VistaLibroPageModule)
   },
+
   
 ];
 

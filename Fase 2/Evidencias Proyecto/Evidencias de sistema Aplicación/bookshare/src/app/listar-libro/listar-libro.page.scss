@@ -41,7 +41,6 @@ ion-content {
 
     ion-grid {
 
-
         ion-col {
 
             ion-card {
@@ -94,6 +93,22 @@ ion-content {
                         display: flex;
                         justify-content: center;
                         align-items: center;
+                    }
+
+                    .vista {
+                        color: #ffffff;
+                        --background: #229E88;
+                        border-radius: 15px;
+                        font-family: Helvetica;
+                        margin-top: 16px;
+                        width: 100%;
+                        max-width: 40%;
+                        font-size: 12px;
+                        font-weight: bold;
+                        display: block;
+                        justify-content: center;
+                        align-items: center;
+                        margin-left: 25%;
                     }
 
                     ion-buttons {
