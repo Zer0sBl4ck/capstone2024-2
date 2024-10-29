@@ -14,7 +14,17 @@
     
     <!-- Campo para ISBN -->
     <ion-item>
-      <ion-label position="stacked">ISBN</ion-label>
+      <div class="label-button-container">
+        <ion-label position="stacked">ISBN</ion-label>
+        <ion-button id="click-trigger">ejemplo</ion-button>
+        <ion-popover cal trigger="click-trigger" triggerAction="click">
+          <ng-template>
+            <ion-content class="ion-padding">
+              <ion-img src="assets/imagenes/isbn-ejemplo.png" alt=""></ion-img>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+      </div>
       <ion-input [(ngModel)]="isbn" name="isbn" required></ion-input>
     </ion-item>
     <div class="aviso" *ngIf="libroForm.controls['isbn']?.invalid && (libroForm.controls['isbn']?.touched || libroForm.submitted)">
@@ -40,7 +50,7 @@
     </div>
 
     <!-- Campo para Descripción -->
-    <ion-item>
+    <ion-item style="--ion-item-border-color: transparent;">
       <ion-label position="stacked">Descripción</ion-label>
       <ion-textarea class="descripcion" [(ngModel)]="descripcion" name="descripcion" required></ion-textarea>
     </ion-item>
