@@ -70,6 +70,10 @@ const routes: Routes = [
     path: 'vista-libro',
     loadChildren: () => import('./vista-libro/vista-libro.module').then( m => m.VistaLibroPageModule)
   },
+  {
+    path: 'modificar-libro',
+    loadChildren: () => import('./modificar-libro/modificar-libro.module').then( m => m.ModificarLibroPageModule)
+  },
 
   
 ];
