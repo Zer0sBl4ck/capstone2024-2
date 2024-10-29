@@ -1,0 +1,165 @@
+.fondo {
+    ion-toolbar {
+        --background: #229E88 !important;
+        color: #ffffff;
+
+        ion-icon {
+            color: #ffffff;
+        }
+    }
+}
+
+ion-content {
+
+    --background: #f0dfc0;
+
+    .libro-detalle {
+        padding: 16px;
+        /* Espaciado interno */
+
+        h2 {
+            font-weight: bold;
+            color: #000000;
+            text-align: center;
+            font-family: "Rethink Sans", sans-serif;
+        }
+
+        .autor,
+        .genero,
+        .isbn {
+            font-weight: bold;
+            color: #000000;
+            text-align: center;
+            font-family: "Rethink Sans", sans-serif;
+        }
+
+        .imagen-libro {
+            margin-top: 1%;
+            text-align: center;
+        }
+
+        .imagen-libro img {
+            max-width: 100%;
+            /* Asegura que la imagen no sobrepase el ancho del contenedor */
+            height: auto;
+            /* Mantiene la proporción de la imagen */
+            border-radius: 10px;
+        }
+
+        .descripcion {
+            color: #000000;
+            font-family: "Rethink Sans",
+            sans-serif;
+            max-height: 100px;
+            resize: none;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 15px;
+            text-align: center;
+
+            p {
+                color: #000000;
+                font-family: "Rethink Sans", sans-serif;
+            }         
+        }
+    }
+}
+
+@media (min-width: 2560px) {
+    ion-content {
+        .libro-detalle {
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .autor,
+            .genero,
+            .isbn {
+                font-size: 1.7rem;
+            }
+
+            .descripcion {
+                font-size: 1.7rem;
+
+                p {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1920px) {
+    ion-content {
+        .libro-detalle {
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .autor,
+            .genero,
+            .isbn {
+                font-size: 1.3rem;
+            }
+
+            .descripcion {
+                font-size: 1.3rem;
+
+                p {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    ion-content {
+        .libro-detalle {
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .autor,
+            .genero,
+            .isbn {
+                font-size: 1rem;
+            }
+
+            .descripcion {
+                font-size: 1rem;
+
+                p {
+                    font-size: 0.9rem;
+                }
+
+            }
+        }
+    }
+}
+
+@media (max-height: 900px) {
+    ion-content {
+        .libro-detalle {
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .autor, .genero, .isbn {
+                font-size: 1rem;
+            }
+
+            .descripcion {
+                font-size: 1rem;
+
+                p {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+}

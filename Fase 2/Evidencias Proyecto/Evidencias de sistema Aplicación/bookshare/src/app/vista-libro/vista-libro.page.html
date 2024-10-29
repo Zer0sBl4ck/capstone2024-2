@@ -20,10 +20,10 @@
       <img [src]="'data:image/jpeg;base64,' + libro.imagen_libro_base64" alt="Imagen del libro" />
     </div>
 
-    
-    <h3>Autor: {{ libro.autor }}</h3>
-    <p><strong>Género:</strong> {{ libro.genero }}</p>
-    <p><strong>ISBN:</strong> {{ libro.isbn }}</p>
+    <p class="autor">Autor: {{ libro.autor }}</p>
+
+    <p class="genero"><strong>Género:</strong> {{ libro.genero }}</p>
+    <p class="isbn"><strong>ISBN:</strong> {{ libro.isbn }}</p>
     
     <div class="descripcion">
       <strong>Descripción:</strong>
