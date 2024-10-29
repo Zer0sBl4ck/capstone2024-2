@@ -25,7 +25,7 @@
           </ng-template>
         </ion-popover>
       </div>
-      <ion-input [(ngModel)]="isbn" name="isbn" required></ion-input>
+      <ion-input [(ngModel)]="isbn" name="isbn" placeholder="Ejemplo: 9123456789123" required></ion-input>
     </ion-item>
     <div class="aviso" *ngIf="libroForm.controls['isbn']?.invalid && (libroForm.controls['isbn']?.touched || libroForm.submitted)">
       <ion-label color="danger">El ISBN es obligatorio.</ion-label>
@@ -34,7 +34,7 @@
     <!-- Campo para Título -->
     <ion-item>
       <ion-label position="stacked">Título</ion-label>
-      <ion-input [(ngModel)]="titulo" name="titulo" required></ion-input>
+      <ion-input [(ngModel)]="titulo" name="titulo" placeholder="Ejemplo: El principito" required></ion-input>
     </ion-item>
     <div class="aviso" *ngIf="libroForm.controls['titulo']?.invalid && (libroForm.controls['titulo']?.touched || libroForm.submitted)">
       <ion-label color="danger">El título es obligatorio.</ion-label>
@@ -42,8 +42,8 @@
 
     <!-- Campo para Autor -->
     <ion-item>
-      <ion-label position="stacked">Autor</ion-label>
-      <ion-input [(ngModel)]="autor" name="autor" required></ion-input>
+      <ion-label position="stacked" >Autor</ion-label>
+      <ion-input [(ngModel)]="autor" name="autor" placeholder="Ejemplo: Pablo Neruda" required></ion-input>
     </ion-item>
     <div class="aviso" *ngIf="libroForm.controls['autor']?.invalid && (libroForm.controls['autor']?.touched || libroForm.submitted)">
       <ion-label color="danger">El autor es obligatorio.</ion-label>
@@ -51,8 +51,9 @@
 
     <!-- Campo para Descripción -->
     <ion-item style="--ion-item-border-color: transparent;">
-      <ion-label position="stacked">Descripción</ion-label>
-      <ion-textarea class="descripcion" [(ngModel)]="descripcion" name="descripcion" required></ion-textarea>
+      <ion-label position="stacked" >Descripción</ion-label>
+      <ion-textarea class="descripcion" [(ngModel)]="descripcion" name="descripcion" 
+      placeholder="Ejemplo: En un mundo donde los sueños y la realidad se entrelazan, una joven ..." required></ion-textarea>
     </ion-item>
     <div class="aviso" *ngIf="libroForm.controls['descripcion']?.invalid && (libroForm.controls['descripcion']?.touched || libroForm.submitted)">
       <ion-label color="danger">La descripción es obligatoria.</ion-label>
@@ -61,7 +62,7 @@
     <!-- Campo para Género -->
     <ion-item>
       <ion-label position="stacked">Género</ion-label>
-      <ion-select class="opcion" [(ngModel)]="genero" name="genero" required label="Seleccione opción">
+      <ion-select class="opcion" placeholder="Seleccione una opción" [(ngModel)]="genero" name="genero" required>
         <ion-select-option value="aventura">Aventura</ion-select-option>
         <ion-select-option value="autoayuda">Autoayuda</ion-select-option>
         <ion-select-option value="bibliografiayautobiografia">Bibliografía y autobiografía</ion-select-option>
@@ -97,7 +98,7 @@
     </div>
 
     <!-- Campo para Imagen del Libro -->
-    <ion-item>
+    <ion-item style="--ion-item-border-color: transparent;">
       <ion-label position="stacked">Imagen del Libro</ion-label>
       <input class="foto" type="file" (change)="onFileSelected($event)" accept="image/*" required />
     </ion-item>
