@@ -56,13 +56,13 @@
     <ion-item>
       <ion-label position="stacked">Ubicación</ion-label>
       <ion-select class="opcion" [(ngModel)]="ubicacion" name="ubicacion" required label="Seleccione opción">
-        <ion-select-option value="concepcion">Concepción</ion-select-option>
-        <ion-select-option value="talcahuano">Talcahuano</ion-select-option>
-        <ion-select-option value="chiguayante">Chiguayante</ion-select-option>
-        <ion-select-option value="hualpen">Hualpen</ion-select-option>
-        <ion-select-option value="hualqui">Hualqui</ion-select-option>
-        <ion-select-option value="sanpedrodelapaz">San Pedro de la Paz</ion-select-option>
-        <ion-select-option value="coronel">Coronel</ion-select-option>
+        <ion-select-option value="Concepcion">Concepción</ion-select-option>
+        <ion-select-option value="Talcahuano">Talcahuano</ion-select-option>
+        <ion-select-option value="Chiguayante">Chiguayante</ion-select-option>
+        <ion-select-option value="Hualpen">Hualpen</ion-select-option>
+        <ion-select-option value="Hualqui">Hualqui</ion-select-option>
+        <ion-select-option value="San Pedro de la Paz">San Pedro de la Paz</ion-select-option>
+        <ion-select-option value="Coronel">Coronel</ion-select-option>
       </ion-select>
 
     </ion-item>
@@ -73,7 +73,7 @@
 
     <!-- Foto de perfil -->
     <ion-item>
-      <ion-label position="stacked">Foto de perfil</ion-label>
+      <ion-label position="stacked">Foto de perfil (max img 200 x 200)</ion-label>
       <input class="foto" type="file" (change)="onImageSelected($event)" accept="image/*" required>
     </ion-item>
     <div class="aviso"
