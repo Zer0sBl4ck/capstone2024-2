@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { IonicSlides } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
+import { VistaLibroPage } from '../vista-libro/vista-libro.page'; // Importa el componente
+
 
 interface Book {
   isbn: string;
@@ -27,7 +30,7 @@ export class HomePage {
   swiperModules = [IonicSlides];
   books: Book[] = []; 
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private popoverController: PopoverController) {}
 
   ionViewWillEnter() {
     this.checkAuthentication();
@@ -55,6 +58,8 @@ export class HomePage {
         this.books = response.map((libro: any) => ({
           isbn: libro.isbn,
           titulo: libro.titulo,
+          autor: libro.autor,
+          descripcion: libro.descripcion,
           imagen_libro: libro.imagen_libro_base64 ? 'data:image/jpeg;base64,' + libro.imagen_libro_base64 : 'assets/imagenes/default.png', // Usa imagen_libro_base64 aquí
           selectedRating: 0, // Calificación inicial
         }));
@@ -65,7 +70,16 @@ export class HomePage {
     );
   }
 
-  
+  async goToBookDetail(isbn: string) {
+    const popover = await this.popoverController.create({
+      component: VistaLibroPage,
+      componentProps: { isbn: isbn }, // Pasa el ISBN al popover
+      cssClass: 'custom-popover',
+      translucent: true,
+    });
+    return await popover.present();
+  }
+
   rateBook(bookIndex: number, rating: number) {
     this.books[bookIndex].selectedRating = rating; // Actualiza la calificación seleccionada del libro
     console.log(`Calificación seleccionada para ${this.books[bookIndex].titulo}: ${rating}`);
@@ -99,7 +113,7 @@ export class HomePage {
   }
 
   gochat() {
-    this.router.navigate(['/chat'], { replaceUrl: true });
+    this.router.navigate(['/tabs/chat'], { replaceUrl: true });
   }
 
   logout() {
@@ -108,3 +122,4 @@ export class HomePage {
     window.location.reload();
   }
 }
+

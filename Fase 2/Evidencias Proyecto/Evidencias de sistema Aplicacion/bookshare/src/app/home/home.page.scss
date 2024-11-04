@@ -62,7 +62,11 @@ ion-app {
   }
 
 
-
+  .custom-popover {
+    --background: white; /* Fondo del popover */
+    --box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra */
+    border-radius: 10px; /* Bordes redondeados */
+  }
 
   .ion-page#main-content ion-header {
     --background: #229E88;

@@ -1,6 +1,5 @@
-// vista-libro.page.ts
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { NavParams, PopoverController } from '@ionic/angular'; // Importa NavParams y PopoverController
 import { AuthService } from '../services/auth.service';
 
 interface Libro {
@@ -21,12 +20,13 @@ export class VistaLibroPage implements OnInit {
   libro: Libro | undefined;
 
   constructor(
-    private route: ActivatedRoute,
-    private authService: AuthService
+    private navParams: NavParams, // Cambia a NavParams
+    private authService: AuthService,
+    private popoverController: PopoverController // Inyecta PopoverController
   ) { }
 
   ngOnInit() {
-    const isbn = this.route.snapshot.paramMap.get('isbn');
+    const isbn = this.navParams.get('isbn'); // Obtiene el ISBN desde navParams
     if (isbn) {
       this.cargarLibro(isbn);
     }
@@ -36,5 +36,9 @@ export class VistaLibroPage implements OnInit {
     this.authService.getLibros().subscribe((data) => {
       this.libro = data.find((libro: Libro) => libro.isbn === isbn);
     });
+  }
+
+  closePopover() {
+    this.popoverController.dismiss(); // Cierra el popover
   }
 }

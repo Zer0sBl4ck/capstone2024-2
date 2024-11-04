@@ -1,9 +1,9 @@
 <ion-header class="fondo">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button routerLink="/home">
+      <ion-button routerLink="/tabs/home">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
-      </ion-button>
+    </ion-button>
     </ion-buttons>
     <ion-title class="titulo">Lista de libros</ion-title>
   </ion-toolbar>
@@ -11,7 +11,7 @@
 
 <ion-content>
 
-  <ion-searchbar placeholder="Buscar..." showCancelButton="true" cancelButtonText="Cancelar" class="search-bar"
+  <ion-searchbar placeholder="Buscar..."  class="search-bar"
     inputmode="search" (ionInput)="buscarLibros($event)">
   </ion-searchbar>
 
@@ -19,7 +19,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="8" size-md="3" size-lg="2" *ngFor="let libro of libros">
-        <ion-card>
+        <ion-card (click)="goToBookDetail(libro.isbn)">
           <ion-card-header>
             <div class="libro">
               <img class="imagen" *ngIf="libro.imagen_libro_base64"
@@ -54,19 +54,19 @@
 
             <ion-buttons>
               <ion-button class="agregar" expand="block" *ngIf="rol === 'usuario'"
-              (click)="agregarLibroABiblioteca(libro)">
-              <ion-icon name="add-outline"></ion-icon><!--Agregar libro-->
-            </ion-button>
-
-            <ion-button class="modificar" routerLink="/modificar-libro" expand="block" *ngIf="rol === 'admin'">
-              <ion-icon name="pencil-outline"></ion-icon><!--modificar libro-->
-            </ion-button>
-
-            <ion-button class="ver" expand="block" (click)="irAPersonasConLibro(libro.isbn)">
-              <ion-icon name="eye-outline"></ion-icon><!--ver personas con este libro -->
-            </ion-button>
+                (click)="agregarLibroABiblioteca(libro); $event.stopPropagation()">
+                <ion-icon name="add-outline"></ion-icon><!--Agregar libro-->
+              </ion-button>
+            
+              <ion-button class="modificar" routerLink="/modificar-libro" expand="block" *ngIf="rol === 'admin'"
+                (click)="$event.stopPropagation()">
+                <ion-icon name="pencil-outline"></ion-icon><!--modificar libro-->
+              </ion-button>
+            
+              <ion-button class="ver" expand="block" (click)="irAPersonasConLibro(libro.isbn); $event.stopPropagation()">
+                <ion-icon name="eye-outline"></ion-icon><!--ver personas con este libro -->
+              </ion-button>
             </ion-buttons>
-
 
 
 

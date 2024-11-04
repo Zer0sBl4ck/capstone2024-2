@@ -10,10 +10,11 @@
 }
 
 ion-content {
-
+    
     --background: #f0dfc0;
 
     .libro-detalle {
+        
         padding: 16px;
         /* Espaciado interno */
 
@@ -92,6 +93,8 @@ ion-content {
 
 @media (min-width: 1920px) {
     ion-content {
+        
+          
         .libro-detalle {
 
             h2 {

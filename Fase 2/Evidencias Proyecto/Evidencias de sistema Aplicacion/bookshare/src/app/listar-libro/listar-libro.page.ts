@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service'; 
 import { AlertController } from '@ionic/angular'; 
 import { Router } from '@angular/router'; 
+import { PopoverController } from '@ionic/angular';
+import { VistaLibroPage } from '../vista-libro/vista-libro.page'; // Importa el componente
 
 
 interface Libro {
@@ -26,7 +28,8 @@ export class ListarLibroPage implements OnInit {
   constructor(
     private authService: AuthService, 
     private alertController: AlertController,
-    private router: Router // Inyectar Router
+    private router: Router,
+    private popoverController: PopoverController // Inyectar Router
   ) { }
 
   ngOnInit() {
@@ -49,6 +52,16 @@ export class ListarLibroPage implements OnInit {
         console.error('Error al cargar libros:', error);
       }
     );
+  }
+
+  async goToBookDetail(isbn: string) {
+    const popover = await this.popoverController.create({
+      component: VistaLibroPage,
+      componentProps: { isbn: isbn }, // Pasa el ISBN al popover
+      cssClass: 'custom-popover',
+      translucent: true,
+    });
+    return await popover.present();
   }
 
   async agregarLibroABiblioteca(libro: Libro) { // Cambiar el tipo a Libro

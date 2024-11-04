@@ -97,9 +97,10 @@
         </ion-button>-->
 
         <swiper-container [modules]="swiperModules" [slidesPerView]="3" [loop]="true" navigation pagination>
-          <swiper-slide *ngFor="let book of books; let i = index">
+          <swiper-slide *ngFor="let book of books; let i = index" (click)="goToBookDetail(book.isbn)">
             <img *ngIf="book.imagen_libro" [src]="book.imagen_libro" alt="Libro {{ book.titulo }}" />
             <p>{{ book.titulo }}</p>
+            <p>{{ book.autor }}</p>
             <div class="rating">
               <span
                 *ngFor="let star of stars; let starIndex = index"
@@ -110,6 +111,7 @@
             </div>
           </swiper-slide>
         </swiper-container>
+        
         
         
 
