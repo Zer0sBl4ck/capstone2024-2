@@ -8,8 +8,7 @@
             color: #ffffff;
             text-align: center;
             font-family: Helvetica;
-            left: 50%;
-            transform: translateX(-10%);
+            display: flex;
         }
 
         ion-icon {
@@ -19,12 +18,13 @@
 }
 
 ion-content {
-    --background: #ffffff !important;
+    --background: #f0dfc0 !important;
 
     ion-card {
         --background: #ffffff !important;
-        border-radius: 10%;
+        border-radius: 2rem;
         margin-top: 10rem;
+        width: 100%;
 
         .foto {
             display: flex;
@@ -34,7 +34,7 @@ ion-content {
                 width: 150px;
                 height: 150px;
                 object-fit: cover;
-                border-radius: 20%;
+                border-radius: 1.5rem;
             }
         }
     }
@@ -62,5 +62,186 @@ ion-content {
         width: 100%;
         font-size: 16px;
         font-weight: bold;
+    }
+}
+
+@media (min-width: 2560px) {
+    ion-content {
+        --background: #f0dfc0 !important;
+    
+        ion-card {
+            --background: #ffffff !important;
+            border-radius: 2rem;
+            margin-top: 10rem;
+            max-width: 40%;
+            margin-left: 50%;
+    
+            .foto {
+                display: flex;
+                justify-content: center;
+    
+                img {
+                    width: 150px;
+                    height: 150px;
+                    object-fit: cover;
+
+                }
+            }
+        }
+    
+        .titulo-card {
+            color: #000000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+    
+        .dato {
+            color: #000000;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    
+        .btn-editar {
+            max-width: 25%;
+            margin-left: 37%;
+        }
+    }
+
+}
+
+@media (min-width: 1920px) {
+
+    ion-content {
+        --background: #f0dfc0 !important;
+    
+        ion-card {
+            --background: #ffffff !important;
+            border-radius: 2rem;
+            margin-top: 10rem;
+            max-width: 50%;
+            margin-left: 30rem;
+    
+            .foto {
+                display: flex;
+                justify-content: center;
+    
+                img {
+                    width: 150px;
+                    height: 150px;
+                    object-fit: cover;
+
+                }
+            }
+        }
+    
+        .titulo-card {
+            color: #000000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+    
+        .dato {
+            color: #000000;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    
+        .btn-editar {
+            max-width: 25%;
+            margin-left: 37%;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+
+    ion-content {
+        --background: #f0dfc0 !important;
+    
+        ion-card {
+            --background: #ffffff !important;
+            border-radius: 2rem;
+            margin-top: 10rem;
+            max-width: 90%;
+            margin-left: 1.5rem;
+    
+            .foto {
+                display: flex;
+                justify-content: center;
+    
+                img {
+                    width: 150px;
+                    height: 150px;
+                    object-fit: cover;
+
+                }
+            }
+        }
+    
+        .titulo-card {
+            color: #000000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+    
+        .dato {
+            color: #000000;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    
+        .btn-editar {
+            max-width: 60%;
+            margin-left: 21%;
+        }
+    }
+}
+
+
+@media (max-height: 900px) {
+
+    ion-content {
+        --background: #f0dfc0 !important;
+    
+        ion-card {
+            --background: #ffffff !important;
+            border-radius: 2rem;
+            margin-top: 10rem;
+            max-width: 80%;
+            margin-left: 5.5rem;
+    
+            .foto {
+                display: flex;
+                justify-content: center;
+    
+                img {
+                    width: 150px;
+                    height: 150px;
+                    object-fit: cover;
+
+                }
+            }
+        }
+    
+        .titulo-card {
+            color: #000000;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+    
+        .dato {
+            color: #000000;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    
+        .btn-editar {
+            max-width: 30%;
+            margin-left: 35%;
+        }
     }
 }

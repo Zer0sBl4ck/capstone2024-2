@@ -23,7 +23,7 @@
 }
 
 ion-content {
-    --background: #ffffff;
+    --background: #f0dfc0;
 
     ion-segment {
         --background: transparent;
@@ -50,6 +50,8 @@ ion-content {
         display: flex;
         justify-content: center;
         align-items: center;
+		display: flex; /* Cambiado a flex para uso de flex-direction */
+		flex-direction: column; /* Para que los items se apilen verticalmente */
 
         ion-item {
             --background: #4d4d4d;
@@ -97,6 +99,8 @@ ion-content {
         justify-content: center;
         align-items: center;
         margin-left: 10%;
+		display: flex; /* Cambiado a flex para uso de flex-direction */
+		flex-direction: column; /* Para que los items se apilen verticalmente */
 
         ion-item {
             --background: #4d4d4d;

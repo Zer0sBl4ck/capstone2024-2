@@ -23,7 +23,6 @@
 }
 
 ion-content {
-
     --background: #f0dfc0;
 
     ion-list {
@@ -33,6 +32,7 @@ ion-content {
         border: 3px solid #229E88;
         border-radius: 7px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         margin-left: 5%;
@@ -41,9 +41,9 @@ ion-content {
             --background: #4d4d4d;
             width: 95%;
             --ion-item-border-color: #229E88;
+            margin-top: 5px;
 
             ion-label {
-
                 h2 {
                     font-family: Helvetica;
                     color: #ffffff;
@@ -58,7 +58,7 @@ ion-content {
             }
 
             ion-button {
-                --background:#229E88;
+                --background: #229E88;
 
                 ion-icon {
                     color: #ffffff;
