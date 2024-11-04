@@ -25,7 +25,7 @@ const io = socketIo(server, {
 app.use(cors({
   origin: [
     'http://localhost:8100',
-    'http://192.168.1.26:8100' // Añade tu IP aquí
+    'http://192.168.105.79:8100' // Añade tu IP aquí
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos que quieres permitir
   allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados que quieres permitir

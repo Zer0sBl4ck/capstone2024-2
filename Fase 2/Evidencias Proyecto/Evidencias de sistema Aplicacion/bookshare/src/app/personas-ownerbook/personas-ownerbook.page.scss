@@ -19,20 +19,22 @@
 }
 
 ion-content {
-    --background: #ffffff;
+    --background: #f0dfc0;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 5%;
 
     ion-list {
-        background: #ffffff;
-        width: 100%;
+        background: #c5bbbb;
+        width: 95%;
         --border-color: #ffffff;
 
         ion-item {
-            --background: #ffffff;
+            --background: #c5bbbb;
             --ion-item-border-color: transparent;
+            display: flex; /* Cambiado a flex para uso de flex-direction */
+            flex-direction: column; /* Para que los items se apilen verticalmente */
 
             ion-avatar {
 
@@ -167,6 +169,7 @@ ion-content {
     ion-content {
 
         ion-list {
+            margin-left: 2.5%;
 
             ion-item {
 
