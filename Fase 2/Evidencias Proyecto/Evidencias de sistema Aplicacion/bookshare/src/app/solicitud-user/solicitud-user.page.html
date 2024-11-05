@@ -29,7 +29,7 @@
           <h2>Libro: {{ solicitud.titulo }}</h2>
           <p>Estado: {{ solicitud.estado_prestamo }}</p>
           <p>Correo solicitante: {{ solicitud.correo_2 }}</p>
-          <p>Fecha: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
+          <p>Fecha devolucion: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
           <p>{{ solicitud.nombre_usuario }}</p>
         </ion-label>
 
@@ -45,8 +45,12 @@
         <!-- Botón Eliminar -->
         <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'desarrollo'"
           (click)="eliminarSolicitud(solicitud.id_prestamo)">Rechazar</ion-button>
-
+          <ion-button *ngIf="solicitud.estado_prestamo === 'desarrollo' && mostrarRecibidas" 
+          (click)="modificarFechaDevolucion(solicitud.id_prestamo)">
+          Fecha devolucion
+        </ion-button>
       </ion-item>
+      
     </ion-list>
     <ng-template #noSolicitudesRecibidas>
       <ion-card>

@@ -105,4 +105,41 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
+  modificarFechaDevolucion(id_prestamo: number): void {
+    const fechaInput = prompt('Ingrese la fecha de devolución en formato dd-mm-yyyy');
+
+    // Verificar que la fecha se haya ingresado y esté en el formato correcto
+    if (fechaInput && this.validarFechaFormato(fechaInput)) {
+      // Convertir la fecha al formato ISO para enviarla al backend (yyyy-mm-dd)
+      const [dia, mes, año] = fechaInput.split('-');
+      const fechaISO = `${año}-${mes}-${dia}`;
+
+      this.authService.actualizarFechaDevolucion(id_prestamo, fechaISO).subscribe(
+        (response) => {
+          console.log('Fecha de devolución actualizada:', response);
+          this.cargarSolicitudesRecibidas(); // Recargar la lista para reflejar el cambio
+        },
+        (error) => {
+          console.error('Error al actualizar la fecha de devolución:', error);
+        }
+      );
+    } else {
+      alert('Fecha inválida. Por favor, ingrésala en el formato dd-mm-yyyy.');
+    }
+    window.location.reload();
+  }
+
+  // Función para validar el formato de fecha dd-mm-yyyy
+  private validarFechaFormato(fecha: string): boolean {
+    const regex = /^(\d{2})-(\d{2})-(\d{4})$/;
+    if (!regex.test(fecha)) return false;
+
+    const [dia, mes, año] = fecha.split('-').map(Number);
+    const fechaObj = new Date(año, mes - 1, dia);
+    return (
+      fechaObj.getFullYear() === año &&
+      fechaObj.getMonth() === mes - 1 &&
+      fechaObj.getDate() === dia
+    );
+  }
 }

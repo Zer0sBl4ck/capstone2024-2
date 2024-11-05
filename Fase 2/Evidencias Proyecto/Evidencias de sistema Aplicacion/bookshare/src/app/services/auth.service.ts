@@ -225,5 +225,10 @@ export class AuthService {
     const url = `${this.apiUrl}/${isbn}/${id_usuario}`; 
     return this.http.delete(url);
   }
+  actualizarFechaDevolucion(id_prestamo: number, fecha_devolucion: string): Observable<any> {
+    const url = `${this.apiUrl}/prestamo/devolucion`;
+    const body = { id_prestamo, fecha_devolucion };
+    return this.http.put(url, body);
+  }
   
 }

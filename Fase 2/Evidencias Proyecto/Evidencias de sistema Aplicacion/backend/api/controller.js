@@ -467,7 +467,7 @@ router.post('/prestamo', (req, res) => {
   // Paso 1: Insertar el préstamo en la tabla 'prestamo'
   const insertQuery = `
     INSERT INTO prestamo (id_usuario_solicitante, id_usuario_prestamista, id_biblioteca, fecha_prestamo, estado_prestamo) 
-    VALUES (?, ?, ?, CURDATE(), 'pendiente')
+    VALUES (?, ?, ?, null, 'pendiente')
   `;
 
   db.query(insertQuery, [id_usuario_solicitante, id_usuario_prestamista, id_biblioteca], (error, results) => {
@@ -910,6 +910,31 @@ function deleteBookFromLibrary(isbn, id_usuario, callback) {
 router.delete('/:isbn/:id_usuario', (req, res) => {
   const { isbn, id_usuario } = req.params;
   deleteBookAndRelatedData(isbn, id_usuario, res);
+});
+
+router.put('/prestamo/devolucion', (req, res) => {
+  const { id_prestamo, fecha_devolucion } = req.body;
+
+  // Validar que los campos requeridos estén presentes
+  if (!id_prestamo || !fecha_devolucion) {
+    return res.status(400).json({ error: 'Faltan campos requeridos.' });
+  }
+
+  // Actualizar solo la fecha de devolución en el préstamo
+  const updateQuery = `
+    UPDATE prestamo 
+    SET fecha_prestamo = ? 
+    WHERE id_prestamo = ?
+  `;
+
+  // Ejecutar la consulta de actualización
+  db.query(updateQuery, [fecha_devolucion, id_prestamo], (err, result) => {
+    if (err) {
+      console.error('Error al actualizar la fecha de devolución:', err.message);
+      return res.status(500).json({ error: 'Error al actualizar la fecha de devolución.' });
+    }
+    res.status(200).json({ message: 'Fecha de devolución actualizada exitosamente.' });
+  });
 });
 
 
