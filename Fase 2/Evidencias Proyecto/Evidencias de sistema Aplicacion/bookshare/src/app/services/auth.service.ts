@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://192.168.1.26:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api
+  private apiUrl = 'http://localhost:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api
 
   constructor(private http: HttpClient) { }
 
@@ -219,6 +219,11 @@ export class AuthService {
   // Función para listar los mensajes de un chat
   listarMensajes(idChat: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/listar-mensajes/${idChat}`);
+  }
+  eliminarLibroBiblioteca(isbn: string, id_usuario: number): Observable<any> {
+    console.log("eliminando libro")
+    const url = `${this.apiUrl}/${isbn}/${id_usuario}`; 
+    return this.http.delete(url);
   }
   
 }

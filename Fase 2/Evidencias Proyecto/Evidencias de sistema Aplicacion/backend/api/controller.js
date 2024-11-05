@@ -199,7 +199,8 @@ router.get('/perfil/:correo', async (req, res) => {
   console.log(`Recibiendo solicitud de perfil para el correo: ${correo}`);
 
   const query = `
-    SELECT 
+    SELECT
+      id_usuario,
       nombre_usuario, 
       correo, 
       telefono, 
@@ -814,6 +815,107 @@ router.get('/listar-mensajes/:id_chat', async (req, res) => {
     return res.status(500).json({ error: 'Error al listar los mensajes' });
   }
 });
+
+async function deleteBookAndRelatedData(isbn, id_usuario, res) {
+    let errorOccurred = false; 
+
+    try {
+        // Primero, intenta eliminar los mensajes
+        await deleteMessages(isbn, id_usuario);
+    } catch (err) {
+        console.error('Error al eliminar los mensajes:', err.message);
+        errorOccurred = true; // Marcar que ocurrió un error
+    }
+
+    try {
+        // Luego, intenta eliminar los chats
+        await deleteChats(isbn, id_usuario);
+    } catch (err) {
+        console.error('Error al eliminar los chats:', err.message);
+        errorOccurred = true; // Marcar que ocurrió un error
+    }
+
+    try {
+        // Luego, intenta eliminar los préstamos
+        await deleteLoans(isbn, id_usuario);
+    } catch (err) {
+        console.error('Error al eliminar los préstamos:', err.message);
+        errorOccurred = true; // Marcar que ocurrió un error
+    }
+
+    try {
+        // Finalmente, intenta eliminar el libro de la biblioteca
+        await deleteBookFromLibrary(isbn, id_usuario);
+    } catch (err) {
+        console.error('Error al eliminar el libro:', err.message);
+        errorOccurred = true; // Marcar que ocurrió un error
+    }
+
+    // Respuesta final después de intentar todas las eliminaciones
+    if (errorOccurred) {
+        return res.status(500).json({ message: 'Algunas eliminaciones fallaron' });
+    }
+    res.json({ message: 'Proceso de eliminación completado' });
+}
+
+// Función para eliminar los mensajes
+function deleteMessages(isbn, id_usuario, callback) {
+  const deleteMessagesQuery = `
+    DELETE FROM mensaje 
+    WHERE id_chat IN (
+      SELECT id_chat 
+      FROM chat 
+      WHERE id_biblioteca_usuario_ofertante IN (
+        SELECT id_biblioteca 
+        FROM biblioteca_usuario 
+        WHERE isbn = ? AND id_usuario = ?
+      )
+    )
+  `;
+  db.query(deleteMessagesQuery, [isbn, id_usuario], callback);
+}
+
+// Función para eliminar los chats
+function deleteChats(isbn, id_usuario, callback) {
+  const deleteChatsQuery = `
+    DELETE FROM chat 
+    WHERE id_biblioteca_usuario_ofertante IN (
+      SELECT id_biblioteca 
+      FROM biblioteca_usuario 
+      WHERE isbn = ? AND id_usuario = ?
+    )
+  `;
+  db.query(deleteChatsQuery, [isbn, id_usuario], callback);
+}
+
+// Función para eliminar los préstamos
+function deleteLoans(isbn, id_usuario, callback) {
+  const deleteLoansQuery = `
+    DELETE FROM prestamo 
+    WHERE id_biblioteca IN (
+      SELECT id_biblioteca 
+      FROM biblioteca_usuario 
+      WHERE isbn = ? AND id_usuario = ?
+    )
+  `;
+  db.query(deleteLoansQuery, [isbn, id_usuario], callback);
+}
+
+// Función para eliminar el libro de la biblioteca del usuario
+function deleteBookFromLibrary(isbn, id_usuario, callback) {
+  const deleteBookQuery = `DELETE FROM biblioteca_usuario WHERE isbn = ? AND id_usuario = ?`;
+  db.query(deleteBookQuery, [isbn, id_usuario], callback);
+}
+// Ruta para eliminar el libro y todos los datos relacionados
+router.delete('/:isbn/:id_usuario', (req, res) => {
+  const { isbn, id_usuario } = req.params;
+  deleteBookAndRelatedData(isbn, id_usuario, res);
+});
+
+
+
+
+
 
 return router;
 }
