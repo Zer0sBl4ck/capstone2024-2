@@ -15,14 +15,14 @@
           Perfil cuenta   
         </ion-button>
 
-        <ion-button routerLink="/wishlist">
+        <ion-button routerLink="/favoritos">
           <ion-icon name="star-outline" slot="start"></ion-icon>
           Lista de deseos
         </ion-button>
 
         <ion-button routerLink="/addbook" *ngIf="userRole === 'admin'">
           <ion-icon name="add-outline" slot="start"></ion-icon>
-          Agregar libro
+          Agregar libro admin
         </ion-button>
 
         <ion-button (click)="goAddBookuser()" *ngIf="userRole === 'usuario'">

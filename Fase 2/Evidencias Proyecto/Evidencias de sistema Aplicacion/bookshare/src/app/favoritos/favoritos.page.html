@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="favoritos.length > 0; else noFavoritos">
+    <ion-card *ngFor="let libro of favoritos">
+      <ion-card-header>
+        <ion-card-title>{{ libro.titulo }}</ion-card-title>
+        <ion-card-subtitle>Autor: {{ libro.autor }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>ISBN: {{ libro.isbn }}</p>
+        <ion-button color="danger" (click)="eliminarFavorito(libro.isbn)">
+          <ion-icon name="trash-outline"></ion-icon>
+          Eliminar de Favoritos
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ng-template #noFavoritos>
+    <ion-text color="medium">
+      <p>No tienes libros en favoritos.</p>
+    </ion-text>
+  </ng-template>
+</ion-content>

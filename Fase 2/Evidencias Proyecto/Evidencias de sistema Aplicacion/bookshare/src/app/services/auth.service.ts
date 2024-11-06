@@ -230,5 +230,21 @@ export class AuthService {
     const body = { id_prestamo, fecha_devolucion };
     return this.http.put(url, body);
   }
+  agregarFavorito(correo: string, isbn: string): Observable<any> {
+    const url = `${this.apiUrl}/agregar-favorito`; 
+    const data = { correo, isbn };
+    return this.http.post(url, data);
+  }
+  getLibrosFavoritos(correo: string): Observable<any> {
+    const url = `${this.apiUrl}/favoritos/${correo}`;
+    return this.http.get(url);
+  }
+
+  // Método para eliminar un libro de favoritos
+  eliminarFavorito(correo: string, isbn: string): Observable<any> {
+    const url = `${this.apiUrl}/eliminar-favorito`;
+    const data = { correo, isbn };
+    return this.http.request('delete', url, { body: data });
+  }
   
 }

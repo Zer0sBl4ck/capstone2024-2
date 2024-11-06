@@ -49,7 +49,10 @@
             </p> -->
 
             <ion-button class="vista" expand="block" [routerLink]="['/vista-libro', libro.isbn]"> Detalle</ion-button>
-
+            <ion-button class="favoritos" expand="block" *ngIf="rol === 'usuario'"
+            (click)="agregarAFavoritos(libro); $event.stopPropagation()">
+            <ion-icon name="heart-outline"></ion-icon> Agregar a Favoritos
+          </ion-button>
 
 
             <ion-buttons>

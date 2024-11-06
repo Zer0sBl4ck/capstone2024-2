@@ -937,6 +937,83 @@ router.put('/prestamo/devolucion', (req, res) => {
   });
 });
 
+router.post('/agregar-favorito', async (req, res) => {
+  const { correo, isbn } = req.body; // Recibe los datos del cuerpo de la solicitud
+
+  if (!correo || !isbn) {
+    return res.status(400).json({ message: 'Correo e ISBN son requeridos' });
+  }
+
+  try {
+    // Verificar si ya existe el libro en favoritos
+    const checkQuery = `
+      SELECT * FROM favorito_libro 
+      WHERE correo = ? AND isbn = ?
+    `;
+    const [rows] = await db.execute(checkQuery, [correo, isbn]);
+
+    if (rows.length > 0) {
+      return res.status(409).json({ message: 'El libro ya está en favoritos' });
+    }
+
+    // Si no existe, agregar el libro a favoritos
+    const insertQuery = `
+      INSERT INTO favorito_libro (correo, isbn)
+      VALUES (?, ?)
+    `;
+    await db.execute(insertQuery, [correo, isbn]);
+
+    res.status(201).json({ message: 'Libro agregado a favoritos exitosamente' });
+  } catch (error) {
+    console.error('Error al agregar libro a favoritos:', error);
+    res.status(500).json({ message: 'Error al agregar libro a favoritos' });
+  }
+});
+
+router.get('/favoritos/:correo', async (req, res) => {
+  const { correo } = req.params;
+
+  try {
+    const query = `
+      SELECT libro.isbn, libro.titulo, libro.autor, libro.genero, libro.descripcion
+      FROM favorito_libro
+      JOIN libro ON favorito_libro.isbn = libro.isbn
+      WHERE favorito_libro.correo = ?
+    `;
+    const [rows] = await db.execute(query, [correo]);
+
+    res.status(200).json(rows); // Devuelve la lista de libros favoritos
+  } catch (error) {
+    console.error('Error al obtener libros favoritos:', error);
+    res.status(500).json({ message: 'Error al obtener libros favoritos' });
+  }
+});
+router.delete('/eliminar-favorito', async (req, res) => {
+  const { correo, isbn } = req.body;
+
+  if (!correo || !isbn) {
+    return res.status(400).json({ message: 'Correo e ISBN son requeridos' });
+  }
+
+  try {
+    const query = `
+      DELETE FROM favorito_libro
+      WHERE correo = ? AND isbn = ?
+    `;
+    const [result] = await db.execute(query, [correo, isbn]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'El libro no está en favoritos' });
+    }
+
+    res.status(200).json({ message: 'Libro eliminado de favoritos exitosamente' });
+  } catch (error) {
+    console.error('Error al eliminar libro de favoritos:', error);
+    res.status(500).json({ message: 'Error al eliminar libro de favoritos' });
+  }
+});
+
+
 
 
 

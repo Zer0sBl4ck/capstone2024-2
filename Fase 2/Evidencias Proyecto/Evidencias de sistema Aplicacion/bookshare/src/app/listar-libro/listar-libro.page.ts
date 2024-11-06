@@ -124,4 +124,23 @@ export class ListarLibroPage implements OnInit {
       );
     });
   }
+  async agregarAFavoritos(libro: Libro) {
+    const usuario = this.authService.getUserData(); // Obtener datos del usuario
+    console.log('Usuario:', usuario); // Verifica si el usuario está definido
+    if (usuario) {
+      this.authService.agregarFavorito(usuario.correo, libro.isbn).subscribe(
+        () => {
+          console.log('Libro agregado a favoritos');
+          this.mostrarAlerta('Éxito', 'El libro se ha agregado a tus favoritos.');
+        },
+        (error) => {
+          console.error('Error al agregar libro a favoritos:', error);
+          this.mostrarAlerta('Error', 'Este libro ya está en tus favoritos o hubo un problema al agregarlo.');
+        }
+      );
+    } else {
+      console.error('No se ha encontrado el usuario.');
+      this.mostrarAlerta('Error', 'No se ha encontrado el usuario.');
+    }
+  }
 }
