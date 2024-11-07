@@ -117,7 +117,8 @@ export class SolicitudUserPage implements OnInit {
       this.authService.actualizarFechaDevolucion(id_prestamo, fechaISO).subscribe(
         (response) => {
           console.log('Fecha de devolución actualizada:', response);
-          this.cargarSolicitudesRecibidas(); // Recargar la lista para reflejar el cambio
+          this.cargarSolicitudesRecibidas(); 
+     
         },
         (error) => {
           console.error('Error al actualizar la fecha de devolución:', error);
@@ -126,7 +127,7 @@ export class SolicitudUserPage implements OnInit {
     } else {
       alert('Fecha inválida. Por favor, ingrésala en el formato dd-mm-yyyy.');
     }
-    window.location.reload();
+
   }
 
   // Función para validar el formato de fecha dd-mm-yyyy

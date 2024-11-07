@@ -16,13 +16,14 @@
   </div>
 
   <!-- contenedor chat-->
-  <div *ngIf="chats.length > 0">
-    <ion-list>
-      <ion-item *ngFor="let chat of chats">
-        <ion-label>
-          <h2>ID Chat: {{ chat.id_chat }}</h2>
+  <div *ngIf="chats.length > 0" class="listado-chat">
+    <ion-list class="listado-chat">
+      <ion-item *ngFor="let chat of chats" class="listado-chat">
+        <ion-label class="listado-chat">
+          <h2>📚 {{chat.titulo}} ({{chat.tipo_chat}})</h2>
           <p>Ofertante: {{ chat.correo_usuario_prestamista }}</p>
           <p>Solicitante: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
+          
         </ion-label>
         <ion-button (click)="irAlChat(chat.id_chat)" >
           <ion-icon name="chatbubble-ellipses-outline"></ion-icon>

@@ -735,10 +735,14 @@ router.get('/listar-chats/:correo_usuario', async (req, res) => {
   // Consulta para obtener los chats de tipo 'prestamo' en los que el usuario está involucrado
   const listarChatsQuery = `
     SELECT c.id_chat, 
-           u1.correo AS correo_usuario_prestamista, 
-           u2.correo AS correo_usuario_solicitante
+           u1.nombre_usuario AS correo_usuario_prestamista, 
+           u2.nombre_usuario AS correo_usuario_solicitante,
+           l.titulo,
+           c.tipo_chat
     FROM chat c
     JOIN prestamo p ON c.id_estado = p.id_prestamo
+    JOIN biblioteca_usuario bu ON bu.id_biblioteca=p.id_biblioteca
+    JOIN libro l ON l.isbn = bu.isbn 
     LEFT JOIN usuario u1 ON p.id_usuario_prestamista = u1.id_usuario
     LEFT JOIN usuario u2 ON p.id_usuario_solicitante = u2.id_usuario
     WHERE (u1.correo = ? OR u2.correo = ?) 
