@@ -78,7 +78,11 @@ const routes: Routes = [
   {
     path: 'favoritos',
     loadChildren: () => import('./favoritos/favoritos.module').then( m => m.FavoritosPageModule)
+  },  {
+    path: 'resena-libro',
+    loadChildren: () => import('./resena-libro/resena-libro.module').then( m => m.ResenaLibroPageModule)
   }
+
 ];
 
 @NgModule({
