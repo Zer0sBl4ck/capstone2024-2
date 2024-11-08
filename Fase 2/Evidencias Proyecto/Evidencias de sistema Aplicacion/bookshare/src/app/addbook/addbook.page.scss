@@ -1,6 +1,6 @@
 .fondo {
     ion-toolbar {
-        --background: #229E88 !important;
+        --background: #e96a24 !important;
         color: #ffffff;
         display: flex;
         justify-content: center;
@@ -23,7 +23,7 @@
 }
 
 ion-content {
-    --background: #f0dfc0;
+    --background: #ebe7e7;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,7 +43,7 @@ ion-content {
         box-sizing: border-box;
 
         ion-label {
-            color: #229E88;
+            color: #e96a24;
             font-size: 25px;
             font-family: Helvetica;
         }
@@ -101,7 +101,7 @@ ion-content {
 
     ion-button {
         color: #ffffff;
-        --background: #229E88;
+        --background: #e96a24;
         border-radius: 15px;
         font-family: Helvetica;
         margin-top: 16px;
@@ -129,7 +129,7 @@ ion-content {
     }
 
     .ejemplo {
-        --background: #229E88;
+        --background: #e96a24;
         --color: #ffffff;
         font-size: 0.8rem;
         max-width: 45%;

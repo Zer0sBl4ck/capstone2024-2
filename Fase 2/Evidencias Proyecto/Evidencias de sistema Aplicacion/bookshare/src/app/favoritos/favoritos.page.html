@@ -1,6 +1,11 @@
-<ion-header>
+<ion-header class="fondo">
   <ion-toolbar>
-    <ion-title>Favoritos</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/tabs/home">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="titulo">Whislist</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +19,7 @@
 
       <ion-card-content>
         <p>ISBN: {{ libro.isbn }}</p>
-        <ion-button color="danger" (click)="eliminarFavorito(libro.isbn)">
+        <ion-button (click)="eliminarFavorito(libro.isbn)">
           <ion-icon name="trash-outline"></ion-icon>
           Eliminar de Favoritos
         </ion-button>
