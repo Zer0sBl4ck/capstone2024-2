@@ -77,17 +77,20 @@
     <ion-content style="--background: #ebe7e7;">
       <ion-card-header>
         <div class="foto-container" *ngIf="userProfile">
-          <img *ngIf="userProfile.foto_perfil_base64" 
-               [src]="'data:image/jpeg;base64,' + userProfile.foto_perfil_base64"
-               alt="Foto de perfil" class="profile-image" />
-
+          <a [routerLink]="'/perfil'">  <!-- Redirige al perfil al hacer clic en la imagen -->
+            <img *ngIf="userProfile.foto_perfil_base64" 
+                 [src]="'data:image/jpeg;base64,' + userProfile.foto_perfil_base64"
+                 alt="Foto de perfil" class="profile-image" (click)="goToProfile()"/>
+          </a>
+      
           <div class="welcome-message-container">
             <ion-title *ngIf="isLoggedIn" class="welcome-message">
-              ¡Hola!, {{ userName }} :)
+              
             </ion-title>
           </div>
         </div>
       </ion-card-header>
+      
 
       <div id="container">
        

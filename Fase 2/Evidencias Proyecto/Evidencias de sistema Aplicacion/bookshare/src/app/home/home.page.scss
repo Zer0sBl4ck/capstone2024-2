@@ -113,14 +113,18 @@ ion-app {
   }
 
   .ion-page#main-content ion-title {
-    font-size: 25px;
+    font-size: 27px;
     color: #000000;
-    font-family: 'Rethink Sans', sans-serif; 
-    font-weight: 500;
-    
+    font-family: 'Rethink Sans', sans-serif;
+    font-weight: initial;
     text-align: left;
     margin-bottom: 0px;
-    padding-top: 10px; /* En lugar de margin-top */
+    padding-top: 10px;  /* En lugar de margin-top */
+    padding-right: 120px; /* Añadir espacio a la derecha para la imagen */
+    display: inline-block; /* Evita que el texto se expanda por todo el ancho */
+    white-space: nowrap; /* Evita que el texto se rompa y que el contenido se desplace */
+    overflow: hidden;  /* Oculta cualquier desbordamiento del texto */
+    text-overflow: ellipsis; /* Muestra '...' si el texto es demasiado largo */
   }
   /* Estilo para el mensaje de bienvenida */
 .ion-page#main-content .foto-container .welcome-message-container {
@@ -173,22 +177,36 @@ ion-app {
 
   }
   
-  .ion-page#main-content .foto-container {
-    display: flex;  /* Flexbox para alinear los elementos en fila */
-    align-items: center;  /* Centra verticalmente los elementos */
-    gap: 10px;  /* Espacio entre la imagen y el mensaje */
-    flex-direction: row-reverse;  /* Cambia el orden de los elementos (foto a la derecha) */
-  }
+  /* Contenedor para la imagen y el texto */
+.ion-page#main-content .foto-container {
+  position: relative;  /* Para que los elementos posicionados de forma absoluta dentro de este contenedor se ubiquen de acuerdo al contenedor */
+  display: flex;  /* Flexbox para alinear los elementos en fila */
+  align-items: center;  /* Centra verticalmente los elementos */
+  gap: 10px;  /* Espacio entre la imagen y el mensaje */
+  flex-direction: row-reverse;  /* Cambia el orden de los elementos (foto a la derecha) */
+  width: 100%;  /* Asegura que el contenedor ocupe el ancho completo */
+  padding-top: 0px;
+  padding-bottom: 7px ;
+}
+
+/* Estilo para la imagen de perfil */
+.ion-page#main-content .foto-container .profile-image {
+  position: absolute;  /* Posiciona la imagen de forma absoluta dentro de su contenedor */
+  right: 0;  /* Ancla la imagen a la derecha */
+  width: 75px;  /* Tamaño de la imagen */
+  height: 75px;  /* Tamaño de la imagen */
+  border-radius: 50%;  /* Circular */
+  object-fit: fill;  /* Asegura que la imagen se recorte correctamente */
+  box-shadow: 0px 4px 11px rgba(3, 23, 20, 6.2);  /* Sombra sutil */
   
-  /* Estilo para la imagen de perfil */
-  .ion-page#main-content .foto-container .profile-image {
-    width: 70px;  /* Tamaño de la imagen */
-    height: 70px;  /* Tamaño de la imagen */
-    border-radius: 50%;  /* Circular */
-    object-fit: fill;  /* Asegura que la imagen se recorte correctamente */
-    box-shadow: 0px 4px 11px rgba(3, 23, 20, 6.2);  /* Sombra sutil */
-  }
+}
+
+/* Opcional: Ajusta el texto o cualquier otro elemento que se encuentre dentro del contenedor */
+.ion-page#main-content .foto-container .texto {
+  flex-grow: 1;  /* Esto hace que el texto ocupe el espacio restante */
   
+}
+
   /* Estilo específico para la imagen de perfil */
   .foto-container .profile-image {
     width: 50px;
