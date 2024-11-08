@@ -104,7 +104,7 @@ ion-app {
   }
 
   .ion-page#main-content #container {
-    background-color: #f0dfc0;
+    background-color: #ffffff;
   }
 
   .ion-page#main-content #container img {
@@ -122,7 +122,13 @@ ion-app {
     margin-bottom: 0px;
     padding-top: 10px; /* En lugar de margin-top */
   }
-  
+  /* Estilo para el mensaje de bienvenida */
+.ion-page#main-content .foto-container .welcome-message-container {
+  font-size: 18px;  /* Tamaño de la fuente */
+  font-family: "Rethink Sans", sans-serif;
+  color: #1b6531;
+  font-weight: bold;
+}
   .ion-page#main-content .sigue-aportando {
     
     bottom: 20px; /* Distancia desde el fondo */
@@ -167,6 +173,30 @@ ion-app {
 
   }
   
+  .ion-page#main-content .foto-container {
+    display: flex;  /* Flexbox para alinear los elementos en fila */
+    align-items: center;  /* Centra verticalmente los elementos */
+    gap: 10px;  /* Espacio entre la imagen y el mensaje */
+    flex-direction: row-reverse;  /* Cambia el orden de los elementos (foto a la derecha) */
+  }
+  
+  /* Estilo para la imagen de perfil */
+  .ion-page#main-content .foto-container .profile-image {
+    width: 70px;  /* Tamaño de la imagen */
+    height: 70px;  /* Tamaño de la imagen */
+    border-radius: 50%;  /* Circular */
+    object-fit: fill;  /* Asegura que la imagen se recorte correctamente */
+    box-shadow: 0px 4px 11px rgba(3, 23, 20, 6.2);  /* Sombra sutil */
+  }
+  
+  /* Estilo específico para la imagen de perfil */
+  .foto-container .profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
   swiper-slide {
   display: flex;
   flex-direction: column;
@@ -194,13 +224,20 @@ ion-app {
 
  
 .ion-page#main-content .banner-image {
-  box-shadow: 1px 3px 1px rgba(0, 0, 0, 0.2); // Sombra detrás de la imagen
-  padding-top: 10px;
+  box-shadow: 0px 0px 21px rgba(0, 0, 0, 0.5); // Sombra detrás de la imagen
+  padding-top: 0px;
   max-width: 100%; 
   width: 100%; // Full width
   height: auto; // Maintain aspect ratio
   border-radius: 7px; // Rounded corners
   display: block; // Centering effect
+}
+.ion-page#main-content .foto-container img {
+  max-width: 60%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 7px;
+  display: block;
 }
 
 .ion-page#main-content img {

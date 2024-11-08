@@ -82,7 +82,16 @@ export class AuthService {
 
     return this.http.post(`${this.apiUrl}/libros`, libroData);
   }
-
+  getPrestamoPorId(id_prestamo: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/prestamo/${id_prestamo}`);
+  }
+  agregarResena(id_usuario: number, isbn: string, calificacion: number, comentario: string): Observable<any> {
+    const resena = { id_usuario, isbn, calificacion, comentario };
+    return this.http.post(`${this.apiUrl}/resenas`, resena);
+  }
+  getLibroPorIsbn(isbn: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/libro/${isbn}`);
+  }
   getLibros(): Observable<any> {
     return this.http.get(`${this.apiUrl}/libros`);
   }

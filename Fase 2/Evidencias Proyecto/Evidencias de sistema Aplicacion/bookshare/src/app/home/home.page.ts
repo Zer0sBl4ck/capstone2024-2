@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { IonicSlides } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { VistaLibroPage } from '../vista-libro/vista-libro.page'; // Importa el componente
@@ -29,8 +29,12 @@ export class HomePage {
   stars: number[] = Array(5).fill(0);
   swiperModules = [IonicSlides];
   books: Book[] = []; 
+  userProfile: any = null;
+  correo: string = '';
+  correoLogueado: string | null = '';  
+  profileImage: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router, private popoverController: PopoverController) {}
+  constructor(private authService: AuthService, private router: Router, private popoverController: PopoverController, private route: ActivatedRoute,) {}
 
   ionViewWillEnter() {
     this.checkAuthentication();
@@ -48,7 +52,24 @@ export class HomePage {
     } 
   }
   ngOnInit() {
+    const correo = this.authService.getUserEmail();  // Obtener el correo del usuario logueado
+    if (correo) {
+      this.authService.getUserProfile(correo).subscribe(
+        (data) => {
+          this.userProfile = data;  // Asignar la respuesta a userProfile
+          if (this.userProfile && this.userProfile.foto_perfil_base64) {
+            this.profileImage = 'data:image/jpeg;base64,' + this.userProfile.foto_perfil_base64;  // Asignar la imagen
+          }
+        },
+        (error) => {
+          console.error('Error al obtener los datos del perfil:', error);
+        }
+      );
+    }
+  
+
     this.getLibros(); // Cargar libros al inicializar la página
+    
   }
 
   getLibros() {
