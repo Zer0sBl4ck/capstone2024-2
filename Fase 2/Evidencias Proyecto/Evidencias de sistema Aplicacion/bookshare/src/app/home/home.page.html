@@ -1,15 +1,12 @@
 <ion-app>
-  
   <!-- Side Menu -->
-
-   <ion-menu contentId="main-content" *ngIf="isLoggedIn">
+  <ion-menu contentId="main-content" *ngIf="isLoggedIn">
     <ion-header>
       <ion-toolbar>
       </ion-toolbar>
     </ion-header>
     <ion-content class="menu">
       <ion-list>
-        
         <ion-button (click)="goToProfile()">
           <ion-icon name="person-outline" slot="start"></ion-icon>
           Perfil cuenta   
@@ -29,11 +26,10 @@
           <ion-icon name="add-outline" slot="start"></ion-icon>
           Agregar libro
         </ion-button>
-        
 
         <ion-button (click)="gochat()" *ngIf="userRole === 'usuario'">
           <ion-icon name="add-outline" slot="start"></ion-icon>
-            Chat
+          Chat
         </ion-button>
         <ion-button (click)="goBookOwner()" *ngIf="userRole === 'usuario'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
@@ -42,19 +38,19 @@
 
         <ion-button (click)="gosoliuser()" *ngIf="userRole === 'usuario'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
-         Prestamos
+          Prestamos
         </ion-button>
 
         <ion-button routerLink="/listar-libro">
           <ion-icon name="bookmark-outline" slot="start"></ion-icon>
           Lista de libros
         </ion-button>
-        
+
         <ion-button (click)="solicitudesadd()" *ngIf="userRole === 'admin'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
           SOLICITUDES LIBROS
         </ion-button>
-        
+
         <ion-button class="cerrar" (click)="logout()">
           <ion-icon name="log-out-outline" slot="start"></ion-icon>
           Cerrar Sesión
@@ -78,23 +74,30 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content style="--background: #f0dfc0;"
-    > 
+    <ion-content style="--background: #f0dfc0;">
+      <ion-card-header>
+        <div class="foto-container" *ngIf="userProfile">
+          <img *ngIf="userProfile.foto_perfil_base64" 
+               [src]="'data:image/jpeg;base64,' + userProfile.foto_perfil_base64"
+               alt="Foto de perfil" class="profile-image" />
+
+          <div class="welcome-message-container">
+            <ion-title *ngIf="isLoggedIn" class="welcome-message">
+              ¡Hola!, {{ userName }} :)
+            </ion-title>
+          </div>
+        </div>
+      </ion-card-header>
+
       <div id="container">
-        <ion-title *ngIf="isLoggedIn" class="welcome-message">
-          ¡Hola!, {{ userName }} :)
-        </ion-title>
+       
         
         <ion-title *ngIf="isLoggedIn" class="sigue-aportando">Lee, comparte, conecta.</ion-title>
 
-        
         <div class="book-cover">
           <img class="banner-image" src="assets/imagenes/banner-02.jpg" alt="">
         </div>
-        <ion-title  class="recomendaciones">Recomendaciones</ion-title>
-       <!--  <ion-button routerLink="/listar-libro" class="list-button">
-          Ver Más
-        </ion-button>-->
+        <ion-title class="recomendaciones">Recomendaciones</ion-title>
 
         <swiper-container [modules]="swiperModules" [slidesPerView]="3" [loop]="true" navigation pagination>
           <swiper-slide *ngFor="let book of books; let i = index" (click)="goToBookDetail(book.isbn)">
@@ -102,26 +105,16 @@
             <p>{{ book.titulo }}</p>
             <p>{{ book.autor }}</p>
             <div class="rating">
-              <span
-                *ngFor="let star of stars; let starIndex = index"
-                class="star"
-                (click)="rateBook(i, starIndex + 1)"
-                [innerHTML]="starIndex < book.selectedRating ? '&#9733;' : '&#9734;'"
-              ></span>
+              <span *ngFor="let star of stars; let starIndex = index"
+                    class="star"
+                    (click)="rateBook(i, starIndex + 1)"
+                    [innerHTML]="starIndex < book.selectedRating ? '&#9733;' : '&#9734;'"></span>
             </div>
           </swiper-slide>
         </swiper-container>
-        
-        
-        
 
-
-
-       
         <br>
       </div>
     </ion-content>
   </div>
-  
 </ion-app>
-
