@@ -1,15 +1,19 @@
 .fondo {
     ion-toolbar {
-        --background: #229E88 !important;
+        --background: #e96a24 !important;
         color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-        ion-title {
+        .titulo {
             font-weight: bold;
             color: #ffffff;
+            font-family: Helvetica;
+            font-size: 1.5rem;
             text-align: center;
-            font-family: "Rethink Sans", sans-serif;
-            left: 50%;
-            transform: translateX(-8%);
+            width: 100%;
+            max-width: 95%;
         }
 
         ion-icon {
@@ -20,14 +24,14 @@
 
 ion-content {
 
-    --background: #f0dfc0;
+    --background: #ebe7e7;
     display: flex;
     justify-content: center;
     align-items: center;
 
 
     ion-searchbar {
-        --background: #229E88;
+        --background: #e96a24;
         --border-radius: 15px;
         --placeholder-color: #ffffff;
         --color: #ffffff;
@@ -39,16 +43,152 @@ ion-content {
         display: block;
     }
 
-    ion-grid {
+    .admin-grid {
 
-        ion-col {
+        display: block;
+        justify-content: center;
+        align-items: center;
+        margin-left: 15rem;
+
+        ion-row {
+
+            ion-col {
+
+                ion-card {
+                    --background: #ffffff;
+                    width: 100%;
+                    max-width: 70%;
+                    height: auto;
+                    border-radius: 1rem;
+
+                    ion-card-header {
+
+                        .libro {
+                            margin-bottom: 16px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            .imagen {
+                                object-fit: cover;
+                                border-radius: 1rem;
+                            }
+                        }
+                    }
+
+                    ion-card-content {
+
+                        .titulo {
+                            color: #000000;
+                            font-size: 1rem;
+                            font-family: "Rethink Sans", sans-serif;
+                            font-weight: bold;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        .autor {
+                            color: #000000;
+                            font-size: 0.8rem;
+                            font-family: "Rethink Sans", sans-serif;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        p {
+                            color: #000000;
+                            font-size: 0.8rem;
+                            font-family: "Rethink Sans", sans-serif;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        .vista {
+                            color: #ffffff;
+                            --background: #229E88;
+                            border-radius: 1rem;
+                            font-family: "Rethink Sans", sans-serif;
+                            margin-top: 1rem;
+                            width: 100%;
+                            max-width: 40%;
+                            font-size: 12px;
+                            font-weight: bold;
+                            display: block;
+                            justify-content: center;
+                            align-items: center;
+                            margin-left: 30%;
+                        }
+
+                        ion-buttons {
+
+                            .modificar {
+                                color: #ffffff;
+                                --background: #229E88;
+                                border-radius: 15px;
+                                font-family: "Rethink Sans", sans-serif;
+                                margin-top: 16px;
+                                width: 100%;
+                                max-width: 25%;
+                                font-size: 16px;
+                                font-weight: bold;
+                                margin-left: 22%;
+
+                                ion-icon {
+                                    font-size: 1.5rem;
+                                    color: #ffffff;
+                                }
+                            }
+
+                            .ver {
+                                color: #ffffff;
+                                --background: #229E88;
+                                border-radius: 15px;
+                                font-family: "Rethink Sans", sans-serif;
+                                margin-top: 16px;
+                                width: 100%;
+                                max-width: 25%;
+                                font-size: 16px;
+                                font-weight: bold;
+                                display: block;
+                                justify-content: center;
+                                align-items: center;
+                                margin-left: 5%;
+
+                                ion-icon {
+                                    font-size: 1.5rem;
+                                    color: #ffffff;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .usuario-list {
+
+        background: transparent;
+
+        ion-item {
+            --background: transparent;
+            --ion-item-border-color: transparent;
+            display: flex;
+            flex-direction: column;
 
             ion-card {
                 --background: #ffffff;
                 width: 100%;
-                max-width: 70%;
+                max-width: 90%;
                 height: auto;
-                border-radius: 5%;
+                border-radius: 1rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-color: #e0dcdc;
 
                 ion-card-header {
 
@@ -60,7 +200,7 @@ ion-content {
 
                         .imagen {
                             object-fit: cover;
-
+                            border-radius: 1rem;
                         }
                     }
                 }
@@ -69,7 +209,7 @@ ion-content {
 
                     .titulo {
                         color: #000000;
-                        font-size: 10px;
+                        font-size: 1rem;
                         font-family: "Rethink Sans", sans-serif;
                         font-weight: bold;
                         display: flex;
@@ -79,7 +219,7 @@ ion-content {
 
                     .autor {
                         color: #000000;
-                        font-size: 10px;
+                        font-size: 0.8rem;
                         font-family: "Rethink Sans", sans-serif;
                         display: flex;
                         justify-content: center;
@@ -88,7 +228,7 @@ ion-content {
 
                     p {
                         color: #000000;
-                        font-size: 10px;
+                        font-size: 0.8rem;
                         font-family: "Rethink Sans", sans-serif;
                         display: flex;
                         justify-content: center;
@@ -97,7 +237,7 @@ ion-content {
 
                     .vista {
                         color: #ffffff;
-                        --background: #229E88;
+                        --background: #e96a24;
                         border-radius: 15px;
                         font-family: "Rethink Sans", sans-serif;
                         margin-top: 16px;
@@ -108,75 +248,96 @@ ion-content {
                         display: block;
                         justify-content: center;
                         align-items: center;
-                        margin-left: 25%;
-                    }
-
-                    ion-buttons {
-
-                        .agregar {
-                            color: #ffffff;
-                            --background: #229E88;
-                            border-radius: 15px;
-                            font-family: "Rethink Sans", sans-serif;
-                            margin-top: 16px;
-                            width: 100%;
-                            max-width: 25%;
-                            font-size: 16px;
-                            font-weight: bold;
-                            display: block;
-                            justify-content: center;
-                            align-items: center;
-                            margin-left: 25%;
-
-
-
-                            ion-icon {
-                                font-size: 20px;
-                                color: #ffffff;
-                            }
-                        }
-
-                        .modificar {
-                            color: #ffffff;
-                            --background: #229E88;
-                            border-radius: 15px;
-                            font-family: "Rethink Sans", sans-serif;
-                            margin-top: 16px;
-                            width: 100%;
-                            max-width: 25%;
-                            font-size: 16px;
-                            font-weight: bold;
-                            margin-left: 22%;
-
-                            ion-icon {
-                                font-size: 20px;
-                                color: #ffffff;
-                            }
-                        }
-
-                        .ver {
-                            color: #ffffff;
-                            --background: #229E88;
-                            border-radius: 15px;
-                            font-family: "Rethink Sans", sans-serif;
-                            margin-top: 16px;
-                            width: 100%;
-                            max-width: 25%;
-                            font-size: 16px;
-                            font-weight: bold;
-                            display: block;
-                            justify-content: center;
-                            align-items: center;
-                            margin-left: 5%;
-
-                            ion-icon {
-                                font-size: 20px;
-                                color: #ffffff;
-                            }
-                        }
+                        margin-left: 30%;
                     }
                 }
+
+                ion-buttons {
+                    --border-radius: 20px;
+                    display: center;
+                    justify-content: center;
+                    align-items: center;
+
+
+                    .agregar {
+                        color: #9a9797;
+                        --background: #e96a24;
+                        border-radius: 15px;
+                        font-family: "Rethink Sans", sans-serif;
+                        margin-top: 16px;
+                        width: 100%;
+                        max-width: 20%;
+                        font-size: 16px;
+                        font-weight: bold;
+                        display: block;
+                        justify-content: center;
+                        align-items: center;
+
+
+                        ion-icon {
+                            font-size: 1.5rem;
+                            color: #ffffff;
+                        }
+                    }
+
+                    .favoritos {
+                        color: #9a9797;
+                        --background: #e96a24;
+                        border-radius: 15px;
+                        font-family: "Rethink Sans", sans-serif;
+                        margin-top: 16px;
+                        width: 100%;
+                        max-width: 20%;
+                        font-size: 16px;
+                        font-weight: bold;
+                        display: block;
+                        justify-content: center;
+                        align-items: center;
+                        margin-left: 1rem;
+
+                        ion-icon {
+                            font-size: 1.5em;
+                            color: #ffffff;
+                        }
+
+                    }
+
+                    .ver {
+                        color: #9a9797;
+                        --background: #e96a24;
+                        border-radius: 15px;
+                        font-family: "Rethink Sans", sans-serif;
+                        margin-top: 16px;
+                        width: 100%;
+                        max-width: 20%;
+                        font-size: 16px;
+                        font-weight: bold;
+                        display: block;
+                        justify-content: center;
+                        align-items: center;
+                        margin-left: 1rem;
+
+
+                        ion-icon {
+                            font-size: 1.5rem;
+                            color: #ffffff;
+                        }
+                    }
+
+
+
+
+                }
+
+
+
             }
         }
+
+
+
     }
+
+
+
 }
