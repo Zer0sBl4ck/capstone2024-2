@@ -1,0 +1,48 @@
+<ion-header class="fondo">
+  <ion-toolbar>
+    <ion-title>Mis Intercambios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="intercambiosComoSolicitante.length > 0; else noSolicitante">
+    <ion-list-header>
+      <ion-label>Intercambios como Solicitante</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let intercambio of intercambiosComoSolicitante">
+      <ion-label>
+        <h2>Libro solicitud: {{ intercambio.libro_titulo }}</h2>
+        <p>Intercambio usuario: {{ intercambio.ofertante }}</p>
+        <p>Estado: {{ intercambio.estado }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noSolicitante>
+    <ion-item>
+      <ion-label>No tienes intercambios como solicitante.</ion-label>
+    </ion-item>
+  </ng-template>
+
+  <ion-list *ngIf="intercambiosComoPrestamista.length > 0; else noPrestamista">
+    <ion-list-header>
+      <ion-label>Intercambios como Prestamista</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let intercambio of intercambiosComoPrestamista">
+      <ion-label>
+        <h2>Libro prestado: {{ intercambio.libro_titulo }}</h2>
+        <p>Intercambio usuario: {{ intercambio.ofertante }}</p>
+        <p>Estado: {{ intercambio.estado }}</p>
+        <ion-button (click)="irAIntercambioUsuario(intercambio.id_solicitante)">
+          Ver intercambios de solicitante
+        </ion-button>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noPrestamista>
+    <ion-item>
+      <ion-label>No tienes intercambios como prestamista.</ion-label>
+    </ion-item>
+  </ng-template>
+</ion-content>

@@ -255,5 +255,37 @@ export class AuthService {
     const data = { correo, isbn };
     return this.http.request('delete', url, { body: data });
   }
+  insertarIntercambio(id_usuario_ofertante: number, id_usuario_solicitante: number, id_biblioteca_prestamista: number): Observable<any> {
+    const url = `${this.apiUrl}/insertar-intercambio`;
+    const data = { 
+      id_usuario_ofertante, 
+      id_usuario_solicitante, 
+      id_biblioteca_prestamista, 
+      id_biblioteca_solicitante: null, 
+      estado: 'Pendiente'              
+    };
+    return this.http.post(url, data);
+  }
+  obtenerIdBiblioteca(isbn: string, id_usuario: number): Observable<any> {
+    const url = `${this.apiUrl}/obtener-id-biblioteca/${isbn}/${id_usuario}`;
+    return this.http.get(url);
+  }
+
+  obtenerIntercambiosSolicitante(id_usuario: number): Observable<any> {
+    const url = `${this.apiUrl}/intercambios-solicitante/${id_usuario}`;
+    return this.http.get(url);
+  }
+  
+  obtenerIntercambiosPrestamista(id_usuario: number): Observable<any> {
+    const url = `${this.apiUrl}/intercambios-prestamista/${id_usuario}`;
+    return this.http.get(url);
+  }
+  obtenerLibrosDisponiblesIntercambio(idUsuario: number): Observable<any> {
+    console.log(idUsuario)
+    const url = `${this.apiUrl}/libros-disponibles-intercambio/${idUsuario}`;
+    return this.http.get(url);
+  }
+  
+  
   
 }

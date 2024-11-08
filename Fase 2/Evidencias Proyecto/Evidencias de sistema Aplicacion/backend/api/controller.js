@@ -1062,6 +1062,152 @@ router.delete('/eliminar-favorito', async (req, res) => {
   }
 });
 
+router.post('/insertar-intercambio', async (req, res) => {
+  const { id_usuario_ofertante, id_usuario_solicitante, id_biblioteca_prestamista, id_biblioteca_solicitante, estado } = req.body;
+  
+  // Validar que todos los campos necesarios estén presentes
+  if (!id_usuario_ofertante || !id_usuario_solicitante || !estado) {
+    return res.status(400).json({ message: 'Todos los campos son requeridos' });
+  }
+
+  try {
+    const query = `
+      INSERT INTO intercambio (id_usuario_ofertante, id_usuario_solicitante, id_biblioteca_prestamista, id_biblioteca_solicitante, estado)
+      VALUES (?, ?, ?, ?, ?)
+    `;
+    
+    // Ejecutar la consulta para insertar el intercambio
+    await db.execute(query, [id_usuario_ofertante, id_usuario_solicitante, id_biblioteca_prestamista, id_biblioteca_solicitante, estado]);
+
+    res.status(201).json({ message: 'Intercambio insertado exitosamente' });
+  } catch (error) {
+    console.error('Error al insertar el intercambio:', error);
+    res.status(500).json({ message: 'Error al insertar el intercambio' });
+  }
+});
+router.get('/obtener-id-biblioteca/:isbn/:id_usuario', async (req, res) => {
+  const { isbn, id_usuario } = req.params;
+
+  try {
+    const query = `
+      SELECT id_biblioteca 
+      FROM biblioteca_usuario 
+      WHERE isbn = ? AND id_usuario = ?`;
+    
+    const [rows] = await db.execute(query, [isbn, id_usuario]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'No se encontró la biblioteca para este libro y usuario' });
+    }
+
+    res.status(200).json({ id_biblioteca: rows[0].id_biblioteca });
+  } catch (error) {
+    console.error('Error al obtener la id_biblioteca:', error);
+    res.status(500).json({ message: 'Error al obtener la id_biblioteca' });
+  }
+});
+
+router.get('/intercambios-solicitante/:id_usuario', async (req, res) => {
+  const { id_usuario } = req.params;
+
+  try {
+    const query = `
+  SELECT
+      i.id_intercambio,
+      i.id_usuario_ofertante AS id_ofertante,
+      i.id_usuario_solicitante AS id_solicitante,
+      i.id_biblioteca_prestamista,
+      i.id_biblioteca_solicitante,
+      i.estado,
+      us.nombre_usuario AS solicitante,
+      u.nombre_usuario AS ofertante,
+      l.titulo AS libro_titulo
+ FROM intercambio i
+ JOIN usuario u ON u.id_usuario = i.id_usuario_ofertante
+ JOIN usuario us ON us.id_usuario = i.id_usuario_solicitante
+ JOIN biblioteca_usuario bup ON bup.id_biblioteca = i.id_biblioteca_prestamista
+ JOIN libro l ON l.isbn = bup.isbn
+    WHERE i.id_usuario_solicitante = ?`;
+      
+    const [rows] = await db.execute(query, [id_usuario]);
+
+    res.status(200).json(rows);
+  } catch (error) {
+    console.error('Error al obtener intercambios como solicitante:', error);
+    res.status(500).json({ message: 'Error al obtener intercambios' });
+  }
+});
+
+
+router.get('/intercambios-prestamista/:id_usuario', async (req, res) => {
+  const { id_usuario } = req.params;
+
+  try {
+    const query = `
+ SELECT
+      i.id_intercambio,
+      i.id_usuario_ofertante AS id_ofertante,
+      i.id_usuario_solicitante AS id_solicitante,
+      i.id_biblioteca_prestamista,
+      i.id_biblioteca_solicitante,
+      i.estado,
+      us.nombre_usuario AS solicitante,
+      u.nombre_usuario AS ofertante,
+      l.titulo AS libro_titulo
+ FROM intercambio i
+ JOIN usuario u ON u.id_usuario = i.id_usuario_ofertante
+ JOIN usuario us ON us.id_usuario = i.id_usuario_solicitante
+ JOIN biblioteca_usuario bup ON bup.id_biblioteca = i.id_biblioteca_prestamista
+ JOIN libro l ON l.isbn = bup.isbn
+      WHERE i.id_usuario_ofertante = ?`;
+    const [rows] = await db.execute(query, [id_usuario]);
+
+    res.status(200).json(rows);
+  } catch (error) {
+    console.error('Error al obtener intercambios como prestamista:', error);
+    res.status(500).json({ message: 'Error al obtener intercambios' });
+  }
+});
+
+router.get('/libros-disponibles-intercambio/:idUsuario', async (req, res) => {
+  const { idUsuario } = req.params;
+
+  try {
+    const query = `
+      SELECT 
+          bu.id_biblioteca,
+          bu.id_usuario,
+          bu.isbn,
+          l.titulo,
+          l.autor,
+          l.descripcion,
+          l.genero,
+          l.creado_en AS fecha_creacion_libro,
+          bu.creado_en AS fecha_creacion_biblioteca,
+          l.imagen_libro
+      FROM 
+          biblioteca_usuario bu
+      JOIN 
+          libro l ON bu.isbn = l.isbn
+      WHERE 
+          bu.id_usuario = ? 
+          AND bu.disponible_intercambio = 1;
+    `;
+
+    const [rows] = await db.execute(query, [idUsuario]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'No se encontraron libros disponibles para intercambio.' });
+    }
+
+    res.status(200).json(rows);
+  } catch (error) {
+    console.error('Error al obtener los libros disponibles para intercambio:', error);
+    res.status(500).json({ message: 'Error al obtener los libros disponibles para intercambio.' });
+  }
+});
+
+
 
 
 

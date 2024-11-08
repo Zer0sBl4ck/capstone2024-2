@@ -78,9 +78,18 @@ const routes: Routes = [
   {
     path: 'favoritos',
     loadChildren: () => import('./favoritos/favoritos.module').then( m => m.FavoritosPageModule)
-  },  {
+  },
+  {
     path: 'resena-libro',
     loadChildren: () => import('./resena-libro/resena-libro.module').then( m => m.ResenaLibroPageModule)
+  },
+  {
+    path: 'listar-intercambio',
+    loadChildren: () => import('./listar-intercambio/listar-intercambio.module').then( m => m.ListarIntercambioPageModule)
+  },
+  {
+    path: 'listar-intercambio-usuario/:id_usuario',
+    loadChildren: () => import('./listar-intercambio-usuario/listar-intercambio-usuario.module').then(m => m.ListarIntercambioUsuarioPageModule)
   }
 
 ];

@@ -77,5 +77,48 @@ export class PersonasOwnerbookPage implements OnInit {
     }
     
   }
-
+  notificacion_intercambio(correo: string): void {
+    const titulo = 'Solicitud de Intercambio de Libro';
+    const fechaActual = new Date().toLocaleString(); // Formateamos la fecha actual
+    const descripcion = `Se ha solicitado un intercambio de libros el ${fechaActual}.`;
+    this.authService.crearNotificacionPrestamo(correo, titulo, descripcion).subscribe(
+      (notificacionResponse) => {
+        console.log('Notificación creada con éxito:', notificacionResponse);
+      },
+      (notificacionError) => {
+        console.error('Error al crear la notificación:', notificacionError);
+      }
+    );
+  }
+  solicitarIntercambio(isbn: string, id_usuario_prestamista: number): void {
+    const id_usuario_solicitante = this.authService.getUserData()?.id_usuario; // Obtener ID del usuario logueado
+    console.log(id_usuario_solicitante) // bien
+    console.log(isbn, " ", id_usuario_prestamista) // bien
+    if (id_usuario_solicitante) {
+      // Primero, obtener la id_biblioteca_prestamista a partir del ISBN
+      this.authService.obtenerIdBiblioteca(isbn,id_usuario_prestamista).subscribe(
+        (response) => {
+          const id_biblioteca_prestamista = response.id_biblioteca; // Obtener la ID de la biblioteca
+          console.log("id_biblioteca: ",id_biblioteca_prestamista) // bien
+          // Ahora que tenemos todos los datos necesarios, podemos insertar el intercambio
+          this.authService.insertarIntercambio(id_usuario_prestamista, id_usuario_solicitante, id_biblioteca_prestamista)
+            .subscribe(
+              (response) => {
+                console.log('Intercambio insertado exitosamente:', response);
+                // Aquí puedes agregar una notificación o mensaje de confirmación
+              },
+              (error) => {
+                console.error('Error al insertar el intercambio:', error);
+              }
+            );
+        },
+        (error) => {
+          console.error('Error al obtener la id_biblioteca_prestamista:', error);
+        }
+      );
+    } else {
+      console.error('Error: No se pudo obtener el ID del usuario logueado');
+    }
+  }
+  
 }

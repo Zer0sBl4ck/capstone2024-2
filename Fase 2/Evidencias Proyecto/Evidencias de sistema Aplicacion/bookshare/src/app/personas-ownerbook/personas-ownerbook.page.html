@@ -40,6 +40,13 @@
         slot="end">
         Solicitar Préstamo
       </ion-button>
+      <ion-button 
+      *ngIf="persona.disponible_intercambio === 1" 
+      (click)="solicitarIntercambio(isbn, persona.id_usuario)"
+      slot="end">
+      Solicitar Intercambio
+    </ion-button>
+    
 
     </ion-item>
   </ion-list>
