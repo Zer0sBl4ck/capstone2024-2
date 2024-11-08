@@ -1,0 +1,100 @@
+.fondo {
+    ion-toolbar {
+        --background: #e96a24 !important;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .titulo {
+            font-weight: bold;
+            color: #ffffff;
+            font-family: Helvetica;
+            font-size: 1.5rem;
+            text-align: center;
+            width: 100%;
+            max-width: 95%;
+        }
+
+        ion-icon {
+            color: #ffffff;
+        }
+    }
+}
+
+ion-content {
+
+    --background: #ebe7e7;
+
+
+    ion-list {
+        background: transparent;
+
+        ion-card {
+            --background: #ffffff;
+            width: 100%;
+            max-width: 80%;
+            height: auto;
+            border-radius: 1rem;
+            border-color: #e0dcdc;
+            margin-left: 10%;
+
+
+            ion-card-header {
+
+                ion-card-title {
+                    color: #000000;
+                    font-size: 1rem;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-weight: bold;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                }
+
+                ion-card-subtitle {
+                    color: #000000;
+                    font-size: 0.8rem;
+                    font-family: "Rethink Sans", sans-serif;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                }
+            }
+
+            ion-card-content {
+                p {
+                    color: #000000;
+                    font-size: 0.8rem;
+                    font-family: "Rethink Sans", sans-serif;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                ion-button {
+                    color: #ffffff;
+                    --background: #e96a24;
+                    border-radius: 15px;
+                    font-family: "Rethink Sans", sans-serif;
+                    margin-top: 16px;
+                    width: 100%;
+                    max-width: 60%;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    display: center;
+                    justify-content: center;
+                    align-items: center;
+                    margin-left: 20%;
+
+                    ion-icon {
+                        font-size: 1.5rem;
+                        color: #ffffff;
+                    }
+                }
+            }
+        }
+    }
+}

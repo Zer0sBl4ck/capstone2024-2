@@ -22,8 +22,39 @@
     }
 }
 
+/* Color de los labels siempre en verde (o el color que desees) */
+ion-label {
+    color: #229E88 !important; /* Color del label siempre en verde */
+}
+
+/* Asegurar que el color del label no cambie cuando el input esté enfocado */
+ion-item:focus-within ion-label {
+    color: #229E88 !important;
+}
+
+/* Mantener el color de los labels como verde incluso si el input es inválido */
+ion-item.ion-invalid ion-label {
+    color: #229E88 !important; /* No cambia el color del label */
+}
+
+/* Estilos para los mensajes de error (aviso) */
+.aviso {
+    color: #ff0000 !important; /* Color rojo para los mensajes de error */
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+/* Estilos para los ion-labels dentro de los div de error */
+.aviso ion-label {
+    color: #ff0000 !important; /* Asegurando que el mensaje de error esté en rojo */
+}
+
+  
 ion-content {
-    --background: #ffffff;
+    --background: #f0dfc0;
     display: flex;
     justify-content: center;
     align-items: center;

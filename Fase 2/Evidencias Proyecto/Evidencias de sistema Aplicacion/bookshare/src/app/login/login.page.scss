@@ -1,20 +1,26 @@
 .fondo {
+  ion-toolbar {
+      --background: #229E88 !important;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    --background: #ffffff !important;
-    ion-toolbar {
-        --background: #ffffff !important;
-        color: #ffffff !important;
-  
-        ion-icon {
-            color: #229E88;
-        }
-    }
+      .titulo {
+          font-weight: bold;
+          color: #ffffff;
+          font-family: Helvetica;
+          font-size: 1.5rem;
+          text-align: center;
+          width: 100%;
+          max-width: 95%;
+      }
+
+      ion-icon {
+          color: #ffffff;
+      }
   }
-  
-  
-  .arriba {
-    --background: #229E88;
-  }
+}
   
   
   ion-content {
