@@ -1145,7 +1145,7 @@ router.get('/intercambios-prestamista/:id_usuario', async (req, res) => {
   try {
     const query = `
  SELECT
-      i.id_intercambio,
+      i.id_intercambio AS id_intercambio,
       i.id_usuario_ofertante AS id_ofertante,
       i.id_usuario_solicitante AS id_solicitante,
       i.id_biblioteca_prestamista,
@@ -1175,7 +1175,7 @@ router.get('/libros-disponibles-intercambio/:idUsuario', async (req, res) => {
   try {
     const query = `
       SELECT 
-          bu.id_biblioteca,
+          bu.id_biblioteca AS id_biblioteca,
           bu.id_usuario,
           bu.isbn,
           l.titulo,
@@ -1205,6 +1205,24 @@ router.get('/libros-disponibles-intercambio/:idUsuario', async (req, res) => {
     console.error('Error al obtener los libros disponibles para intercambio:', error);
     res.status(500).json({ message: 'Error al obtener los libros disponibles para intercambio.' });
   }
+});
+
+router.put('/actualizarBibliotecaPrestamista', (req, res) => {
+  const { id_intercambio, id_biblioteca_prestamista } = req.body;
+
+  const query = `
+    UPDATE intercambio 
+    SET id_biblioteca_solicitante = ? 
+    WHERE id_intercambio = ?`;
+
+  db.query(query, [id_biblioteca_prestamista, id_intercambio], (error, results) => {
+    if (error) {
+      console.error('Error al actualizar el intercambio:', error);
+      res.status(500).json({ error: 'Error al actualizar el intercambio' });
+    } else {
+      res.status(200).json({ message: 'Intercambio actualizado correctamente', results });
+    }
+  });
 });
 
 

@@ -47,8 +47,8 @@ export class ListarIntercambioPage implements OnInit {
       }
     );
   }
-  irAIntercambioUsuario(idSolicitante: number): void {
-    console.log(idSolicitante)
-    this.router.navigate(['/listar-intercambio-usuario', idSolicitante]);
-  }
+  irAIntercambioUsuario(idSolicitante: number, id_intercambio: number): void {
+    console.log(idSolicitante);
+    this.router.navigate(['/listar-intercambio-usuario', idSolicitante, id_intercambio]);
+}
 }

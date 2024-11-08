@@ -26,7 +26,11 @@
           <ion-icon name="add-outline" slot="start"></ion-icon>
           Agregar libro
         </ion-button>
-
+        
+        <ion-button (click)="goIntercambio()" *ngIf="userRole === 'usuario'">
+          <ion-icon name="add-outline" slot="start"></ion-icon>
+          Intercambio
+        </ion-button>
         <ion-button (click)="gochat()" *ngIf="userRole === 'usuario'">
           <ion-icon name="add-outline" slot="start"></ion-icon>
           Chat

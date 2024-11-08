@@ -9,8 +9,9 @@ import { AuthService } from '../services/auth.service';
 })
 export class ListarIntercambioUsuarioPage implements OnInit {
 
-  idUsuarioPropietario: string | null = null; // ID del usuario propietario de los libros
-  librosDisponiblesIntercambio: any[] = []; // Lista de libros disponibles para intercambio
+  idUsuarioPropietario: string | null = null;
+  idIntercambio: string | null = null;
+  librosDisponiblesIntercambio: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -18,16 +19,15 @@ export class ListarIntercambioUsuarioPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Obtener el id_usuario de la URL
     this.idUsuarioPropietario = this.route.snapshot.paramMap.get('id_usuario');
-    
+    this.idIntercambio = this.route.snapshot.paramMap.get('id_intercambio');
+
     if (this.idUsuarioPropietario) {
       this.cargarLibrosDisponiblesIntercambio();
     }
   }
 
   cargarLibrosDisponiblesIntercambio(): void {
-    // Convertir el idUsuarioPropietario a un número antes de llamar al servicio
     const idUsuarioNumber = Number(this.idUsuarioPropietario);
 
     if (!isNaN(idUsuarioNumber)) {
@@ -42,6 +42,23 @@ export class ListarIntercambioUsuarioPage implements OnInit {
       );
     } else {
       console.error('ID de usuario propietario no válido:', this.idUsuarioPropietario);
+    }
+  }
+
+  actualizarIntercambio(idBiblioteca: number): void {
+    if (this.idIntercambio) {
+      const idIntercambioNumber = Number(this.idIntercambio);
+
+      this.authService.actualizarBibliotecaPrestamista(idIntercambioNumber, idBiblioteca).subscribe(
+        (response) => {
+          console.log('Intercambio actualizado correctamente:', response);
+        },
+        (error) => {
+          console.error('Error al actualizar el intercambio:', error);
+        }
+      );
+    } else {
+      console.error('ID de intercambio no válido:', this.idIntercambio);
     }
   }
 }

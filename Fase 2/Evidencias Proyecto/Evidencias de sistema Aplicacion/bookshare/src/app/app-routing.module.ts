@@ -88,7 +88,7 @@ const routes: Routes = [
     loadChildren: () => import('./listar-intercambio/listar-intercambio.module').then( m => m.ListarIntercambioPageModule)
   },
   {
-    path: 'listar-intercambio-usuario/:id_usuario',
+    path: 'listar-intercambio-usuario/:id_usuario/:id_intercambio',
     loadChildren: () => import('./listar-intercambio-usuario/listar-intercambio-usuario.module').then(m => m.ListarIntercambioUsuarioPageModule)
   }
 

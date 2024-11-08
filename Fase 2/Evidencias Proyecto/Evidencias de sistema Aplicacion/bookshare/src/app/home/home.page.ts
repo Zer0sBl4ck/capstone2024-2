@@ -136,6 +136,10 @@ export class HomePage {
   gochat() {
     this.router.navigate(['/tabs/chat'], { replaceUrl: true });
   }
+  goIntercambio() {
+    this.router.navigate(['/listar-intercambio'], { replaceUrl: true });
+  }
+  
 
   logout() {
     this.authService.logout();

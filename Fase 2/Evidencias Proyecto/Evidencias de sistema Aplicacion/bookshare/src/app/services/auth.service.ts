@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://192.168.1.26:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api
+  private apiUrl = 'http://localhost:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api
 
   constructor(private http: HttpClient) { }
 
@@ -284,6 +284,12 @@ export class AuthService {
     console.log(idUsuario)
     const url = `${this.apiUrl}/libros-disponibles-intercambio/${idUsuario}`;
     return this.http.get(url);
+  }
+  actualizarBibliotecaPrestamista(idIntercambio: number, idBibliotecaPrestamista: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/actualizarBibliotecaPrestamista`, {
+      id_intercambio: idIntercambio,
+      id_biblioteca_prestamista: idBibliotecaPrestamista
+    });
   }
   
   

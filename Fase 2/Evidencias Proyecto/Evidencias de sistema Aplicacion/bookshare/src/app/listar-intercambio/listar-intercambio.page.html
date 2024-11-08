@@ -33,7 +33,7 @@
         <h2>Libro prestado: {{ intercambio.libro_titulo }}</h2>
         <p>Intercambio usuario: {{ intercambio.ofertante }}</p>
         <p>Estado: {{ intercambio.estado }}</p>
-        <ion-button (click)="irAIntercambioUsuario(intercambio.id_solicitante)">
+        <ion-button (click)="irAIntercambioUsuario(intercambio.id_solicitante,intercambio.id_intercambio)">
           Ver intercambios de solicitante
         </ion-button>
       </ion-label>

@@ -12,10 +12,8 @@
   </ion-header>
 
   <ion-list>
-    <!-- Verificamos si hay libros disponibles para mostrar -->
     <ion-item *ngFor="let libro of librosDisponiblesIntercambio">
       <ion-thumbnail slot="start">
-        <!-- Mostrar la imagen en formato base64 -->
         <img *ngIf="libro.imagen_libro" [src]="'data:image/jpeg;base64,' + libro.imagen_libro" alt="Imagen del libro">
       </ion-thumbnail>
       <ion-label>
@@ -23,11 +21,15 @@
         <p>{{ libro.autor }}</p>
         <p>{{ libro.descripcion }}</p>
         <p><strong>Género:</strong> {{ libro.genero }}</p>
+        <p><strong>ID Biblioteca:</strong> {{ libro.id_biblioteca }}</p>
       </ion-label>
+      <!-- Botón para actualizar el intercambio -->
+      <ion-button (click)="actualizarIntercambio(libro.id_biblioteca)">
+        Actualizar Intercambio
+      </ion-button>
     </ion-item>
   </ion-list>
 
-  <!-- Mostrar un mensaje si no hay libros disponibles -->
   <ion-text *ngIf="librosDisponiblesIntercambio.length === 0">
     <p>No hay libros disponibles para intercambio en este momento.</p>
   </ion-text>
