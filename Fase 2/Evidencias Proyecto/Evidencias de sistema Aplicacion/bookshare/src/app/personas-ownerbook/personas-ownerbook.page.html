@@ -10,53 +10,61 @@
 </ion-header>
 
 <ion-content>
-  <br />
-  <ion-list *ngIf="personas.length > 0; else noData">
-    <ion-item *ngFor="let persona of personas">
-      <ion-avatar slot="start">
-        <img
-          class="foto"
-          *ngIf="persona.foto_perfil_base64"
-          [src]="'data:image/jpeg;base64,' + persona.foto_perfil_base64"
-          alt="Foto de perfil de {{ persona.nombre_usuario }}"
-        />
+  <br>
+
+  <!-- Filtro de Ubicación -->
+  <ion-item>
+    <ion-label position="stacked">Filtrar por Ubicación</ion-label>
+    <ion-select [(ngModel)]="ubicacionSeleccionada" placeholder="Seleccione una ubicación">
+      <ion-select-option value="">Todas</ion-select-option> <!-- Opción para mostrar todos -->
+      <ion-select-option value="concepcion">Concepción</ion-select-option>
+      <ion-select-option value="talcahuano">Talcahuano</ion-select-option>
+      <ion-select-option value="chiguayante">Chiguayante</ion-select-option>
+      <ion-select-option value="hualpen">Hualpen</ion-select-option>
+      <ion-select-option value="hualqui">Hualqui</ion-select-option>
+      <ion-select-option value="sanpedrodelapaz">San Pedro de la Paz</ion-select-option>
+      <ion-select-option value="coronel">Coronel</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <br>
+
+  <ion-list *ngIf="personasFiltradas().length > 0; else noData">
+    <ion-item *ngFor="let persona of personasFiltradas()">
+      <ion-avatar [routerLink]="['/perfil', persona.correo]" slot="start">
+        <img class="foto" *ngIf="persona.foto_perfil_base64" 
+             [src]="'data:image/jpeg;base64,' + persona.foto_perfil_base64" 
+             alt="Foto de perfil de {{ persona.nombre_usuario }}">
       </ion-avatar>
 
       <ion-label>
-        <h2>{{ persona.nombre_usuario }}</h2>
+        <h2 [routerLink]="['/perfil', persona.correo]" style="cursor: pointer;">
+          {{ persona.nombre_usuario }}
+        </h2>
         <p>Email: {{ persona.correo }}</p>
         <p>Ubicación: {{ persona.ubicacion }}</p>
-        <p>
-          Disponible intercambio:
-          <span *ngIf="persona.disponible_intercambio === 1; else noIntercambio"
-            >Sí</span
-          >
+        <p>Disponible intercambio: 
+          <span *ngIf="persona.disponible_intercambio === 1; else noIntercambio">Sí</span>
           <ng-template #noIntercambio>No</ng-template>
         </p>
-        <p>
-          Disponible préstamo:
-          <span *ngIf="persona.disponible_prestamo === 1; else noPrestamo"
-            >Sí</span
-          >
+        <p>Disponible préstamo: 
+          <span *ngIf="persona.disponible_prestamo === 1; else noPrestamo">Sí</span>
           <ng-template #noPrestamo>No</ng-template>
         </p>
       </ion-label>
 
-      <ion-button
-        *ngIf="persona.disponible_prestamo === 1"
+      <ion-button 
+        *ngIf="persona.disponible_prestamo === 1" 
         (click)="solicitarPrestamo(persona.id_usuario, persona.id_biblioteca, persona.correo)"
-        slot="end"
-      >
+        slot="end">
         Solicitar Préstamo
       </ion-button>
-      
-      <ion-button
-        *ngIf="persona.disponible_intercambio === 1"
-        (click)="solicitarIntercambio(isbn, persona.id_usuario)"
-        slot="end"
-      >
-        Solicitar Intercambio
-      </ion-button>
+      <ion-button 
+      *ngIf="persona.disponible_intercambio === 1" 
+      (click)="solicitarIntercambio(isbn, persona.id_usuario)"
+      slot="end">
+      Solicitar Intercambio
+    </ion-button>
     </ion-item>
   </ion-list>
 
