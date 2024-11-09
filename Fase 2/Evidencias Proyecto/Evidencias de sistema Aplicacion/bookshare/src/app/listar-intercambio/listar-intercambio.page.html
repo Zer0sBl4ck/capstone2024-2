@@ -36,7 +36,7 @@
     <ion-item *ngFor="let intercambio of intercambiosComoPrestamista">
       <ion-label>
         <h2>Libro prestado: {{ intercambio.libro_titulo }}</h2>
-        <p>Intercambio usuario: {{ intercambio.ofertante }}</p>
+        <p>Intercambio usuario: {{ intercambio.solicitante }}</p>
         <p>Estado: {{ intercambio.estado }}</p>
         <ion-button (click)="irAIntercambioUsuario(intercambio.id_solicitante,intercambio.id_intercambio)">
           Ver intercambios de solicitante

@@ -98,3 +98,17 @@ ion-content {
         }
     }
 }
+.imagen-libro {
+    width: 150px; /* Ajusta el tamaño */
+    height: 200px; /* Ajusta el tamaño */
+    object-fit: cover; /* Hace que la imagen se ajuste al área sin deformarse */
+    border-radius: 10px; /* Borde redondeado */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border: 2px solid #ddd; /* Borde gris claro */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación de transición */
+  }
+  
+  .imagen-libro:hover {
+    transform: scale(1.05); /* Aumenta el tamaño al hacer hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Sombra más fuerte */
+  }

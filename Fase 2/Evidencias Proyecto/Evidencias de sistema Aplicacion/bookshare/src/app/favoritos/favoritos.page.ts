@@ -6,6 +6,7 @@ interface LibroFavorito {
   isbn: string;
   titulo: string;
   autor: string;
+  imagen:string
 }
 
 @Component({
@@ -32,6 +33,7 @@ export class FavoritosPage implements OnInit {
       this.authService.getLibrosFavoritos(this.correoUsuario).subscribe(
         (data) => {
           this.favoritos = data;
+          console.log(data)
         },
         (error) => {
           console.error('Error al cargar favoritos:', error);

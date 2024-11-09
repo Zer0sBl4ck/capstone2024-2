@@ -460,9 +460,10 @@ router.put('/libros-cambio-intercambio/:isbn', async (req, res) => {
   }
 });
 
-router.get('/personas-con-libro/:isbn', async (req, res) => {
-  const isbn = req.params.isbn; // Obtener el ISBN del parámetro de la ruta
-  console.log(`Recibiendo solicitud para listar personas con el libro ISBN: ${isbn}`);
+router.get('/personas-con-libro/:isbn/:idUsuarioLogeado', async (req, res) => {
+  const { isbn, idUsuarioLogeado } = req.params; // Obtener ISBN y ID del usuario logeado de los parámetros de la ruta
+
+  console.log(`Recibiendo solicitud para listar personas con el libro ISBN: ${isbn}, excluyendo al usuario ID: ${idUsuarioLogeado}`);
 
   const query = `
     SELECT 
@@ -471,7 +472,7 @@ router.get('/personas-con-libro/:isbn', async (req, res) => {
       usuario.correo, 
       usuario.ubicacion, 
       usuario.telefono, 
-      TO_BASE64(usuario.foto_perfil) AS foto_perfil_base64,  -- Alias para el campo Base64
+      TO_BASE64(usuario.foto_perfil) AS foto_perfil_base64,  
       libro.titulo, 
       libro.genero, 
       libro.autor,
@@ -484,10 +485,11 @@ router.get('/personas-con-libro/:isbn', async (req, res) => {
     WHERE biblioteca_usuario.isbn = ?
       AND (biblioteca_usuario.disponible_prestamo = 1 OR biblioteca_usuario.disponible_intercambio = 1)
       AND libro.estado = 1
+      AND usuario.id_usuario != ?
   `;
 
   try {
-    const [results] = await db.query(query, [isbn]);
+    const [results] = await db.query(query, [isbn, idUsuarioLogeado]);
     console.log('Resultados obtenidos:', results);
     
     if (results.length === 0) {
@@ -1024,7 +1026,7 @@ router.get('/favoritos/:correo', async (req, res) => {
 
   try {
     const query = `
-      SELECT libro.isbn, libro.titulo, libro.autor, libro.genero, libro.descripcion
+      SELECT libro.isbn, libro.titulo, libro.autor, libro.genero, libro.descripcion,TO_BASE64(libro.imagen_libro) AS imagen
       FROM favorito_libro
       JOIN libro ON favorito_libro.isbn = libro.isbn
       WHERE favorito_libro.correo = ?
