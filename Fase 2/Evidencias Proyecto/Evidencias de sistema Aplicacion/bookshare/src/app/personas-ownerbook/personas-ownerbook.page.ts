@@ -11,6 +11,7 @@ export class PersonasOwnerbookPage implements OnInit {
 
   personas: any[] = [];  // Array para almacenar las personas con el libro
   isbn: string = '';     // Variable para almacenar el ISBN
+  idUsuarioLogeado: number | null = null;
 
   constructor(
     private authService: AuthService,  // Inyectamos el AuthService
@@ -18,11 +19,10 @@ export class PersonasOwnerbookPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Obtener el parámetro 'isbn' de la URL
+    this.idUsuarioLogeado = this.authService.getUserData()?.id_usuario || null;
     this.route.paramMap.subscribe((params) => {
-      this.isbn = params.get('isbn') || ''; // Si no hay ISBN, usa un string vacío
-      if (this.isbn) {
-        // Llamamos al método para cargar las personas que tienen el libro
+      this.isbn = params.get('isbn') || '';
+      if (this.isbn && this.idUsuarioLogeado !== null) {
         this.cargarPersonasConLibro();
       }
     });
@@ -30,14 +30,18 @@ export class PersonasOwnerbookPage implements OnInit {
 
   // Método para llamar al servicio y cargar las personas
   cargarPersonasConLibro(): void {
-    this.authService.getPersonasConLibro(this.isbn).subscribe(
-      (response) => {
-        this.personas = response; // Guardamos las personas obtenidas en el array
-      },
-      (error) => {
-        console.error('Error al obtener las personas con el libro:', error);
-      }
-    );
+    if (this.idUsuarioLogeado !== null) {
+      this.authService.getPersonasConLibro(this.isbn, this.idUsuarioLogeado).subscribe(
+        (response) => {
+          this.personas = response;
+        },
+        (error) => {
+          console.error('Error al obtener las personas con el libro:', error);
+        }
+      );
+    } else {
+      console.error('ID de usuario logeado no disponible.');
+    }
   }
 
   notificacion_prestamo(correo: string): void{
