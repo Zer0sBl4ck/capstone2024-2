@@ -12,6 +12,7 @@ export class PersonasOwnerbookPage implements OnInit {
   personas: any[] = [];  // Array para almacenar las personas con el libro
   isbn: string = '';     // Variable para almacenar el ISBN
   idUsuarioLogeado: number | null = null;
+  ubicacionSeleccionada: string = '';
 
   constructor(
     private authService: AuthService,  // Inyectamos el AuthService
@@ -19,6 +20,7 @@ export class PersonasOwnerbookPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.ubicacionSeleccionada=""
     this.idUsuarioLogeado = this.authService.getUserData()?.id_usuario || null;
     this.route.paramMap.subscribe((params) => {
       this.isbn = params.get('isbn') || '';
@@ -123,6 +125,12 @@ export class PersonasOwnerbookPage implements OnInit {
     } else {
       console.error('Error: No se pudo obtener el ID del usuario logueado');
     }
+  }
+  personasFiltradas(): any[] {
+    if (this.ubicacionSeleccionada) {
+      return this.personas.filter(persona => persona.ubicacion === this.ubicacionSeleccionada);
+    }
+    return this.personas;
   }
   
 }
