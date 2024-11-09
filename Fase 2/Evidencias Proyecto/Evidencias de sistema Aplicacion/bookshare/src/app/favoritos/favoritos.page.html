@@ -5,7 +5,7 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="titulo">Whislist</ion-title>
+    <ion-title class="titulo">FAVORITOS</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,9 +15,15 @@
       <ion-card-header>
         <ion-card-title>{{ libro.titulo }}</ion-card-title>
         <ion-card-subtitle>Autor: {{ libro.autor }}</ion-card-subtitle>
+        <img src="" alt="">
       </ion-card-header>
       <ion-card-content>
+        <p *ngIf="libro.imagen">
+          <img [src]="'data:image/jpeg;base64,' + libro.imagen" alt="Imagen del libro" class="imagen-libro" />
+        </p>
+        <p *ngIf="!libro.imagen">No hay imagen disponible</p>
         <p>ISBN: {{ libro.isbn }}</p>
+        
         <ion-button [routerLink]="['/personas-ownerbook', libro.isbn]">
           <ion-icon name="people-outline"></ion-icon>
           Ver personas con este libro

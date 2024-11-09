@@ -1026,7 +1026,7 @@ router.get('/favoritos/:correo', async (req, res) => {
 
   try {
     const query = `
-      SELECT libro.isbn, libro.titulo, libro.autor, libro.genero, libro.descripcion
+      SELECT libro.isbn, libro.titulo, libro.autor, libro.genero, libro.descripcion,TO_BASE64(libro.imagen_libro) AS imagen
       FROM favorito_libro
       JOIN libro ON favorito_libro.isbn = libro.isbn
       WHERE favorito_libro.correo = ?
