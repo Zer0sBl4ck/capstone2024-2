@@ -2,17 +2,24 @@
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="home">
       <ion-icon name="home"></ion-icon>
-      <ion-label></ion-label>
+      <ion-label>Inicio</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="chat">
       <ion-icon name="chatbubbles"></ion-icon>
-      <ion-label></ion-label>
+      <ion-label>Chat</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="listar-libro">
       <ion-icon name="book"></ion-icon>
-      <ion-label></ion-label>
+      <ion-label>Libros</ion-label>
     </ion-tab-button>
+
+    <ion-tab-button tab="notificaciones">
+      <ion-icon name="notifications"></ion-icon>
+      <ion-label></ion-label>
+      <ion-badge *ngIf="notificacionesNoLeidas > 0" color="danger">{{ notificacionesNoLeidas }}</ion-badge>
+    </ion-tab-button>
+    
   </ion-tab-bar>
 </ion-tabs>

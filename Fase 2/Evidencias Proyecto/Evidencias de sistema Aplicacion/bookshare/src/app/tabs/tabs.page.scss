@@ -1,18 +1,34 @@
 ion-tab-bar {
-    --background: #e96c26 !important;
-    --color: #fff !important;
-    --color-selected: #ffffff !important;
-    height: 52px;
-    border-top-left-radius: 0px; // Bordes redondeados en la parte superior izquierda
-    border-top-right-radius: 0px; // Bordes redondeados en la parte superior derecha
-    
-  overflow: hidden; // Asegúrate de que los bordes redondeados se vean correctamente
+  --background: #e96c26 !important;  // Fondo de la barra de tabs
+  --color: #fff !important;           // Color de texto por defecto
+  --color-selected: #ffffff !important;  // Color de texto cuando el tab está seleccionado
+  height: 52px;                      // Altura de la barra de tabs
+  border-top-left-radius: 0px;       // Bordes redondeados en la parte superior izquierda
+  border-top-right-radius: 0px;      // Bordes redondeados en la parte superior derecha
+  overflow: hidden;                  // Para asegurarte de que los bordes redondeados se vean correctamente
   box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.2); // Sombra opcional
-  }
-  ion-tab-button {
-    font-size: 1.0rem; // Ajusta este valor para cambiar el tamaño del texto
-  }
-  
-  ion-icon {
-    font-size: 100px; // Cambia este valor para hacer los iconos más grandes o más pequeños
-  }
+}
+
+ion-tab-button {
+  font-size: 1.0rem;  // Tamaño del texto dentro del tab
+  display: flex;      // Asegura que los iconos y etiquetas estén alineados correctamente
+  justify-content: center;
+  align-items: center;
+}
+
+ion-icon {
+  font-size: 30px;  // Ajusta este valor para hacer los iconos más grandes o más pequeños
+}
+
+ion-label {
+  font-size: 12px;  // Ajusta el tamaño del texto debajo de los íconos
+  margin-top: 2px;  // Pequeño espacio entre el ícono y el texto
+}
+
+ion-badge {
+  font-size: 10px;  // Tamaño de la fuente del badge
+  position: absolute;  // Asegura que el badge esté alineado sobre el icono
+  top: 2px;
+  right: -5px;
+  background-color: red;  // Cambiar color del badge si es necesario
+}

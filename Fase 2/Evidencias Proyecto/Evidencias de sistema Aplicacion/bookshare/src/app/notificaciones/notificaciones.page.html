@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Notificaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="notificaciones.length > 0; else noNotificaciones">
+    <ion-item *ngFor="let notificacion of notificaciones">
+      <ion-label>
+        <h2>{{ notificacion.titulo }}</h2>
+        <p>{{ notificacion.descripcion }}</p>
+        <p *ngIf="!notificacion.visto" style="color: red;">Nueva</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="marcarComoVisto(notificacion.id_notificacion)" *ngIf="!notificacion.visto">
+          Marcar como visto
+        </ion-button>
+        <ion-button color="danger" (click)="eliminarNotificacion(notificacion.id_notificacion)">
+          Eliminar
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noNotificaciones>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Sin notificaciones</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Actualmente no tienes notificaciones.
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-content>

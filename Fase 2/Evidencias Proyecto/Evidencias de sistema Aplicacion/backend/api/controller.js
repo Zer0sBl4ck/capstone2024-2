@@ -461,7 +461,7 @@ router.put('/libros-cambio-intercambio/:isbn', async (req, res) => {
 });
 
 router.get('/personas-con-libro/:isbn', async (req, res) => {
-  const isbn = req.params.isbn; // Obtener el ISBN del parámetro de la ruta
+  const { isbn, idUsuarioLogeado } = req.params; // Obtener el ISBN del parámetro de la ruta
   console.log(`Recibiendo solicitud para listar personas con el libro ISBN: ${isbn}`);
 
   const query = `
@@ -487,7 +487,7 @@ router.get('/personas-con-libro/:isbn', async (req, res) => {
   `;
 
   try {
-    const [results] = await db.query(query, [isbn]);
+    const [results] = await db.query(query, [isbn, idUsuarioLogeado]);
     console.log('Resultados obtenidos:', results);
     
     if (results.length === 0) {
@@ -532,30 +532,162 @@ router.post('/prestamo', (req, res) => {
     });
   });
 });
+router.post('/notificacion_aceptacion', async (req, res) => {
+  // Aquí recibimos los campos enviados desde el frontend
+  const { correo, titulo, descripcion } = req.body;
 
-router.post('/notificacion_prestamo', (req, res) => {
-  const { correo, titulo, descripcion } = req.body; // Cambié 'correo_prestamista' a 'correo'
-  // Validar que los campos requeridos estén presentes
+  // Asegúrate de que el backend reciba tanto el correo del solicitante como el mensaje
   if (!correo || !titulo || !descripcion) {
     return res.status(400).json({ error: 'Faltan campos requeridos.' });
   }
 
-  // Paso 1: Insertar la notificación en la tabla 'notificacion'
-  const insertNotificacionQuery = `
-    INSERT INTO notificacion (correo, titulo, descripcion) 
-    VALUES (?, ?, ?)
+  // Asignamos el correo del solicitante de acuerdo a los datos recibidos
+  const correoSolicitante = correo; // Suponiendo que "correo" es el del solicitante
+
+  // Inserción de notificación para el solicitante
+  const insertNotificacionSolicitanteQuery = `
+    INSERT INTO notificacion (correo, titulo, descripcion, tipo) 
+    VALUES (?, ?, ?, 'Solicitud aceptada')
+  `;
+  
+  try {
+    // Insertar notificación para el solicitante
+    await db.query(insertNotificacionSolicitanteQuery, [correoSolicitante, titulo, descripcion]);
+
+    console.log('Notificación insertada para el solicitante con éxito.');
+    return res.status(201).json({ message: 'Notificación de aceptación enviada con éxito' });
+
+  } catch (error) {
+    console.error('Error al insertar la notificación de aceptación:', error);
+    return res.status(500).json({ error: 'Error al insertar la notificación de aceptación' });
+  }
+});
+
+
+router.post('/notificacion_prestamo', async (req, res) => {
+  // Aquí recibimos los campos enviados desde el frontend
+  const { correo, titulo, descripcion } = req.body;
+
+  // Asegúrate de que el backend reciba tanto el correo del solicitante como el del prestamista
+  if (!correo || !titulo || !descripcion) {
+    return res.status(400).json({ error: 'Faltan campos requeridos.' });
+  }
+
+  // Asignamos el correo prestamista y correo solicitante de acuerdo a los datos recibidos
+  const correoSolicitante = correo; // Suponiendo que "correo" es el del solicitante
+  const correoPrestamista = req.body.correoPrestamista; // Suponiendo que este dato también debe enviarse desde el frontend
+
+  // Inserción de notificación para el prestamista
+  const insertNotificacionPrestamistaQuery = `
+    INSERT INTO notificacion (correo, titulo, descripcion, tipo) 
+    VALUES (?, ?, ?, 'Solicitud recibida')
+  `;
+  
+  try {
+    // Insertar notificación para el prestamista
+    await db.query(insertNotificacionPrestamistaQuery, [correoPrestamista, titulo, descripcion]);
+
+    console.log('Notificación insertada para el prestamista con éxito.');
+
+    // Insertar notificación para el solicitante
+    const insertNotificacionSolicitanteQuery = `
+      INSERT INTO notificacion (correo, titulo, descripcion, tipo) 
+      VALUES (?, ?, ?, 'Solicitud realizada')
+    `;
+    
+    await db.query(insertNotificacionSolicitanteQuery, [correoSolicitante, titulo, descripcion]);
+
+    console.log('Notificación insertada para el solicitante con éxito.');
+    return res.status(201).json({ message: 'Notificaciones insertadas con éxito' });
+
+  } catch (error) {
+    console.error('Error al insertar las notificaciones:', error);
+    return res.status(500).json({ error: 'Error al insertar las notificaciones' });
+  }
+});
+
+// Endpoint para obtener notificaciones de un usuario
+router.get('/notificaciones/:correo', async (req, res) => {
+  const { correo } = req.params;
+
+  if (!correo) {
+    return res.status(400).json({ error: 'Correo es requerido para obtener notificaciones.' });
+  }
+
+  try {
+    // Consulta las notificaciones asociadas a ese correo
+    const [results] = await db.query(
+      'SELECT * FROM notificacion WHERE correo = ? ORDER BY fecha_creacion DESC',
+      [correo]
+    );
+
+    // Envia las notificaciones encontradas
+    return res.status(200).json(results);
+  } catch (error) {
+    console.error('Error al obtener notificaciones:', error);
+    return res.status(500).json({ error: 'Error al obtener las notificaciones' });
+  }
+});
+
+// Endpoint para marcar una notificación como vista
+router.put('/notificaciones/:id/visto', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Actualizar el campo "visto" de la notificación con el ID dado
+    await db.query(
+      'UPDATE notificacion SET visto = TRUE WHERE id_notificacion = ?',
+      [id]
+    );
+    return res.status(200).json({ message: 'Notificación marcada como vista' });
+  } catch (error) {
+    console.error('Error al marcar notificación como vista:', error);
+    return res.status(500).json({ error: 'Error al marcar la notificación como vista' });
+  }
+});
+
+// Endpoint para eliminar una notificación
+router.delete('/notificaciones/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Eliminar la notificación con el ID dado
+    await db.query(
+      'DELETE FROM notificacion WHERE id_notificacion = ?',
+      [id]
+    );
+    return res.status(200).json({ message: 'Notificación eliminada exitosamente' });
+  } catch (error) {
+    console.error('Error al eliminar la notificación:', error);
+    return res.status(500).json({ error: 'Error al eliminar la notificación' });
+  }
+});
+// Agregar a tu controller.js
+router.post('/notificar-aceptacion', async (req, res) => {
+  const { correoSolicitante, correoPrestamista, titulo, descripcion } = req.body;
+
+  if (!correoSolicitante || !correoPrestamista || !titulo || !descripcion) {
+    return res.status(400).json({ error: 'Faltan campos requeridos.' });
+  }
+
+  const insertNotificacionSolicitanteQuery = `
+    INSERT INTO notificacion (correo, titulo, descripcion, tipo) 
+    VALUES (?, ?, ?, 'Préstamo aceptado')
   `;
 
-  db.query(insertNotificacionQuery, [correo, titulo, descripcion], (error, result) => {
-    if (error) {
-      console.error('Error al insertar la notificación:', error);
-      return res.status(500).json({ error: 'Error al insertar la notificación' });
-    }
+  try {
+    // Insertar notificación para el solicitante
+    await db.query(insertNotificacionSolicitanteQuery, [correoSolicitante, titulo, descripcion]);
 
-    console.log('Notificación insertada con éxito:', result);
-    return res.status(200).json({ message: 'Notificación insertada con éxito' });
-  });
+    console.log('Notificación enviada al solicitante con éxito.');
+    return res.status(201).json({ message: 'Notificación enviada al solicitante con éxito.' });
+  } catch (error) {
+    console.error('Error al insertar la notificación:', error);
+    return res.status(500).json({ error: 'Error al insertar la notificación' });
+  }
 });
+
+
 router.get('/ps/:correo', async (req, res) => {
   const { correo } = req.params;
 
@@ -668,7 +800,7 @@ router.put('/solicitud/:id/desarrollo', async (req, res) => {
     return res.status(500).json({ error: 'Error al actualizar el estado de la solicitud' });
   }
 });
-
+/// En el backend, asegúrate de tener un endpoint PUT para actualizar el estado a "Entregado".
 router.put('/solicitud/:id/entregado', async (req, res) => {
   const { id } = req.params;
 
@@ -677,7 +809,7 @@ router.put('/solicitud/:id/entregado', async (req, res) => {
   }
 
   const updateEstadoQuery = `
-    UPDATE prestamo SET estado_prestamo = 'entregado' WHERE id_prestamo = ?
+    UPDATE prestamo SET estado_prestamo = 'Entregado' WHERE id_prestamo = ?
   `;
 
   try {
@@ -687,7 +819,33 @@ router.put('/solicitud/:id/entregado', async (req, res) => {
       return res.status(404).json({ message: 'No se encontró la solicitud para actualizar.' });
     }
 
-    res.status(200).json({ message: 'El estado de la solicitud fue actualizado a entregado.' });
+    res.status(200).json({ message: 'El estado de la solicitud fue actualizado a "Entregado".' });
+  } catch (error) {
+    console.error('Error al actualizar el estado de la solicitud:', error);
+    return res.status(500).json({ error: 'Error al actualizar el estado de la solicitud' });
+  }
+});
+
+
+router.put('/solicitud/:id/por-entregar', async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'El id de la solicitud es requerido.' });
+  }
+
+  const updateEstadoQuery = `
+    UPDATE prestamo SET estado_prestamo = 'Por entregar' WHERE id_prestamo = ?
+  `;
+
+  try {
+    const [result] = await db.query(updateEstadoQuery, [id]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'No se encontró la solicitud para actualizar.' });
+    }
+
+    res.status(200).json({ message: 'El estado de la solicitud fue actualizado a por entregar.' });
   } catch (error) {
     console.error('Error al actualizar el estado de la solicitud:', error);
     return res.status(500).json({ error: 'Error al actualizar el estado de la solicitud' });
@@ -1024,7 +1182,7 @@ router.get('/favoritos/:correo', async (req, res) => {
 
   try {
     const query = `
-      SELECT libro.isbn, libro.titulo, libro.autor, libro.genero, libro.descripcion
+      SELECT libro.isbn, libro.titulo, libro.autor, libro.genero, libro.descripcion AS imagen
       FROM favorito_libro
       JOIN libro ON favorito_libro.isbn = libro.isbn
       WHERE favorito_libro.correo = ?

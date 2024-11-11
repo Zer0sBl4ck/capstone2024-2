@@ -11,7 +11,9 @@ export class PersonasOwnerbookPage implements OnInit {
 
   personas: any[] = [];  // Array para almacenar las personas con el libro
   isbn: string = '';     // Variable para almacenar el ISBN
-
+  idUsuarioLogeado: number | null = null;
+  ubicacionSeleccionada: string = '';
+  
   constructor(
     private authService: AuthService,  // Inyectamos el AuthService
     private route: ActivatedRoute      // Inyectamos ActivatedRoute para acceder a los parámetros de la URL
@@ -19,6 +21,8 @@ export class PersonasOwnerbookPage implements OnInit {
 
   ngOnInit() {
     // Obtener el parámetro 'isbn' de la URL
+    this.ubicacionSeleccionada=""
+    this.idUsuarioLogeado = this.authService.getUserData()?.id_usuario || null;
     this.route.paramMap.subscribe((params) => {
       this.isbn = params.get('isbn') || ''; // Si no hay ISBN, usa un string vacío
       if (this.isbn) {
@@ -29,25 +33,32 @@ export class PersonasOwnerbookPage implements OnInit {
   }
 
   // Método para llamar al servicio y cargar las personas
+  // Método para llamar al servicio y cargar las personas
   cargarPersonasConLibro(): void {
-    this.authService.getPersonasConLibro(this.isbn).subscribe(
-      (response) => {
-        this.personas = response; // Guardamos las personas obtenidas en el array
-      },
-      (error) => {
-        console.error('Error al obtener las personas con el libro:', error);
-      }
-    );
+    if (this.idUsuarioLogeado !== null) {
+      this.authService.getPersonasConLibro(this.isbn, this.idUsuarioLogeado).subscribe(
+        (response) => {
+          this.personas = response;
+        },
+        (error) => {
+          console.error('Error al obtener las personas con el libro:', error);
+        }
+      );
+    } else {
+      console.error('ID de usuario logeado no disponible.');
+    }
   }
-
-  notificacion_prestamo(correo: string): void{
+  notificacion_prestamo(correo: string): void {
     const titulo = 'Solicitud de Préstamo';
     const fechaActual = new Date().toLocaleString(); // Formateamos la fecha actual
     const descripcion = `Se ha solicitado un préstamo de uno de sus libros el ${fechaActual}.`;
-    this.authService.crearNotificacionPrestamo(correo, titulo, descripcion).subscribe(
+    const tipo = 'Solicitud de préstamo';  // Asignamos el tipo de notificación
+  
+    // Llamada al servicio para crear la notificación
+    this.authService.crearNotificacionPrestamo(correo, titulo, descripcion, tipo).subscribe(
       (notificacionResponse) => {
         console.log('Notificación creada con éxito:', notificacionResponse);
-        
+        // Aquí puedes agregar lógica adicional como mostrar un mensaje de éxito al usuario
       },
       (notificacionError) => {
         console.error('Error al crear la notificación:', notificacionError);
@@ -55,7 +66,8 @@ export class PersonasOwnerbookPage implements OnInit {
       }
     );
   }
-
+  
+  
   // Método para solicitar un préstamo
   solicitarPrestamo(id_usuario_prestamista: string, id_biblioteca: string,correo:string): void {
     const id_usuario_solicitante = this.authService.getUserData()?.id_usuario; // Obtén el ID del usuario logueado
@@ -120,5 +132,12 @@ export class PersonasOwnerbookPage implements OnInit {
       console.error('Error: No se pudo obtener el ID del usuario logueado');
     }
   }
+  personasFiltradas(): any[] {
+    if (this.ubicacionSeleccionada) {
+      return this.personas.filter(persona => persona.ubicacion === this.ubicacionSeleccionada);
+    }
+    return this.personas;
+  }
+  
   
 }
