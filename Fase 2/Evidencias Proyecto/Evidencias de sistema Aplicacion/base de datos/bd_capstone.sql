@@ -175,10 +175,13 @@ CREATE TABLE `mensaje` (
 --
 
 CREATE TABLE `notificacion` (
-  `id_notificacion` int(11) NOT NULL,
-  `correo` varchar(255) DEFAULT NULL,
-  `titulo` varchar(255) DEFAULT NULL,
-  `descripcion` varchar(255) DEFAULT NULL
+  `id_notificacion` INT(11) NOT NULL,
+  `correo` VARCHAR(255) DEFAULT NULL,  -- Correo del usuario
+  `titulo` VARCHAR(255) DEFAULT NULL,  -- Título de la notificación
+  `descripcion` TEXT DEFAULT NULL,     -- Descripción de la notificación
+  `tipo` VARCHAR(50) DEFAULT NULL,     -- Tipo de notificación (Ej. 'Solicitud recibida', 'Solicitud aceptada')
+  `visto` BOOLEAN DEFAULT FALSE,       -- Si la notificación ha sido vista o no
+  `fecha_creacion` TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

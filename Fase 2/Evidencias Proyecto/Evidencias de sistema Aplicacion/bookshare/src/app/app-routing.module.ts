@@ -59,6 +59,7 @@ const routes: Routes = [
     path: 'chat',
     loadChildren: () => import('./chat/chat.module').then(m => m.ChatPageModule)
   },
+   { path: 'chat/:id_prestamo', loadChildren: () => import('./chat/chat.module').then(m => m.ChatPageModule) },
   {
     path: 'chat-contacto/:id_chat',
     loadChildren: () => import('./chat-contacto/chat-contacto.module').then(m => m.ChatContactoPageModule)
@@ -90,7 +91,12 @@ const routes: Routes = [
   {
     path: 'listar-intercambio-usuario/:id_usuario/:id_intercambio',
     loadChildren: () => import('./listar-intercambio-usuario/listar-intercambio-usuario.module').then(m => m.ListarIntercambioUsuarioPageModule)
+  },
+  {
+    path: 'notificaciones',
+    loadChildren: () => import('./notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
   }
+
 
 ];
 

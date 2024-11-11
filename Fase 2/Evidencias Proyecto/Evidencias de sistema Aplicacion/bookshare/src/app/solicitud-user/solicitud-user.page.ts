@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service'; // Asegúrate de que la ruta sea correcta
+import { ActionSheetController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-solicitud-user',
@@ -12,7 +14,7 @@ export class SolicitudUserPage implements OnInit {
   solicitudesRealizadas: any[] = []; // Array para almacenar solicitudes realizadas
   mostrarRecibidas: boolean = true;  // Variable para alternar entre recibidas y realizadas
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private actionSheetController: ActionSheetController) { }
 
   ngOnInit() {
     this.cargarSolicitudesRecibidas();   // Cargar solicitudes recibidas al iniciar
@@ -68,6 +70,7 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
+  
 
   // Función para actualizar el estado de una solicitud recibida a 'desarrollo'
   modificarEstadoSolicitud(id_prestamo: number): void {
@@ -94,10 +97,11 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
-  actualizarEstadoSolicitudAceptado(id_prestamo: number): void {
-    this.authService.actualizarEstadoSolicitudAceptado(id_prestamo).subscribe(
+    marcarEstadoComoEntregado(id_prestamo: number): void {
+    this.authService.marcarEstadoComoEntregado(id_prestamo).subscribe(
       (response) => {
-        console.log('Estado de la solicitud actualizado a "Aceptado":', response);
+        console.log('Estado de la solicitud actualizado a "Entregado":', response);
+        // Recargar las solicitudes después de modificar el estado
         this.cargarSolicitudesRecibidas();
       },
       (error) => {
@@ -105,29 +109,110 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
-  modificarFechaDevolucion(id_prestamo: number): void {
-    const fechaInput = prompt('Ingrese la fecha de devolución en formato dd-mm-yyyy');
-
-    // Verificar que la fecha se haya ingresado y esté en el formato correcto
-    if (fechaInput && this.validarFechaFormato(fechaInput)) {
-      // Convertir la fecha al formato ISO para enviarla al backend (yyyy-mm-dd)
-      const [dia, mes, año] = fechaInput.split('-');
-      const fechaISO = `${año}-${mes}-${dia}`;
-
-      this.authService.actualizarFechaDevolucion(id_prestamo, fechaISO).subscribe(
-        (response) => {
-          console.log('Fecha de devolución actualizada:', response);
-          this.cargarSolicitudesRecibidas(); 
-     
-        },
-        (error) => {
-          console.error('Error al actualizar la fecha de devolución:', error);
-        }
-      );
-    } else {
-      alert('Fecha inválida. Por favor, ingrésala en el formato dd-mm-yyyy.');
+  actualizarEstadoSolicitudAceptado(id_prestamo: number, solicitud: any): void {
+    const correoSolicitante = solicitud.correo; // Obtener el correo del solicitante
+  
+    if (!correoSolicitante) {
+      console.error('No se pudo obtener el correo del solicitante');
+      return; // Salir si no se puede obtener el correo
     }
-
+  
+    // Actualizar el estado de la solicitud a "Aceptado"
+    this.authService.actualizarEstadoSolicitudAceptado(id_prestamo).subscribe(
+      (response) => {
+        console.log('Estado de la solicitud actualizado a "Aceptado":', response);
+  
+        const titulo = 'Préstamo Aceptado';
+        const descripcion = 'Tu solicitud de préstamo ha sido aceptada. Dirígete al chat para más detalles.';
+  
+        // Llamar al servicio para crear la notificación de aceptación solo para el solicitante
+        this.authService.crearNotificacion_aceptacion(correoSolicitante, titulo, descripcion).subscribe(
+          (notifResponse) => {
+            console.log('Notificación de aceptación enviada al solicitante:', notifResponse);
+          },
+          (notifError) => {
+            console.error('Error al enviar la notificación de aceptación al solicitante:', notifError);
+          }
+        );
+  
+        // Recargar las solicitudes después de modificar el estado
+        this.cargarSolicitudesRecibidas();
+      },
+      (error) => {
+        console.error('Error al actualizar el estado de la solicitud:', error);
+      }
+    );
+  }
+  
+  
+  
+  
+  
+  
+  modificarFechaDevolucion(id_prestamo: number, solicitud: any): void {
+    const actionSheet = this.actionSheetController.create({
+      header: 'Selecciona la duración de la devolución',
+      buttons: [
+        {
+          text: '1 Semana',
+          handler: () => {
+            this.actualizarFechaDevolucion(id_prestamo, 1);
+            // Pasar solicitud.correo al actualizar el estado y enviar la notificación
+            this.actualizarEstadoSolicitudAceptado(id_prestamo, solicitud);
+          }
+        },
+        {
+          text: '2 Semanas',
+          handler: () => {
+            this.actualizarFechaDevolucion(id_prestamo, 2);
+            // Pasar solicitud.correo al actualizar el estado y enviar la notificación
+            this.actualizarEstadoSolicitudAceptado(id_prestamo, solicitud);
+          }
+        },
+        {
+          text: '3 Semanas',
+          handler: () => {
+            this.actualizarFechaDevolucion(id_prestamo, 3);
+            // Pasar solicitud.correo al actualizar el estado y enviar la notificación
+            this.actualizarEstadoSolicitudAceptado(id_prestamo, solicitud);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Selección cancelada');
+          }
+        }
+      ]
+    });
+  
+ 
+  
+    actionSheet.then(actionSheetElement => {
+      actionSheetElement.present();
+    });
+  }
+  
+  
+  actualizarFechaDevolucion(id_prestamo: number, semanas: number): void {
+    // Obtener la fecha actual
+    const fechaActual = new Date();
+    // Sumar las semanas seleccionadas
+    fechaActual.setDate(fechaActual.getDate() + (semanas * 7));
+  
+    // Formatear la fecha a formato 'yyyy-mm-dd'
+    const fechaISO = fechaActual.toISOString().split('T')[0];
+  
+    this.authService.actualizarFechaDevolucion(id_prestamo, fechaISO).subscribe(
+      (response) => {
+        console.log('Fecha de devolución actualizada:', response);
+        this.cargarSolicitudesRecibidas();
+      },
+      (error) => {
+        console.error('Error al actualizar la fecha de devolución:', error);
+      }
+    );
   }
 
   // Función para validar el formato de fecha dd-mm-yyyy

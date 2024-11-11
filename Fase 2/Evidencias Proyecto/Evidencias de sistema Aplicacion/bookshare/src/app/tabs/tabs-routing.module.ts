@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../listar-libro/listar-libro.module').then(m => m.ListarLibroPageModule)
       },
       {
+      path: 'notificaciones',
+        loadChildren: () => import('../notificaciones/notificaciones.module').then(m => m.NotificacionesPageModule)
+      },
+      {
         path: '',
         redirectTo: 'home',  // Redirige a la pestaña de inicio por defecto
         pathMatch: 'full'

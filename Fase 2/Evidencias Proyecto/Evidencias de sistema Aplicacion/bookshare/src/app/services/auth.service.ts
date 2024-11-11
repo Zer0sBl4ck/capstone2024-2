@@ -2,12 +2,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api
+  private apiUrl = 'http://192.168.1.26:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api
 
   constructor(private http: HttpClient) { }
 
@@ -104,6 +106,50 @@ export class AuthService {
 
     return this.http.post(`${this.apiUrl}/biblioteca`, bibliotecaData);
   }
+  // Obtener notificaciones del usuario
+  obtenerNotificaciones(correo: string) {
+    return this.http.get<any[]>(`http://localhost:3000/api/notificaciones/${correo}`);
+  }
+  enviarNotificacionAceptada(correoSolicitante: string) {
+    const correoPrestamista = this.getUserEmail(); // Correo del prestamista (actual usuario)
+    const titulo = 'Préstamo Aceptado';
+    const descripcion = 'Tu solicitud de préstamo ha sido aceptada. Dirígete al chat para más detalles.';
+    
+    console.log('Correo solicitante:', correoSolicitante);
+    console.log('Correo prestamista:', correoPrestamista);
+    console.log('Título:', titulo);
+    console.log('Descripción:', descripcion);
+  
+    return this.http.post('http://localhost:3000/api/notificar-aceptacion', {
+      correoSolicitante,
+      correoPrestamista,
+      titulo,
+      descripcion
+    });
+  }
+  
+  
+  
+  // Crear una nueva notificación
+  crearNotificacion(correo: string, titulo: string, descripcion: string, tipo: string): Observable<any> {
+    const payload = { correo, titulo, descripcion, tipo };
+    return this.http.post<any>(`${this.apiUrl}/notificaciones`, payload);
+  }
+ // Llama al backend para obtener la cantidad de notificaciones no leídas
+ getNotificacionesNoLeidas(correo: string): Observable<number> {
+  return this.http.get<number>(`${this.apiUrl}/notificaciones/no-leidas?correo=${correo}`);
+}
+
+  // Marcar una notificación como vista
+  marcarNotificacionComoVisto(idNotificacion: number): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/notificaciones/${idNotificacion}/visto`, {});
+  }
+
+  // Eliminar una notificación
+  eliminarNotificacion(idNotificacion: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/notificaciones/${idNotificacion}`);
+  }
+
 
   getLibrosPorCorreo(correo: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/libros/${correo}`);
@@ -170,16 +216,37 @@ export class AuthService {
 
     return this.http.post(`${this.apiUrl}/prestamo`, prestamoData);
   }
-  crearNotificacionPrestamo(correo_prestamista: string, titulo: string, descripcion: string): Observable<any> {
-    const notificacionData = {
-      correo: correo_prestamista, // Enviar el correo del prestamista
-      titulo, // Enviar el título de la notificación
-      descripcion // Enviar la descripción de la notificación
-    };
-    console.log(notificacionData)
 
-    return this.http.post(`${this.apiUrl}/notificacion_prestamo`, notificacionData);
+  // authService.ts
+
+crearNotificacion_aceptacion(correoSolicitante: string, titulo: string, descripcion: string): Observable<any> {
+  
+  const body = {
+    correoSolicitante,
+    
+    titulo,
+    descripcion
+  };
+  return this.http.post('http://localhost:3000/api/notificacion_aceptacion', body);
+}
+
+  crearNotificacionPrestamo(correo: string, titulo: string, descripcion: string, tipo: string = 'Solicitud de préstamo'): Observable<Object> {
+    const body = {
+      correo: correo,
+      titulo: titulo,
+      descripcion: descripcion,
+      tipo: tipo,  // Asegúrate de que tipo esté bien definido
+      visto: false, // Notificación no vista por defecto
+      fecha_creacion: new Date().toISOString(), // Fecha de creación
+    };
+  
+    // Asegúrate de imprimir en consola el body para revisar los valores antes de enviarlos
+    console.log('Cuerpo de la notificación:', body);
+  
+    // Asegúrate de enviar el POST a la ruta correcta
+    return this.http.post('http://localhost:3000/api/notificacion_prestamo', body);
   }
+  
 
   getSolicitudesPrestamo(correo: string): Observable<any> {
     const url = `${this.apiUrl}/ps/${correo}`;
@@ -199,9 +266,19 @@ export class AuthService {
     return this.http.put(url, {});
   }
   actualizarEstadoSolicitudAceptado(id_prestamo: number): Observable<any> {
-    const url = `${this.apiUrl}/solicitud/${id_prestamo}/entregado`;
+    const url = `${this.apiUrl}/solicitud/${id_prestamo}/por-entregar`; // Cambiar el estado a "Por entregar" en el backend
     return this.http.put(url, {});
-  }
+}
+// authService.ts
+obtenerCorreoSolicitante(id_prestamo: number): Observable<string> {
+  return this.http.get<{ correo: string }>(`${this.apiUrl}/prestamos/${id_prestamo}/correo`).pipe(
+    map(response => response.correo)
+  );
+}
+marcarEstadoComoEntregado(id_prestamo: number): Observable<any> {
+  const url = `${this.apiUrl}/solicitud/${id_prestamo}/entregado`; // Cambiar el estado a "Por entregar" en el backend
+    return this.http.put(url, {});
+}
   actualizarEstadoSolicitudDevolucion(id_prestamo: number): Observable<any> {
     const url = `${this.apiUrl}/solicitud/${id_prestamo}/devolucion`;
     return this.http.put(url, {});
