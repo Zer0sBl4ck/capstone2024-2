@@ -44,19 +44,21 @@
         <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
           (click)="eliminarSolicitud(solicitud.id_prestamo)">Rechazar</ion-button>
 
-        <ion-button *ngIf="solicitud.estado_prestamo === 'Por entregar'"
-          (click)="marcarEstadoComoEntregado(solicitud.id_prestamo)">Entregar</ion-button>
+        <ion-button class="entregar" *ngIf="solicitud.estado_prestamo === 'Por entregar'"
+          (click)="marcarEstadoComoEntregado(solicitud.id_prestamo)"></ion-button>
+
         <ion-button *ngIf="solicitud.estado_prestamo === 'Por entregar'"
           [routerLink]="['/chat', solicitud.id_prestamo]">
           Chat
         </ion-button>
-        <ion-button *ngIf="solicitud.estado_prestamo === 'Entregado'" [routerLink]="['/chat', solicitud.id_prestamo]">
+
+        <ion-button class="msj" *ngIf="solicitud.estado_prestamo === 'Entregado'" [routerLink]="['/chat', solicitud.id_prestamo]">
           Chat
         </ion-button>
 
 
         <!-- Botón Fecha devolución disponible en estado 'desarrollo' -->
-        <ion-button *ngIf="solicitud.estado_prestamo === 'desarrollo'"
+        <ion-button class="devolucion" *ngIf="solicitud.estado_prestamo === 'desarrollo'"
           (click)="modificarFechaDevolucion(solicitud.id_prestamo, solicitud)">
           Fecha devolución
         </ion-button>

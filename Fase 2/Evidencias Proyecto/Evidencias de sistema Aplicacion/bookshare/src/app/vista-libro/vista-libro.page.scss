@@ -1,7 +1,20 @@
 .fondo {
     ion-toolbar {
-        --background: #229E88 !important;
+        --background: #e96a24 !important;
         color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .titulo {
+            font-weight: bold;
+            color: #ffffff;
+            font-family: Helvetica;
+            font-size: 1.5rem;
+            text-align: center;
+            width: 100%;
+            max-width: 95%;
+        }
 
         ion-icon {
             color: #ffffff;
@@ -11,7 +24,7 @@
 
 ion-content {
     
-    --background: #f0dfc0;
+    --background: #ebe7e7;
 
     .libro-detalle {
         

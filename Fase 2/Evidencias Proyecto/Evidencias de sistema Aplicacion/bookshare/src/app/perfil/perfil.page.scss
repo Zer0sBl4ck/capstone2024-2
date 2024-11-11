@@ -1,6 +1,6 @@
 .fondo {
     ion-toolbar {
-        --background: #229E88 !important;
+        --background: #e96a24 !important;
         color: #ffffff;
 
         ion-title {
@@ -18,10 +18,10 @@
 }
 
 ion-content {
-    --background: #f0dfc0 !important;
+    --background: #ebe7e7 !important;
 
     ion-card {
-        --background: #ffffff !important;
+        --background: #ebe7e7 !important;
         border-radius: 2rem;
         margin-top: 10rem;
         width: 100%;
@@ -31,8 +31,8 @@ ion-content {
             justify-content: center;
 
             img {
-                width: 150px;
-                height: 150px;
+                width: 100%;
+                height: 100%;
                 object-fit: cover;
                 border-radius: 1.5rem;
             }
@@ -54,7 +54,7 @@ ion-content {
 
     .btn-editar {
         color: #ffffff;
-        --background: #229E88;
+        --background: #e96a24;
         border-radius: 5px;
         font-family: Helvetica;
         margin-top: 16px;
@@ -67,7 +67,6 @@ ion-content {
 
 @media (min-width: 2560px) {
     ion-content {
-        --background: #f0dfc0 !important;
     
         ion-card {
             --background: #ffffff !important;
@@ -81,8 +80,8 @@ ion-content {
                 justify-content: center;
     
                 img {
-                    width: 150px;
-                    height: 150px;
+                    max-width: 20%;
+                    max-height: 20%;
                     object-fit: cover;
 
                 }
@@ -113,10 +112,8 @@ ion-content {
 @media (min-width: 1920px) {
 
     ion-content {
-        --background: #f0dfc0 !important;
     
         ion-card {
-            --background: #ffffff !important;
             border-radius: 2rem;
             margin-top: 10rem;
             max-width: 50%;
@@ -127,8 +124,8 @@ ion-content {
                 justify-content: center;
     
                 img {
-                    width: 150px;
-                    height: 150px;
+                    max-width: 20%;
+                    max-height: 20%;
                     object-fit: cover;
 
                 }
@@ -158,10 +155,8 @@ ion-content {
 @media (max-width: 600px) {
 
     ion-content {
-        --background: #f0dfc0 !important;
     
         ion-card {
-            --background: #ffffff !important;
             border-radius: 2rem;
             margin-top: 10rem;
             max-width: 90%;
@@ -172,8 +167,8 @@ ion-content {
                 justify-content: center;
     
                 img {
-                    width: 150px;
-                    height: 150px;
+                    max-width: 50%;
+                    max-height: 50%;
                     object-fit: cover;
 
                 }
@@ -204,10 +199,8 @@ ion-content {
 @media (max-height: 900px) {
 
     ion-content {
-        --background: #f0dfc0 !important;
     
         ion-card {
-            --background: #ffffff !important;
             border-radius: 2rem;
             margin-top: 10rem;
             max-width: 80%;
@@ -218,8 +211,8 @@ ion-content {
                 justify-content: center;
     
                 img {
-                    width: 150px;
-                    height: 150px;
+                    max-width: 40%;
+                    max-height: 40%;
                     object-fit: cover;
 
                 }

@@ -1,6 +1,6 @@
 .fondo {
   ion-toolbar {
-      --background: #229E88 !important;
+      --background: #e96a24 !important;
       color: #ffffff;
       display: flex;
       justify-content: center;
@@ -24,7 +24,7 @@
   
   
   ion-content {
-      --background: #f0dfc0;
+      --background: #ebe7e7;
   
     
     .login-container {
@@ -46,7 +46,7 @@
     
       // Estilo para los ion-labels
       ion-label {
-        color: #229E88;
+        color: #e96a24;
         font-weight: bold;
         font-size: 18px;
       }
@@ -68,7 +68,7 @@
       // Estilo para el botón de iniciar sesión
       ion-button {
         color: #ffffff;
-        --background: #229E88;
+        --background: #e96a24;
         border-radius: 15px;
         font-family: Helvetica;
         margin-top: 16px;
@@ -84,7 +84,7 @@
     
       // Estilo para el enlace de registro
       a {
-        color: #229E88;
+        color: #e96a24;
         font-family: Helvetica;
         font-weight: bold;
         text-decoration: none;

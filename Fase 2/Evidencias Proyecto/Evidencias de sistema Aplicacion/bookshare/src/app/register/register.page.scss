@@ -1,6 +1,6 @@
 .fondo {
     ion-toolbar {
-        --background: #229E88 !important;
+        --background: #e96a24 !important;
         color: #ffffff;
         display: flex;
         justify-content: center;
@@ -24,17 +24,17 @@
 
 /* Color de los labels siempre en verde (o el color que desees) */
 ion-label {
-    color: #229E88 !important; /* Color del label siempre en verde */
+    color: #e96a24 !important; /* Color del label siempre en verde */
 }
 
 /* Asegurar que el color del label no cambie cuando el input esté enfocado */
 ion-item:focus-within ion-label {
-    color: #229E88 !important;
+    color: #e96a24 !important;
 }
 
 /* Mantener el color de los labels como verde incluso si el input es inválido */
 ion-item.ion-invalid ion-label {
-    color: #229E88 !important; /* No cambia el color del label */
+    color: #e96a24 !important; /* No cambia el color del label */
 }
 
 /* Estilos para los mensajes de error (aviso) */
@@ -54,7 +54,7 @@ ion-item.ion-invalid ion-label {
 
   
 ion-content {
-    --background: #f0dfc0;
+    --background: #ebe7e7;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,7 +75,7 @@ ion-content {
         box-sizing: border-box;
 
         ion-label {
-            color: #229E88;
+            color: #e96a24;
             font-size: 25px;
             font-family: Helvetica;
         }
@@ -125,7 +125,7 @@ ion-content {
 
     ion-button {
         color: #ffffff;
-        --background: #229E88;
+        --background: #e96a24;
         border-radius: 15px;
         font-family: Helvetica;
         margin-top: 16px;
@@ -141,7 +141,7 @@ ion-content {
     }
 
     a {
-        color: #229E88;
+        color: #e96a24;
         font-family: Helvetica;
         font-weight: bold;
         text-decoration: none;

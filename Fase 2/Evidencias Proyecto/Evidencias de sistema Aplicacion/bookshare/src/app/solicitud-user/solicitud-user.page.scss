@@ -1,6 +1,6 @@
 .fondo {
     ion-toolbar {
-        --background: #229E88 !important;
+        --background: #e96a24 !important;
         color: #ffffff;
         display: flex;
         justify-content: center;
@@ -23,7 +23,7 @@
 }
 
 ion-content {
-    --background: #f0dfc0;
+    --background: #ebe7e7;
 
     ion-segment {
         --background: transparent;
@@ -32,9 +32,9 @@ ion-content {
 
         .reci,
         .reali {
-            --background: #229E88;
+            --background: #e96a24;
             color: #000000;
-            border: 1px solid #229E88;
+            border: 1px solid #e96a24;
             border-radius: 4px;
             font-family: Helvetica;
         }
@@ -45,7 +45,7 @@ ion-content {
         background: #4d4d4d;
         width: 100%;
         margin-top: 1%;
-        border: 3px solid #229E88;
+        border: 3px solid #e96a24;
         border-radius: 7px;
         display: flex;
         justify-content: center;
@@ -56,7 +56,7 @@ ion-content {
         ion-item {
             --background: #4d4d4d;
             width: 90%;
-            --ion-item-border-color: #229E88;
+            --ion-item-border-color: #e96a24;
 
             ion-label {
                 h2 {
@@ -70,8 +70,15 @@ ion-content {
                 }
             }
 
-            .aceptar {
-                --background: #229E88;
+            .aceptar, .devolucion, .entregar, .chat {
+                --background: #e96a24;
+                color: #ffffff;
+                font-family: Helvetica;
+                border-radius: 7px;
+            }
+
+            .msj {
+                --background: #e96a24;
                 color: #ffffff;
                 font-family: Helvetica;
                 border-radius: 7px;
@@ -84,6 +91,8 @@ ion-content {
                 border-radius: 7px;
                 margin-left: 1%;
             }
+
+
         }
     }
 
@@ -93,7 +102,7 @@ ion-content {
         width: 100%;
         max-width: 80%;
         margin-top: 1%;
-        border: 3px solid #229E88;
+        border: 3px solid #e96a24;
         border-radius: 7px;
         display: flex;
         justify-content: center;
@@ -105,7 +114,7 @@ ion-content {
         ion-item {
             --background: #4d4d4d;
             width: 90%;
-            --ion-item-border-color: #229E88;
+            --ion-item-border-color: #e96a24;
 
             ion-label {
 
@@ -126,9 +135,9 @@ ion-content {
 
     /*Mostrar que no hay solicitudes */
     ion-card {
-        --background: #229E88;
+        --background: #e96a24;
         width: 100%;
-        border: 3px solid #1e6356;
+        border: 3px solid #e96a24;
         border-radius: 5px;
 
 

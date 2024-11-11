@@ -1,6 +1,6 @@
 .fondo {
     ion-toolbar {
-        --background: #229E88 !important;
+        --background: #e96a24 !important;
         color: #ffffff;
         display: flex;
         justify-content: center;
@@ -24,7 +24,7 @@
 
 ion-content {
 
-    --background: #f0dfc0;
+    --background: #ebe7e7;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,15 +54,15 @@ ion-content {
             }
 
             .prestamo,.intercambio {
-                --background: #229E88;
-                font-size: 12px;
+                --background: #e96a24;
+                font-size: 0.8rem;
                 color:#ffffff;
                 font-family: Helvetica;
             }
 
             .eliminar {
                 --background: #c92929;
-                font-size: 12px;
+                font-size: 0.8rem;
                 color:#ffffff;
                 font-family: Helvetica;
 

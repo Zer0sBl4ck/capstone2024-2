@@ -1,24 +1,24 @@
 .fondo {
   ion-toolbar {
-    --background: #229E88 !important;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .titulo {
-      font-weight: bold;
+      --background: #e96a24 !important;
       color: #ffffff;
-      font-family: Helvetica;
-      font-size: 1.5rem;
-      text-align: center;
-      width: 100%;
-      max-width: 95%;
-    }
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    ion-icon {
-      color: #ffffff;
-    }
+      .titulo {
+          font-weight: bold;
+          color: #ffffff;
+          font-family: Helvetica;
+          font-size: 1.5rem;
+          text-align: center;
+          width: 100%;
+          max-width: 95%;
+      }
+
+      ion-icon {
+          color: #ffffff;
+      }
   }
 }
 
@@ -29,7 +29,7 @@ ion-content {
   padding: 15px;
   gap: 8px;
   height: 100vh; /* Altura completa de la ventana */
-  --background: #f0dfc0;
+  --background: #ebe7e7;
   overflow-y: hidden; /* Evitar que el contenido se desplace en la altura completa */
 
   .mensajes-container {
@@ -41,7 +41,7 @@ ion-content {
 
 
   .mensaje-remitente {
-    background-color: #229E88;
+    background-color: #e96a24;
     border-radius: 10px;
     width: 80%;
     max-width: auto;
@@ -73,7 +73,7 @@ ion-content {
   }
 
   .mensaje-receptor {
-    background-color: #3b7558;
+    background-color: #974316;
     border-radius: 10px;
     width: 80%;
     max-width: auto;
@@ -104,7 +104,7 @@ ion-content {
     gap: 8px;
     align-items: center;
     padding: 10px;
-    border-radius: 50px;
+    border-radius: 1rem;
     background-color: #353333;
     /* Color de fondo para diferenciar del resto */
     margin: 0;
@@ -129,7 +129,7 @@ ion-content {
 
     ion-button {
       color: #ffffff;
-      --background: #229E88;
+      --background: #e96a24;
       font-family: Helvetica;
       font-size: 1rem;
       font-weight: bold;
