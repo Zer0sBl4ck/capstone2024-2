@@ -1,6 +1,11 @@
 <ion-header class="fondo">
   <ion-toolbar>
-    <ion-title>Mis Intercambios</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/tabs/home">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="titulo">Mis Intercambios</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -31,7 +36,7 @@
     <ion-item *ngFor="let intercambio of intercambiosComoPrestamista">
       <ion-label>
         <h2>Libro prestado: {{ intercambio.libro_titulo }}</h2>
-        <p>Intercambio usuario: {{ intercambio.ofertante }}</p>
+        <p>Intercambio usuario: {{ intercambio.solicitante }}</p>
         <p>Estado: {{ intercambio.estado }}</p>
         <ion-button (click)="irAIntercambioUsuario(intercambio.id_solicitante,intercambio.id_intercambio)">
           Ver intercambios de solicitante

@@ -24,9 +24,8 @@ export class PersonasOwnerbookPage implements OnInit {
     this.ubicacionSeleccionada=""
     this.idUsuarioLogeado = this.authService.getUserData()?.id_usuario || null;
     this.route.paramMap.subscribe((params) => {
-      this.isbn = params.get('isbn') || ''; // Si no hay ISBN, usa un string vacío
-      if (this.isbn) {
-        // Llamamos al método para cargar las personas que tienen el libro
+      this.isbn = params.get('isbn') || '';
+      if (this.isbn && this.idUsuarioLogeado !== null) {
         this.cargarPersonasConLibro();
       }
     });
@@ -138,6 +137,6 @@ export class PersonasOwnerbookPage implements OnInit {
     }
     return this.personas;
   }
-  
+
   
 }

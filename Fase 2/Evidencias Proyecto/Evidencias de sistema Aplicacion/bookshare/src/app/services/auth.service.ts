@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api
+  private apiUrl = 'http://192.168.1.26:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api
 
   constructor(private http: HttpClient) { }
 
@@ -204,10 +204,9 @@ export class AuthService {
     return this.http.put<any>(`${this.apiUrl}/libros-cambio-intercambio/${isbn}`, { disponible_intercambio });
   }
   getPersonasConLibro(isbn: string, idUsuarioLogeado: number): Observable<any> {
-    const url = `${this.apiUrl}/personas-con-libro/${isbn}`;
+    const url = `${this.apiUrl}/personas-con-libro/${isbn}/${idUsuarioLogeado}`;
     return this.http.get<any>(url);
   }
-
   crearPrestamo(id_usuario_solicitante: string, id_usuario_prestamista: string, id_biblioteca: string): Observable<any> {
     const prestamoData = {
       id_usuario_solicitante,
