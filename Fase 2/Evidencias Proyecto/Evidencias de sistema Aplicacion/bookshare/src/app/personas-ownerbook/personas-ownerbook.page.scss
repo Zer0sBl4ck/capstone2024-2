@@ -1,19 +1,15 @@
+/* Forzar colores en el header y toolbar */
 .fondo {
     ion-toolbar {
         --background: #e96a24 !important;
         color: #ffffff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
 
-        .titulo {
+        ion-title {
             font-weight: bold;
             color: #ffffff;
-            font-family: Helvetica;
-            font-size: 1.5rem;
             text-align: center;
-            width: 100%;
-            max-width: 95%;
+            font-family: Helvetica;
+            display: flex;
         }
 
         ion-icon {
@@ -21,228 +17,119 @@
         }
     }
 }
-
-ion-content {
-    --background: #f0dfc0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5%;
-
-    ion-list {
-        background: #c5bbbb;
-        width: 95%;
-        --border-color: #ffffff;
-
+.fondo-blanco{
+    background-color: white;
+    color: white !important;
+    ion-card {
+        --background: white !important;
         ion-item {
-            --background: #c5bbbb;
-            --ion-item-border-color: transparent;
-            display: flex; /* Cambiado a flex para uso de flex-direction */
-            flex-direction: column; /* Para que los items se apilen verticalmente */
-
-            ion-avatar {
-
-                .foto {}
-            }
-
-            ion-label {
-
-                h2 {
-                    color: #000000;
-                    font-family: Helvetica;
-                }
-
-                p {
-                    color: #000000;
-                    font-family: Helvetica;
-
-                    span {
-                        color: #000000;
-                        font-family: Helvetica;
-
-                    }
-                }
-            }
-
-            ion-button {
-                --background: #229E88;
-                color: #ffffff;
-                font-family: Helvetica;
-            }
+            --background: #e96a24 !important;
         }
     }
-    
-    .nohay {
-            color: #000000;
-            font-family: Helvetica;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
+    ion-list{
+        --background: #e96a24 !important;
     }
     
 }
+.naranjo-header {
+    --background: #FFA500 !important; /* Naranjo */
+    --color: #FFFFFF !important; /* Texto blanco */
+  }
+  
+  ion-toolbar {
+    --background: #FFA500 !important; /* Fondo naranjo */
+    --ion-toolbar-background: #FFA500 !important; /* Fondo naranjo */
+    --color: #FFFFFF !important; /* Texto blanco */
+  }
+  
+  .fondo-blanco {
+    --background: #FFFFFF !important; /* Fondo blanco para ion-content */
+  }
+  
+  /* Estilos para la tarjeta de filtro */
+  .tarjeta-filtro {
+    --background: #FFFFFF !important; /* Fondo blanco */
+    color: #000000 !important; /* Texto negro */
+    margin: 10px;
+    
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para cada tarjeta de persona */
+  .tarjeta-persona {
+    background-color: #FFFFFF !important; /* Fondo blanco */
+    color: #000000 !important; /* Texto negro */
+    margin: 10px;
+
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para ion-select en la tarjeta de filtro */
+  ion-select {
+    --background: #e96a24 !important; /* Fondo blanco */
+    --placeholder-color: #e96a24 !important; /* Texto placeholder negro */
+    --color: #e96a24 !important; /* Texto negro */
+  }
+  
+  /* Estilo de la sección de "No hay datos" */
+  .nohay {
+    text-align: center;
+    color: #888888;
+    font-size: 1.1em;
+  }
+  
+  /* Asegura que el texto principal esté en negro */
+  ion-title,
+  ion-label,
+  ion-select,
+  h2,
+  p {
+    color: #000000 !important; /* Texto negro */
+  }
+  
+  /* Opciones de ion-select */
+  ion-select-option {
+    color: #000000 !important; /* Texto negro en opciones */
+  }
+  
+  /* Asegura que los botones mantengan el color adecuado */
+  ion-button[color="primary"] {
+    --background: #4285f4 !important; /* Azul para Préstamo */
+  }
+  
+  ion-button[color="secondary"] {
+    --background: #34a853 !important; /* Verde para Intercambio */
+  }
+
+  i-item{
+    --background: #34a853 !important; 
+  }
+
+  p{
+    color: white !important;
+  }
+
+  h2{
+    color: white !important;
+  }
+
+  ion-select{
+    color: white !important;
+  }
+
+  .negro{
+    background-color: white;
+  }
+
+  .btn-tarjeta{
+   --background: rgb(255, 81, 0) !important;
+   border-radius: 5px;
+
+ 
+  }
 
 
-@media (min-width: 2560px) {
-    ion-content {
 
-        ion-list {
-            padding: 0 10px;
-            max-width: 80%;
-            margin-left: 25%;
-
-            ion-item {
-                width: 100%;
-                max-width: 60%;
-
-
-                ion-avatar {
-
-                    .foto {}
-                }
-
-                ion-label {
-
-                    h2 {
-                        font-size: 16px;
-
-                    }
-
-                    p {
-                        font-size: 14px;
-
-                        span {
-                            font-size: 14px;
-                        }
-                    }
-                }
-
-                ion-button {
-                    font-size: 14px;
-                }
-            }
-        }
-    }
-}
-
-@media (min-width: 1920px) {
-    ion-content {
-
-        ion-list {
-            background: transparent;
-            padding: 0 10px;
-            max-width: 80%;
-            margin-left: 25%;
-
-            ion-item {
-                width: 100%;
-                max-width: 60%;
-
-
-                ion-avatar {
-
-                    .foto {}
-                }
-
-                ion-label {
-
-                    h2 {
-                        font-size: 16px;
-                    }
-
-                    p {
-                        font-size: 14px;
-
-                        span {
-                            font-size: 14px;
-                        }
-                    }
-                }
-
-                ion-button {
-                    font-size: 14px;
-                }
-            }
-        }
-    }
-}
-
-@media (max-width: 600px) {
-
-    ion-content {
-
-        ion-list {
-            margin-left: 2.5%;
-
-            ion-item {
-
-                ion-avatar {
-
-                    .foto {}
-                }
-
-                ion-label {
-
-                    h2 {
-                        font-size: 14px;
-                    }
-
-                    p {
-                        font-size: 12px;
-
-                        span {
-                            font-size: 12px;
-                        }
-                    }
-                }
-
-                ion-button {
-                    font-size: 12px;
-                }
-            }
-        }
-    }
-}
-
-@media (max-height: 900px) {
-
-    ion-content {
-
-        ion-list {
-            background: transparent;
-            padding: 0 10px;
-            max-width: 85%;
-            margin-left: 20%;
-
-            ion-item {
-                width: 100%;
-                max-width: 70%;
-
-                ion-avatar {
-
-                    .foto {}
-                }
-
-                ion-label {
-
-                    h2 {
-                        font-size: 16px;
-                    }
-
-                    p {
-                        font-size: 14px;
-
-                        span {
-                            font-size: 14px;
-                        }
-                    }
-                }
-
-                ion-button {
-                    font-size: 14px;
-                }
-            }
-        }
-    }
-}
+  
