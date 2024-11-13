@@ -10,6 +10,20 @@ const socketIo = require('socket.io'); // Importa Socket.IO
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Configuración de CORS para las rutas de Express
+app.use(cors({
+  origin: [
+    'http://localhost:8100',  // Frontend en desarrollo
+    'http://192.168.1.26:8100',  // IP local 1
+    'http://192.168.137.1:8100',  // IP local 2
+    'http://192.168.123.79:8100'  // IP local 3
+    // Añade más IPs si es necesario
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos que quieres permitir
+  allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados que quieres permitir
+  credentials: true // Permitir credenciales si es necesario
+}));
+
 // Crea el servidor HTTP
 const server = http.createServer(app);
 const io = socketIo(server, {
@@ -20,20 +34,6 @@ const io = socketIo(server, {
     credentials: true // Permitir credenciales si es necesario
   }
 });
-
-// Configuración de CORS para las rutas de Express
-app.use(cors({
-  origin: [
-    'http://localhost:8100',
-    'http://192.168.1.26:8100',
-    'http://192.168.137.1:8100',
-    'http://192.168.123.79:8100'
-     // Añade tu IP aquí
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos que quieres permitir
-  allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados que quieres permitir
-  credentials: true // Permitir credenciales si es necesario
-}));
 
 // Middleware
 app.use(bodyParser.json()); // Para parsear aplicaciones JSON
