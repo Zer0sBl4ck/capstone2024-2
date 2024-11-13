@@ -230,20 +230,27 @@ export class AuthService {
 
     return this.http.post(`${this.apiUrl}/prestamo`, prestamoData);
   }
-
+  obtenerDetallesPrestamo(id_prestamo: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/prestamos1/${id_prestamo}`);
+  }
   // authService.ts
 
-crearNotificacion_aceptacion(correoSolicitante: string, titulo: string, descripcion: string): Observable<any> {
+  crearNotificacionAceptacion(correo: string, titulo: string, descripcion: string, tipo: string = 'Aceptación de préstamo'): Observable<Object> {
+    const body = {
+      correo: correo,
+      titulo: titulo,
+      descripcion: descripcion,
+      tipo: tipo,  // Asegúrate de que tipo esté bien definido
+      visto: false, // Notificación no vista por defecto
+      fecha_creacion: new Date().toISOString(), // Fecha de creación
+    };
   
-  const body = {
-    correoSolicitante,
-    
-    titulo,
-    descripcion
-  };
-  return this.http.post('http://localhost:3000/api/notificacion_aceptacion', body);
-}
-
+    // Asegúrate de imprimir en consola el body para revisar los valores antes de enviarlos
+    console.log('Cuerpo de la notificación de aceptación:', body);
+  
+    // Asegúrate de enviar el POST a la ruta correcta
+    return this.http.post('http://localhost:3000/api/notificacion_aceptacion', body);
+  }
   crearNotificacionPrestamo(correo: string, titulo: string, descripcion: string, tipo: string = 'Solicitud de préstamo'): Observable<Object> {
     const body = {
       correo: correo,

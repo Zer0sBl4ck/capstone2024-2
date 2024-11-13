@@ -140,37 +140,48 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
-  actualizarEstadoSolicitudAceptado(id_prestamo: number, solicitud: any): void {
-    const correoSolicitante = solicitud.correo; // Obtener el correo del solicitante
+  actualizarEstadoSolicitudAceptado(id_prestamo: number): void {
+    // Obtener los detalles del préstamo
+    this.authService.obtenerDetallesPrestamo(id_prestamo).subscribe(
+      (prestamo) => {
+        const correoSolicitante = prestamo.correo_solicitante; // Obtener el correo del solicitante
   
-    if (!correoSolicitante) {
-      console.error('No se pudo obtener el correo del solicitante');
-      return; // Salir si no se puede obtener el correo
-    }
+        if (!correoSolicitante) {
+          console.error('No se pudo obtener el correo del solicitante');
+          return; // Salir si no se puede obtener el correo
+        }
   
-    // Actualizar el estado de la solicitud a "Aceptado"
-    this.authService.actualizarEstadoSolicitudAceptado(id_prestamo).subscribe(
-      (response) => {
-        console.log('Estado de la solicitud actualizado a "Aceptado":', response);
+        // Actualizar el estado de la solicitud a "Aceptado"
+        this.authService.actualizarEstadoSolicitudAceptado(id_prestamo).subscribe(
+          (response) => {
+            console.log('Estado de la solicitud actualizado a "Aceptado":', response);
   
-        const titulo = 'Préstamo Aceptado';
-        const descripcion = 'Tu solicitud de préstamo ha sido aceptada. Dirígete al chat para más detalles.';
+            const titulo = 'Préstamo Aceptado';
+            const descripcion = 'Tu solicitud de préstamo ha sido aceptada. Dirígete al chat para más detalles.';
   
-        // Llamar al servicio para crear la notificación de aceptación solo para el solicitante
-        this.authService.crearNotificacion_aceptacion(correoSolicitante, titulo, descripcion).subscribe(
-          (notifResponse) => {
-            console.log('Notificación de aceptación enviada al solicitante:', notifResponse);
+            // Verificar los datos antes de enviar la solicitud
+            console.log('Datos de la notificación:', { correo: correoSolicitante, titulo, descripcion });
+  
+            // Llamar al servicio para crear la notificación de aceptación solo para el solicitante
+            this.authService.crearNotificacionAceptacion(correoSolicitante, titulo, descripcion).subscribe(
+              (notifResponse) => {
+                console.log('Notificación de aceptación enviada al solicitante:', notifResponse);
+              },
+              (notifError) => {
+                console.error('Error al enviar la notificación de aceptación al solicitante:', notifError);
+              }
+            );
+  
+            // Recargar las solicitudes después de modificar el estado
+            this.cargarSolicitudesRecibidas();
           },
-          (notifError) => {
-            console.error('Error al enviar la notificación de aceptación al solicitante:', notifError);
+          (error) => {
+            console.error('Error al actualizar el estado de la solicitud:', error);
           }
         );
-  
-        // Recargar las solicitudes después de modificar el estado
-        this.cargarSolicitudesRecibidas();
       },
       (error) => {
-        console.error('Error al actualizar el estado de la solicitud:', error);
+        console.error('Error al obtener los detalles del préstamo:', error);
       }
     );
   }
@@ -179,8 +190,7 @@ export class SolicitudUserPage implements OnInit {
   
   
   
-  
-  modificarFechaDevolucion(id_prestamo: number, solicitud: any): void {
+  modificarFechaDevolucion(id_prestamo: number): void {
     const actionSheet = this.actionSheetController.create({
       header: 'Selecciona la duración de la devolución',
       buttons: [
@@ -189,7 +199,7 @@ export class SolicitudUserPage implements OnInit {
           handler: () => {
             this.actualizarFechaDevolucion(id_prestamo, 1);
             // Pasar solicitud.correo al actualizar el estado y enviar la notificación
-            this.actualizarEstadoSolicitudAceptado(id_prestamo, solicitud);
+            this.actualizarEstadoSolicitudAceptado(id_prestamo);
           }
         },
         {
@@ -197,7 +207,7 @@ export class SolicitudUserPage implements OnInit {
           handler: () => {
             this.actualizarFechaDevolucion(id_prestamo, 2);
             // Pasar solicitud.correo al actualizar el estado y enviar la notificación
-            this.actualizarEstadoSolicitudAceptado(id_prestamo, solicitud);
+            this.actualizarEstadoSolicitudAceptado(id_prestamo);
           }
         },
         {
@@ -205,7 +215,7 @@ export class SolicitudUserPage implements OnInit {
           handler: () => {
             this.actualizarFechaDevolucion(id_prestamo, 3);
             // Pasar solicitud.correo al actualizar el estado y enviar la notificación
-            this.actualizarEstadoSolicitudAceptado(id_prestamo, solicitud);
+            this.actualizarEstadoSolicitudAceptado(id_prestamo);
           }
         },
         {

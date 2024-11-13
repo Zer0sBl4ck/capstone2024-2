@@ -406,7 +406,30 @@ router.get('/obtener-detalles-libro/:id_prestamo', async (req, res) => {
   }
 });
 
+router.get('/prestamos1/:id_prestamo', async (req, res) => {
+  const { id_prestamo } = req.params;
 
+  try {
+    // Obtener los detalles del préstamo
+    const query = `
+      SELECT p.id_prestamo, p.id_usuario_solicitante, u.correo AS correo_solicitante
+      FROM prestamo p
+      JOIN usuario u ON p.id_usuario_solicitante = u.id_usuario
+      WHERE p.id_prestamo = ?`;
+
+    const [rows] = await db.execute(query, [id_prestamo]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Préstamo no encontrado' });
+    }
+
+    // Devuelve los detalles del préstamo
+    return res.status(200).json(rows[0]);
+  } catch (error) {
+    console.error('Error al obtener los detalles del préstamo:', error.message);
+    return res.status(500).json({ message: 'Error interno del servidor.', error: error.message });
+  }
+});
 // Endpoint para obtener un préstamo por su ID
 // Endpoint para obtener un préstamo por su ID
 router.get('/prestamos/:id_prestamo', (req, res) => {

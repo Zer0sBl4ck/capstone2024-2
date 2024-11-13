@@ -60,13 +60,13 @@
 
         <!-- Botón Fecha devolución disponible en estado 'desarrollo' -->
         <ion-button class="devolucion" *ngIf="solicitud.estado_prestamo === 'desarrollo'"
-          (click)="modificarFechaDevolucion(solicitud.id_prestamo, solicitud)">
+          (click)="modificarFechaDevolucion(solicitud.id_prestamo)">
           Fecha devolución
         </ion-button>
 
         <!-- Botón Prestar disponible solo si la fecha de devolución ha sido seleccionada y estado aceptado -->
         <ion-button class="aceptar" *ngIf="solicitud.estado_prestamo === 'aceptado'"
-          (click)="actualizarEstadoSolicitudAceptado(solicitud.id_prestamo, solicitud)">
+          (click)="actualizarEstadoSolicitudAceptado(solicitud.id_prestamo)">
           Prestar
         </ion-button>
 
@@ -103,7 +103,7 @@
 
        
         <!-- Botón para agregar reseña, solo visible si el estado es 'Entregado' y es el solicitante -->
-        <ion-button *ngIf="solicitud.estado_prestamo === 'Entregado' && esSolicitante(solicitud)" 
+        <ion-button *ngIf="solicitud.estado_prestamo === 'Entregado' && esSolicitante(solicitud)"  
         (click)="irAResena(solicitud.id_prestamo)">
 Agregar Reseña
 </ion-button>

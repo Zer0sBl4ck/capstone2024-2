@@ -13,6 +13,7 @@
   <!-- Mostrar los detalles del libro si están disponibles -->
   <div *ngIf="libro">
     <h2 class="titulo">{{ libro.titulo }}</h2>
+    <p><strong>Prestamista: </strong> {{ libro.prestamista }}</p>
     <p><strong>Autor:</strong> {{ libro.autor }}</p>
     <p><strong>ISBN:</strong> {{ libro.isbn }}</p>
 
