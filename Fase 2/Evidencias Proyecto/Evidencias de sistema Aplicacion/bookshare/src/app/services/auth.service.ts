@@ -281,7 +281,9 @@ export class AuthService {
     const url = `${this.apiUrl}/solicitud/${id_prestamo}`;
     return this.http.delete(url);
   }
-
+  cancelarSolicitud(id_prestamo: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/cancelar-solicitud/${id_prestamo}`, {});
+  }
   actualizarEstadoSolicitud(id_prestamo: number): Observable<any> {
     const url = `${this.apiUrl}/solicitud/${id_prestamo}/desarrollo`;
     return this.http.put(url, {});
@@ -295,6 +297,12 @@ obtenerCorreoSolicitante(id_prestamo: number): Observable<string> {
   return this.http.get<{ correo: string }>(`${this.apiUrl}/prestamos/${id_prestamo}/correo`).pipe(
     map(response => response.correo)
   );
+}
+actualizarEstadoResena(id_prestamo: number): Observable<any> {
+  return this.http.post(`${this.apiUrl}/actualizar-estado-resena/${id_prestamo}`, {});
+}
+eliminarSolicitud1(id_prestamo: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/eliminar-solicitud/${id_prestamo}`);
 }
 marcarEstadoComoEntregado(id_prestamo: number): Observable<any> {
   const url = `${this.apiUrl}/solicitud/${id_prestamo}/entregado`; // Cambiar el estado a "Por entregar" en el backend

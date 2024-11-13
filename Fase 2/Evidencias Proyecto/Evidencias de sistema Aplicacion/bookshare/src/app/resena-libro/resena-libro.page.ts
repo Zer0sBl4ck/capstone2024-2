@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service'; // Asegúrate de que la ruta sea correcta
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resena-libro',
@@ -16,7 +17,8 @@ export class ResenaLibroPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute, 
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class ResenaLibroPage implements OnInit {
           console.log('Reseña agregada con éxito:', response);  // Log
           alert('¡Reseña agregada con éxito!');
           // Redirigir o realizar alguna otra acción (ej. volver a la página de libros o al perfil)
+          this.router.navigate(['/solicitud-user']);
         },
         (error) => {
           console.error('Error al agregar la reseña:', error);

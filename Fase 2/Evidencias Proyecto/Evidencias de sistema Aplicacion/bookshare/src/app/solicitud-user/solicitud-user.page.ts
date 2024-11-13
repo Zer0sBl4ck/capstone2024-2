@@ -71,35 +71,68 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
-
+  eliminarSolicitud1(id_prestamo: number): void {
+    this.authService.eliminarSolicitud(id_prestamo).subscribe(
+      (response) => {
+        console.log('Solicitud eliminada:', response);
+        this.cargarSolicitudesRecibidas();
+        
+      },
+      (error) => {
+        console.error('Error al eliminar la solicitud:', error);
+      }
+    );
+  }
+  cancelarSolicitud(id_prestamo: number): void {
+    this.authService.cancelarSolicitud(id_prestamo).subscribe(
+      (response) => {
+        console.log('Solicitud cancelada:', response);
+        this.cargarSolicitudesRecibidas();
+      },
+      (error) => {
+        console.error('Error al cancelar la solicitud:', error);
+      }
+    );
+  }
   esSolicitante(solicitud: any): boolean {
     // Compara el ID del usuario actual con el ID del solicitante de la solicitud
     return solicitud.id_usuario_solicitante === this.authService.getCurrentUserId();
   }
   irAResena(id_prestamo: number): void {
-    this.authService.obtenerDetallesLibroPorPrestamo(id_prestamo).subscribe(
+    // Llamada para actualizar el estado de la reseña
+    this.authService.actualizarEstadoResena(id_prestamo).subscribe(
       (response) => {
-        console.log('Datos del libro obtenidos:', response); // Log para verificar los datos obtenidos
-        // Navega a la página de reseñas pasando todos los datos del libro
-        this.router.navigate(['/resena-libro'], {
-          queryParams: {
-            id_prestamo: id_prestamo,
-            isbn: response.isbn,
-            titulo: response.titulo,
-            autor: response.autor,
-            descripcion: response.descripcion,
-            genero: response.genero,
-            prestamista: response.nombre_usuario
+        console.log('Estado de la solicitud actualizado a "Reseña Exitosa":', response);
+  
+        // Luego, obtenemos los detalles del libro y navegamos a la página de reseñas
+        this.authService.obtenerDetallesLibroPorPrestamo(id_prestamo).subscribe(
+          (response) => {
+            console.log('Datos del libro obtenidos:', response); // Log para verificar los datos obtenidos
+            
+            // Navega a la página de reseñas pasando todos los datos del libro
+            this.router.navigate(['/resena-libro'], {
+              queryParams: {
+                id_prestamo: id_prestamo,
+                isbn: response.isbn,
+                titulo: response.titulo,
+                autor: response.autor,
+                descripcion: response.descripcion,
+                genero: response.genero,
+                prestamista: response.nombre_usuario
+              }
+            });
+          },
+          (error) => {
+            console.error('Error al obtener los detalles del libro:', error);
           }
-        });
+        );
       },
       (error) => {
-        console.error('Error al obtener los detalles del libro:', error);
+        console.error('Error al actualizar el estado de la solicitud:', error);
       }
     );
   }
   
-
 
   // Función para actualizar el estado de una solicitud recibida a 'desarrollo'
   modificarEstadoSolicitud(id_prestamo: number): void {

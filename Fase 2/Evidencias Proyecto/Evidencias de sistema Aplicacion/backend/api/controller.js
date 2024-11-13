@@ -397,7 +397,40 @@ router.get('/libros-estado-false', async (req, res) => {
     return res.status(500).json({ message: 'Error interno del servidor.', error: error.message });
   }
 });
+router.post('/cancelar-solicitud/:id_prestamo', async (req, res) => {
+  const { id_prestamo } = req.params;
 
+  try {
+    const query = 'UPDATE prestamo SET estado_prestamo = "Cancelado" WHERE id_prestamo = ?';
+    const [result] = await db.execute(query, [id_prestamo]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Solicitud no encontrada' });
+    }
+
+    return res.status(200).json({ message: 'Solicitud cancelada exitosamente' });
+  } catch (error) {
+    console.error('Error al cancelar la solicitud:', error.message);
+    return res.status(500).json({ message: 'Error interno del servidor.', error: error.message });
+  }
+});
+router.post('/actualizar-estado-resena/:id_prestamo', async (req, res) => {
+  const { id_prestamo } = req.params;
+
+  try {
+    const query = 'UPDATE prestamo SET estado_prestamo = "Reseña Exitosa" WHERE id_prestamo = ?';
+    const [result] = await db.execute(query, [id_prestamo]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Solicitud no encontrada' });
+    }
+
+    return res.status(200).json({ message: 'Estado de la solicitud actualizado a "Reseña Exitosa"' });
+  } catch (error) {
+    console.error('Error al actualizar el estado de la solicitud:', error.message);
+    return res.status(500).json({ message: 'Error interno del servidor.', error: error.message });
+  }
+});
 router.get('/obtener-detalles-libro/:id_prestamo', async (req, res) => {
   const { id_prestamo } = req.params;
 
@@ -425,6 +458,23 @@ router.get('/obtener-detalles-libro/:id_prestamo', async (req, res) => {
   }
 });
 
+router.delete('/eliminar-solicitud1/:id_prestamo', async (req, res) => {
+  const { id_prestamo } = req.params;
+
+  try {
+    const query = 'DELETE FROM prestamo WHERE id_prestamo = ?';
+    const [result] = await db.execute(query, [id_prestamo]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Solicitud no encontrada' });
+    }
+
+    return res.status(200).json({ message: 'Solicitud eliminada exitosamente' });
+  } catch (error) {
+    console.error('Error al eliminar la solicitud:', error.message);
+    return res.status(500).json({ message: 'Error interno del servidor.', error: error.message });
+  }
+});
 router.get('/prestamos1/:id_prestamo', async (req, res) => {
   const { id_prestamo } = req.params;
 
