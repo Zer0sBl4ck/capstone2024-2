@@ -1,0 +1,105 @@
+ion-header {
+    --background: #ffffff; /* Fondo blanco */
+    --color: #ffffff; /* Letras blancas */
+  }
+  
+  ion-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff; /* Letras blancas */
+  }
+  
+  ion-content {
+    --background: #ebe7e7; /* Fondo naranja */
+  }
+  
+  ion-list.list-md {
+    background: #ebe7e7 !important;
+    margin: 0;
+    padding: 0;
+
+
+    
+  }
+  
+  ion-item {
+    --background: #ff7b00; /* Fondo blanco */
+    --border-color: #ccc;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  ion-label {
+    font-size: 16px;
+    color: #ffffff; /* Letras blancas */
+  }
+  
+  ion-label h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    color: #ffffff; /* Letras blancas */
+  }
+  
+  ion-label p {
+    margin: 5px 0;
+    color: #ffffff; /* Letras blancas */
+  }
+  
+  ion-label p[nueva] {
+    color: red;
+  }
+  
+  ion-button {
+    --background: #ffffff; /* Fondo blanco */
+    --color: #ff9800; /* Letras naranjas */
+    margin-left: 10px;
+  }
+  
+  ion-button[color="danger"] {
+    --background: #eb445a;
+    --color: #ffffff; /* Letras blancas */
+  }
+  
+  ion-card {
+    --background: #ffffff; /* Fondo blanco */
+    --border-color: #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  ion-card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff9800; /* Letras naranjas */
+  }
+  
+  .fondo {
+    ion-toolbar {
+        --background: #e96a24 !important;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .titulo {
+            font-weight: bold;
+            color: #ffffff;
+            font-family: Helvetica;
+            font-size: 1.5rem;
+            text-align: center;
+            width: 100%;
+            max-width: 95%;
+        }
+
+        ion-icon {
+            color: #ffffff;
+        }
+    }
+}
+  
+  ion-card-content {
+    font-size: 16px;
+    color: #ff9800; /* Letras naranjas */
+  }
