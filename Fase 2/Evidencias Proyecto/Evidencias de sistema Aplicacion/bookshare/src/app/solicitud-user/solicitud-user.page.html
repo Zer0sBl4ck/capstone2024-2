@@ -36,6 +36,9 @@
           <p>{{ solicitud.nombre_usuario }}</p>
         </ion-label>
 
+        <ion-button (click)="reportarUsuario(solicitud.id_solicitante, solicitud.id_prestamista)">
+          Reportar al solicitante
+        </ion-button>
         <!-- Botón Aceptar solo si está pendiente -->
         <ion-button class="aceptar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
           (click)="modificarEstadoSolicitud(solicitud.id_prestamo)">Aceptar</ion-button>

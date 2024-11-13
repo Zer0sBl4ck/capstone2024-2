@@ -9,7 +9,11 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+<<<<<<< HEAD
   private apiUrl = 'http://192.168.1.26:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api
+=======
+  private apiUrl = 'http://localhost:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api
+>>>>>>> 2cc23d91ed4cf2036cc6f6b4221584d5395b65b4
 
   constructor(private http: HttpClient) { }
 
@@ -367,6 +371,16 @@ marcarEstadoComoEntregado(id_prestamo: number): Observable<any> {
       id_biblioteca_prestamista: idBibliotecaPrestamista
     });
   }
+
+  reportarUsuario(usuarioReportado: number, usuarioReportante: number): Observable<any> {
+    console.log('Reportando usuario:', usuarioReportado, usuarioReportante);
+  
+    return this.http.post<any>(`${this.apiUrl}/reportar`, {
+      usuario_reportado: usuarioReportado,
+      usuario_reportante: usuarioReportante
+    });
+  }
+  
   
   
   

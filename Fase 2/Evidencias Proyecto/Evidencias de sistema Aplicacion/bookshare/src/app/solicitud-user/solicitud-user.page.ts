@@ -242,4 +242,15 @@ export class SolicitudUserPage implements OnInit {
       }
     }, 2000);
   }
+  reportarUsuario(usuarioReportado: number, usuarioReportante: number): void {
+    this.authService.reportarUsuario(usuarioReportado, usuarioReportante).subscribe(
+      (response) => {
+        console.log('Usuario reportado correctamente:', response);
+        // Puedes mostrar un mensaje de éxito o actualizar el UI aquí
+      },
+      (error) => {
+        console.error('Error al reportar usuario:', error);
+      }
+    );
+  }
 }

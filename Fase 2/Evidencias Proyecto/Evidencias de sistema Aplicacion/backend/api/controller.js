@@ -68,27 +68,33 @@ router.post('/login', async (req, res) => {
   const { correo, contrasena } = req.body;
 
   try {
-    
+    // Buscar al usuario en la base de datos por correo
     const [users] = await db.query('SELECT * FROM usuario WHERE correo = ?', [correo]);
 
-   
+    // Si no se encuentra el usuario
     if (!users || users.length === 0) {
       return res.status(401).json({ message: 'Credenciales incorrectas.' });
     }
 
-    
     const foundUser = users[0];
 
-    
+    // Verificar si el usuario está suspendido
+    if (foundUser.fecha_suspension && new Date(foundUser.fecha_suspension) > new Date()) {
+      return res.status(403).json({ message: `Tu cuenta está suspendida hasta el ${foundUser.fecha_suspension}. Por acomulación de reportes.` });
+    }
+
+    // Comparar la contraseña ingresada con la contraseña almacenada
     const isValid = await bcrypt.compare(contrasena, foundUser.contrasena);
 
+    // Si la contraseña es incorrecta
     if (!isValid) {
       return res.status(401).json({ message: 'Credenciales incorrectas.' });
     }
 
-    
+    // Crear el token de autenticación
     const token = jwt.sign({ id: foundUser.id_usuario }, 'clave_unica', { expiresIn: '1h' });
 
+    // Responder con éxito y los datos del usuario
     return res.status(200).json({
       message: 'Inicio de sesión exitoso',
       token,
@@ -104,6 +110,7 @@ router.post('/login', async (req, res) => {
     return res.status(500).json({ message: 'Error interno del servidor.' });
   }
 });
+
 
 router.post('/libros', async (req, res) => {
   const { isbn, titulo, autor, descripcion, genero, imagen_libro } = req.body; // Eliminamos nuevo_campo
@@ -699,7 +706,7 @@ router.get('/ps/:correo', async (req, res) => {
 
   // Consulta para obtener las solicitudes de préstamo donde el correo coincide con el prestamista
   const getSolicitudesQuery = `
-    SELECT p.id_prestamo, p.id_usuario_solicitante, p.id_usuario_prestamista, p.id_biblioteca, 
+    SELECT p.id_prestamo, p.id_usuario_solicitante AS id_solicitante, p.id_usuario_prestamista AS id_prestamista, p.id_biblioteca, 
            u.nombre_usuario AS prestamista, libro.titulo AS titulo, u.correo ,a.correo AS correo_2, p.estado_prestamo,
            p.fecha_prestamo
     FROM prestamo p
@@ -731,7 +738,7 @@ router.get('/ss/:correo', async (req, res) => {
 
   // Consulta para obtener las solicitudes de préstamo donde el correo coincide con el solicitante
   const getSolicitudesQuery = `
-    SELECT p.id_prestamo, p.id_usuario_solicitante, p.id_usuario_prestamista, p.id_biblioteca, 
+    SELECT p.id_prestamo, p.id_usuario_solicitante AS id_solicitante, p.id_usuario_prestamista AS id_prestamista, p.id_biblioteca, 
            u.nombre_usuario AS prestamista, libro.titulo AS titulo, u.correo, a.correo AS correo_2, 
            p.estado_prestamo, p.fecha_prestamo
     FROM prestamo p
@@ -1384,6 +1391,27 @@ router.put('/actualizarBibliotecaPrestamista', (req, res) => {
     }
   });
 });
+
+router.post('/reportar', (req, res) => {
+  const { usuario_reportado, usuario_reportante } = req.body;
+
+  // Llamar al procedimiento ReportarUsuario
+  const query = 'CALL ReportarUsuario(?, ?)';
+
+  db.query(query, [usuario_reportado, usuario_reportante], (error, results) => {
+    if (error) {
+      console.error('Error al reportar usuario:', error);
+      if (error.code === 'ER_SIGNAL_EXCEPTION' && error.sqlState === '45000') {
+        return res.status(400).json({ error: 'Este usuario ya ha reportado a este usuario.' });
+      }
+      return res.status(500).json({ error: 'Hubo un error al reportar al usuario.' });
+    }
+
+    // Si todo sale bien, respondemos con éxito
+    res.status(200).json({ message: 'Reporte realizado correctamente', results });
+  });
+});
+
 
 
 
