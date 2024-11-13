@@ -9,7 +9,7 @@
       <ion-list>
         <ion-button (click)="goToProfile()">
           <ion-icon name="person-outline" slot="start"></ion-icon>
-          Perfil cuenta   
+          Perfil cuenta
         </ion-button>
 
         <ion-button routerLink="/favoritos">
@@ -26,7 +26,7 @@
           <ion-icon name="add-outline" slot="start"></ion-icon>
           Agregar libro
         </ion-button>
-        
+
         <ion-button (click)="goIntercambio()" *ngIf="userRole === 'usuario'">
           <ion-icon name="add-outline" slot="start"></ion-icon>
           Intercambio
@@ -81,25 +81,22 @@
     <ion-content style="--background: #ebe7e7;">
       <ion-card-header>
         <div class="foto-container" *ngIf="userProfile">
-          <a [routerLink]="'/perfil'">  <!-- Redirige al perfil al hacer clic en la imagen -->
-            <img *ngIf="userProfile.foto_perfil_base64" 
-                 [src]="'data:image/jpeg;base64,' + userProfile.foto_perfil_base64"
-                 alt="Foto de perfil" class="profile-image" (click)="goToProfile()"/>
+          <a [routerLink]="'/perfil'"> <!-- Redirige al perfil al hacer clic en la imagen -->
+            <img *ngIf="userProfile.foto_perfil_base64"
+              [src]="'data:image/jpeg;base64,' + userProfile.foto_perfil_base64" alt="Foto de perfil"
+              class="profile-image" (click)="goToProfile()" />
           </a>
-      
+
           <div class="welcome-message-container">
             <ion-title *ngIf="isLoggedIn" class="welcome-message">
-              
+
             </ion-title>
           </div>
         </div>
       </ion-card-header>
-      
+
 
       <div id="container">
-       
-        
-      
 
         <div class="book-cover">
           <img class="banner-image" src="assets/imagenes/banner-02.jpg" alt="">
@@ -112,10 +109,8 @@
             <p>{{ book.titulo }}</p>
             <p>{{ book.autor }}</p>
             <div class="rating">
-              <span *ngFor="let star of stars; let starIndex = index"
-                    class="star"
-                    (click)="rateBook(i, starIndex + 1)"
-                    [innerHTML]="starIndex < book.selectedRating ? '&#9733;' : '&#9734;'"></span>
+              <span *ngFor="let star of stars; let starIndex = index" class="star" (click)="rateBook(i, starIndex + 1)"
+                [innerHTML]="starIndex < book.selectedRating ? '&#9733;' : '&#9734;'"></span>
             </div>
           </swiper-slide>
         </swiper-container>

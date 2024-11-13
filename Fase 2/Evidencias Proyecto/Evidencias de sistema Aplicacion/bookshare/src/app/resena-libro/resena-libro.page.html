@@ -1,20 +1,24 @@
-<ion-header>
+<ion-header class="fondo">
   <ion-toolbar>
-    <ion-title>Reseña del Libro</ion-title>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="titulo">Reseña del libro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <!-- Mostrar los detalles del libro si están disponibles -->
   <div *ngIf="libro">
-    <h2>{{ libro.titulo }}</h2>
+    <h2 class="titulo">{{ libro.titulo }}</h2>
     <p><strong>Autor:</strong> {{ libro.autor }}</p>
     <p><strong>ISBN:</strong> {{ libro.isbn }}</p>
     <p><strong>Descripción:</strong> {{ libro.descripcion }}</p>
 
-    <!-- Aquí puedes agregar el formulario para la reseña y valoración -->
     <ion-item>
-      <ion-label>Calificación</ion-label>
+      <ion-label position="stacked">Calificación</ion-label>
       <ion-select [(ngModel)]="calificacion">
         <ion-select-option value="1">1</ion-select-option>
         <ion-select-option value="2">2</ion-select-option>
@@ -23,10 +27,17 @@
         <ion-select-option value="5">5</ion-select-option>
       </ion-select>
     </ion-item>
+
     <ion-item>
-      <ion-label>Comentario</ion-label>
-      <ion-textarea [(ngModel)]="comentario"></ion-textarea>
+      <ion-label position="stacked">Comentario</ion-label>
+      <ion-select [(ngModel)]="comentario">
+        <ion-select-option value="supero las expectativas">Superó las expectativas</ion-select-option>
+        <ion-select-option value="cumplio con las expectativas">Cumplió con las expectativas</ion-select-option>
+        <ion-select-option value="no cumplio con las expectativas">No cumplió con las expectativas</ion-select-option>
+    </ion-select>
+    
     </ion-item>
+    
     <ion-button (click)="agregarResena()">Enviar Reseña</ion-button>
 
   </div>

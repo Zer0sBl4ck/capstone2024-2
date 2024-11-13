@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://192.168.123.79:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api
+  private apiUrl = 'http://192.168.1.26:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api
 
   constructor(private http: HttpClient) { }
 
