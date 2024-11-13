@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-button routerLink="/tabs/home">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
-    </ion-button>
+      </ion-button>
     </ion-buttons>
     <ion-title class="titulo">Mis Libros</ion-title>
   </ion-toolbar>
@@ -15,27 +15,27 @@
     <ion-thumbnail slot="start">
       <img class="imagen" [src]="'data:image/jpeg;base64,' + libro.imagen_base64" alt="Imagen del libro" />
     </ion-thumbnail>
-    
+
     <ion-label>
       <h2 class="titulo">{{ libro.titulo }}</h2>
-      
+
       <!-- Mostrar botones solo si el usuario logueado es el propietario -->
-      <ion-button *ngIf="esPropietario" class="prestamo" 
-                  (click)="cambiarEstadoPrestamo(libro.isbn, !libro.disponible_prestamo)">
+      <ion-button *ngIf="esPropietario" class="prestamo"
+        (click)="cambiarEstadoPrestamo(libro.isbn, !libro.disponible_prestamo)">
         {{ libro.disponible_prestamo ? 'No Disponible para prestamo' : 'Disponible para prestamo' }}
       </ion-button>
 
-      <ion-button *ngIf="esPropietario" class="intercambio" 
-                  (click)="cambiarEstadoIntercambio(libro.isbn, !libro.disponible_intercambio)">
+      <ion-button *ngIf="esPropietario" class="intercambio"
+        (click)="cambiarEstadoIntercambio(libro.isbn, !libro.disponible_intercambio)">
         {{ libro.disponible_intercambio ? 'No Disponible para intercambio' : 'Disponible para intercambio' }}
       </ion-button>
-      <ion-button *ngIf="esPropietario" class="eliminar" (click)="eliminarLibroBiblioteca(libro.isbn)">Eliminar Libro</ion-button>
+      <ion-button *ngIf="esPropietario" class="eliminar" (click)="eliminarLibroBiblioteca(libro.isbn)">Eliminar
+        Libro</ion-button>
 
-      
+
     </ion-label>
     <br>
-  
+
   </ion-item>
 
 </ion-content>
-

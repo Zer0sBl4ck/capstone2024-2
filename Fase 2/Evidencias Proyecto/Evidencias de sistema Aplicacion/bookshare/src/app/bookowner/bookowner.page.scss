@@ -32,9 +32,12 @@ ion-content {
 
     ion-item {
         --background: transparent !important;
-        max-width: 80%;
-        width:100%;
+        max-width: 70%;
+        width: 100%;
         --ion-item-border-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
 
         ion-thumbnail {
@@ -48,48 +51,223 @@ ion-content {
 
             .titulo {
                 font-size: 14px;
-                color:#000000;
+                color: #000000;
                 font-family: Helvetica;
                 font-weight: bold;
             }
 
-            .prestamo,.intercambio {
+            .prestamo,
+            .intercambio {
                 --background: #e96a24;
                 font-size: 0.8rem;
-                color:#ffffff;
+                color: #ffffff;
                 font-family: Helvetica;
             }
 
             .eliminar {
                 --background: #c92929;
                 font-size: 0.8rem;
-                color:#ffffff;
+                color: #ffffff;
                 font-family: Helvetica;
-
             }
         }
-
     }
+}
 
+@media (max-width: 2560px) {
+    ion-content {
+
+        --background: #ebe7e7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+
+        ion-item {
+            margin-left: 55rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            ion-thumbnail {
+                .imagen {
+                    border-radius: 8%;
+                }
+            }
+
+            ion-label {
+
+                .titulo {
+                    font-size: 14px;
+                    color: #000000;
+                    font-family: Helvetica;
+                    font-weight: bold;
+                }
+
+                .prestamo,
+                .intercambio {
+                    --background: #e96a24;
+                    font-size: 0.8rem;
+                    color: #ffffff;
+                    font-family: Helvetica;
+                }
+
+                .eliminar {
+                    --background: #c92929;
+                    font-size: 0.8rem;
+                    color: #ffffff;
+                    font-family: Helvetica;
+                }
+            }
+        }
+    }
 }
 
 
+@media (max-width: 1920px) {
 
+    ion-content {
 
-@media (min-width: 1920px) {
-    ion-item {
-        margin-left: 32%; 
+        --background: #ebe7e7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+
+        ion-item {
+            margin-left: 35rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            ion-thumbnail {
+                .imagen {
+                    border-radius: 8%;
+                }
+            }
+
+            ion-label {
+
+                .titulo {
+                    font-size: 14px;
+                    color: #000000;
+                    font-family: Helvetica;
+                    font-weight: bold;
+                }
+
+                .prestamo,
+                .intercambio {
+                    --background: #e96a24;
+                    font-size: 0.8rem;
+                    color: #ffffff;
+                    font-family: Helvetica;
+                }
+
+                .eliminar {
+                    --background: #c92929;
+                    font-size: 0.8rem;
+                    color: #ffffff;
+                    font-family: Helvetica;
+                }
+            }
+        }
     }
 }
 
 @media (max-width: 600px) {
-    ion-item {
-        margin-left: 10%;
+    ion-content {
+
+        --background: #ebe7e7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+
+        ion-item {
+            margin-left: 4.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            ion-thumbnail {
+                .imagen {
+                    border-radius: 8%;
+                }
+            }
+
+            ion-label {
+
+                .titulo {
+                    font-size: 14px;
+                    color: #000000;
+                    font-family: Helvetica;
+                    font-weight: bold;
+                }
+
+                .prestamo,
+                .intercambio {
+                    --background: #e96a24;
+                    font-size: 0.8rem;
+                    color: #ffffff;
+                    font-family: Helvetica;
+                }
+
+                .eliminar {
+                    --background: #c92929;
+                    font-size: 0.8rem;
+                    color: #ffffff;
+                    font-family: Helvetica;
+                }
+            }
+        }
     }
 }
 
 @media (max-height: 900px) {
-    ion-item {
-        margin-left: 18%;
+    ion-content {
+
+        --background: #ebe7e7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+
+        ion-item {
+            margin-left: 10rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            ion-thumbnail {
+                .imagen {
+                    border-radius: 8%;
+                }
+            }
+
+            ion-label {
+
+                .titulo {
+                    font-size: 14px;
+                    color: #000000;
+                    font-family: Helvetica;
+                    font-weight: bold;
+                }
+
+                .prestamo,
+                .intercambio {
+                    --background: #e96a24;
+                    font-size: 0.8rem;
+                    color: #ffffff;
+                    font-family: Helvetica;
+                }
+
+                .eliminar {
+                    --background: #c92929;
+                    font-size: 0.8rem;
+                    color: #ffffff;
+                    font-family: Helvetica;
+                }
+            }
+        }
     }
 }
