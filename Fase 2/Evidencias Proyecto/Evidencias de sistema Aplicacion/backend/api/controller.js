@@ -158,21 +158,40 @@ router.get('/libros', async (req, res) => {
 });
 
 router.post('/biblioteca', (req, res) => {
-  const { id_usuario, isbn } = req.body; // Cambiar id_libro a isbn
+  const { id_usuario, isbn } = req.body;
 
   const query = `
     INSERT INTO biblioteca_usuario (id_usuario, isbn, disponible_prestamo, disponible_intercambio)
-    VALUES (?, ?, false, false)  -- Establece los valores predeterminados como false
+    VALUES (?, ?, false, false)
   `;
 
   db.query(query, [id_usuario, isbn], (error, results) => {
     if (error) {
-      console.error('Error al agregar libro a la biblioteca:', error);
-      return res.status(500).json({ message: 'Error al agregar libro a la biblioteca' });
+      if (error.code === 'ER_DUP_ENTRY') {
+        console.warn('Intento de insertar libro duplicado en la biblioteca:', error);
+        return res.status(409).json({ message: 'Este libro ya existe en la biblioteca del usuario.' });
+      } else {
+        console.error('Error al agregar libro a la biblioteca:', error);
+        return res.status(500).json({ message: 'Error al agregar libro a la biblioteca.' });
+      }
     }
+
     res.status(201).json({ message: 'Libro agregado a la biblioteca', id_biblioteca: results.insertId });
   });
 });
+
+// Middleware global de manejo de errores
+process.on('uncaughtException', (err) => {
+  console.error('Excepción no capturada:', err);
+  // No cerrar el servidor, pero loguea el error
+  // Puedes también enviar una respuesta al cliente si lo deseas
+});
+
+process.on('unhandledRejection', (err) => {
+  console.error('Promesa no manejada:', err);
+  // No cerrar el servidor, pero loguea el error
+});
+
 
 router.get('/libros/:correo', async (req, res) => {
   const correo = req.params.correo;
