@@ -2,6 +2,7 @@
 import { AuthService } from '../services/auth.service'; // Asegúrate de que la ruta sea correcta
 import { ActionSheetController } from '@ionic/angular';
 import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-solicitud-user',
@@ -14,7 +15,7 @@ export class SolicitudUserPage implements OnInit {
   solicitudesRealizadas: any[] = []; // Array para almacenar solicitudes realizadas
   mostrarRecibidas: boolean = true;  // Variable para alternar entre recibidas y realizadas
 
-  constructor(private authService: AuthService, private actionSheetController: ActionSheetController) { }
+  constructor(private authService: AuthService, private actionSheetController: ActionSheetController, private router: Router) { }
 
   ngOnInit() {
     this.cargarSolicitudesRecibidas();   // Cargar solicitudes recibidas al iniciar
@@ -70,7 +71,35 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
+
+  esSolicitante(solicitud: any): boolean {
+    // Compara el ID del usuario actual con el ID del solicitante de la solicitud
+    return solicitud.id_usuario_solicitante === this.authService.getCurrentUserId();
+  }
+  irAResena(id_prestamo: number): void {
+    this.authService.obtenerDetallesLibroPorPrestamo(id_prestamo).subscribe(
+      (response) => {
+        console.log('Datos del libro obtenidos:', response); // Log para verificar los datos obtenidos
+        // Navega a la página de reseñas pasando todos los datos del libro
+        this.router.navigate(['/resena-libro'], {
+          queryParams: {
+            id_prestamo: id_prestamo,
+            isbn: response.isbn,
+            titulo: response.titulo,
+            autor: response.autor,
+            descripcion: response.descripcion,
+            genero: response.genero,
+            prestamista: response.nombre_usuario
+          }
+        });
+      },
+      (error) => {
+        console.error('Error al obtener los detalles del libro:', error);
+      }
+    );
+  }
   
+
 
   // Función para actualizar el estado de una solicitud recibida a 'desarrollo'
   modificarEstadoSolicitud(id_prestamo: number): void {
@@ -97,6 +126,8 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
+
+  
     marcarEstadoComoEntregado(id_prestamo: number): void {
     this.authService.marcarEstadoComoEntregado(id_prestamo).subscribe(
       (response) => {

@@ -32,8 +32,10 @@ export class AuthService {
 
     return this.http.post(`${this.apiUrl}/usuarios`, userData);
   }
-
-
+  
+  getDetallesLibroPorPrestamo(idPrestamo: number): Observable<any> {
+    return this.http.get<any>(`/api/detalles-libro/${idPrestamo}`);
+  }
 
   login(correo: string, contrasena: string): Observable<any> {
     const loginData = { correo, contrasena }; 
@@ -85,8 +87,14 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/libros`, libroData);
   }
   getPrestamoPorId(id_prestamo: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/prestamo/${id_prestamo}`);
+    return this.http.get<any>(`${this.apiUrl}/prestamo/${id_prestamo}`);
   }
+
+  // Otros métodos que uses, por ejemplo, para obtener los detalles del libro
+  getDetallesLibroPorIsbn(isbn: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/libro/${isbn}`);
+  }
+
   agregarResena(id_usuario: number, isbn: string, calificacion: number, comentario: string): Observable<any> {
     const resena = { id_usuario, isbn, calificacion, comentario };
     return this.http.post(`${this.apiUrl}/resenas`, resena);
@@ -97,7 +105,10 @@ export class AuthService {
   getLibros(): Observable<any> {
     return this.http.get(`${this.apiUrl}/libros`);
   }
-
+  getCurrentUserId(): number {
+    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    return user ? user.id_usuario : null; // Asegúrate de que 'id_usuario' es la propiedad correcta
+  }
   agregarLibroABiblioteca(id_usuario: string, isbn: string): Observable<any> {
     const bibliotecaData = {
       id_usuario,
@@ -342,11 +353,22 @@ marcarEstadoComoEntregado(id_prestamo: number): Observable<any> {
     };
     return this.http.post(url, data);
   }
+  obtenerLibroPorId(id_biblioteca: number) {
+    return this.http.get<any>(`${this.apiUrl}/libros/${id_biblioteca}`);
+  }
+  
   obtenerIdBiblioteca(isbn: string, id_usuario: number): Observable<any> {
     const url = `${this.apiUrl}/obtener-id-biblioteca/${isbn}/${id_usuario}`;
     return this.http.get(url);
   }
-
+  obtenerDetallesLibroPorBiblioteca(id_biblioteca: number, id_usuario: number): Observable<any> {
+    const url = `${this.apiUrl}/obtener-detalles-libro/${id_biblioteca}/${id_usuario}`;
+    return this.http.get(url);
+  }
+  obtenerDetallesLibroPorPrestamo(id_prestamo: number): Observable<any> {
+    const url = `${this.apiUrl}/obtener-detalles-libro/${id_prestamo}`;
+    return this.http.get<any>(url);
+  }
   obtenerIntercambiosSolicitante(id_usuario: number): Observable<any> {
     const url = `${this.apiUrl}/intercambios-solicitante/${id_usuario}`;
     return this.http.get(url);

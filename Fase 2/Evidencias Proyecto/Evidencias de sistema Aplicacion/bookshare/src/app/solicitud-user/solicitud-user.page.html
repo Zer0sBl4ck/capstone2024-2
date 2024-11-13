@@ -18,10 +18,8 @@
   <ion-segment value="recibi" (ionChange)="alternarSolicitudes($event)">
     <ion-segment-button class="reci" value="recibidas">Solicitudes Recibidas
     </ion-segment-button>
-
     <ion-segment-button class="reali" value="realizadas">Solicitudes Realizadas
     </ion-segment-button>
-
   </ion-segment>
 
   <!-- Mostrar solicitudes recibidas -->
@@ -39,6 +37,7 @@
         <ion-button (click)="reportarUsuario(solicitud.id_solicitante, solicitud.id_prestamista)">
           Reportar al solicitante
         </ion-button>
+        
         <!-- Botón Aceptar solo si está pendiente -->
         <ion-button class="aceptar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
           (click)="modificarEstadoSolicitud(solicitud.id_prestamo)">Aceptar</ion-button>
@@ -59,7 +58,6 @@
           Chat
         </ion-button>
 
-
         <!-- Botón Fecha devolución disponible en estado 'desarrollo' -->
         <ion-button class="devolucion" *ngIf="solicitud.estado_prestamo === 'desarrollo'"
           (click)="modificarFechaDevolucion(solicitud.id_prestamo, solicitud)">
@@ -79,7 +77,6 @@
           Rechazar
         </ion-button>
       </ion-item>
-
     </ion-list>
     <ng-template #noSolicitudesRecibidas>
       <ion-card>
@@ -103,6 +100,13 @@
           <p>Correo prestamista: {{ solicitud.correo }}</p>
           <p>Fecha: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
         </ion-label>
+
+       
+        <!-- Botón para agregar reseña, solo visible si el estado es 'Entregado' y es el solicitante -->
+        <ion-button *ngIf="solicitud.estado_prestamo === 'Entregado' && esSolicitante(solicitud)" 
+        (click)="irAResena(solicitud.id_prestamo)">
+Agregar Reseña
+</ion-button>
       </ion-item>
     </ion-list>
     <ng-template #noSolicitudesRealizadas>

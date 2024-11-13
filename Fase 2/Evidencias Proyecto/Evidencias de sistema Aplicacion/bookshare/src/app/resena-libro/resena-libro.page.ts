@@ -20,39 +20,36 @@ export class ResenaLibroPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Obtiene los parámetros de la URL (queryParams)
     this.route.queryParams.subscribe(params => {
-      this.idPrestamo = params['id_prestamo']; // Obtiene el id del préstamo
-      if (this.idPrestamo) {
-        this.obtenerDatosLibro(); // Si existe el id, obtiene los datos del libro
-      }
+      this.idPrestamo = params['id_prestamo'];
+      this.libro = {
+        isbn: params['isbn'],
+        titulo: params['titulo'],
+        prestamista: params['prestamista'],
+        autor: params['autor'],
+        descripcion: params['descripcion'],
+        genero: params['genero']
+      };
+      console.log('ID del préstamo recibido:', this.idPrestamo);
+      console.log('Datos del libro recibidos:', this.libro);
     });
   }
-
-  obtenerDatosLibro(): void {
-    // Aquí usas el idPrestamo para obtener los datos del libro (como el ISBN)
-    this.authService.getPrestamoPorId(this.idPrestamo).subscribe(
-      (response) => {
-        if (response && response.isbn) {
-          this.libro = response; // Asigna los datos del libro a la propiedad 'libro'
-        } else {
-          console.error('Datos del libro no encontrados');
-        }
-      },
-      (error) => {
-        console.error('Error al obtener los datos del libro:', error);
-      }
-    );
-  }
+  
+  
 
   agregarResena(): void {
-    const usuarioId = 1; // Aquí debes obtener el id del usuario actual, puedes usar `this.authService.getUserData().id`
+    const id_usuario_solicitante = this.authService.getUserData()?.id_usuario; // Obtén el ID del usuario actual
+    console.log('ID del usuario que agrega la reseña:', id_usuario_solicitante);  // Log
 
+    // Validación de calificación y comentario antes de hacer la llamada al servicio
     if (this.calificacion && this.comentario) {
-      this.authService.agregarResena(usuarioId, this.libro.isbn, this.calificacion, this.comentario).subscribe(
+      console.log('Enviando reseña con calificación:', this.calificacion, 'y comentario:', this.comentario);  // Log
+      this.authService.agregarResena(id_usuario_solicitante, this.libro.isbn, this.calificacion, this.comentario).subscribe(
         (response) => {
-          console.log('Reseña agregada con éxito:', response);
+          console.log('Reseña agregada con éxito:', response);  // Log
           alert('¡Reseña agregada con éxito!');
-          // Redirigir o realizar alguna otra acción
+          // Redirigir o realizar alguna otra acción (ej. volver a la página de libros o al perfil)
         },
         (error) => {
           console.error('Error al agregar la reseña:', error);
@@ -60,6 +57,7 @@ export class ResenaLibroPage implements OnInit {
         }
       );
     } else {
+      console.warn('Por favor, complete la calificación y el comentario antes de enviar la reseña');  // Log
       alert('Por favor, complete la calificación y el comentario.');
     }
   }

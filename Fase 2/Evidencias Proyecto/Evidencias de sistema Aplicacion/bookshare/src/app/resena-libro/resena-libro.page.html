@@ -7,10 +7,11 @@
 <ion-content>
   <!-- Mostrar los detalles del libro si están disponibles -->
   <div *ngIf="libro">
-    <h2>{{ libro.titulo }}</h2>
-    <p><strong>Autor:</strong> {{ libro.autor }}</p>
+    <h2><strong>Libro solicitado:</strong>{{ libro.titulo }}</h2>
+    <p><strong>Nombre del Prestamista:</strong> {{ libro.prestamista }}</p>
+    <p><strong>ID del Préstamo:</strong> {{ idPrestamo }}</p>
     <p><strong>ISBN:</strong> {{ libro.isbn }}</p>
-    <p><strong>Descripción:</strong> {{ libro.descripcion }}</p>
+
 
     <!-- Aquí puedes agregar el formulario para la reseña y valoración -->
     <ion-item>

@@ -280,7 +280,8 @@ router.put('/usuarios/correo/:correo', async (req, res) => {
 });
 
 // Ruta para agregar una nueva reseña
-router.post('/resena', async (req, res) => {
+// Ruta para agregar una nueva reseña
+router.post('/resenas', async (req, res) => {
   const { id_usuario, isbn, calificacion, comentario } = req.body;
 
   if (!id_usuario || !isbn || !calificacion || comentario === undefined) {
@@ -377,6 +378,67 @@ router.get('/libros-estado-false', async (req, res) => {
     return res.status(500).json({ message: 'Error interno del servidor.', error: error.message });
   }
 });
+
+router.get('/obtener-detalles-libro/:id_prestamo', async (req, res) => {
+  const { id_prestamo } = req.params;
+
+  try {
+    // Obtener el libro relacionado con el id_prestamo
+    const query = `
+      SELECT l.isbn, l.titulo, l.autor, l.descripcion, l.genero, u.nombre_usuario
+      FROM prestamo p
+      JOIN biblioteca_usuario b ON p.id_biblioteca = b.id_biblioteca
+      JOIN libro l ON b.isbn = l.isbn
+      JOIN usuario u ON b.id_usuario = u.id_usuario
+      WHERE p.id_prestamo = ?`;
+
+    const [rows] = await db.execute(query, [id_prestamo]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Libro no encontrado para este préstamo' });
+    }
+
+    // Devuelve los detalles del libro y el nombre del prestamista
+    return res.status(200).json(rows[0]);
+  } catch (error) {
+    console.error('Error al obtener los detalles del libro:', error.message);
+    return res.status(500).json({ message: 'Error interno del servidor.', error: error.message });
+  }
+});
+
+
+// Endpoint para obtener un préstamo por su ID
+// Endpoint para obtener un préstamo por su ID
+router.get('/prestamos/:id_prestamo', (req, res) => {
+  const id = req.params.id_prestamo; // Cambiado a id_prestamo
+
+  if (!id) {
+    return res.status(400).json({ message: "El ID es requerido" });
+  }
+
+  // Consulta JOIN entre prestamo, biblioteca_usuario y libro para obtener detalles del préstamo y libro
+  const query = `
+    SELECT p.*, b.isbn, l.titulo, l.autor, l.descripcion, l.genero
+    FROM prestamo p
+    JOIN biblioteca_usuario b ON p.id_biblioteca = b.id_biblioteca
+    JOIN libro l ON b.isbn = l.isbn
+    WHERE p.id_prestamo = ?
+  `;
+
+  db.query(query, [id], (error, results) => {
+    if (error) {
+      console.error("Error al obtener el préstamo:", error);
+      return res.status(500).json({ message: "Error en el servidor" });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: "Préstamo no encontrado" });
+    }
+
+    res.status(200).json(results[0]); // Devolvemos los detalles del préstamo y el libro
+  });
+});
+
 
 
 // Modificar libro de estado false a true
