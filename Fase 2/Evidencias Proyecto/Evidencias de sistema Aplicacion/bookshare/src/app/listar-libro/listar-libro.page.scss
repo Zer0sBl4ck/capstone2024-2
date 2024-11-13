@@ -44,7 +44,6 @@ ion-content {
     }
 
     .listargrid {
-
         display: block;
         justify-content: center;
         align-items: center;
@@ -62,7 +61,6 @@ ion-content {
                     border-radius: 1rem;
 
                     ion-card-header {
-
                         .libro {
                             margin-bottom: 16px;
                             display: flex;
@@ -77,7 +75,6 @@ ion-content {
                     }
 
                     ion-card-content {
-
                         .titulo {
                             color: #000000;
                             font-size: 1rem;
@@ -123,6 +120,7 @@ ion-content {
                         }
 
                         ion-buttons {
+                            
 
                             .agregar {
                                 color: #ffffff;
@@ -137,8 +135,7 @@ ion-content {
                                 display: block;
                                 justify-content: center;
                                 align-items: center;
-                                margin-left: 2rem;
-
+                                margin-left: 3rem;
 
                                 ion-icon {
                                     font-size: 1.5rem;
@@ -227,7 +224,6 @@ ion-content {
         }
 
         .listargrid {
-
             display: block;
             justify-content: center;
             align-items: center;
@@ -240,9 +236,7 @@ ion-content {
                 margin-left: 3rem;
 
                 ion-col {
-
                     margin-left: 2.5rem;
-
 
                     ion-card {
                         max-width: 70%;
@@ -250,9 +244,8 @@ ion-content {
                         border-radius: 1rem;
 
                         ion-card-header {
-
                             .libro {
-                                margin-bottom: 16px;
+                                margin-bottom: 1rem;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
@@ -265,7 +258,6 @@ ion-content {
                         }
 
                         ion-card-content {
-
                             .titulo {
                                 font-size: 1rem;
                                 font-weight: bold;
@@ -299,7 +291,6 @@ ion-content {
                             }
 
                             ion-buttons {
-
                                 .agregar {
                                     max-width: 20%;
                                     font-size: 16px;
@@ -308,7 +299,6 @@ ion-content {
                                     justify-content: center;
                                     align-items: center;
                                     margin-left: 2rem;
-
 
                                     ion-icon {
                                         font-size: 1.5rem;
@@ -415,9 +405,7 @@ ion-content {
                         ion-card-content {
 
                             .titulo {
-                                color: #000000;
                                 font-size: 1rem;
-                                font-family: "Rethink Sans", sans-serif;
                                 font-weight: bold;
                                 display: flex;
                                 justify-content: center;
@@ -425,16 +413,13 @@ ion-content {
                             }
 
                             .autor {
-                                color: #000000;
                                 font-size: 0.8rem;
-                                font-family: "Rethink Sans", sans-serif;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
                             }
 
                             p {
-                                color: #000000;
                                 font-size: 0.8rem;
                                 font-family: "Rethink Sans", sans-serif;
                                 display: flex;

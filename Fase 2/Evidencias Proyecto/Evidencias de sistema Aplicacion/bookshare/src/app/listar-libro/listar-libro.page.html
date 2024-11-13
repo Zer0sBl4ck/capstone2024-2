@@ -16,7 +16,7 @@
   <!-- Vista para el Admin -->
   <ion-grid class="listargrid">
     <ion-row>
-      <ion-col size="6" size-md="3" size-lg="3" *ngFor="let libro of libros">
+      <ion-col size="6" size-sm="6" size-md="3" size-lg="3" *ngFor="let libro of libros">
         <ion-card (click)="goToBookDetail(libro.isbn)">
           <ion-card-header>
             <div class="libro">
@@ -40,7 +40,6 @@
               Detalle</ion-button>
 
             <ion-buttons>
-
               <ion-button class="agregar" expand="block" *ngIf="rol === 'usuario'"
                 (click)="agregarLibroABiblioteca(libro); $event.stopPropagation()">
                 <ion-icon name="add-outline"></ion-icon>
@@ -60,9 +59,8 @@
                 (click)="irAPersonasConLibro(libro.isbn); $event.stopPropagation()">
                 <ion-icon name="eye-outline"></ion-icon><!--ver personas con este libro -->
               </ion-button>
-
-
             </ion-buttons>
+
           </ion-card-content>
         </ion-card>
       </ion-col>
