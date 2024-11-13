@@ -1,0 +1,96 @@
+.fondo {
+    ion-toolbar {
+        --background: #e96a24 !important;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .titulo {
+            font-weight: bold;
+            color: #ffffff;
+            font-family: Helvetica;
+            font-size: 1.5rem;
+            text-align: center;
+            width: 100%;
+            max-width: 95%;
+        }
+
+        ion-icon {
+            color: #ffffff;
+        }
+    }
+}
+
+ion-content {
+    --background: #ebe7e7;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilos para el contenedor de los detalles del libro */
+ion-content>div {
+    width: 100%;
+    max-width: 600px;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Título del libro */
+h2.titulo {
+    font-family: Helvetica, sans-serif;
+    color: #4d4d4d;
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Estilos para los detalles del libro */
+p {
+    font-family: Helvetica, sans-serif;
+    color: #333333;
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+p strong {
+    font-weight: bold;
+    color: #4d4d4d;
+}
+
+/* Estilos para el ion-item de selección de calificación y comentario */
+ion-item {
+    --background: #f5f5f5;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+ion-label {
+    font-family: Helvetica, sans-serif;
+    color: #4d4d4d;
+    font-weight: bold;
+}
+
+ion-select {
+    --padding-start: 10px;
+    --color-activated: #e96a24;
+    color: #000000;
+
+}
+
+/* Estilos para el botón de enviar reseña */
+ion-button {
+    --background: #e96a24;
+    color: #ffffff;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 10px;
+}

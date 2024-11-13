@@ -10,27 +10,18 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar
-    placeholder="Buscar..."
-    class="search-bar"
-    inputmode="search"
-    (ionInput)="buscarLibros($event)"
-  >
+  <ion-searchbar placeholder="Buscar..." class="search-bar" inputmode="search" (ionInput)="buscarLibros($event)">
   </ion-searchbar>
 
   <!-- Vista para el Admin -->
-  <ion-grid *ngIf="rol === 'admin'" class="admin-grid">
+  <ion-grid class="listargrid">
     <ion-row>
-      <ion-col size="8" size-md="2" size-lg="2" *ngFor="let libro of libros">
+      <ion-col size="6" size-sm="6" size-md="3" size-lg="3" *ngFor="let libro of libros">
         <ion-card (click)="goToBookDetail(libro.isbn)">
           <ion-card-header>
             <div class="libro">
-              <img
-                class="imagen"
-                *ngIf="libro.imagen_libro_base64"
-                [src]="'data:image/jpeg;base64,' + libro.imagen_libro_base64"
-                alt="Imagen del libro"
-              />
+              <img class="imagen" *ngIf="libro.imagen_libro_base64"
+                [src]="'data:image/jpeg;base64,' + libro.imagen_libro_base64" alt="Imagen del libro" />
             </div>
           </ion-card-header>
 
@@ -44,104 +35,36 @@
             <p class="genero"><strong>Género:</strong> {{ libro.genero }}</p>
             <p class="isbn">ISBN: {{ libro.isbn }}</p>
 
-            <!-- Botones para el Admin -->
-            <ion-button
-              class="vista"
-              expand="block"
-              [routerLink]="['/vista-libro', libro.isbn]"
-            >
-              Detalle</ion-button
-            >
+            <!-- Botones-->
+            <ion-button class="vista" expand="block" [routerLink]="['/vista-libro', libro.isbn]">
+              Detalle</ion-button>
 
             <ion-buttons>
-              <ion-button
-                class="modificar"
-                routerLink="/modificar-libro"
-                expand="block"
-                *ngIf="rol === 'admin'"
-                (click)="$event.stopPropagation()"
-              >
-                <ion-icon name="pencil-outline"></ion-icon
-                ><!--modificar libro-->
+              <ion-button class="agregar" expand="block" *ngIf="rol === 'usuario'"
+                (click)="agregarLibroABiblioteca(libro); $event.stopPropagation()">
+                <ion-icon name="add-outline"></ion-icon>
               </ion-button>
 
-              <ion-button
-                class="ver"
-                expand="block"
-                (click)="irAPersonasConLibro(libro.isbn); $event.stopPropagation()"
-              >
-                <ion-icon name="eye-outline"></ion-icon
-                ><!--ver personas con este libro -->
+              <ion-button class="favoritos" expand="block" *ngIf="rol === 'usuario'"
+                (click)="agregarAFavoritos(libro); $event.stopPropagation()">
+                <ion-icon name="heart-outline"></ion-icon>
+              </ion-button>
+
+              <ion-button class="modificar" routerLink="/modificar-libro" expand="block" *ngIf="rol === 'admin'"
+                (click)="$event.stopPropagation()">
+                <ion-icon name="pencil-outline"></ion-icon><!--modificar libro-->
+              </ion-button>
+
+              <ion-button class="ver" expand="block"
+                (click)="irAPersonasConLibro(libro.isbn); $event.stopPropagation()">
+                <ion-icon name="eye-outline"></ion-icon><!--ver personas con este libro -->
               </ion-button>
             </ion-buttons>
+
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <!-- Vista para el Usuario -->
-  <ion-list *ngIf="rol === 'usuario'" class="usuario-list">
-    <ion-item *ngFor="let libro of libros">
-      <ion-card (click)="goToBookDetail(libro.isbn)" class="usuario-card">
-        <ion-card-header>
-          <div class="libro">
-            <img
-              class="imagen"
-              *ngIf="libro.imagen_libro_base64"
-              [src]="'data:image/jpeg;base64,' + libro.imagen_libro_base64"
-              alt="Imagen del libro"
-            />
-          </div>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-card-title class="titulo"> {{ libro.titulo }} </ion-card-title>
-          <ion-card-subtitle class="autor">
-            <strong>Autor: </strong> {{ libro.autor }}
-          </ion-card-subtitle>
-          <p class="genero"><strong>Género: </strong> {{ libro.genero }}</p>
-          <p class="isbn">ISBN: {{ libro.isbn }}</p>
-
-          <!-- Botones para el Usuario -->
-          <ion-button
-            class="vista"
-            expand="block"
-            [routerLink]="['/vista-libro', libro.isbn]"
-          >
-            Detalle</ion-button
-          >
-
-          <ion-buttons>
-            <ion-button
-              class="agregar"
-              expand="block"
-              *ngIf="rol === 'usuario'"
-              (click)="agregarLibroABiblioteca(libro); $event.stopPropagation()"
-            >
-              <ion-icon name="add-outline"></ion-icon
-              ><!--Agregar libro-->
-            </ion-button>
-
-            <ion-button
-              class="favoritos"
-              expand="block"
-              *ngIf="rol === 'usuario'"
-              (click)="agregarAFavoritos(libro); $event.stopPropagation()"
-            >
-              <ion-icon name="heart-outline"></ion-icon>
-            </ion-button>
-
-            <ion-button
-              class="ver"
-              expand="block"
-              (click)="irAPersonasConLibro(libro.isbn); $event.stopPropagation()"
-            >
-              <ion-icon name="eye-outline"></ion-icon
-              ><!--ver personas con este libro -->
-            </ion-button>
-          </ion-buttons>
-        </ion-card-content>
-      </ion-card>
-    </ion-item>
-  </ion-list>
 </ion-content>

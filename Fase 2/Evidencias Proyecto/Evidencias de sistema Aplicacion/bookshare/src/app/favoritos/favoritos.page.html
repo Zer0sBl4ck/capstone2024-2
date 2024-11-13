@@ -5,36 +5,43 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="titulo">FAVORITOS</ion-title>
+    <ion-title class="titulo">Favoritos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list *ngIf="favoritos.length > 0; else noFavoritos">
-    <ion-card *ngFor="let libro of favoritos">
-      <ion-card-header>
-        <ion-card-title>{{ libro.titulo }}</ion-card-title>
-        <ion-card-subtitle>Autor: {{ libro.autor }}</ion-card-subtitle>
-        <img src="" alt="">
-      </ion-card-header>
-      <ion-card-content>
-        <p *ngIf="libro.imagen">
-          <img [src]="'data:image/jpeg;base64,' + libro.imagen" alt="Imagen del libro" class="imagen-libro" />
-        </p>
-        <p *ngIf="!libro.imagen">No hay imagen disponible</p>
-        <p>ISBN: {{ libro.isbn }}</p>
-        
-        <ion-button [routerLink]="['/personas-ownerbook', libro.isbn]">
-          <ion-icon name="people-outline"></ion-icon>
-          Ver personas con este libro
-        </ion-button>
-        <ion-button (click)="eliminarFavorito(libro.isbn)">
-          <ion-icon name="trash-outline"></ion-icon>
-          Eliminar de Favoritos
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
-  </ion-list>
+
+  <ion-grid *ngIf="favoritos.length > 0; else noFavoritos" class="listargrid">
+    <ion-row>
+      <ion-col size="8" size-sm="6" size-md="3" size-lg="3" *ngFor="let libro of favoritos">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ libro.titulo }}</ion-card-title>
+            <ion-card-subtitle>Autor: {{ libro.autor }}</ion-card-subtitle>
+            <img src="" alt="">
+          </ion-card-header>
+          <ion-card-content>
+            <div *ngIf="libro.imagen" class="libro">
+              <img [src]="'data:image/jpeg;base64,' + libro.imagen" alt="Imagen del libro" class="imagen" />
+            </div>
+            <p *ngIf="!libro.imagen" class="noimagen">No hay imagen disponible</p>
+            <p class="isbn">ISBN: {{ libro.isbn }}</p>
+
+            <ion-buttons>
+              <ion-button [routerLink]="['/personas-ownerbook', libro.isbn]" class="ver">
+                <ion-icon name="eye-outline"></ion-icon>
+              </ion-button>
+
+              <ion-button (click)="eliminarFavorito(libro.isbn)" class="eliminar">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <ng-template #noFavoritos>
     <ion-text color="medium">

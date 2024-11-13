@@ -38,17 +38,16 @@ ion-content {
         width: 100%;
         max-width: 80%;
         font-family: Helvetica, sans-serif;
-        font-size: 16px;
+        font-size: 1rem;
         margin: 0 auto;
         display: block;
     }
 
-    .admin-grid {
-
+    .listargrid {
         display: block;
         justify-content: center;
         align-items: center;
-        margin-left: 2rem;
+        margin-left: 5.5rem;
 
         ion-row {
 
@@ -62,7 +61,6 @@ ion-content {
                     border-radius: 1rem;
 
                     ion-card-header {
-
                         .libro {
                             margin-bottom: 16px;
                             display: flex;
@@ -77,7 +75,6 @@ ion-content {
                     }
 
                     ion-card-content {
-
                         .titulo {
                             color: #000000;
                             font-size: 1rem;
@@ -109,7 +106,7 @@ ion-content {
                         .vista {
                             color: #ffffff;
                             --background: #e96a24;
-                            border-radius: 1rem;
+                            border-radius: 0.8rem;
                             font-family: "Rethink Sans", sans-serif;
                             margin-top: 1rem;
                             width: 100%;
@@ -123,6 +120,48 @@ ion-content {
                         }
 
                         ion-buttons {
+                            
+
+                            .agregar {
+                                color: #ffffff;
+                                --background: #e96a24;
+                                border-radius: 15px;
+                                font-family: "Rethink Sans", sans-serif;
+                                margin-top: 16px;
+                                width: 100%;
+                                max-width: 20%;
+                                font-size: 16px;
+                                font-weight: bold;
+                                display: block;
+                                justify-content: center;
+                                align-items: center;
+                                margin-left: 3rem;
+
+                                ion-icon {
+                                    font-size: 1.5rem;
+                                    color: #ffffff;
+                                }
+                            }
+
+                            .favoritos {
+                                color: #ffffff;
+                                --background: #e96a24;
+                                border-radius: 15px;
+                                font-family: "Rethink Sans", sans-serif;
+                                margin-top: 16px;
+                                width: 100%;
+                                max-width: 20%;
+                                font-size: 1rem;
+                                font-weight: bold;
+                                display: block;
+                                justify-content: center;
+                                align-items: center;
+
+                                ion-icon {
+                                    font-size: 1.5em;
+                                    color: #ffffff;
+                                }
+                            }
 
                             .modificar {
                                 color: #ffffff;
@@ -132,9 +171,9 @@ ion-content {
                                 margin-top: 16px;
                                 width: 100%;
                                 max-width: 25%;
-                                font-size: 16px;
+                                font-size: 1rem;
                                 font-weight: bold;
-                                margin-left: 22%;
+                                margin-left: 5.5rem;
 
                                 ion-icon {
                                     font-size: 1.5rem;
@@ -149,13 +188,12 @@ ion-content {
                                 font-family: "Rethink Sans", sans-serif;
                                 margin-top: 16px;
                                 width: 100%;
-                                max-width: 25%;
-                                font-size: 16px;
+                                max-width: 20%;
+                                font-size: 1rem;
                                 font-weight: bold;
                                 display: block;
                                 justify-content: center;
                                 align-items: center;
-                                margin-left: 5%;
 
                                 ion-icon {
                                     font-size: 1.5rem;
@@ -168,158 +206,324 @@ ion-content {
             }
         }
     }
+}
 
-    .usuario-list {
+@media (max-width: 600px) {
 
-        background: transparent;
+    ion-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-        ion-item {
-            --background: transparent;
-            --ion-item-border-color: transparent;
-            display: flex;
-            flex-direction: column;
 
-            ion-card {
-                --background: #ffffff;
-                width: 100%;
-                max-width: 90%;
-                height: auto;
-                border-radius: 1rem;
-                display: flex;
+        ion-searchbar {
+            max-width: 80%;
+            font-size: 1rem;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .listargrid {
+            display: block;
+            justify-content: center;
+            align-items: center;
+            margin-left: 2rem;
+
+            ion-row {
+                display: block;
                 justify-content: center;
                 align-items: center;
-                border-color: #e0dcdc;
+                margin-left: 3rem;
 
-                ion-card-header {
+                ion-col {
+                    margin-left: 2.5rem;
 
-                    .libro {
-                        margin-bottom: 16px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
+                    ion-card {
+                        max-width: 70%;
+                        height: auto;
+                        border-radius: 1rem;
 
-                        .imagen {
-                            object-fit: cover;
-                            border-radius: 1rem;
+                        ion-card-header {
+                            .libro {
+                                margin-bottom: 1rem;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+
+                                .imagen {
+                                    object-fit: cover;
+                                    border-radius: 1rem;
+                                }
+                            }
+                        }
+
+                        ion-card-content {
+                            .titulo {
+                                font-size: 1rem;
+                                font-weight: bold;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+
+                            .autor {
+                                font-size: 0.8rem;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+
+                            p {
+                                font-size: 0.8rem;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+
+                            .vista {
+                                max-width: 40%;
+                                font-size: 0.8rem;
+                                font-weight: bold;
+                                display: block;
+                                justify-content: center;
+                                align-items: center;
+                                margin-left: 30%;
+                            }
+
+                            ion-buttons {
+                                .agregar {
+                                    max-width: 20%;
+                                    font-size: 16px;
+                                    font-weight: bold;
+                                    display: block;
+                                    justify-content: center;
+                                    align-items: center;
+                                    margin-left: 2rem;
+
+                                    ion-icon {
+                                        font-size: 1.5rem;
+                                        color: #ffffff;
+                                    }
+                                }
+
+                                .favoritos {
+                                    max-width: 20%;
+                                    font-size: 1rem;
+                                    font-weight: bold;
+                                    display: block;
+                                    justify-content: center;
+                                    align-items: center;
+
+                                    ion-icon {
+                                        font-size: 1.5em;
+                                        color: #ffffff;
+                                    }
+                                }
+
+                                .modificar {
+                                    max-width: 25%;
+                                    font-size: 1rem;
+                                    font-weight: bold;
+                                    margin-left: 22%;
+
+                                    ion-icon {
+                                        font-size: 1.5rem;
+                                        color: #ffffff;
+                                    }
+                                }
+
+                                .ver {
+                                    margin-top: 16px;
+                                    width: 100%;
+                                    max-width: 25%;
+                                    font-size: 1rem;
+                                    font-weight: bold;
+                                    display: block;
+                                    justify-content: center;
+                                    align-items: center;
+
+                                    ion-icon {
+                                        font-size: 1.5rem;
+                                        color: #ffffff;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
-
-                ion-card-content {
-
-                    .titulo {
-                        color: #000000;
-                        font-size: 1rem;
-                        font-family: "Rethink Sans", sans-serif;
-                        font-weight: bold;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                    }
-
-                    .autor {
-                        color: #000000;
-                        font-size: 0.8rem;
-                        font-family: "Rethink Sans", sans-serif;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                    }
-
-                    p {
-                        color: #000000;
-                        font-size: 0.8rem;
-                        font-family: "Rethink Sans", sans-serif;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                    }
-
-                    .vista {
-                        color: #ffffff;
-                        --background: #e96a24;
-                        border-radius: 15px;
-                        font-family: "Rethink Sans", sans-serif;
-                        margin-top: 16px;
-                        width: 100%;
-                        max-width: 40%;
-                        font-size: 12px;
-                        font-weight: bold;
-                        display: block;
-                        justify-content: center;
-                        align-items: center;
-                        margin-left: 30%;
-                    }
-                }
-
-                ion-buttons {
-                    --border-radius: 20px;
-                    display: center;
-                    justify-content: center;
-                    align-items: center;
+            }
+        }
+    }
+}
 
 
-                    .agregar {
-                        color: #ffffff;
-                        --background: #e96a24;
-                        border-radius: 15px;
-                        font-family: "Rethink Sans", sans-serif;
-                        margin-top: 16px;
-                        width: 100%;
-                        max-width: 20%;
-                        font-size: 16px;
-                        font-weight: bold;
-                        display: block;
-                        justify-content: center;
-                        align-items: center;
+@media (max-height: 900px) {
+    ion-content {
 
+        ion-searchbar {
+            --background: #e96a24;
+            --border-radius: 15px;
+            --placeholder-color: #ffffff;
+            --color: #ffffff;
+            width: 100%;
+            max-width: 80%;
+            font-family: Helvetica, sans-serif;
+            font-size: 16px;
+            margin: 0 auto;
+            display: block;
+        }
 
-                        ion-icon {
-                            font-size: 1.5rem;
-                            color: #ffffff;
+        .listargrid {
+            margin-right: 1rem;
+
+            ion-row {
+
+                ion-col {
+                    margin-right: 2.5rem;
+
+                    ion-card {
+                        --background: #ffffff;
+                        max-width: 100%;
+                        height: 100%;
+                        border-radius: 1rem;
+
+                        ion-card-header {
+
+                            .libro {
+                                margin-bottom: 16px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+
+                                .imagen {
+                                    object-fit: cover;
+                                    border-radius: 1rem;
+                                }
+                            }
                         }
-                    }
 
-                    .favoritos {
-                        color: #ffffff;
-                        --background: #e96a24;
-                        border-radius: 15px;
-                        font-family: "Rethink Sans", sans-serif;
-                        margin-top: 16px;
-                        width: 100%;
-                        max-width: 20%;
-                        font-size: 16px;
-                        font-weight: bold;
-                        display: block;
-                        justify-content: center;
-                        align-items: center;
-                        margin-left: 1rem;
+                        ion-card-content {
 
-                        ion-icon {
-                            font-size: 1.5em;
-                            color: #ffffff;
-                        }
-                    }
+                            .titulo {
+                                font-size: 1rem;
+                                font-weight: bold;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
 
-                    .ver {
-                        color: #ffffff;
-                        --background: #e96a24;
-                        border-radius: 15px;
-                        font-family: "Rethink Sans", sans-serif;
-                        margin-top: 16px;
-                        width: 100%;
-                        max-width: 20%;
-                        font-size: 16px;
-                        font-weight: bold;
-                        display: block;
-                        justify-content: center;
-                        align-items: center;
-                        margin-left: 1rem;
+                            .autor {
+                                font-size: 0.8rem;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
 
+                            p {
+                                font-size: 0.8rem;
+                                font-family: "Rethink Sans", sans-serif;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
 
-                        ion-icon {
-                            font-size: 1.5rem;
-                            color: #ffffff;
+                            .vista {
+                                color: #ffffff;
+                                --background: #e96a24;
+                                border-radius: 1rem;
+                                font-family: "Rethink Sans", sans-serif;
+                                margin-top: 1rem;
+                                width: 100%;
+                                max-width: 40%;
+                                font-size: 12px;
+                                font-weight: bold;
+                                display: block;
+                                justify-content: center;
+                                align-items: center;
+                                margin-left: 30%;
+                            }
+
+                            ion-buttons {
+
+                                .agregar {
+                                    color: #ffffff;
+                                    --background: #e96a24;
+                                    border-radius: 15px;
+                                    font-family: "Rethink Sans", sans-serif;
+                                    margin-top: 16px;
+                                    width: 100%;
+                                    max-width: 20%;
+                                    font-size: 16px;
+                                    font-weight: bold;
+                                    display: block;
+                                    justify-content: center;
+                                    align-items: center;
+                                    margin-left: 1.5rem;
+
+                                    ion-icon {
+                                        font-size: 1.5rem;
+                                        color: #ffffff;
+                                    }
+                                }
+
+                                .favoritos {
+                                    color: #ffffff;
+                                    --background: #e96a24;
+                                    border-radius: 15px;
+                                    font-family: "Rethink Sans", sans-serif;
+                                    margin-top: 16px;
+                                    width: 100%;
+                                    max-width: 20%;
+                                    font-size: 16px;
+                                    font-weight: bold;
+                                    display: block;
+                                    justify-content: center;
+                                    align-items: center;
+
+                                    ion-icon {
+                                        font-size: 1.5em;
+                                        color: #ffffff;
+                                    }
+                                }
+
+                                .modificar {
+                                    color: #ffffff;
+                                    --background: #e96a24;
+                                    border-radius: 15px;
+                                    font-family: "Rethink Sans", sans-serif;
+                                    margin-top: 16px;
+                                    width: 100%;
+                                    max-width: 25%;
+                                    font-size: 16px;
+                                    font-weight: bold;
+                                    margin-left: 22%;
+
+                                    ion-icon {
+                                        font-size: 1.5rem;
+                                        color: #ffffff;
+                                    }
+                                }
+
+                                .ver {
+                                    color: #ffffff;
+                                    --background: #e96a24;
+                                    border-radius: 15px;
+                                    font-family: "Rethink Sans", sans-serif;
+                                    margin-top: 16px;
+                                    width: 100%;
+                                    max-width: 25%;
+                                    font-size: 16px;
+                                    font-weight: bold;
+                                    display: block;
+                                    justify-content: center;
+                                    align-items: center;
+
+                                    ion-icon {
+                                        font-size: 1.5rem;
+                                        color: #ffffff;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
