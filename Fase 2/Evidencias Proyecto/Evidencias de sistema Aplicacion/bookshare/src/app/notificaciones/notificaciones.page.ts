@@ -8,11 +8,16 @@ import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
 })
 export class NotificacionesPage implements OnInit {
   notificaciones: any[] = [];
-
+  private refreshInterval: any;
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.cargarNotificaciones();
+
+    // Configurar el intervalo para refrescar la página cada 3 segundos (3000 ms)
+    this.refreshInterval = setInterval(() => {
+      this.cargarNotificaciones();
+    }, 3000); // 3000 ms = 3 segundos
   }
 
   cargarNotificaciones() {
@@ -51,12 +56,10 @@ export class NotificacionesPage implements OnInit {
     );
   }
   refreshData(event: CustomEvent<RefresherEventDetail>) {
-    // Aquí va la lógica para actualizar los datos
     console.log('Refrescando...');
-    window.location.reload();
-    // Simula un delay para el refresco
+    this.cargarNotificaciones();
+
     setTimeout(() => {
-      // Verificar si event.target es un IonRefresher
       const refresher = event.target;
 
       if (refresher instanceof IonRefresher) {
@@ -64,5 +67,4 @@ export class NotificacionesPage implements OnInit {
       }
     }, 2000);
   }
-  
 }

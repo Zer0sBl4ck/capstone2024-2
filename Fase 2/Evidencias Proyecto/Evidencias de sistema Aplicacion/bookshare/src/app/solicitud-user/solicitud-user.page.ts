@@ -14,12 +14,19 @@ export class SolicitudUserPage implements OnInit {
   solicitudesRecibidas: any[] = [];  // Array para almacenar solicitudes recibidas
   solicitudesRealizadas: any[] = []; // Array para almacenar solicitudes realizadas
   mostrarRecibidas: boolean = true;  // Variable para alternar entre recibidas y realizadas
-
+  private refreshInterval: any;
   constructor(private authService: AuthService, private actionSheetController: ActionSheetController, private router: Router) { }
 
+  
   ngOnInit() {
     this.cargarSolicitudesRecibidas();   // Cargar solicitudes recibidas al iniciar
     this.cargarSolicitudesRealizadas();  // Cargar solicitudes realizadas al iniciar
+
+    // Configurar el intervalo para refrescar la página cada 3 segundos (3000 ms)
+    this.refreshInterval = setInterval(() => {
+      this.cargarSolicitudesRecibidas();
+      this.cargarSolicitudesRealizadas();
+    }, 3000); // 3000 ms = 3 segundos
   }
 
   // Cargar solicitudes recibidas (donde el usuario es prestamista)
@@ -181,29 +188,62 @@ export class SolicitudUserPage implements OnInit {
 
   // Función para actualizar el estado de una solicitud recibida a 'desarrollo'
   modificarEstadoSolicitud(id_prestamo: number): void {
-    this.authService.actualizarEstadoSolicitud(id_prestamo).subscribe(
-      (response) => {
-        console.log('Estado de la solicitud actualizado a "desarrollo":', response);
-        
-        // Crear el chat después de actualizar el estado
-        this.authService.crearChatPrestamo(id_prestamo).subscribe(
-          (chatResponse) => {
-            console.log('Chat creado exitosamente:', chatResponse);
-            // Aquí puedes agregar código adicional si necesitas manejar el chat creado
+    // Obtener los detalles del préstamo
+    this.authService.obtenerDetallesPrestamo(id_prestamo).subscribe(
+      (prestamo) => {
+        const correoSolicitante = prestamo.correo_solicitante; // Obtener el correo del solicitante
+  
+        if (!correoSolicitante) {
+          console.error('No se pudo obtener el correo del solicitante');
+          return; // Salir si no se puede obtener el correo
+        }
+  
+        // Actualizar el estado de la solicitud a "Aceptado"
+        this.authService.actualizarEstadoSolicitud(id_prestamo).subscribe(
+          (response) => {
+            console.log('Estado de la solicitud actualizado a "Aceptado":', response);
+  
+            const titulo = 'Préstamo Aceptado';
+            const descripcion = 'Tu solicitud de préstamo ha sido aceptada. Dirígete al chat para más detalles.';
+  
+            // Verificar los datos antes de enviar la solicitud
+            console.log('Datos de la notificación:', { correo: correoSolicitante, titulo, descripcion });
+  
+            // Llamar al servicio para crear la notificación de aceptación solo para el solicitante
+            this.authService.crearNotificacionAceptacion(correoSolicitante, titulo, descripcion).subscribe(
+              (notifResponse) => {
+                console.log('Notificación de aceptación enviada al solicitante:', notifResponse);
+              },
+              (notifError) => {
+                console.error('Error al enviar la notificación de aceptación al solicitante:', notifError);
+              }
+            );
+  
+            // Crear el chat después de actualizar el estado
+            this.authService.crearChatPrestamo(id_prestamo).subscribe(
+              (chatResponse) => {
+                console.log('Chat creado exitosamente:', chatResponse);
+                // Aquí puedes agregar código adicional si necesitas manejar el chat creado
+              },
+              (chatError) => {
+                console.error('Error al crear el chat:', chatError);
+              }
+            );
+  
+            // Recargar las solicitudes después de modificar el estado
+            this.cargarSolicitudesRecibidas();
           },
-          (chatError) => {
-            console.error('Error al crear el chat:', chatError);
+          (error) => {
+            console.error('Error al actualizar el estado de la solicitud:', error);
           }
         );
-  
-        // Vuelve a cargar las solicitudes después de modificar el estado
-        this.cargarSolicitudesRecibidas();
       },
       (error) => {
-        console.error('Error al actualizar el estado de la solicitud:', error);
+        console.error('Error al obtener los detalles del préstamo:', error);
       }
     );
   }
+  
 
   
     marcarEstadoComoEntregado(id_prestamo: number): void {
@@ -347,19 +387,19 @@ export class SolicitudUserPage implements OnInit {
       fechaObj.getDate() === dia
     );
   }
+  // Refrescar los datos manualmente
   refreshData(event: CustomEvent<RefresherEventDetail>) {
-    // Aquí va la lógica para actualizar los datos
     console.log('Refrescando...');
-    window.location.reload();
-    // Simula un delay para el refresco
+    this.cargarSolicitudesRecibidas();
+    this.cargarSolicitudesRealizadas();
+
     setTimeout(() => {
-      // Verificar si event.target es un IonRefresher
       const refresher = event.target;
 
       if (refresher instanceof IonRefresher) {
         refresher.complete();  // Indica que el refresco se completó
       }
-    }, 2000);
+    }, 3500);
   }
   reportarUsuario(usuarioReportado: number, usuarioReportante: number): void {
     this.authService.reportarUsuario(usuarioReportado, usuarioReportante).subscribe(
