@@ -26,15 +26,16 @@
       <!-- Mostrar botones solo si el usuario logueado es el propietario -->
       <ion-button *ngIf="esPropietario" class="prestamo"
         (click)="cambiarEstadoPrestamo(libro.isbn, !libro.disponible_prestamo)">
-        {{ libro.disponible_prestamo ? 'No Disponible para prestamo' : 'Disponible para prestamo' }}
+        {{ libro.disponible_prestamo ? 'Prestamo disponible' : 'Presiona para prestar' }}
       </ion-button>
 
       <ion-button *ngIf="esPropietario" class="intercambio"
         (click)="cambiarEstadoIntercambio(libro.isbn, !libro.disponible_intercambio)">
-        {{ libro.disponible_intercambio ? 'No Disponible para intercambio' : 'Disponible para intercambio' }}
+        {{ libro.disponible_intercambio ? 'Intercambio disponible' : 'Presiona para intercambiar' }}
       </ion-button>
-      <ion-button *ngIf="esPropietario" class="eliminar" (click)="eliminarLibroBiblioteca(libro.isbn)">Eliminar
-        Libro</ion-button>
+
+      <ion-button *ngIf="esPropietario" class="eliminar" 
+        (click)="eliminarLibroBiblioteca(libro.isbn)">Eliminar Libro</ion-button>
 
 
     </ion-label>

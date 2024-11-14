@@ -51,7 +51,7 @@
       </ion-button>
         <!-- entregado -->
         <ion-button class="entregar" *ngIf="solicitud.estado_prestamo === 'Por entregar'"
-        (click)="marcarEstadoComoEntregado(solicitud.id_prestamo)">Entregar</ion-button>
+        (click)="marcarEstadoComoEntregado(solicitud.id_prestamo)">Marcar entregado</ion-button>
         <ion-button (click)="reportarUsuario(solicitud.id_solicitante, solicitud.id_prestamista)"
         *ngIf="solicitud.estado_prestamo === 'devuelto'">
         Reportar al solicitante
