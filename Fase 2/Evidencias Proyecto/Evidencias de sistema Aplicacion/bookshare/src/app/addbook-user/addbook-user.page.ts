@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service'; // Asegúrate de que la ruta sea correcta
 import { ToastController } from '@ionic/angular'; // Importa ToastController
+import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
 
 @Component({
   selector: 'app-addbook-user',
@@ -81,5 +82,19 @@ export class AddbookUserPage implements OnInit {
     this.descripcion = '';
     this.genero = '';
     this.imagen_libro = null; 
+  }
+  refreshData(event: CustomEvent<RefresherEventDetail>) {
+    // Aquí va la lógica para actualizar los datos
+    console.log('Refrescando...');
+    window.location.reload();
+    // Simula un delay para el refresco
+    setTimeout(() => {
+      // Verificar si event.target es un IonRefresher
+      const refresher = event.target;
+
+      if (refresher instanceof IonRefresher) {
+        refresher.complete();  // Indica que el refresco se completó
+      }
+    }, 2000);
   }
 }

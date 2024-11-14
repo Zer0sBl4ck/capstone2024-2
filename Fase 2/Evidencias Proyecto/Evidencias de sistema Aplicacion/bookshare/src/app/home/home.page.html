@@ -65,6 +65,9 @@
   </ion-menu>
 
   <div class="ion-page" id="main-content">
+    <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">

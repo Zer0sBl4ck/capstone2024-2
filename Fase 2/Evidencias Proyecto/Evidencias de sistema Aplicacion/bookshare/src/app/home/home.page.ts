@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IonicSlides } from '@ionic/angular';
 import { PopoverController } from '@ionic/angular';
 import { VistaLibroPage } from '../vista-libro/vista-libro.page'; // Importa el componente
+import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
 
 
 interface Book {
@@ -169,5 +170,20 @@ export class HomePage {
     this.checkAuthentication();
     window.location.reload();
   }
+  refreshData(event: CustomEvent<RefresherEventDetail>) {
+    // Aquí va la lógica para actualizar los datos
+    console.log('Refrescando...');
+    window.location.reload();
+    // Simula un delay para el refresco
+    setTimeout(() => {
+      // Verificar si event.target es un IonRefresher
+      const refresher = event.target;
+
+      if (refresher instanceof IonRefresher) {
+        refresher.complete();  // Indica que el refresco se completó
+      }
+    }, 2000);
+  }
+  
 }
 

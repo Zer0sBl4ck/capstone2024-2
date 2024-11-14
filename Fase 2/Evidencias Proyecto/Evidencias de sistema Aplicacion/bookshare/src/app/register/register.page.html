@@ -10,6 +10,10 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
   <form (ngSubmit)="register()" #registroForm="ngForm">
     <ion-item>
       <ion-label position="stacked">Nombre de usuario</ion-label>

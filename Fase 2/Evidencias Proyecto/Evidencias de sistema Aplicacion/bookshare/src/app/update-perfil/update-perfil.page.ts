@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router'; 
 import { ToastController } from '@ionic/angular'; // Importa ToastController
+import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
 
 @Component({
   selector: 'app-update-perfil',
@@ -86,5 +87,19 @@ export class UpdatePerfilPage implements OnInit {
     if (correoLogueado) {
       this.router.navigate(['/perfil', correoLogueado]); 
     }
+  }
+  refreshData(event: CustomEvent<RefresherEventDetail>) {
+    // Aquí va la lógica para actualizar los datos
+    console.log('Refrescando...');
+    window.location.reload();
+    // Simula un delay para el refresco
+    setTimeout(() => {
+      // Verificar si event.target es un IonRefresher
+      const refresher = event.target;
+
+      if (refresher instanceof IonRefresher) {
+        refresher.complete();  // Indica que el refresco se completó
+      }
+    }, 2000);
   }
 }

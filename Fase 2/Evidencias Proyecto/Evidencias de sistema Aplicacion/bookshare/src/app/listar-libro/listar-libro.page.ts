@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router'; 
 import { PopoverController } from '@ionic/angular';
 import { VistaLibroPage } from '../vista-libro/vista-libro.page'; // Importa el componente
+import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
 
 
 interface Libro {
@@ -24,6 +25,7 @@ export class ListarLibroPage implements OnInit {
   libros: Libro[] = []; // Cambiar el tipo de libros a Libro[]
   esAdmin: boolean = false;
   rol: string | null = null; // Variable para almacenar el rol del usuario
+  userEmail: string | null = null;  
 
   constructor(
     private authService: AuthService, 
@@ -36,6 +38,7 @@ export class ListarLibroPage implements OnInit {
     this.cargarLibros(); 
     this.rol = this.authService.getUserRole(); 
     this.verificarRol(); // Asegurarse de verificar el rol del usuario
+    this.userEmail = this.authService.getUserEmail(); 
   }
 
   cargarLibros() {
@@ -64,25 +67,51 @@ export class ListarLibroPage implements OnInit {
     return await popover.present();
   }
 
-  async agregarLibroABiblioteca(libro: Libro) { // Cambiar el tipo a Libro
-    const usuario = this.authService.getUserData(); // Obtener datos del usuario
-    console.log('Usuario:', usuario); // Verifica si el usuario está definido
+  async agregarLibroABiblioteca(libro: Libro) {
+    const alert = await this.alertController.create({
+      header: 'Confirmación',
+      message: '¿Estás seguro de que deseas agregar este libro a tu biblioteca?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Operación cancelada');
+          }
+        },
+        {
+          text: 'Agregar',
+          handler: () => {
+            this.confirmarAgregarLibro(libro);
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+  
+  confirmarAgregarLibro(libro: Libro) {
+    const usuario = this.authService.getUserData();
+    console.log('Usuario:', usuario);
     if (usuario) {
-      // Cambiar id_libro a isbn
       this.authService.agregarLibroABiblioteca(usuario.id_usuario, libro.isbn).subscribe(
-        () => { 
+        () => {
           console.log('Libro agregado a la biblioteca');
-          this.mostrarAlerta('Éxito', 'El libro se ha agregado a tu biblioteca.'); // Mostrar alerta de éxito
+          this.mostrarAlerta('Éxito', 'El libro se ha agregado a tu biblioteca.');
+
+          
         },
         error => {
           console.error('Error al agregar libro a la biblioteca:', error);
-          this.mostrarAlerta('Error', 'Este libro ya está en tu biblioteca o hubo un problema al agregarlo.'); // Mostrar alerta de error
+          this.mostrarAlerta('Error', 'Este libro ya está en tu biblioteca o hubo un problema al agregarlo.');
         }
       );
     } else {
-      console.error('No se ha encontrado el usuario.'); // Log si no se encuentra el usuario
-      this.mostrarAlerta('Error', 'No se ha encontrado el usuario.'); // Alerta si no se encuentra el usuario
+      console.error('No se ha encontrado el usuario.');
+      this.mostrarAlerta('Error', 'No se ha encontrado el usuario.');
     }
+    this.router.navigate(['/bookowner', this.userEmail], { replaceUrl: true });
   }
 
   // Método para ir a la página de personas con el libro
@@ -142,5 +171,19 @@ export class ListarLibroPage implements OnInit {
       console.error('No se ha encontrado el usuario.');
       this.mostrarAlerta('Error', 'No se ha encontrado el usuario.');
     }
+  }
+  refreshData(event: CustomEvent<RefresherEventDetail>) {
+    // Aquí va la lógica para actualizar los datos
+    console.log('Refrescando...');
+    window.location.reload();
+    // Simula un delay para el refresco
+    setTimeout(() => {
+      // Verificar si event.target es un IonRefresher
+      const refresher = event.target;
+
+      if (refresher instanceof IonRefresher) {
+        refresher.complete();  // Indica que el refresco se completó
+      }
+    }, 2000);
   }
 }
