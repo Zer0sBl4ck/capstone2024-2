@@ -114,6 +114,31 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
+  abrirFormularioResena(solicitud: any) {
+    const calificacion = prompt('Ingrese la calificación (1-5):');
+    const comentario = prompt('Ingrese el comentario:');
+  
+    if (calificacion && comentario) {
+      this.agregarResenaSolicitante(solicitud.id_prestamo, parseInt(calificacion), comentario, solicitud);
+    } else {
+      alert('Por favor, complete la calificación y el comentario.');
+    }
+  }
+  
+  agregarResenaSolicitante(id_prestamo: number, calificacion: number, comentario: string, solicitud: any): void {
+  this.authService.agregarResenaSolicitante(id_prestamo, calificacion, comentario).subscribe(
+    (response) => {
+      console.log('Reseña agregada:', response);
+      solicitud.estado_prestamo = 'Reseña Agregada'; // Actualiza el estado de la solicitud
+      this.cargarSolicitudesRecibidas();
+      this.cargarSolicitudesRealizadas();
+    },
+    (error) => {
+      console.error('Error al agregar la reseña:', error);
+    }
+  );
+}
+
   esSolicitante(solicitud: any): boolean {
     // Compara el ID del usuario actual con el ID del solicitante de la solicitud
     return solicitud.id_usuario_solicitante === this.authService.getCurrentUserId();

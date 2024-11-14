@@ -272,6 +272,10 @@ export class AuthService {
   }
 
 
+  agregarResenaSolicitante(id_prestamo: number, calificacion: number, comentario: string): Observable<any> {
+    const body = { id_prestamo, calificacion, comentario };
+    return this.http.post(`${this.apiUrl}/resenas-solicitante`, body);
+  }
 
   getSolicitudesPrestamo(correo: string): Observable<any> {
     const url = `${this.apiUrl}/ps/${correo}`;

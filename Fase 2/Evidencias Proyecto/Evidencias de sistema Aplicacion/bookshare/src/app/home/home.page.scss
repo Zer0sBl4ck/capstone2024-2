@@ -257,7 +257,59 @@ ion-app {
   border-radius: 7px;
   display: block;
 }
+ion-title.reseñas {
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 10px;
+}
 
+swiper-container {
+  --swiper-navigation-color: white;
+  --swiper-pagination-color: white;
+  background-color: #ff6f3c; /* Fondo naranja */
+  padding: 16px;
+  border-radius: 10px;
+}
+
+swiper-slide ion-card {
+  background-color: #ff8a4b; /* Fondo un poco más claro para el card */
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+ion-card-title, ion-card-subtitle, ion-card-content p, ion-label h2 {
+  color: white;
+}
+
+ion-card-header {
+  text-align: center;
+}
+
+ion-card-content p {
+  margin: 0;
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: transparent;
+  padding-top: 8px;
+}
+
+ion-avatar img {
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+ion-card-content {
+  padding: 16px;
+}
+
+ion-label p {
+  font-size: 14px;
+  color: #ffdbc1; /* Un tono más claro para la fecha */
+}
 .ion-page#main-content img {
   max-width: 60%; // Other images will have this style
   height: auto;

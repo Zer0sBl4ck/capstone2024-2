@@ -39,6 +39,9 @@
           (click)="modificarEstadoSolicitud(solicitud.id_prestamo)">Aceptar</ion-button>
         <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
           (click)="eliminarSolicitud(solicitud.id_prestamo)">Rechazar</ion-button>
+          <ion-button *ngIf="solicitud.estado_prestamo === 'Reseña Exitosa'" (click)="abrirFormularioResena(solicitud)">
+            Dar Reseña
+          </ion-button>
         <!-- desarollo -->
         <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'desarollo'"
         (click)="eliminarSolicitud(solicitud.id_prestamo)">Rechazar</ion-button>

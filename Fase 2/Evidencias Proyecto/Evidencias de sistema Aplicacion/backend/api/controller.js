@@ -297,6 +297,46 @@ router.put('/usuarios/correo/:correo', async (req, res) => {
     return res.status(500).json({ message: 'Error interno del servidor.' });
   }
 });
+router.post('/resenas-solicitante', async (req, res) => {
+  const { id_prestamo, calificacion, comentario } = req.body;
+
+  if (!id_prestamo || !calificacion || comentario === undefined) {
+    return res.status(400).json({ message: 'Faltan campos requeridos' });
+  }
+
+  const creado_en = new Date();
+
+  try {
+    // Obtener el id_usuario del solicitante a partir del id_prestamo
+    const [solicitante] = await db.query(
+      'SELECT id_usuario_solicitante FROM prestamo WHERE id_prestamo = ?',
+      [id_prestamo]
+    );
+
+    if (solicitante.length === 0) {
+      return res.status(404).json({ message: 'No se encontró el solicitante para el préstamo proporcionado' });
+    }
+
+    const id_usuario = solicitante[0].id_usuario_solicitante;
+
+    // Insertar la reseña
+    const [result] = await db.query(
+      'INSERT INTO resena (id_usuario, calificacion, comentario, creado_en) VALUES (?, ?, ?, ?)',
+      [id_usuario, calificacion, comentario, creado_en]
+    );
+
+    // Actualizar el estado de la solicitud
+    await db.query(
+      'UPDATE prestamo SET estado_prestamo = "Reseña Agregada" WHERE id_prestamo = ?',
+      [id_prestamo]
+    );
+
+    return res.status(201).json({ message: 'Reseña agregada exitosamente', id_resena: result.insertId });
+  } catch (error) {
+    console.error('Error al agregar la reseña:', error);
+    return res.status(500).json({ message: 'Error al agregar la reseña' });
+  }
+});
 router.get('/resenas1', async (req, res) => {
   try {
     const [resenas] = await db.query(`
