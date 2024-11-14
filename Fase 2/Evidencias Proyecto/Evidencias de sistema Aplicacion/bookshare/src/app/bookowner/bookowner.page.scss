@@ -54,6 +54,10 @@ ion-content {
                 color: #000000;
                 font-family: Helvetica;
                 font-weight: bold;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
             }
 
             .prestamo,
