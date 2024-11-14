@@ -252,7 +252,7 @@ export class SolicitudUserPage implements OnInit {
           handler: () => {
             this.actualizarFechaDevolucion(id_prestamo, 1);
             // Pasar solicitud.correo al actualizar el estado y enviar la notificación
-            this.actualizarEstadoSolicitudAceptado(id_prestamo);
+            this.cambiarEstado(String(id_prestamo),'Por entregar');
           }
         },
         {
@@ -260,7 +260,7 @@ export class SolicitudUserPage implements OnInit {
           handler: () => {
             this.actualizarFechaDevolucion(id_prestamo, 2);
             // Pasar solicitud.correo al actualizar el estado y enviar la notificación
-            this.actualizarEstadoSolicitudAceptado(id_prestamo);
+            this.cambiarEstado(String(id_prestamo),'Por entregar');
           }
         },
         {
@@ -268,7 +268,7 @@ export class SolicitudUserPage implements OnInit {
           handler: () => {
             this.actualizarFechaDevolucion(id_prestamo, 3);
             // Pasar solicitud.correo al actualizar el estado y enviar la notificación
-            this.actualizarEstadoSolicitudAceptado(id_prestamo);
+            this.cambiarEstado(String(id_prestamo),'Por entregar');
           }
         },
         {
@@ -347,4 +347,17 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
+  cambiarEstado(id: string, nuevoEstado: string) {
+    this.authService.actualizarEstadoSolicitudx(id, nuevoEstado).subscribe(
+      (response) => {
+        console.log('Estado actualizado:', response);
+        // Aquí puedes mostrar un mensaje de éxito o hacer alguna otra acción
+      },
+      (error) => {
+        console.error('Error al actualizar el estado:', error);
+        // Aquí puedes mostrar un mensaje de error o manejar el error
+      }
+    );
+  }
+  
 }

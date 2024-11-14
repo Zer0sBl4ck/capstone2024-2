@@ -1005,6 +1005,31 @@ router.put('/solicitud/:id/desarrollo', async (req, res) => {
     return res.status(500).json({ error: 'Error al actualizar el estado de la solicitud' });
   }
 });
+
+router.put('/solicitud/:id/:estado', async (req, res) => {
+  const { id, estado } = req.params;
+
+  if (!id || !estado) {
+    return res.status(400).json({ error: 'El id de la solicitud y el estado son requeridos.' });
+  }
+
+  const updateEstadoQuery = `
+    UPDATE prestamo SET estado_prestamo = ? WHERE id_prestamo = ?
+  `;
+
+  try {
+    const [result] = await db.query(updateEstadoQuery, [estado, id]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'No se encontró la solicitud para actualizar.' });
+    }
+
+    res.status(200).json({ message: `El estado de la solicitud fue actualizado a ${estado}.` });
+  } catch (error) {
+    console.error('Error al actualizar el estado de la solicitud:', error);
+    return res.status(500).json({ error: 'Error al actualizar el estado de la solicitud' });
+  }
+});
 /// En el backend, asegúrate de tener un endpoint PUT para actualizar el estado a "Entregado".
 router.put('/solicitud/:id/entregado', async (req, res) => {
   const { id } = req.params;

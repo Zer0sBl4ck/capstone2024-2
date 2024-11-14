@@ -423,6 +423,11 @@ marcarEstadoComoEntregado(id_prestamo: number): Observable<any> {
       usuario_reportante: usuarioReportante
     });
   }
+  actualizarEstadoSolicitudx(id: string, estado: string): Observable<any> {
+    console.log(id,estado)
+    const url = `${this.apiUrl}/solicitud/${id}/${estado}`;
+    return this.http.put(url, {});
+  }
   
   
   

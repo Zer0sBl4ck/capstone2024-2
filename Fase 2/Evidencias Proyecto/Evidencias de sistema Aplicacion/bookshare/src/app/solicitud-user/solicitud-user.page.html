@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -34,44 +34,46 @@
           <p>Fecha devolución: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
           <p>{{ solicitud.nombre_usuario }}</p>
         </ion-label>
-
-        <ion-button (click)="reportarUsuario(solicitud.id_solicitante, solicitud.id_prestamista)">
-          Reportar al solicitante
-        </ion-button>
-        
-        <!-- Botón Aceptar solo si está pendiente -->
+        <!-- pendiente -->
         <ion-button class="aceptar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
           (click)="modificarEstadoSolicitud(solicitud.id_prestamo)">Aceptar</ion-button>
-
-        <!-- Botón Rechazar solo si está pendiente -->
         <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
           (click)="eliminarSolicitud(solicitud.id_prestamo)">Rechazar</ion-button>
-
+        <!-- desarollo -->
+        <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'desarollo'"
+        (click)="eliminarSolicitud(solicitud.id_prestamo)">Rechazar</ion-button>
+        <ion-button class="devolucion" *ngIf="solicitud.estado_prestamo === 'desarrollo'"
+        (click)="modificarFechaDevolucion(solicitud.id_prestamo)">
+        Fecha devolución
+      </ion-button>
+        <!-- entregado -->
         <ion-button class="entregar" *ngIf="solicitud.estado_prestamo === 'Por entregar'"
-          (click)="marcarEstadoComoEntregado(solicitud.id_prestamo)"></ion-button>
+        (click)="marcarEstadoComoEntregado(solicitud.id_prestamo)">Entregar</ion-button>
+        <ion-button (click)="reportarUsuario(solicitud.id_solicitante, solicitud.id_prestamista)"
+        *ngIf="solicitud.estado_prestamo === 'devuelto'">
+        Reportar al solicitante
+      </ion-button>
+      <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'Libro devuelto'"
+      (click)="cambiarEstado(solicitud.id_prestamo,'Devolucion confirmada')">Confirmar devolucion</ion-button>
+
+       
+
+
 
         <ion-button *ngIf="solicitud.estado_prestamo === 'Por entregar'"
           [routerLink]="['/chat', solicitud.id_prestamo]">
           Chat
         </ion-button>
 
-        <ion-button class="msj" *ngIf="solicitud.estado_prestamo === 'Entregado'" [routerLink]="['/chat', solicitud.id_prestamo]">
+        <ion-button class="msj" *ngIf="solicitud.estado_prestamo === 'Entregado'"
+          [routerLink]="['/chat', solicitud.id_prestamo]">
           Chat
         </ion-button>
-
-        <!-- Botón Fecha devolución disponible en estado 'desarrollo' -->
-        <ion-button class="devolucion" *ngIf="solicitud.estado_prestamo === 'desarrollo'"
-          (click)="modificarFechaDevolucion(solicitud.id_prestamo)">
-          Fecha devolución
-        </ion-button>
-
-        <!-- Botón Prestar disponible solo si la fecha de devolución ha sido seleccionada y estado aceptado -->
+      
         <ion-button class="aceptar" *ngIf="solicitud.estado_prestamo === 'aceptado'"
-          (click)="actualizarEstadoSolicitudAceptado(solicitud.id_prestamo)">
+          (click)="cambiarEstado(solicitud.id_prestamo,'Por entregar')">
           Prestar
         </ion-button>
-
-        <!-- Botón Rechazar para estado 'desarrollo' o 'aceptado' -->
         <ion-button class="rechazar"
           *ngIf="solicitud.estado_prestamo === 'desarrollo' || solicitud.estado_prestamo === 'aceptado'"
           (click)="eliminarSolicitud(solicitud.id_prestamo)">
@@ -101,13 +103,15 @@
           <p>Correo prestamista: {{ solicitud.correo }}</p>
           <p>Fecha: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
         </ion-label>
-
-        <ion-button *ngIf="solicitud.estado_prestamo === 'pendiente' && esSolicitante(solicitud)"
-        (click)="cancelarSolicitud(solicitud.id_prestamo)">
-        Cancelar
-      </ion-button>
-
-      <ion-button *ngIf="solicitud.estado_prestamo === 'Cancelado' && esSolicitante(solicitud)"
+        <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
+        (click)="eliminarSolicitud1(solicitud.id_prestamo)">Cancelar solicitud</ion-button>
+        <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'desarrollo'"
+        (click)="eliminarSolicitud1(solicitud.id_prestamo)">Cancelar solicitud</ion-button>
+        <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'entregado'"
+        (click)="cambiarEstado(solicitud.id_prestamo,'Entrega confirmada')">Confirmar recepcion</ion-button>
+        <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'Entrega confirmada'"
+        (click)="cambiarEstado(solicitud.id_prestamo,'Libro devuelto')">Devolver libro</ion-button>
+        <ion-button *ngIf="solicitud.estado_prestamo === 'Cancelado' && esSolicitante(solicitud)"
           (click)="eliminarSolicitud(solicitud.id_prestamo)">
           Eliminar
         </ion-button>
@@ -116,10 +120,10 @@
             Devolver Libro
           </ion-button>-->
         <!-- Botón para agregar reseña, solo visible si el estado es 'Entregado' y es el solicitante -->
-        <ion-button *ngIf="solicitud.estado_prestamo === 'Entregado' && esSolicitante(solicitud)"  
-        (click)="irAResena(solicitud.id_prestamo)">
-Agregar Reseña
-</ion-button>
+        <ion-button *ngIf="solicitud.estado_prestamo === 'Devolucion confirmada' && esSolicitante(solicitud)"
+          (click)="irAResena(solicitud.id_prestamo)">
+          Agregar Reseña libro
+        </ion-button>
       </ion-item>
     </ion-list>
     <ng-template #noSolicitudesRealizadas>
