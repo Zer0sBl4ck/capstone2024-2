@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router'; 
 import { PopoverController } from '@ionic/angular';
 import { VistaLibroPage } from '../vista-libro/vista-libro.page'; // Importa el componente
+import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
 
 
 interface Libro {
@@ -142,5 +143,19 @@ export class ListarLibroPage implements OnInit {
       console.error('No se ha encontrado el usuario.');
       this.mostrarAlerta('Error', 'No se ha encontrado el usuario.');
     }
+  }
+  refreshData(event: CustomEvent<RefresherEventDetail>) {
+    // Aquí va la lógica para actualizar los datos
+    console.log('Refrescando...');
+    window.location.reload();
+    // Simula un delay para el refresco
+    setTimeout(() => {
+      // Verificar si event.target es un IonRefresher
+      const refresher = event.target;
+
+      if (refresher instanceof IonRefresher) {
+        refresher.complete();  // Indica que el refresco se completó
+      }
+    }, 2000);
   }
 }

@@ -10,6 +10,10 @@
 </ion-header>
 
 <ion-content class="fondo-blanco">
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
   <ion-card class="tarjeta-filtro animate__animated">
     <ion-item lines="none">
       <ion-label position="stacked"><p>Filtrar por Ubicación</p></ion-label>
