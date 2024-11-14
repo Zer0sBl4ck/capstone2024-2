@@ -71,6 +71,26 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
+  devolverLibro(id_prestamo: number): void {
+    // Implementa la lógica para devolver el libro
+    this.authService.devolverLibro(id_prestamo).subscribe(
+      (response) => {
+        console.log('Libro devuelto:', response);
+        this.cargarSolicitudesRecibidas();
+        this.cargarSolicitudesRealizadas();
+      },
+      (error) => {
+        console.error('Error al devolver el libro:', error);
+      }
+    );
+  }
+ 
+  mostrarBotonDevolver(fechaDevolucion: string): boolean {
+    const fechaActual = new Date();
+    const fechaDev = new Date(fechaDevolucion);
+    const diasRestantes = (fechaDev.getTime() - fechaActual.getTime()) / (1000 * 3600 * 24);
+    return diasRestantes <= 3; // Mostrar el botón si faltan 3 días o menos para la fecha de devolución
+  }
   eliminarSolicitud1(id_prestamo: number): void {
     this.authService.eliminarSolicitud(id_prestamo).subscribe(
       (response) => {

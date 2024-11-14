@@ -267,7 +267,11 @@ export class AuthService {
     // Asegúrate de enviar el POST a la ruta correcta
     return this.http.post('http://localhost:3000/api/notificacion_prestamo', body);
   }
-  
+  obtenerResenas(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/resenas1`);
+  }
+
+
 
   getSolicitudesPrestamo(correo: string): Observable<any> {
     const url = `${this.apiUrl}/ps/${correo}`;
@@ -280,6 +284,9 @@ export class AuthService {
   eliminarSolicitud(id_prestamo: number): Observable<any> {
     const url = `${this.apiUrl}/solicitud/${id_prestamo}`;
     return this.http.delete(url);
+  }
+  devolverLibro(id_prestamo: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/devolver-libro/${id_prestamo}`, {});
   }
   cancelarSolicitud(id_prestamo: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/cancelar-solicitud/${id_prestamo}`, {});

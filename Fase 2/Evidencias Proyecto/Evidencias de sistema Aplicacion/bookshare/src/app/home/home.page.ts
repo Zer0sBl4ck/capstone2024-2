@@ -33,6 +33,7 @@ export class HomePage {
   correo: string = '';
   correoLogueado: string | null = '';  
   profileImage: string | null = null;
+  resenas: any[] = [];
 
   constructor(private authService: AuthService, private router: Router, private popoverController: PopoverController, private route: ActivatedRoute,) {}
 
@@ -69,7 +70,7 @@ export class HomePage {
   
 
     this.getLibros(); // Cargar libros al inicializar la página
-    
+    this.obtenerResenas();
   }
 
   getLibros() {
@@ -90,7 +91,29 @@ export class HomePage {
       }
     );
   }
-
+  obtenerResenas() {
+    console.log('Llamando al servicio para obtener reseñas'); // Log adicional para verificar la llamada al servicio
+    this.authService.obtenerResenas().subscribe(
+      (response) => {
+        console.log('Reseñas recibidas:', response); // Log para verificar las reseñas recibidas
+        this.resenas = response.map((resena: any) => ({
+          id_resena: resena.id_resena,
+          isbn: resena.isbn,
+          calificacion: resena.calificacion,
+          comentario: resena.comentario,
+          creado_en: resena.creado_en,
+          nombreUsuario: resena.nombreUsuario,
+          imagenUsuario: resena.imagenUsuario ? 'data:image/jpeg;base64,' + resena.imagenUsuario : 'assets/imagenes/default-avatar.png',
+          titulo: resena.titulo,
+          autor: resena.autor,
+        }));
+      },
+      (error) => {
+        console.error('Error al obtener las reseñas:', error);
+      }
+    );
+  
+  }
   async goToBookDetail(isbn: string) {
     const popover = await this.popoverController.create({
       component: VistaLibroPage,

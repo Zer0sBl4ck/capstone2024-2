@@ -110,6 +110,10 @@
           (click)="eliminarSolicitud(solicitud.id_prestamo)">
           Eliminar
         </ion-button>
+       <!-- <ion-button *ngIf="mostrarBotonDevolver(solicitud.fecha_prestamo) && esSolicitante(solicitud)"
+            (click)="devolverLibro(solicitud.id_prestamo)">
+            Devolver Libro
+          </ion-button>-->
         <!-- Botón para agregar reseña, solo visible si el estado es 'Entregado' y es el solicitante -->
         <ion-button *ngIf="solicitud.estado_prestamo === 'Entregado' && esSolicitante(solicitud)"  
         (click)="irAResena(solicitud.id_prestamo)">

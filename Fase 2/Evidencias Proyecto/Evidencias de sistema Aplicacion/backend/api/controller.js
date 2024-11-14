@@ -297,7 +297,32 @@ router.put('/usuarios/correo/:correo', async (req, res) => {
     return res.status(500).json({ message: 'Error interno del servidor.' });
   }
 });
+router.get('/resenas1', async (req, res) => {
+  try {
+    const [resenas] = await db.query(`
+      SELECT r.id_resena, r.isbn, r.calificacion, r.comentario, r.creado_en, 
+             u.nombre_usuario AS nombreUsuario, u.foto_perfil AS imagenUsuario, 
+             l.titulo, l.autor
+      FROM resena r
+      JOIN usuario u ON r.id_usuario = u.id_usuario
+      JOIN libro l ON r.isbn = l.isbn
+      ORDER BY r.creado_en DESC
+    `);
 
+    // Procesar la imagen de usuario si está presente
+    const resenasConImagen = resenas.map(resena => {
+      if (resena.imagenUsuario) {
+        resena.imagenUsuario = resena.imagenUsuario.toString('base64');
+      }
+      return resena;
+    });
+
+    return res.status(200).json(resenasConImagen);
+  } catch (error) {
+    console.error('Error al obtener las reseñas:', error);
+    return res.status(500).json({ message: 'Error al obtener las reseñas' });
+  }
+});
 // Ruta para agregar una nueva reseña
 // Ruta para agregar una nueva reseña
 router.post('/resenas', async (req, res) => {
@@ -428,6 +453,23 @@ router.post('/actualizar-estado-resena/:id_prestamo', async (req, res) => {
     return res.status(200).json({ message: 'Estado de la solicitud actualizado a "Reseña Exitosa"' });
   } catch (error) {
     console.error('Error al actualizar el estado de la solicitud:', error.message);
+    return res.status(500).json({ message: 'Error interno del servidor.', error: error.message });
+  }
+});
+router.post('/devolver-libro/:id_prestamo', async (req, res) => {
+  const { id_prestamo } = req.params;
+
+  try {
+    const query = 'UPDATE prestamo SET estado_prestamo = "Devuelto" WHERE id_prestamo = ?';
+    const [result] = await db.execute(query, [id_prestamo]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Solicitud no encontrada' });
+    }
+
+    return res.status(200).json({ message: 'Libro devuelto exitosamente' });
+  } catch (error) {
+    console.error('Error al devolver el libro:', error.message);
     return res.status(500).json({ message: 'Error interno del servidor.', error: error.message });
   }
 });
