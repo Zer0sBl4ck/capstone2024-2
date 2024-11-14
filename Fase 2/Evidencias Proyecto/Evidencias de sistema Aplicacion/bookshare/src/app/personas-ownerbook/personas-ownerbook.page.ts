@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service'; // Asegúrate de que la ruta sea correcta
-import { ActivatedRoute } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-personas-ownerbook',
   templateUrl: './personas-ownerbook.page.html',
@@ -16,7 +18,9 @@ export class PersonasOwnerbookPage implements OnInit {
   
   constructor(
     private authService: AuthService,  // Inyectamos el AuthService
-    private route: ActivatedRoute      // Inyectamos ActivatedRoute para acceder a los parámetros de la URL
+    private route: ActivatedRoute,      // Inyectamos ActivatedRoute para acceder a los parámetros de la URL
+    private alertController: AlertController,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -57,7 +61,7 @@ export class PersonasOwnerbookPage implements OnInit {
     this.authService.crearNotificacionPrestamo(correo, titulo, descripcion, tipo).subscribe(
       (notificacionResponse) => {
         console.log('Notificación creada con éxito:', notificacionResponse);
-        // Aquí puedes agregar lógica adicional como mostrar un mensaje de éxito al usuario
+        this.router.navigate(['/solicitud-user'], { replaceUrl: true });
       },
       (notificacionError) => {
         console.error('Error al crear la notificación:', notificacionError);
@@ -68,25 +72,46 @@ export class PersonasOwnerbookPage implements OnInit {
   
   
   // Método para solicitar un préstamo
-  solicitarPrestamo(id_usuario_prestamista: string, id_biblioteca: string,correo:string): void {
-    const id_usuario_solicitante = this.authService.getUserData()?.id_usuario; // Obtén el ID del usuario logueado
-    const correoPrestamista = this.authService.getUserData()?.correo; // Obtén el correo del prestamista
-    this.notificacion_prestamo(correo)
+  async solicitarPrestamo(id_usuario_prestamista: string, id_biblioteca: string, correo: string) {
+    const alert = await this.alertController.create({
+      header: 'Confirmación de Préstamo',
+      message: '¿Estás seguro de que deseas solicitar este préstamo?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Solicitud de préstamo cancelada');
+          }
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            this.confirmarPrestamo(id_usuario_prestamista, id_biblioteca, correo);
+            
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+  confirmarPrestamo(id_usuario_prestamista: string, id_biblioteca: string, correo: string): void {
+    const id_usuario_solicitante = this.authService.getUserData()?.id_usuario;
+    const correoPrestamista = this.authService.getUserData()?.correo;
+    this.notificacion_prestamo(correo);
     if (id_usuario_solicitante && correoPrestamista) {
       this.authService.crearPrestamo(id_usuario_solicitante, id_usuario_prestamista, id_biblioteca).subscribe(
         (response) => {
           console.log('Préstamo solicitado exitosamente:', response);
-  
         },
         (error) => {
           console.error('Error al solicitar el préstamo:', error);
-          // Aquí puedes agregar lógica adicional para manejar el error
         }
       );
     } else {
       console.error('No se pudo obtener el ID del usuario solicitante o el correo del prestamista.');
     }
-    
   }
   notificacion_intercambio(correo: string): void {
     const titulo = 'Solicitud de Intercambio de Libro';
@@ -101,22 +126,40 @@ export class PersonasOwnerbookPage implements OnInit {
       }
     );
   }
-  solicitarIntercambio(isbn: string, id_usuario_prestamista: number): void {
-    const id_usuario_solicitante = this.authService.getUserData()?.id_usuario; // Obtener ID del usuario logueado
-    console.log(id_usuario_solicitante) // bien
-    console.log(isbn, " ", id_usuario_prestamista) // bien
+  async solicitarIntercambio(isbn: string, id_usuario_prestamista: number) {
+    const alert = await this.alertController.create({
+      header: 'Confirmación de Intercambio',
+      message: '¿Estás seguro de que deseas solicitar este intercambio?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Solicitud de intercambio cancelada');
+          }
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            this.confirmarIntercambio(isbn, id_usuario_prestamista);
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+  confirmarIntercambio(isbn: string, id_usuario_prestamista: number): void {
+    const id_usuario_solicitante = this.authService.getUserData()?.id_usuario;
     if (id_usuario_solicitante) {
-      // Primero, obtener la id_biblioteca_prestamista a partir del ISBN
-      this.authService.obtenerIdBiblioteca(isbn,id_usuario_prestamista).subscribe(
+      this.authService.obtenerIdBiblioteca(isbn, id_usuario_prestamista).subscribe(
         (response) => {
-          const id_biblioteca_prestamista = response.id_biblioteca; // Obtener la ID de la biblioteca
-          console.log("id_biblioteca: ",id_biblioteca_prestamista) // bien
-          // Ahora que tenemos todos los datos necesarios, podemos insertar el intercambio
+          const id_biblioteca_prestamista = response.id_biblioteca;
           this.authService.insertarIntercambio(id_usuario_prestamista, id_usuario_solicitante, id_biblioteca_prestamista)
             .subscribe(
               (response) => {
                 console.log('Intercambio insertado exitosamente:', response);
-                // Aquí puedes agregar una notificación o mensaje de confirmación
+                this.router.navigate(['/listar-intercambio'], { replaceUrl: true });
               },
               (error) => {
                 console.error('Error al insertar el intercambio:', error);
