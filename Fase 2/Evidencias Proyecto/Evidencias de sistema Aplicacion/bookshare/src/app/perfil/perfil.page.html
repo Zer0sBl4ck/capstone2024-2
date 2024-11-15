@@ -37,12 +37,16 @@
 
       <!-- Mostrar el promedio de calificación con estrellas -->
       <div *ngIf="promedioCalificacion !== null">
-      
         <div class="estrellas" style="text-align: center;">
-          <ion-icon style="color: #e96a24; " *ngFor="let estrella of estrellas" 
-                     [name]="estrella === 'filled' ? 'star' : (estrella === 'half' ? 'star-half' : 'star-outline')">
+          <ion-icon *ngFor="let estrella of estrellas"
+                     [name]="estrella === 'filled' ? 'star' : (estrella === 'half' ? 'star-half' : 'star-outline')"
+                     [style.color]="estrella === 'filled' ? '#e96a24' : (estrella === 'half' ? '#e96a24' : 'gray')">
           </ion-icon>
         </div>
+      </div>
+      <!-- Si no hay valoraciones, mostrar estrellas vacías -->
+      <div *ngIf="promedioCalificacion === null" style="text-align: center;">
+        <ion-icon *ngFor="let _ of [1,2,3,4,5]" name="star-outline" style="color: gray;"></ion-icon>
       </div>
 
       <ion-button *ngIf="esMiPerfil()" (click)="editarPerfil()" expand="block" class="btn-editar">
