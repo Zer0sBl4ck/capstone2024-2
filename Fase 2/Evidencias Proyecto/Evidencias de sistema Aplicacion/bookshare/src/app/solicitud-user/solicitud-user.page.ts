@@ -451,7 +451,7 @@ export class SolicitudUserPage implements OnInit {
   }
   // Refrescar los datos manualmente
   refreshData(event: CustomEvent<RefresherEventDetail>) {
-    console.log('Refrescando...');
+    window.location.reload();
     this.cargarSolicitudesRecibidas();
     this.cargarSolicitudesRealizadas();
 
@@ -486,5 +486,16 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
+  obtenerIdChat(id_estado: string): void {
+    this.authService.obtenerIdChat(id_estado).subscribe(
+      (response) => {
+        const idChat = response.id_chat;
+        this.router.navigate(['/chat-contacto', idChat]);
+      },
+      (error) => {
+        console.error('Error al obtener el ID del chat:', error);
+      }
+    );
+  }  
   
 }

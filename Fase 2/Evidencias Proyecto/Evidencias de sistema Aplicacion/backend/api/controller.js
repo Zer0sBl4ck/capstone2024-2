@@ -1694,6 +1694,52 @@ router.post('/reportar', (req, res) => {
   });
 });
 
+router.get('/promedio-calificacion-sin-isbn/:id_usuario', async (req, res) => {
+  const { id_usuario } = req.params;  // Obtienes el id_usuario desde los parámetros de la URL
+
+  try {
+    const query = `
+      SELECT AVG(r.calificacion) AS promedio_calificacion
+      FROM resena r
+      JOIN usuario u ON u.id_usuario = r.id_usuario
+      WHERE isbn IS NULL AND u.correo = ?`;
+
+    const [rows] = await db.execute(query, [id_usuario]);
+
+    if (rows.length === 0 || rows[0].promedio_calificacion === null) {
+      return res.status(404).json({ message: 'No se encontraron reseñas para este usuario con isbn NULL' });
+    }
+
+    res.status(200).json({ promedio_calificacion: rows[0].promedio_calificacion });
+  } catch (error) {
+    console.error('Error al obtener el promedio de calificación:', error);
+    res.status(500).json({ message: 'Error al obtener el promedio de calificación' });
+  }
+});
+
+router.get('/obtener-id-chat/:id_estado', async (req, res) => {
+  const { id_estado } = req.params;  // Obtienes el id_estado desde los parámetros de la URL
+  const tipo_chat = 'prestamo';  // Tipo de chat fijo a 'prestamo'
+
+  try {
+    const query = `
+      SELECT id_chat
+      FROM chat
+      WHERE id_estado = ? AND tipo_chat = ?
+      LIMIT 1`;  // Limitamos la consulta a un solo chat
+
+    const [rows] = await db.execute(query, [id_estado, tipo_chat]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'No se encontró el id_chat con el estado y tipo de chat dados' });
+    }
+
+    res.status(200).json({ id_chat: rows[0].id_chat });
+  } catch (error) {
+    console.error('Error al obtener el id_chat:', error);
+    res.status(500).json({ message: 'Error al obtener el id_chat' });
+  }
+});
 
 
 

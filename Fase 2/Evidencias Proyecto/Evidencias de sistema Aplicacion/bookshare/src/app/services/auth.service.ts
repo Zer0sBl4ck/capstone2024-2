@@ -438,6 +438,14 @@ marcarEstadoComoEntregado(id_prestamo: number): Observable<any> {
     const url = `${this.apiUrl}/solicitud/${id}/${estado}`;
     return this.http.put(url, {});
   }
+  obtenerIdChat(idEstado: String): Observable<any> {
+    const url = `${this.apiUrl}/obtener-id-chat/${idEstado}`;
+    return this.http.get(url);
+  }
+  obtenerPromedioCalificacion(idUsuario: String): Observable<any> {
+    const url = `${this.apiUrl}/promedio-calificacion-sin-isbn/${idUsuario}`;
+    return this.http.get(url);
+  }
   
   
   
