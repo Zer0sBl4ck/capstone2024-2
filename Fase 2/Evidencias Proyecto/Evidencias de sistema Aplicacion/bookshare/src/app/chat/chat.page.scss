@@ -9,7 +9,7 @@
         .titulo {
             font-weight: bold;
             color: #ffffff;
-            font-family: Helvetica;
+            font-family: "Rethink Sans", sans-serif;
             font-size: 1.5rem;
             text-align: center;
             width: 100%;
@@ -38,20 +38,20 @@ ion-content {
         margin-left: 5%;
 
         ion-item {
-            --background: #4d4d4d;
+            --background: #4d4d4dbe;
             width: 95%;
             --ion-item-border-color: #e96a24;
             margin-top: 5px;
 
             ion-label {
                 h2 {
-                    font-family: Helvetica;
+                    font-family: "Rethink Sans", sans-serif;
                     color: #ffffff;
                     font-size: 1rem;
                 }
 
                 p {
-                    font-family: Helvetica;
+                    font-family: "Rethink Sans", sans-serif;
                     color: #ffffff;
                     font-size: 1rem;
                 }
@@ -69,7 +69,7 @@ ion-content {
     }
 
     p {
-        font-family: Helvetica;
+        font-family: "Rethink Sans", sans-serif;
         color: #ffffff;
         font-size: 1rem;
     }
