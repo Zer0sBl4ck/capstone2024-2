@@ -26,7 +26,8 @@ export class ListarLibroPage implements OnInit {
   esAdmin: boolean = false;
   rol: string | null = null; // Variable para almacenar el rol del usuario
   userEmail: string | null = null;  
-
+  genero: string | null = null; // Género seleccionado por el usuario
+  librosFiltrados: any[] = [];
   constructor(
     private authService: AuthService, 
     private alertController: AlertController,
@@ -50,6 +51,7 @@ export class ListarLibroPage implements OnInit {
           }
           return libro;
         });
+        this.filtrarPorGenero(); // Llamar a filtrarPorGenero después de asignar los libros
       },
       (error) => {
         console.error('Error al cargar libros:', error);
@@ -185,5 +187,10 @@ export class ListarLibroPage implements OnInit {
         refresher.complete();  // Indica que el refresco se completó
       }
     }, 2000);
+  }
+  filtrarPorGenero() {
+    this.librosFiltrados = this.genero
+      ? this.libros.filter(libro => libro.genero === this.genero)
+      : this.libros;
   }
 }
