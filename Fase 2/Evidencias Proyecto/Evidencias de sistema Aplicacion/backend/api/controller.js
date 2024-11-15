@@ -807,6 +807,27 @@ router.post('/notificacion_aceptacion', async (req, res) => {
     return res.status(500).json({ error: 'Error al insertar la notificación de aceptación' });
   }
 });
+router.post('/notificaciones', async (req, res) => {
+  const { correo, titulo, descripcion } = req.body;
+
+  if (!correo || !titulo || !descripcion) {
+    return res.status(400).json({ error: 'Faltan campos requeridos.' });
+  }
+
+  const insertNotificacionQuery = `
+    INSERT INTO notificacion (correo, titulo, descripcion, tipo) 
+    VALUES (?, ?, ?, 'Devolución')
+  `;
+
+  try {
+    await db.query(insertNotificacionQuery, [correo, titulo, descripcion]);
+    console.log('Notificación insertada con éxito.');
+    return res.status(201).json({ message: 'Notificación creada exitosamente.' });
+  } catch (error) {
+    console.error('Error al insertar la notificación:', error);
+    return res.status(500).json({ error: 'Error interno del servidor.' });
+  }
+});
 
 
 router.post('/notificacion_prestamo', async (req, res) => {
