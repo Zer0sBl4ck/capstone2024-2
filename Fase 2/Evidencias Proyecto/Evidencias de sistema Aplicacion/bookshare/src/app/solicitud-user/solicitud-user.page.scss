@@ -9,7 +9,7 @@
         .titulo {
             font-weight: bold;
             color: #ffffff;
-            font-family: Helvetica;
+            font-family: "Rethink Sans", sans-serif;
             font-size: 1.5rem;
             text-align: center;
             width: 100%;
@@ -28,15 +28,27 @@ ion-content {
     ion-segment {
         --background: transparent;
         --ion-color-primary: transparent;
-        margin-top: 1%;
+        width: 100%;
+        max-width: 95%;
+        margin-top: 1rem;
+        margin-left: 1.3rem;
+        position: center;
+        justify-content: center;
+        align-items: center;
 
         .reci,
         .reali {
             --background: #e96a24;
             color: #000000;
+            width: 100%;
+            max-width: 90%;
             border: 1px solid #e96a24;
             border-radius: 4px;
-            font-family: Helvetica;
+            font-size: 0.7rem;
+            font-family: "Rethink Sans", sans-serif;
+            position: center;
+            justify-content: center;
+            align-items: center;
         }
     }
 
@@ -44,55 +56,133 @@ ion-content {
     .rec {
         background: #4d4d4d;
         width: 100%;
-        margin-top: 1%;
+        max-width: 95%;
+        margin-top: 0.5rem;
+        margin-left: 2.5%;
         border: 3px solid #e96a24;
         border-radius: 7px;
-        display: flex;
         justify-content: center;
         align-items: center;
-		display: flex; /* Cambiado a flex para uso de flex-direction */
-		flex-direction: column; /* Para que los items se apilen verticalmente */
+        display: flex;
+        flex-direction: column;
 
-        ion-item {
-            --background: #4d4d4d;
-            width: 90%;
-            --ion-item-border-color: #e96a24;
+        ion-card {
+            --background: transparent;
+            width: 100%;
+            max-width: 95%;
+            height: auto;
+            border-radius: 2rem;
+            border: 0.1rem solid #e96a24;
 
-            ion-label {
-                h2 {
-                    font-family: Helvetica;
+            ion-card-header {
+                ion-card-title {
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                    /*color: #e96a24;*/
+                }
+            }
+
+            ion-card-content {
+                background: transparent;
+
+                .estado,
+                .correo,
+                .fechadev,
+                .nomusu {
+                    font-size: 0.9rem;
+                    font-family: "Rethink Sans", sans-serif;
+                    /*color: #e96a24;*/
+                }
+            }
+
+            ion-buttons {
+                align-items: center;
+                justify-content: center;
+                display: flex;
+
+                .aceptar {
+                    --background: #e96a24;
                     color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.9rem;
+                    width: 100%;
+                    max-width: 15%;
                 }
 
-                p {
-                    font-family: Helvetica;
+                .rechazar {
+                    --background: #ff0000;
                     color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.9rem;
+                    width: 100%;
+                    max-width: 15%;
+                }
+
+                .chatear {
+                    --background: #2442e9;
+                    color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.9rem;
+                    width: 100%;
+                    max-width: 25%;
+                }
+
+                .devolucion {
+                    --background: #e96a24;
+                    color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.75rem;
+                    width: 100%;
+                    max-width: 25%;
+                }
+
+                .rechaza {
+                    --background: #ff0000;
+                    color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.8rem;
+                    width: 100%;
+                    max-width: 50%;
+                    top: 10%;
+                }
+
+                .entregado {
+                    --background: #176e17;
+                    color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.8rem;
+                    width: 100%;
+                    max-width: 23%;
+                }
+
+                .repsoli {
+                    --background: #8d4e1b;
+                    color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.8rem;
+                    width: 100%;
+                    max-width: 23%;
+                }
+
+                .condev {
+                    --background: #176e17;
+                    color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.8rem;
+                    width: 100%;
+                    max-width: 24%;
+                }
+
+                .resena {
+                    --background: #176e17;
+                    color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.8rem;
+                    width: 100%;
+                    max-width: 30%;
                 }
             }
-
-            .aceptar, .devolucion, .entregar, .chat {
-                --background: #e96a24;
-                color: #ffffff;
-                font-family: Helvetica;
-                border-radius: 7px;
-            }
-
-            .msj {
-                --background: #e96a24;
-                color: #ffffff;
-                font-family: Helvetica;
-                border-radius: 7px;
-            }
-
-            .rechazar {
-                --background: #9e2222;
-                color: #ffffff;
-                font-family: Helvetica;
-                border-radius: 7px;
-                margin-left: 1%;
-            }
-
-
         }
     }
 
@@ -100,34 +190,111 @@ ion-content {
     .rea {
         background: #4d4d4d;
         width: 100%;
-        max-width: 80%;
-        margin-top: 1%;
+        max-width: 95%;
+        margin-top: 0.5rem;
+        margin-left: 2.5%;
         border: 3px solid #e96a24;
         border-radius: 7px;
-        display: flex;
         justify-content: center;
         align-items: center;
-        margin-left: 10%;
-		display: flex; /* Cambiado a flex para uso de flex-direction */
-		flex-direction: column; /* Para que los items se apilen verticalmente */
+        display: flex;
+        flex-direction: column;
 
-        ion-item {
-            --background: #4d4d4d;
-            width: 90%;
-            --ion-item-border-color: #e96a24;
+        ion-card {
+            --background: transparent;
+            width: 100%;
+            max-width: 95%;
+            height: auto;
+            border-radius: 2rem;
+            border: 0.1rem solid #e96a24;
 
-            ion-label {
+            ion-card-header {
+                ion-card-title {
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                    /*color: #e96a24;*/
+                }
+            }
 
-                h2 {
-                    font-family: Helvetica;
-                    font-size: 16px;
+            ion-card-content {
+                background: transparent;
+
+                .estado,
+                .correo,
+                .fecha {
+                    font-size: 0.9rem;
+                    font-family: "Rethink Sans", sans-serif;
+                    /*color: #e96a24;*/
+                }
+            }
+
+            ion-buttons {
+                align-items: center;
+                justify-content: center;
+                display: flex;
+
+                .cancelar {
+                    --background: #ff0000;
                     color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.9rem;
+                    width: 100%;
+                    max-width: 24%;
                 }
 
-                p {
-                    font-family: Helvetica;
-                    font-size: 16px;
+                .cancela {
+                    --background: #ff0000;
                     color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.8rem;
+                    width: 100%;
+                    max-width: 21%;
+                }
+
+                .chat {
+                    --background: #2442e9;
+                    color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.9rem;
+                    width: 100%;
+                    max-width: 21%;
+                }
+
+                .repdue {
+                    --background: #8d4e1b;
+                    color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.8rem;
+                    width: 100%;
+                    max-width: 23%;
+                }
+
+                .recepcion {
+                    --background: #176e17;
+                    color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.8rem;
+                    width: 100%;
+                    max-width: 23%;
+                }
+
+                .devolver {
+                    --background: #176e17;
+                    color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.8rem;
+                    width: 100%;
+                    max-width: 30%;
+                }
+
+                .resenalibro {
+                    --background: #176e17;
+                    color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.8rem;
+                    width: 100%;
+                    max-width: 23%;
                 }
             }
         }
@@ -137,14 +304,16 @@ ion-content {
     ion-card {
         --background: #e96a24;
         width: 100%;
-        border: 3px solid #e96a24;
-        border-radius: 5px;
-
-
+        max-width: 95%;
+        height: auto;
+        border-radius: 2rem;
+        border: 0.1rem solid #e96a24;
+        margin-left: 2.5%;
 
         ion-card-header {
             ion-card-title {
-                font-family: Helvetica;
+                font-family: "Rethink Sans", sans-serif;
+                font-size: 1rem;
                 color: #ffffff;
                 display: flex;
                 justify-content: center;
@@ -154,7 +323,8 @@ ion-content {
 
         ion-card-content {
             p {
-                font-family: Helvetica;
+                font-family: "Rethink Sans", sans-serif;
+                font-size: 1rem;
                 color: #ffffff;
                 display: flex;
                 justify-content: center;
@@ -164,144 +334,284 @@ ion-content {
     }
 }
 
-@media (min-width: 2560px), (min-width: 1920px) {
-    ion-content {
 
-        ion-segment {
-
-            .reci,
-            .reali {
-                width: 80%;
-                font-size: 14px;
-            }
-        }
-
-        /*Mostrar solicitudes recibidas*/
-        .rec {
-            width: 70%;
-            margin-left: 15%;
-
-            ion-item {
-                width: 100%;
-
-                ion-label {
-                    h2 {
-                        font-size: 16px;
-                    }
-
-                    p {
-                        font-size: 14px;
-                    }
-                }
-
-                .aceptar {
-                    font-size: 14px;
-                }
-
-                .rechazar {
-                    margin-left: 1%;
-                    font-size: 14px;
-                }
-            }
-        }
-
-        /*Mostrar solicitudes realizadas*/
-        .rea {
-            width: 70%;
-            margin-left: 15%;
-
-            ion-item {
-                width: 100%;
-
-                ion-label {
-                    h2 {
-                        font-size: 16px;
-                    }
-
-                    p {
-                        font-size: 14px;
-                    }
-                }
-            }
-        }
-
-        /*Mostrar que no hay solicitudes */
-        ion-card {
-            width: 30%;
-            margin-left: 33%;
-
-            ion-card-header {
-                ion-card-title {
-                    font-size: 16px;
-                }
-            }
-
-            ion-card-content {
-                p {
-                    font-size: 14px;
-                }
-            }
-        }
-    }
-}
+@media (max-width: 2560px),
+(max-width: 1920px) {}
 
 @media (max-width: 600px) {
     ion-content {
+        --background: #ebe7e7;
 
         ion-segment {
-            margin-left: 5%;
+            --background: transparent;
+            --ion-color-primary: transparent;
+            width: 100%;
+            max-width: 95%;
+            margin-top: 1rem;
+            margin-left: 1.3rem;
+            position: center;
+            justify-content: center;
+            align-items: center;
 
             .reci,
             .reali {
-                width: 80%;
-                font-size: 10px;
+                --background: #e96a24;
+                color: #000000;
+                width: 100%;
+                max-width: 90%;
+                border: 1px solid #e96a24;
+                border-radius: 4px;
+                font-size: 0.7rem;
+                font-family: "Rethink Sans", sans-serif;
+                position: center;
+                justify-content: center;
+                align-items: center;
             }
         }
 
         /*Mostrar solicitudes recibidas*/
         .rec {
-            width: 95%;
-            margin-left: 2%;
+            background: #4d4d4d;
+            width: 100%;
+            max-width: 95%;
+            margin-top: 0.5rem;
+            margin-left: 2.5%;
+            border: 3px solid #e96a24;
+            border-radius: 7px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
 
-            ion-item {
-                width: 92%;
+            ion-card {
+                --background: transparent;
+                width: 100%;
+                max-width: 95%;
+                height: auto;
+                border-radius: 2rem;
+                border: 0.1rem solid #e96a24;
 
-                ion-label {
-                    h2 {
-                        font-size: 14px;
-                    }
-
-                    p {
-                        font-size: 12px;
+                ion-card-header {
+                    ion-card-title {
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        /*color: #e96a24;*/
                     }
                 }
 
-                .aceptar {
-                    font-size: 10px;
+                ion-card-content {
+                    background: transparent;
+
+                    .estado,
+                    .correo,
+                    .fechadev,
+                    .nomusu {
+                        font-size: 0.9rem;
+                        font-family: "Rethink Sans", sans-serif;
+                        /*color: #e96a24;*/
+                    }
                 }
 
-                .rechazar {
-                    margin-left: 1%;
-                    font-size: 10px;
+                ion-buttons {
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+
+                    .aceptar {
+                        --background: #e96a24;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.9rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
+
+                    .rechazar {
+                        --background: #ff0000;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.9rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
+
+                    .chatear {
+                        --background: #2442e9;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.9rem;
+                        width: 100%;
+                        max-width: 25%;
+                    }
+
+                    .devolucion {
+                        --background: #e96a24;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.75rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
+
+                    .rechaza {
+                        --background: #ff0000;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 50%;
+                        top: 10%;
+                    }
+
+                    .entregado {
+                        --background: #176e17;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
+
+                    .repsoli {
+                        --background: #8d4e1b;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
+
+                    .condev {
+                        --background: #176e17;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
+
+                    .resena {
+                        --background: #176e17;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
                 }
             }
         }
 
         /*Mostrar solicitudes realizadas*/
         .rea {
-            width: 80%;
-            margin-left: 10%;
+            background: #4d4d4d;
+            width: 100%;
+            max-width: 95%;
+            margin-top: 0.5rem;
+            margin-left: 2.5%;
+            border: 3px solid #e96a24;
+            border-radius: 7px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
 
-            ion-item {
-                width: 85%;
+            ion-card {
+                --background: transparent;
+                width: 100%;
+                max-width: 95%;
+                height: auto;
+                border-radius: 2rem;
+                border: 0.1rem solid #e96a24;
 
-                ion-label {
-                    h2 {
-                        font-size: 14px;
+                ion-card-header {
+                    ion-card-title {
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        /*color: #e96a24;*/
+                    }
+                }
+
+                ion-card-content {
+                    background: transparent;
+
+                    .estado,
+                    .correo,
+                    .fecha {
+                        font-size: 0.9rem;
+                        font-family: "Rethink Sans", sans-serif;
+                        /*color: #e96a24;*/
+                    }
+                }
+
+                ion-buttons {
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+
+                    .cancelar {
+                        --background: #ff0000;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.9rem;
+                        width: 100%;
+                        max-width: 55%;
                     }
 
-                    p {
-                        font-size: 12px;
+                    .cancela {
+                        --background: #ff0000;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
+
+                    .chat {
+                        --background: #2442e9;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.9rem;
+                        width: 100%;
+                        max-width: 25%;
+                    }
+
+                    .repdue {
+                        --background: #8d4e1b;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 28%;
+                    }
+
+                    .recepcion {
+                        --background: #176e17;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
+
+                    .devolver {
+                        --background: #176e17;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
+
+                    .resenalibro {
+                        --background: #176e17;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 30%;
                     }
                 }
             }
@@ -309,18 +619,33 @@ ion-content {
 
         /*Mostrar que no hay solicitudes */
         ion-card {
-            width: 90%;
-            margin-left: 5%;
+            --background: #e96a24;
+            width: 100%;
+            max-width: 95%;
+            height: auto;
+            border-radius: 2rem;
+            border: 0.1rem solid #e96a24;
+            margin-left: 2.5%;
 
             ion-card-header {
                 ion-card-title {
-                    font-size: 14px;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 1rem;
+                    color: #ffffff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
             }
 
             ion-card-content {
                 p {
-                    font-size: 12px;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 1rem;
+                    color: #ffffff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
             }
         }
@@ -328,83 +653,4 @@ ion-content {
 }
 
 
-@media (max-height: 900px) {
-    ion-content {
-
-        ion-segment {
-
-            .reci,
-            .reali {
-                width: 80%;
-                font-size: 14px;
-            }
-        }
-
-        /*Mostrar solicitudes recibidas*/
-        .rec {
-            width: 80%;
-            margin-left: 6%;
-
-            ion-item {
-                width: 90%;
-
-                ion-label {
-                    h2 {
-                        font-size: 16px;
-                    }
-
-                    p {
-                        font-size: 14px;
-                    }
-                }
-
-                .aceptar {
-                    font-size: 14px;
-                }
-
-                .rechazar {
-                    margin-left: 1%;
-                    font-size: 14px;
-                }
-            }
-        }
-
-        /*Mostrar solicitudes realizadas*/
-        .rea {
-            width: 80%;
-            margin-left: 6%;
-
-            ion-item {
-                width: 90%;
-
-                ion-label {
-                    h2 {
-                        font-size: 16px;
-                    }
-
-                    p {
-                        font-size: 14px;
-                    }
-                }
-            }
-        }
-
-        /*Mostrar que no hay solicitudes */
-        ion-card {
-            width: 55%;
-            margin-left: 20%;
-
-            ion-card-header {
-                ion-card-title {
-                    font-size: 16px;
-                }
-            }
-
-            ion-card-content {
-                p {
-                    font-size: 14px;
-                }
-            }
-        }
-    }
-}
+@media (max-height: 900px) {}

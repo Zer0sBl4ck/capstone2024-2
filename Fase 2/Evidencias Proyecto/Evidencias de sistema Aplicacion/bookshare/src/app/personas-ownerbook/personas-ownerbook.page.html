@@ -1,5 +1,5 @@
 <ion-header class="naranjo-header fondo">
-  <ion-toolbar >
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button routerLink="/tabs/listar-libro">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
@@ -13,10 +13,12 @@
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  
+
   <ion-card class="tarjeta-filtro animate__animated">
     <ion-item lines="none">
-      <ion-label position="stacked"><p>Filtrar por Ubicación</p></ion-label>
+      <ion-label position="stacked">
+        <p>Filtrar por Ubicación</p>
+      </ion-label>
       <ion-select [(ngModel)]="ubicacionSeleccionada" placeholder="Seleccione una ubicación">
         <ion-select-option value="">Todas</ion-select-option>
         <ion-select-option value="concepcion">Concepción</ion-select-option>
@@ -34,9 +36,9 @@
     <ion-card class="tarjeta-persona" *ngFor="let persona of personasFiltradas()">
       <ion-item lines="none" class="i-item">
         <ion-avatar slot="start" [routerLink]="['/perfil', persona.correo]">
-          <img class="foto" *ngIf="persona.foto_perfil_base64" 
-               [src]="'data:image/jpeg;base64,' + persona.foto_perfil_base64" 
-               alt="Foto de perfil de {{ persona.nombre_usuario }}">
+          <img class="foto" *ngIf="persona.foto_perfil_base64"
+            [src]="'data:image/jpeg;base64,' + persona.foto_perfil_base64"
+            alt="Foto de perfil de {{ persona.nombre_usuario }}">
         </ion-avatar>
         <ion-label>
           <h2 [routerLink]="['/perfil', persona.correo]" style="cursor: pointer;">
@@ -44,11 +46,11 @@
           </h2>
           <p>Email: {{ persona.correo }}</p>
           <p>Ubicación: {{ persona.ubicacion }}</p>
-          <p>Intercambio: 
+          <p>Intercambio:
             <span *ngIf="persona.disponible_intercambio === 1; else noIntercambio">Sí</span>
             <ng-template #noIntercambio>No</ng-template>
           </p>
-          <p>Préstamo: 
+          <p>Préstamo:
             <span *ngIf="persona.disponible_prestamo === 1; else noPrestamo">Sí</span>
             <ng-template #noPrestamo>No</ng-template>
           </p>
@@ -56,16 +58,14 @@
       </ion-item>
 
       <ion-item lines="none">
-          <ion-button class="btn-tarjeta" slot="end"
-            *ngIf="persona.disponible_prestamo === 1" 
-            (click)="solicitarPrestamo(persona.id_usuario, persona.id_biblioteca, persona.correo)">
-            <p>Préstamo</p>
-          </ion-button>
-          <ion-button class="btn-tarjeta" slot="end"
-            *ngIf="persona.disponible_intercambio === 1" 
-            (click)="solicitarIntercambio(isbn, persona.id_usuario)">
-            <p>Intercambio</p>
-          </ion-button>
+        <ion-button class="btn-tarjeta" slot="end" *ngIf="persona.disponible_prestamo === 1"
+          (click)="solicitarPrestamo(persona.id_usuario, persona.id_biblioteca, persona.correo)">
+          <p>Préstamo</p>
+        </ion-button>
+        <ion-button class="btn-tarjeta" slot="end" *ngIf="persona.disponible_intercambio === 1"
+          (click)="solicitarIntercambio(isbn, persona.id_usuario)">
+          <p>Intercambio</p>
+        </ion-button>
 
       </ion-item>
     </ion-card>
