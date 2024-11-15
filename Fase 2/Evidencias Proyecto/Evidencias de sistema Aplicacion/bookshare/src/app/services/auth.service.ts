@@ -271,10 +271,7 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/resenas1`);
   }
 
-  crearNotificacionDevolucion(correo: string, titulo: string, descripcion: string): Observable<any> {
-    const body = { correo, titulo, descripcion };
-    return this.http.post(`${this.apiUrl}/notificaciones`, body);
-  }
+
   agregarResenaSolicitante(id_prestamo: number, calificacion: number, comentario: string): Observable<any> {
     const body = { id_prestamo, calificacion, comentario };
     return this.http.post(`${this.apiUrl}/resenas-solicitante`, body);
