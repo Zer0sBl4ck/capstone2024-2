@@ -3,7 +3,7 @@ import { AuthService } from '../services/auth.service'; // Asegúrate de que la 
 import { ActionSheetController } from '@ionic/angular';
 import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
 import { Router } from '@angular/router'; 
-
+import { LocalNotifications } from '@capacitor/local-notifications';
 @Component({
   selector: 'app-solicitud-user',
   templateUrl: './solicitud-user.page.html',
@@ -26,6 +26,7 @@ export class SolicitudUserPage implements OnInit {
     this.refreshInterval = setInterval(() => {
       this.cargarSolicitudesRecibidas();
       this.cargarSolicitudesRealizadas();
+      this.verificarFechasDevolucion();
     }, 3000); // 3000 ms = 3 segundos
   }
 
@@ -58,7 +59,39 @@ export class SolicitudUserPage implements OnInit {
       );
     }
   }
+  verificarFechasDevolucion(): void {
+    const fechaActual = new Date();
+    this.solicitudesRecibidas.forEach(solicitud => {
+      const fechaDev = new Date(solicitud.fecha_devolucion);
+      const diasRestantes = (fechaDev.getTime() - fechaActual.getTime()) / (1000 * 3600 * 24);
+      if (diasRestantes <= 3 && solicitud.estado_prestamo !== 'Notificado') {
+        this.enviarNotificacionLocal(solicitud);
+        solicitud.estado_prestamo = 'Notificado'; // Actualizar el estado para evitar múltiples notificaciones
+      }
+    });
+  }
 
+  enviarNotificacionLocal(solicitud: any): void {
+    const mensaje = `El tiempo de devolución del libro "${solicitud.titulo}" se está acabando.`;
+    LocalNotifications.schedule({
+      notifications: [
+        {
+          title: 'Recordatorio de Devolución',
+          body: mensaje,
+          id: new Date().getTime(),
+          schedule: { at: new Date(Date.now() + 1000 * 5) }, // Notificación en 5 segundos
+          sound: undefined,
+          attachments: undefined,
+          actionTypeId: '',
+          extra: null,
+        },
+      ],
+    }).then(() => {
+      console.log('Notificación local programada');
+    }).catch(error => {
+      console.error('Error al programar la notificación local:', error);
+    });
+  }
   // Alternar entre solicitudes recibidas y realizadas
   alternarSolicitudes(event: any): void {
     const tipo = event.detail.value;
@@ -159,7 +192,7 @@ export class SolicitudUserPage implements OnInit {
         // Luego, obtenemos los detalles del libro y navegamos a la página de reseñas
         this.authService.obtenerDetallesLibroPorPrestamo(id_prestamo).subscribe(
           (response) => {
-            console.log('Datos del libro obtenidos:', response); // Log para verificar los datos obtenidos
+          console.log('Datos del libro obtenidos:', response); // Log para  los datos obtenidos
             
             // Navega a la página de reseñas pasando todos los datos del libro
             this.router.navigate(['/resena-libro'], {
@@ -308,7 +341,7 @@ export class SolicitudUserPage implements OnInit {
   
   
   
-  modificarFechaDevolucion(id_prestamo: number): void {
+  modificarFechaDevolucion(id_prestamo: number, correoSolicitante: string): void {
     const actionSheet = this.actionSheetController.create({
       header: 'Selecciona la duración de la devolución',
       buttons: [
@@ -316,24 +349,24 @@ export class SolicitudUserPage implements OnInit {
           text: '1 Semana',
           handler: () => {
             this.actualizarFechaDevolucion(id_prestamo, 1);
-            // Pasar solicitud.correo al actualizar el estado y enviar la notificación
-            this.cambiarEstado(String(id_prestamo),'Por entregar');
+            this.cambiarEstado(String(id_prestamo), 'Por entregar');
+            this.programarNotificacionDevolucion(id_prestamo, 7, correoSolicitante);
           }
         },
         {
           text: '2 Semanas',
           handler: () => {
             this.actualizarFechaDevolucion(id_prestamo, 2);
-            // Pasar solicitud.correo al actualizar el estado y enviar la notificación
-            this.cambiarEstado(String(id_prestamo),'Por entregar');
+            this.cambiarEstado(String(id_prestamo), 'Por entregar');
+            this.programarNotificacionDevolucion(id_prestamo, 14, correoSolicitante);
           }
         },
         {
           text: '3 Semanas',
           handler: () => {
             this.actualizarFechaDevolucion(id_prestamo, 3);
-            // Pasar solicitud.correo al actualizar el estado y enviar la notificación
-            this.cambiarEstado(String(id_prestamo),'Por entregar');
+            this.cambiarEstado(String(id_prestamo), 'Por entregar');
+            this.programarNotificacionDevolucion(id_prestamo, 21, correoSolicitante);
           }
         },
         {
@@ -345,14 +378,43 @@ export class SolicitudUserPage implements OnInit {
         }
       ]
     });
-  
- 
-  
-    actionSheet.then(actionSheetElement => {
-      actionSheetElement.present();
+    actionSheet.then(sheet => sheet.present());
+  }
+  programarNotificacionDevolucion(id_prestamo: number, dias: number, correoSolicitante: string): void {
+    console.log(`Programando notificación para el préstamo ID: ${id_prestamo}, días: ${dias}`);
+    const titulo = 'Recordatorio de Devolución';
+    const descripcion = `El libro debe devolverse en ${dias} días.`;
+
+    // Llamar al servicio para crear la notificación de devolución para el solicitante
+    this.authService.crearNotificacionDevolucion(correoSolicitante, titulo, descripcion).subscribe(
+      (notifResponse) => {
+        console.log('Notificación de devolución enviada al solicitante:', notifResponse);
+      },
+      (notifError) => {
+        console.error('Error al enviar la notificación de devolución al solicitante:', notifError);
+      }
+    );
+
+    LocalNotifications.schedule({
+      notifications: [
+        {
+          title: titulo,
+          body: descripcion,
+          id: new Date().getTime(),
+          schedule: { at: new Date(Date.now() + 1000 * 5) }, // Notificación en 5 segundos para prueba
+          sound: undefined,
+          attachments: undefined,
+          actionTypeId: '',
+          extra: null,
+        },
+      ],
+    }).then(() => {
+      console.log('Notificación local programada');
+    }).catch(error => {
+      console.error('Error al programar la notificación local:', error);
     });
   }
-  
+
   
   actualizarFechaDevolucion(id_prestamo: number, semanas: number): void {
     // Obtener la fecha actual

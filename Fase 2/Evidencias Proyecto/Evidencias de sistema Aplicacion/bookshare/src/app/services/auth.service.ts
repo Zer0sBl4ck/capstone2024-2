@@ -141,6 +141,12 @@ export class AuthService {
       descripcion
     });
   }
+
+  //crera devolucion
+  crearNotificacionDevolucion(correo: string, titulo: string, descripcion: string): Observable<any> {
+    const body = { correo, titulo, descripcion };
+    return this.http.post(`${this.apiUrl}/notificaciones`, body);
+  }
   
   
   
