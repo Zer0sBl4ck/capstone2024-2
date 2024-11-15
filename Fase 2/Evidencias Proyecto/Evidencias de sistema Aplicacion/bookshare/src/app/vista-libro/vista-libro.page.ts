@@ -1,4 +1,3 @@
-// vista-libro.page.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -36,5 +35,10 @@ export class VistaLibroPage implements OnInit {
     this.authService.getLibros().subscribe((data) => {
       this.libro = data.find((libro: Libro) => libro.isbn === isbn);
     });
+  }
+
+  // Función para retroceder a la página anterior
+  retroceder() {
+    window.history.back();
   }
 }

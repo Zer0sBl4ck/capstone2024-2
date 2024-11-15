@@ -26,11 +26,10 @@
     <ion-list class="solicitante" *ngIf="intercambiosComoSolicitante.length > 0; else noSolicitante">
       <ion-card *ngFor="let intercambio of intercambiosComoSolicitante">
         <ion-card-header>
-          <ion-card-title>Intercambios como Solicitante</ion-card-title>
+          <ion-card-title>Libro solicitud: {{ intercambio.libro_titulo }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
-          <p class="libro">Libro solicitud: {{ intercambio.libro_titulo }}</p>
           <p class="ofertante">Intercambio usuario: {{ intercambio.ofertante }}</p>
           <p class="estado">Estado: {{ intercambio.estado }}</p>
         </ion-card-content>
@@ -55,12 +54,10 @@
       <ion-card *ngFor="let intercambio of intercambiosComoPrestamista">
 
         <ion-card-header>
-          <ion-card-title>Intercambios como Prestamista</ion-card-title>
+          <ion-card-title>Libro prestado: {{ intercambio.libro_titulo }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
-
-          <p class="libro">Libro prestado: {{ intercambio.libro_titulo }}</p>
           <p class="solicitante">Intercambio usuario: {{ intercambio.solicitante }}</p>
           <p class="estado">Estado: {{ intercambio.estado }}</p>
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-intercambio-usuario',
@@ -16,7 +17,8 @@ export class ListarIntercambioUsuarioPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router  // Inject Router to navigate
   ) { }
 
   ngOnInit() {
@@ -62,6 +64,12 @@ export class ListarIntercambioUsuarioPage implements OnInit {
       console.error('ID de intercambio no válido:', this.idIntercambio);
     }
   }
+
+  irAPersonasConLibro(isbn: string): void {
+    // Navigate to the vista-libro page with the ISBN
+    this.router.navigate(['/vista-libro', isbn]);
+  }
+
   refreshData(event: CustomEvent<RefresherEventDetail>) {
     // Aquí va la lógica para actualizar los datos
     console.log('Refrescando...');
@@ -76,5 +84,4 @@ export class ListarIntercambioUsuarioPage implements OnInit {
       }
     }, 2000);
   }
-  
 }

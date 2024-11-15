@@ -1,5 +1,126 @@
-.foto {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
+.fondo {
+    ion-toolbar {
+        --background: #e96a24 !important;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .titulo {
+            font-weight: bold;
+            color: #ffffff;
+            font-family: "Rethink Sans", sans-serif;
+            text-align: center;
+            width: 100%;
+            max-width: 95%;
+        }
+
+        ion-icon {
+            color: #ffffff;
+        }
+    }
+}
+
+ion-content {
+    --background: #ebe7e7;
+
+    ion-list {
+        background: transparent;
+        width: 100%;
+        max-width: 95%;
+        margin-top: 0.5rem;
+        border-radius: 7px;
+        margin-left: 2%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        ion-card {
+            --background: #4d4d4dbe;
+            width: 100%;
+            max-width: 95%;
+            height: auto;
+            border-radius: 1rem;
+
+            ion-card-title {
+                font-family: "Rethink Sans", sans-serif;
+                font-size: 1rem;
+                color: #ffffff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            ion-card-content {
+
+                .libro,
+                .genero,
+                .biblioteca {
+                    font-size: 0.9rem;
+                    font-family: "Rethink Sans", sans-serif;
+                    color: #ffffff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                ion-buttons {
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+
+                    .actualizar {
+                        --background: #e96a24;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
+
+                    .ver {
+                        --background: #176e17;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
+                }
+            }
+        }
+    }
+    ion-card {
+        --background: #e96a24;
+        width: 100%;
+        max-width: 95%;
+        height: auto;
+        border-radius: 2rem;
+        margin-left: 2.5%;
+
+        ion-card-header {
+            ion-card-title {
+                font-family: "Rethink Sans", sans-serif;
+                font-size: 1rem;
+                color: #ffffff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        ion-card-content {
+            p {
+                font-family: "Rethink Sans", sans-serif;
+                font-size: 1rem;
+                color: #ffffff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+
+
+
+}

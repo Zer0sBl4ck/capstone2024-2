@@ -5,7 +5,7 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="titulo">Listar Intercambio Usuario</ion-title>
+    <ion-title class="titulo">Listado Intercambio Usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,31 +15,46 @@
   </ion-refresher>
 
   <ion-list>
-    <ion-list-header>
-      <ion-title size="large">Libros Disponibles para Intercambio</ion-title>
-    </ion-list-header>
-    
     <ion-card *ngFor="let libro of librosDisponiblesIntercambio">
 
       <ion-thumbnail slot="start">
         <img *ngIf="libro.imagen_libro" [src]="'data:image/jpeg;base64,' + libro.imagen_libro" alt="Imagen del libro">
       </ion-thumbnail>
-      <ion-label>
-        <h2>{{ libro.titulo }}</h2>
-        <p>{{ libro.autor }}</p>
-        <p>{{ libro.descripcion }}</p>
-        <p><strong>Género:</strong> {{ libro.genero }}</p>
-        <p><strong>ID Biblioteca:</strong> {{ libro.id_biblioteca }}</p>
-      </ion-label>
 
-      <!-- Botón para actualizar el intercambio -->
-      <ion-button (click)="actualizarIntercambio(libro.id_biblioteca)">
-        Actualizar Intercambio
-      </ion-button>
+      <ion-card-header>
+        <ion-card-title>{{ libro.titulo }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p class="libro">{{ libro.autor }}</p>
+        <p class="genero"><strong>Género:</strong> {{ libro.genero }}</p>
+        <p class="biblioteca"><strong>ID Biblioteca:</strong> {{ libro.id_biblioteca }}</p>
+
+        <!-- Botones para actualizar el intercambio y ver personas con el libro -->
+        <ion-buttons>
+          <ion-button class="actualizar" (click)="actualizarIntercambio(libro.id_biblioteca)">
+            Actualizar Intercambio
+          </ion-button>
+
+          <ion-button class="ver" expand="block" (click)="irAPersonasConLibro(libro.isbn)">
+            <ion-icon name="eye-outline"></ion-icon> Vista del libro
+          </ion-button>
+        </ion-buttons>
+      </ion-card-content>
+
     </ion-card>
   </ion-list>
 
-  <ion-text *ngIf="librosDisponiblesIntercambio.length === 0">
-    <p>No hay libros disponibles para intercambio en este momento.</p>
-  </ion-text>
+  <ng-container *ngIf="librosDisponiblesIntercambio.length === 0">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>No hay solicitudes 🥲</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Este perfil no tiene libros para intercambiar</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+  
+  
 </ion-content>
