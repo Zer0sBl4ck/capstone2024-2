@@ -369,6 +369,7 @@ ion-content {
             border-radius: 7px;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
 
             ion-card {
                 --background: #4d4d4dbe;
@@ -500,6 +501,7 @@ ion-content {
             justify-content: center;
             align-items: center;
             display: flex;
+            flex-direction: column;
 
             ion-card {
                 --background: #4d4d4dbe;
@@ -675,6 +677,7 @@ ion-content {
             margin-left: 2.5%;
             border-radius: 7px;
             left: 10%;
+            flex-direction: column;
 
             ion-card {
                 --background: #4d4d4dbe;
