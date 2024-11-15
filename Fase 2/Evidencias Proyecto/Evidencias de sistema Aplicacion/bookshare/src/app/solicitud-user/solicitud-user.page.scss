@@ -43,23 +43,23 @@ ion-content {
             width: 100%;
             max-width: 90%;
             border: 1px solid #e96a24;
-            border-radius: 4px;
+            border-radius: 1rem;
             font-size: 0.7rem;
             font-family: "Rethink Sans", sans-serif;
             position: center;
             justify-content: center;
             align-items: center;
+            
         }
     }
 
     /*Mostrar solicitudes recibidas*/
     .rec {
-        background: #4d4d4d;
+        background: transparent;
         width: 100%;
         max-width: 95%;
         margin-top: 0.5rem;
         margin-left: 2.5%;
-        border: 3px solid #e96a24;
         border-radius: 7px;
         justify-content: center;
         align-items: center;
@@ -67,12 +67,11 @@ ion-content {
         flex-direction: column;
 
         ion-card {
-            --background: transparent;
+            --background: #4d4d4dbe;
             width: 100%;
             max-width: 95%;
             height: auto;
             border-radius: 2rem;
-            border: 0.1rem solid #e96a24;
 
             ion-card-header {
                 ion-card-title {
@@ -85,7 +84,6 @@ ion-content {
 
             ion-card-content {
                 background: transparent;
-
                 .estado,
                 .correo,
                 .fechadev,
@@ -188,12 +186,11 @@ ion-content {
 
     /*Mostrar solicitudes realizadas*/
     .rea {
-        background: #4d4d4d;
+        background: transparent;
         width: 100%;
         max-width: 95%;
         margin-top: 0.5rem;
         margin-left: 2.5%;
-        border: 3px solid #e96a24;
         border-radius: 7px;
         justify-content: center;
         align-items: center;
@@ -201,12 +198,11 @@ ion-content {
         flex-direction: column;
 
         ion-card {
-            --background: transparent;
+            --background: #4d4d4dbe;
             width: 100%;
             max-width: 95%;
             height: auto;
             border-radius: 2rem;
-            border: 0.1rem solid #e96a24;
 
             ion-card-header {
                 ion-card-title {
@@ -307,7 +303,6 @@ ion-content {
         max-width: 95%;
         height: auto;
         border-radius: 2rem;
-        border: 0.1rem solid #e96a24;
         margin-left: 2.5%;
 
         ion-card-header {
@@ -356,7 +351,7 @@ ion-content {
                 width: 100%;
                 max-width: 90%;
                 border: 1px solid #e96a24;
-                border-radius: 4px;
+                border-radius: 1rem;
                 font-size: 0.7rem;
                 font-family: "Rethink Sans", sans-serif;
                 position: center;
@@ -367,23 +362,20 @@ ion-content {
 
         /*Mostrar solicitudes recibidas*/
         .rec {
-            background: #4d4d4d;
+            background: transparent;
             width: 100%;
             max-width: 95%;
             margin-top: 0.5rem;
-
-            border: 3px solid #e96a24;
             border-radius: 7px;
             justify-content: center;
             align-items: center;
 
             ion-card {
-                --background: transparent;
+                --background: #4d4d4dbe;
                 width: 100%;
                 max-width: 95%;
                 height: auto;
                 border-radius: 2rem;
-                border: 0.1rem solid #e96a24;
 
                 ion-card-header {
                     ion-card-title {
@@ -499,25 +491,22 @@ ion-content {
 
         /*Mostrar solicitudes realizadas*/
         .rea {
-            background: #4d4d4d;
+            background: transparent;
             width: 100%;
             max-width: 95%;
             margin-top: 0.5rem;
             margin-left: 2.5%;
-            border: 3px solid #e96a24;
             border-radius: 7px;
             justify-content: center;
             align-items: center;
             display: flex;
 
-
             ion-card {
-                --background: transparent;
+                --background: #4d4d4dbe;
                 width: 100%;
                 max-width: 95%;
                 height: auto;
                 border-radius: 2rem;
-                border: 0.1rem solid #e96a24;
 
                 ion-card-header {
                     ion-card-title {
@@ -618,7 +607,6 @@ ion-content {
             max-width: 95%;
             height: auto;
             border-radius: 2rem;
-            border: 0.1rem solid #e96a24;
             margin-left: 2.5%;
 
             ion-card-header {
@@ -669,7 +657,7 @@ ion-content {
                 width: 100%;
                 max-width: 90%;
                 border: 1px solid #e96a24;
-                border-radius: 4px;
+                border-radius: 1rem;
                 font-size: 0.7rem;
                 font-family: "Rethink Sans", sans-serif;
                 position: center;
@@ -680,22 +668,20 @@ ion-content {
 
         /*Mostrar solicitudes recibidas*/
         .rec {
-            background: #4d4d4d;
+            background: trnasparent;
             width: 100%;
             max-width: 95%;
             margin-top: 0.5rem;
             margin-left: 2.5%;
-            border: 3px solid #e96a24;
             border-radius: 7px;
             left: 10%;
 
             ion-card {
-                --background: transparent;
+                --background: #4d4d4dbe;
                 width: 100%;
                 max-width: 95%;
                 height: auto;
                 border-radius: 2rem;
-                border: 0.1rem solid #e96a24;
 
                 ion-card-header {
                     ion-card-title {
@@ -811,12 +797,11 @@ ion-content {
 
         /*Mostrar solicitudes realizadas*/
         .rea {
-            background: #4d4d4d;
+            background: transparent;
             width: 100%;
             max-width: 95%;
             margin-top: 0.5rem;
             margin-right: 5%;
-            border: 3px solid #e96a24;
             border-radius: 7px;
             justify-content: center;
             align-items: center;
@@ -824,12 +809,11 @@ ion-content {
             flex-direction: column;
 
             ion-card {
-                --background: transparent;
+                --background: #4d4d4dbe;
                 width: 100%;
                 max-width: 95%;
                 height: auto;
-                border-radius: 2rem;
-                border: 0.1rem solid #e96a24;
+                border-radius: 1rem;
 
                 ion-card-header {
                     ion-card-title {
@@ -867,8 +851,8 @@ ion-content {
                     }
 
                     .cancela {
-                        --background: #ff0000;
-                        color: #ffffff;
+                        --background: transparent;
+                        color: #ff0000;
                         font-family: "Rethink Sans", sans-serif;
                         font-size: 0.8rem;
                         width: 100%;
@@ -930,7 +914,6 @@ ion-content {
             max-width: 95%;
             height: auto;
             border-radius: 2rem;
-            border: 0.1rem solid #e96a24;
             margin-left: 2.5%;
 
             ion-card-header {
