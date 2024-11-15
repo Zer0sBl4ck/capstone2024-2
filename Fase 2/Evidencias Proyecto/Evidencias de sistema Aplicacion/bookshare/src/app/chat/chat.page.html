@@ -24,8 +24,8 @@
       <ion-item *ngFor="let chat of chats" class="listado-chat">
         <ion-label class="listado-chat">
           <h2>📚 {{chat.titulo}} ({{chat.tipo_chat}})</h2>
-          <p>Ofertante: {{ chat.correo_usuario_prestamista }}</p>
-          <p>Solicitante: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
+          <p>Solicitante: {{ chat.correo_usuario_prestamista }}</p>
+          <p>Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
           
         </ion-label>
         <ion-button (click)="irAlChat(chat.id_chat)" >

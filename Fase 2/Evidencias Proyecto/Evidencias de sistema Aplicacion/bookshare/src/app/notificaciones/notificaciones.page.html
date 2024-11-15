@@ -1,29 +1,39 @@
 <ion-header class="fondo">
   <ion-toolbar>
-    <ion-title class="titulo">Solicitudes de Préstamo</ion-title>
+    <ion-title class="titulo">Mis notificaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list *ngIf="notificaciones.length > 0; else noNotificaciones" class="list-md">
-    <ion-item *ngFor="let notificacion of notificaciones">
-      <ion-label>
-        <h2>{{ notificacion.titulo }}</h2>
-        <p>{{ notificacion.descripcion }}</p>
-        <p *ngIf="!notificacion.visto" nueva>Nueva</p>
-      </ion-label>
-      <ion-buttons slot="end">
-        <ion-button (click)="marcarComoVisto(notificacion.id_notificacion)" *ngIf="!notificacion.visto">
-          Marcar como visto
-        </ion-button>
-        <ion-button color="danger" (click)="eliminarNotificacion(notificacion.id_notificacion)">
-          Eliminar
-        </ion-button>
-      </ion-buttons>
-    </ion-item>
+
+  <ion-list class="noti" *ngIf="notificaciones.length > 0; else noNotificaciones">
+
+    <ion-card *ngFor="let notificacion of notificaciones">
+
+      <ion-card-header>
+        <ion-card-title>{{ notificacion.titulo }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+          <p class="descrip">{{ notificacion.descripcion }}</p>
+          <p class="nueva" *ngIf="!notificacion.visto" nueva>Nueva</p>
+
+        <ion-buttons>
+          <ion-button class="visto" (click)="marcarComoVisto(notificacion.id_notificacion)" *ngIf="!notificacion.visto">
+            Marcar como visto
+          </ion-button>
+
+          <ion-button class="eliminar" (click)="eliminarNotificacion(notificacion.id_notificacion)">
+            Eliminar
+          </ion-button>
+        </ion-buttons>
+      </ion-card-content>
+
+    </ion-card>
   </ion-list>
 
   <ng-template #noNotificaciones>
