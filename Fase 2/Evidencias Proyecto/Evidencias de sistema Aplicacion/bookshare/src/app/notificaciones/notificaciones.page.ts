@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-notificaciones',
   templateUrl: './notificaciones.page.html',
@@ -9,7 +10,7 @@ import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
 export class NotificacionesPage implements OnInit {
   notificaciones: any[] = [];
   private refreshInterval: any;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.cargarNotificaciones();
@@ -33,7 +34,9 @@ export class NotificacionesPage implements OnInit {
       );
     }
   }
-
+  onNotificacionClick(notificacion: any) {
+    this.router.navigate(['/solicitud-user'], { queryParams: { id: notificacion.id, section: 'realizadas' } });
+  }
   marcarComoVisto(idNotificacion: number) {
     this.authService.marcarNotificacionComoVisto(idNotificacion).subscribe(
       () => {

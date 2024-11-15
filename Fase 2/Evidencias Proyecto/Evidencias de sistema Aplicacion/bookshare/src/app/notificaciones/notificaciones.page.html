@@ -9,9 +9,9 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list class="noti" *ngIf="notificaciones.length > 0; else noNotificaciones">
+  <ion-list class="noti" *ngIf="notificaciones.length > 0; else noNotificaciones" >
 
-    <ion-card *ngFor="let notificacion of notificaciones">
+    <ion-card *ngFor="let notificacion of notificaciones" (click)="onNotificacionClick(notificacion)">
 
       <ion-card-header>
         <ion-card-title>{{ notificacion.titulo }}</ion-card-title>
