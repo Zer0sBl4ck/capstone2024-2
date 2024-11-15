@@ -35,6 +35,8 @@ export class HomePage {
   correoLogueado: string | null = '';  
   profileImage: string | null = null;
   resenas: any[] = [];
+  notificacionesNoLeidas: number = 0;
+  private intervalId: any;
 
   constructor(private authService: AuthService, private router: Router, private popoverController: PopoverController, private route: ActivatedRoute,) {}
 
@@ -67,6 +69,11 @@ export class HomePage {
           console.error('Error al obtener los datos del perfil:', error);
         }
       );
+      this.cargarNotificacionesNoLeidas();
+      // Realizar polling cada 30 segundos
+      this.intervalId = setInterval(() => {
+        this.cargarNotificacionesNoLeidas();
+      }, 5000); // 30000ms = 30 segundos
     }
   
 
@@ -183,6 +190,27 @@ export class HomePage {
         refresher.complete();  // Indica que el refresco se completó
       }
     }, 2000);
+  }
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);  // Limpiar el intervalo cuando el componente se destruye
+    }
+  }
+  cargarNotificacionesNoLeidas(): void {
+    const correo = this.authService.getUserEmail();  // Obtener el correo del usuario actual
+    if (correo) {
+      this.authService.obtenerNotificaciones(correo).subscribe(
+        (notificaciones: any[]) => {
+          // Contar las notificaciones no leídas
+          this.notificacionesNoLeidas = notificaciones.filter(notificacion => !notificacion.visto).length;
+        },
+        (error) => {
+          console.error('Error al obtener notificaciones:', error);
+        }
+      );
+    } else {
+      console.warn('No se pudo obtener el correo del usuario');
+    }
   }
   
 }

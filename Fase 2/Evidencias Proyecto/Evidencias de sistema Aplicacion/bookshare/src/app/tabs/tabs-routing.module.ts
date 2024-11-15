@@ -24,10 +24,20 @@ const routes: Routes = [
         loadChildren: () => import('../notificaciones/notificaciones.module').then(m => m.NotificacionesPageModule)
       },
       {
+        path: 'solicitud-user',
+          loadChildren: () => import('../solicitud-user/solicitud-user.module').then(m => m.SolicitudUserPageModule)
+      },
+      {
+        path: 'listar-intercambio',
+          loadChildren: () => import('../listar-intercambio/listar-intercambio.module').then(m => m.ListarIntercambioPageModule)
+      },
+      {
+        
         path: '',
         redirectTo: 'home',  // Redirige a la pestaña de inicio por defecto
         pathMatch: 'full'
       }
+      
     ]
   }
 ];
