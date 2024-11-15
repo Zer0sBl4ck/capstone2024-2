@@ -28,7 +28,6 @@ ion-content {
     justify-content: center;
     align-items: center;
 
-
     ion-grid {
         display: block;
         justify-content: center;
@@ -36,9 +35,7 @@ ion-content {
         margin-left: 2rem;
 
         ion-row {
-
             ion-col {
-
                 ion-card {
                     --background: #ffffff;
                     width: 100%;
@@ -46,9 +43,7 @@ ion-content {
                     height: auto;
                     border-radius: 1rem;
 
-
                     ion-card-header {
-
                         .libro {
                             margin-bottom: 16px;
                             display: flex;
@@ -90,7 +85,6 @@ ion-content {
                     }
 
                     ion-card-content {
-
                         .disponible {
                             color: #ffffff;
                             --background: #10c3f0;
@@ -105,7 +99,6 @@ ion-content {
                             justify-content: center;
                             align-items: center;
                             margin-left: 20%;
-
                         }
 
                         .eliminar {
@@ -127,13 +120,134 @@ ion-content {
                 }
             }
         }
-
-
     }
 
+    ion-item {
+        --background: transparent;
+        --ion-item-border-color: transparent;
+
+        ion-label {
+            color: #000000;
+            font-size: 18px;
+            font-family: Helvetica;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            --ion-item-border-color: transparent;
+        }
+    }
+}
+
+@media (max-height: 900px) {
+    ion-content {
+        --background: #ebe7e7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+        ion-grid {
+            display: block;
+            justify-content: center;
+            align-items: center;
+            margin-left: 2rem;
+    
+            ion-row {
+                ion-col {
+                    ion-card {
+                        --background: #ffffff;
+                        width: 100%;
+                        max-width: 100%;
+                        height: auto;
+                        border-radius: 1rem;
+                        margin-left: 4rem;
+                        display: block;
+                        justify-content: center;
+                        align-items: center;
+    
+                        ion-card-header {
+                            .libro {
+                                margin-bottom: 16px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+    
+                                .imagen {
+                                    object-fit: cover;
+                                }
+                            }
+    
+                            .titulo {
+                                color: #000000;
+                                font-size: 0.7rem;
+                                font-family: Helvetica;
+                                font-weight: bold;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+    
+                            .autor {
+                                color: #000000;
+                                font-size: 0.7rem;
+                                font-family: Helvetica;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+    
+                            p {
+                                color: #000000;
+                                font-size: 0.7rem;
+                                font-family: Helvetica;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+                        }
+    
+                        ion-card-content {
+                            .disponible {
+                                color: #ffffff;
+                                --background: #10c3f0;
+                                border-radius: 1rem;
+                                font-family: Helvetica;
+                                margin-top: 16px;
+                                width: 100%;
+                                max-width: 75%;
+                                font-size: 0.7rem;
+                                font-weight: bold;
+                                display: block;
+                                justify-content: center;
+                                align-items: center;
+                                margin-left: 20%;
+                            }
+    
+                            .eliminar {
+                                color: #ffffff;
+                                --background: #ff0000;
+                                border-radius: 15px;
+                                font-family: Helvetica;
+                                margin-top: 16px;
+                                width: 100%;
+                                max-width: 75%;
+                                font-size: 0.7rem;
+                                font-weight: bold;
+                                display: block;
+                                justify-content: center;
+                                align-items: center;
+                                margin-left: 20%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
         ion-item {
             --background: transparent;
             --ion-item-border-color: transparent;
+    
             ion-label {
                 color: #000000;
                 font-size: 18px;
@@ -143,13 +257,7 @@ ion-content {
                 justify-content: center;
                 align-items: center;
                 --ion-item-border-color: transparent;
-
             }
         }
-
-    
-
-
-
-
+    }
 }
