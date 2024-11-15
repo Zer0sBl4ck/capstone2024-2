@@ -27,24 +27,10 @@
           Agregar libro
         </ion-button>
 
-        <ion-button (click)="goIntercambio()" *ngIf="userRole === 'usuario'">
-          <ion-icon name="add-outline" slot="start"></ion-icon>
-          Intercambio
-        </ion-button>
         
         <ion-button (click)="goBookOwner()" *ngIf="userRole === 'usuario'">
           <ion-icon name="book-outline" slot="start"></ion-icon>
           Mis Libros
-        </ion-button>
-
-        <ion-button (click)="gosoliuser()" *ngIf="userRole === 'usuario'">
-          <ion-icon name="book-outline" slot="start"></ion-icon>
-          Prestamos
-        </ion-button>
-
-        <ion-button routerLink="/listar-libro">
-          <ion-icon name="bookmark-outline" slot="start"></ion-icon>
-          Lista de libros
         </ion-button>
 
         <ion-button (click)="solicitudesadd()" *ngIf="userRole === 'admin'">
