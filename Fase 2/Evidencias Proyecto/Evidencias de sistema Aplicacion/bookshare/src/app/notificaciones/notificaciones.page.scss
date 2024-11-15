@@ -27,12 +27,10 @@ ion-content {
 
   .noti {
     background: transparent;
-    
     width: 100%;
     max-width: 95%;
     margin-top: 0.5rem;
     margin-right: 5%;
-    /* border: 3px solid #e96a24;*/
     border-radius: 7px;
     justify-content: center;
     align-items: center;
@@ -41,12 +39,11 @@ ion-content {
     margin-left: 2%;
 
     ion-card {
-      --background: #4d4d4d;
+      --background: #4d4d4dbe;
       width: 100%;
       max-width: 95%;
       height: auto;
       border-radius: 1rem;
-      opacity: 60%;
 
       ion-card-header {
         font-family: "Rethink Sans", sans-serif;

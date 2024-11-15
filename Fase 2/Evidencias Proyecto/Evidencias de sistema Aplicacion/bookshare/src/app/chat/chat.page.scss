@@ -26,7 +26,7 @@ ion-content {
     --background: #ebe7e7;
 
     ion-list {
-        background: #4d4d4d;
+        background: #4d4d4dbe;
         width: 90%;
         margin-top: 1%;
         border: 3px solid #e96a24;
@@ -38,10 +38,11 @@ ion-content {
         margin-left: 5%;
 
         ion-item {
-            --background: #4d4d4dbe;
+            --background: transparent;
             width: 95%;
             --ion-item-border-color: #e96a24;
             margin-top: 5px;
+            margin-left:-4%;
 
             ion-label {
                 h2 {
