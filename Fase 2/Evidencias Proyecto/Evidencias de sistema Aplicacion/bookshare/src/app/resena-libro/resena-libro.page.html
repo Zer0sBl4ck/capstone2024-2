@@ -11,15 +11,30 @@
 
 <ion-content>
   <!-- Mostrar los detalles del libro si están disponibles -->
-  <div *ngIf="libro">
-    <h2 class="titulo">{{ libro.titulo }}</h2>
-    <p><strong>Prestamista: </strong> {{ libro.prestamista }}</p>
-    <p><strong>Autor:</strong> {{ libro.autor }}</p>
-    <p><strong>ISBN:</strong> {{ libro.isbn }}</p>
-
+  <ion-list *ngIf="libro">
 
     <ion-item>
-      <ion-label position="stacked">Calificación</ion-label>
+      <ion-label><strong>Libro:</strong></ion-label>
+      <ion-text>{{ libro.titulo }}</ion-text>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label><strong>Prestamista:</strong></ion-label>
+      <ion-text>{{ libro.prestamista }}</ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label><strong>Autor:</strong></ion-label>
+      <ion-text>{{ libro.autor }}</ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label><strong>ISBN:</strong></ion-label>
+      <ion-text>{{ libro.isbn }}</ion-text>
+    </ion-item>
+
+    <ion-item class="opcion">
+      <ion-label position="stacked"><strong>Calificación</strong></ion-label>
       <ion-select [(ngModel)]="calificacion">
         <ion-select-option value="1">1</ion-select-option>
         <ion-select-option value="2">2</ion-select-option>
@@ -29,17 +44,16 @@
       </ion-select>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Comentario</ion-label>
+    <ion-item class="opcion">
+      <ion-label position="stacked"><strong>Comentario</strong></ion-label>
       <ion-select [(ngModel)]="comentario">
         <ion-select-option value="supero las expectativas">Superó las expectativas</ion-select-option>
         <ion-select-option value="cumplio con las expectativas">Cumplió con las expectativas</ion-select-option>
         <ion-select-option value="no cumplio con las expectativas">No cumplió con las expectativas</ion-select-option>
-    </ion-select>
-    
+      </ion-select>
     </ion-item>
     
-    <ion-button (click)="agregarResena()">Enviar Reseña</ion-button>
-
-  </div>
+      <ion-button expand="block" (click)="agregarResena()">Enviar Reseña</ion-button>
+      
+  </ion-list>
 </ion-content>

@@ -9,7 +9,7 @@
         .titulo {
             font-weight: bold;
             color: #ffffff;
-            font-family: Helvetica;
+            font-family: "Rethink Sans", sans-serif;
             font-size: 1.5rem;
             text-align: center;
             width: 100%;
@@ -28,69 +28,199 @@ ion-content {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    ion-list {
+        background: #ebe7e7;
+        margin-top: 2rem;
+        width: 100%;
+        max-width: 90%;
+        border-radius: 1rem;
+        margin-left: 5%;
+        border: 0.2rem solid #b8b4b4;
+        border-radius: 2rem;
+
+        ion-item {
+            --background: transparent;
+            width: 100%;
+            max-width: 95%;
+            --ion-item-border-color: #b8b4b4;
+
+            ion-label {
+                color: #e96a24;
+                font-size: 1.2rem;
+                font-family: "Rethink Sans", sans-serif;
+            }
+            ion-text {
+                color: #000000;
+                font-size: 1rem;
+                font-family: "Rethink Sans", sans-serif;
+            }
+        }
+        .opcion {
+            width: 100%;
+            max-width: 95%;
+
+            ion-label {
+                color: #e96a24;
+                font-size: 1.5rem;
+                font-family: "Rethink Sans", sans-serif;
+            }
+            ion-select {
+                color: #000000;
+                font-size: 1.2rem;
+                font-family: "Rethink Sans", sans-serif;
+            }
+        }
+            ion-button {
+                color: #ffffff;
+                --background: #e96a24;
+                font-family: Helvetica;
+                margin-top: 16px;
+                width: 100%;
+                max-width: 15%;
+                font-size: 1rem;
+                font-weight: bold;
+                display: block;
+                justify-content: center;
+                align-items: center;
+                margin-left: 42%;
+            }
+    }
 }
 
-/* Estilos para el contenedor de los detalles del libro */
-ion-content>div {
-    width: 100%;
-    max-width: 600px;
-    background: #ffffff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+
+@media (max-width: 600px) {
+    ion-content {
+        --background: #ebe7e7;
+        padding: 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+        ion-list {
+            background: #ebe7e7;
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 90%;
+            border-radius: 1rem;
+            margin-left: 1.2rem;
+            border: 0.2rem solid #b8b4b4;
+            border-radius: 2rem;
+    
+            ion-item {
+                --background: transparent;
+                width: 100%;
+                max-width: 95%;
+                --ion-item-border-color: #b8b4b4;
+    
+                ion-label {
+                    color: #e96a24;
+                    font-size: 1.2rem;
+                    font-family: "Rethink Sans", sans-serif;
+                }
+                ion-text {
+                    color: #000000;
+                    font-size: 1rem;
+                    font-family: "Rethink Sans", sans-serif;
+                }
+            }
+            .opcion {
+                width: 100%;
+                max-width: 95%;
+    
+                ion-label {
+                    color: #e96a24;
+                    font-size: 1.5rem;
+                    font-family: "Rethink Sans", sans-serif;
+                }
+                ion-select {
+                    color: #000000;
+                    font-size: 1.2rem;
+                    font-family: "Rethink Sans", sans-serif;
+                }
+            }
+                ion-button {
+                    color: #ffffff;
+                    --background: #e96a24;
+                    font-family: Helvetica;
+                    margin-top: 16px;
+                    width: 100%;
+                    max-width: 50%;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    display: block;
+                    justify-content: center;
+                    align-items: center;
+                    margin-left: 25%;
+                }
+        }
+    }
 }
 
-/* Título del libro */
-h2.titulo {
-    font-family: Helvetica, sans-serif;
-    color: #4d4d4d;
-    font-size: 1.4rem;
-    margin-top: 0;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-/* Estilos para los detalles del libro */
-p {
-    font-family: Helvetica, sans-serif;
-    color: #333333;
-    margin: 5px 0;
-    font-size: 1rem;
-}
-
-p strong {
-    font-weight: bold;
-    color: #4d4d4d;
-}
-
-/* Estilos para el ion-item de selección de calificación y comentario */
-ion-item {
-    --background: #f5f5f5;
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
-
-ion-label {
-    font-family: Helvetica, sans-serif;
-    color: #4d4d4d;
-    font-weight: bold;
-}
-
-ion-select {
-    --padding-start: 10px;
-    --color-activated: #e96a24;
-    color: #000000;
-
-}
-
-/* Estilos para el botón de enviar reseña */
-ion-button {
-    --background: #e96a24;
-    color: #ffffff;
-    width: 100%;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    margin-top: 10px;
+@media (max-height: 900px) {
+    ion-content {
+        --background: #ebe7e7;
+        padding: 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+        ion-list {
+            background: #ebe7e7;
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 90%;
+            border-radius: 1rem;
+            margin-left: 3rem;
+            border: 0.2rem solid #b8b4b4;
+            border-radius: 2rem;
+    
+            ion-item {
+                --background: transparent;
+                width: 100%;
+                max-width: 95%;
+                --ion-item-border-color: #b8b4b4;
+    
+                ion-label {
+                    color: #e96a24;
+                    font-size: 1.2rem;
+                    font-family: "Rethink Sans", sans-serif;
+                }
+                ion-text {
+                    color: #000000;
+                    font-size: 1rem;
+                    font-family: "Rethink Sans", sans-serif;
+                }
+            }
+            .opcion {
+                width: 100%;
+                max-width: 95%;
+    
+                ion-label {
+                    color: #e96a24;
+                    font-size: 1.5rem;
+                    font-family: "Rethink Sans", sans-serif;
+                }
+                ion-select {
+                    color: #000000;
+                    font-size: 1.2rem;
+                    font-family: "Rethink Sans", sans-serif;
+                }
+            }
+                ion-button {
+                    color: #ffffff;
+                    --background: #e96a24;
+                    font-family: Helvetica;
+                    margin-top: 16px;
+                    width: 100%;
+                    max-width: 25%;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    display: block;
+                    justify-content: center;
+                    align-items: center;
+                    margin-left: 38%;
+                }
+        }
+    } 
 }
