@@ -46,7 +46,7 @@
         <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'desarollo'"
         (click)="eliminarSolicitud(solicitud.id_prestamo)">Rechazar</ion-button>
         <ion-button class="devolucion" *ngIf="solicitud.estado_prestamo === 'desarrollo'"
-        (click)="modificarFechaDevolucion(solicitud.id_prestamo)">
+        (click)="modificarFechaDevolucion(solicitud.id_prestamo, solicitud.correo_2)">
         Fecha devolución
       </ion-button>
         <!-- entregado -->
