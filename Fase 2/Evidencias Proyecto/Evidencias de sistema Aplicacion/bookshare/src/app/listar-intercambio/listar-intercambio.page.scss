@@ -21,3 +21,473 @@
         }
     }
 }
+
+ion-content {
+    --background: #ebe7e7;
+
+    ion-segment {
+        --background: transparent;
+        --ion-color-primary: transparent;
+        width: 100%;
+        max-width: 95%;
+        margin-top: 1rem;
+        margin-left: 1.3rem;
+        position: center;
+        justify-content: center;
+        align-items: center;
+
+        ion-segment-button {
+            --background: #e96a24;
+            color: #000000;
+            width: 100%;
+            max-width: 90%;
+            border: 1px solid #e96a24;
+            border-radius: 1rem;
+            font-size: 0.7rem;
+            font-family: "Rethink Sans", sans-serif;
+            position: center;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    /*Mostrar solicitudes como solicitante*/
+    .solicitante {
+        background: transparent;
+        width: 100%;
+        max-width: 95%;
+        margin-top: 0.5rem;
+        border-radius: 7px;
+        justify-content: center;
+        align-items: center;
+        margin-left: 2%;
+
+
+        ion-card {
+            --background: #4d4d4dbe;
+            width: 100%;
+            max-width: 95%;
+            height: auto;
+            border-radius: 1rem;
+
+            ion-card-header {
+                ion-card-title {
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                    color: #ffffff;
+                }
+            }
+
+            ion-card-content {
+
+                .libro,
+                .ofertante,
+                .estado {
+                    font-size: 0.9rem;
+                    font-family: "Rethink Sans", sans-serif;
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+
+    /*Mostrar solicitudes como prestamista*/
+    .prestamista {
+        background: transparent;
+        width: 100%;
+        max-width: 95%;
+        margin-top: 0.5rem;
+        margin-left: 2%;
+        border-radius: 7px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+
+        ion-card {
+            --background: #4d4d4dbe;
+            width: 100%;
+            max-width: 95%;
+            height: auto;
+            border-radius: 1rem;
+
+            ion-card-header {
+                ion-card-title {
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                    color: #ffffff;
+                }
+            }
+
+            ion-card-content {
+
+                .libro,
+                .solicitante,
+                .estado {
+                    font-size: 0.9rem;
+                    font-family: "Rethink Sans", sans-serif;
+                    color: #ffffff;
+                }
+
+                ion-button {
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+                    --background: #2442e9;
+                    color: #ffffff;
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 0.9rem;
+                    width: 100%;
+                    max-width: 19%;
+                    margin-left: 40%;
+                }
+            }
+        }
+    }
+
+    ion-card {
+        --background: #e96a24;
+        width: 100%;
+        max-width: 95%;
+        height: auto;
+        border-radius: 1rem;
+        margin-left: 2.5%;
+
+        ion-card-header {
+            ion-card-title {
+                font-family: "Rethink Sans", sans-serif;
+                font-size: 1rem;
+                color: #ffffff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        ion-card-content {
+            p {
+                font-family: "Rethink Sans", sans-serif;
+                font-size: 1rem;
+                color: #ffffff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    ion-content {
+        --background: #ebe7e7;
+
+        ion-segment {
+            --background: trasnparent;
+            --ion-color-primary: transparent;
+            width: 100%;
+            max-width: 95%;
+            margin-top: 1rem;
+            margin-left: 1.3rem;
+            position: center;
+            justify-content: center;
+            align-items: center;
+
+            ion-segment-button {
+                --background: #e96a24;
+                color: #000000;
+                width: 100%;
+                max-width: 90%;
+                border: 1px solid #e96a24;
+                border-radius: 1rem;
+                font-size: 0.7rem;
+                font-family: "Rethink Sans", sans-serif;
+                position: center;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        /*Mostrar solicitudes como solicitante*/
+        .solicitante {
+            background: transparent;
+            width: 100%;
+            max-width: 95%;
+            margin-top: 0.5rem;
+            border-radius: 7px;
+            justify-content: center;
+            align-items: center;
+
+            ion-card {
+                --background: #4d4d4dbe;
+                width: 100%;
+                max-width: 95%;
+                height: auto;
+                border-radius: 1rem;
+
+                ion-card-header {
+                    ion-card-title {
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        color: #ffffff;
+                    }
+                }
+
+                ion-card-content {
+
+                    .libro,
+                    .ofertante,
+                    .estado {
+                        font-size: 0.9rem;
+                        font-family: "Rethink Sans", sans-serif;
+                        color: #ffffff;
+                    }
+                }
+            }
+        }
+
+        /*Mostrar solicitudes como prestamista*/
+        .prestamista {
+            background: transparent;
+            width: 100%;
+            max-width: 95%;
+            margin-top: 0.5rem;
+            margin-left: 2.5%;
+            border-radius: 7px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+
+            ion-card {
+                --background: #4d4d4dbe;
+                width: 100%;
+                max-width: 95%;
+                height: auto;
+                border-radius: 1rem;
+
+                ion-card-header {
+                    ion-card-title {
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        color: #ffffff;
+                    }
+                }
+
+                ion-card-content {
+
+                    .libro,
+                    .solicitante,
+                    .estado {
+                        font-size: 0.9rem;
+                        font-family: "Rethink Sans", sans-serif;
+                        color: #ffffff;
+                    }
+
+                    ion-button {
+                        align-items: center;
+                        justify-content: center;
+                        display: flex;
+                        --background: #2442e9;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.9rem;
+                        width: 100%;
+                        max-width: 90%;
+                        margin-left: 5%;
+                    }
+                }
+            }
+        }
+
+        ion-card {
+            --background: #e96a24;
+            width: 100%;
+            max-width: 95%;
+            height: auto;
+            border-radius: 1rem;
+            margin-left: 2.5%;
+
+            ion-card-header {
+                ion-card-title {
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 1rem;
+                    color: #ffffff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            ion-card-content {
+                p {
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 1rem;
+                    color: #ffffff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}
+
+@media (max-height: 900px) {
+    ion-content {
+        --background: #ebe7e7;
+
+        ion-segment {
+            --background: transparent;
+            --ion-color-primary: transparent;
+            width: 100%;
+            max-width: 95%;
+            margin-top: 1rem;
+            margin-left: 1.3rem;
+            position: center;
+            justify-content: center;
+            align-items: center;
+
+            ion-segment-button {
+                --background: #e96a24;
+                color: #000000;
+                width: 100%;
+                max-width: 90%;
+                border: 1px solid #e96a24;
+                border-radius: 1rem;
+                font-size: 0.7rem;
+                font-family: "Rethink Sans", sans-serif;
+                position: center;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        /*Mostrar solicitudes como solicitante*/
+        .solicitante {
+            background: transparent;
+            width: 100%;
+            max-width: 95%;
+            margin-top: 0.5rem;
+            border-radius: 7px;
+            justify-content: center;
+            align-items: center;
+            margin-left: 2%;
+
+
+            ion-card {
+                --background: #4d4d4dbe;
+                width: 100%;
+                max-width: 95%;
+                height: auto;
+                border-radius: 1rem;
+
+                ion-card-header {
+                    ion-card-title {
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        color: #ffffff;
+                    }
+                }
+
+                ion-card-content {
+
+                    .libro,
+                    .ofertante,
+                    .estado {
+                        font-size: 0.9rem;
+                        font-family: "Rethink Sans", sans-serif;
+                        color: #ffffff;
+                    }
+                }
+            }
+        }
+
+        /*Mostrar solicitudes como prestamista*/
+        .prestamista {
+            background: transparent;
+            width: 100%;
+            max-width: 95%;
+            margin-top: 0.5rem;
+            margin-left: 2%;
+            border-radius: 7px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+
+            ion-card {
+                --background: #4d4d4dbe;
+                width: 100%;
+                max-width: 95%;
+                height: auto;
+                border-radius: 1rem;
+
+                ion-card-header {
+                    ion-card-title {
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        color: #ffffff;
+                    }
+                }
+
+                ion-card-content {
+
+                    .libro,
+                    .solicitante,
+                    .estado {
+                        font-size: 0.9rem;
+                        font-family: "Rethink Sans", sans-serif;
+                        color: #ffffff;
+                    }
+
+                    ion-button {
+                        align-items: center;
+                        justify-content: center;
+                        display: flex;
+                        --background: #2442e9;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.9rem;
+                        width: 100%;
+                        max-width: 39%;
+                        margin-left: 30%;
+                    }
+                }
+            }
+        }
+
+        ion-card {
+            --background: #e96a24;
+            width: 100%;
+            max-width: 95%;
+            height: auto;
+            border-radius: 1rem;
+            margin-left: 2.5%;
+
+            ion-card-header {
+                ion-card-title {
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 1rem;
+                    color: #ffffff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            ion-card-content {
+                p {
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 1rem;
+                    color: #ffffff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}

@@ -10,12 +10,10 @@
 </ion-header>
 
 <ion-content>
-
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <!-- Botones para alternar entre solicitudes recibidas y realizadas -->
   <ion-segment value="recibi" (ionChange)="alternarSolicitudes($event)">
     <ion-segment-button class="reci" value="recibidas">Solicitudes Recibidas
     </ion-segment-button>

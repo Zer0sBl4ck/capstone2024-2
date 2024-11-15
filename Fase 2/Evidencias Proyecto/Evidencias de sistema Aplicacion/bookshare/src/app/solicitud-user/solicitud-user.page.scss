@@ -668,7 +668,7 @@ ion-content {
 
         /*Mostrar solicitudes recibidas*/
         .rec {
-            background: trnasparent;
+            background: transparent;
             width: 100%;
             max-width: 95%;
             margin-top: 0.5rem;
@@ -681,7 +681,7 @@ ion-content {
                 width: 100%;
                 max-width: 95%;
                 height: auto;
-                border-radius: 2rem;
+                border-radius: 1rem;
 
                 ion-card-header {
                     ion-card-title {
