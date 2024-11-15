@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router'; 
-  
 import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
+
 @Component({
   selector: 'app-listar-intercambio',
   templateUrl: './listar-intercambio.page.html',
@@ -12,8 +12,9 @@ export class ListarIntercambioPage implements OnInit {
   intercambiosComoSolicitante: any[] = []; // Almacenará los intercambios donde el usuario es solicitante
   intercambiosComoPrestamista: any[] = []; // Almacenará los intercambios donde el usuario es prestamista
   idUsuarioLogeado: number | undefined; // ID del usuario logueado
+  segmentoSeleccionado: string = 'solicitante'; // Controla el segmento seleccionado
 
-  constructor(private authService: AuthService,private router: Router ) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.idUsuarioLogeado = this.authService.getUserData()?.id_usuario;
@@ -25,6 +26,7 @@ export class ListarIntercambioPage implements OnInit {
     }
   }
 
+  // Carga los intercambios como solicitante
   cargarIntercambiosComoSolicitante(): void {
     this.authService.obtenerIntercambiosSolicitante(this.idUsuarioLogeado!).subscribe(
       (response) => {
@@ -37,6 +39,7 @@ export class ListarIntercambioPage implements OnInit {
     );
   }
 
+  // Carga los intercambios como prestamista
   cargarIntercambiosComoPrestamista(): void {
     this.authService.obtenerIntercambiosPrestamista(this.idUsuarioLogeado!).subscribe(
       (response) => {
@@ -48,23 +51,31 @@ export class ListarIntercambioPage implements OnInit {
       }
     );
   }
+
+  // Cambia el segmento seleccionado
+  cambiarSegmento(event: any): void {
+    this.segmentoSeleccionado = event.detail.value;
+    console.log('Segmento seleccionado:', this.segmentoSeleccionado);
+  }
+
+  // Navega a la página de intercambio de un usuario
   irAIntercambioUsuario(idSolicitante: number, id_intercambio: number): void {
     console.log(idSolicitante);
     this.router.navigate(['/listar-intercambio-usuario', idSolicitante, id_intercambio]);
-}
-refreshData(event: CustomEvent<RefresherEventDetail>) {
-  // Aquí va la lógica para actualizar los datos
-  console.log('Refrescando...');
-  window.location.reload();
-  // Simula un delay para el refresco
-  setTimeout(() => {
-    // Verificar si event.target es un IonRefresher
-    const refresher = event.target;
+  }
 
-    if (refresher instanceof IonRefresher) {
-      refresher.complete();  // Indica que el refresco se completó
-    }
-  }, 2000);
-}
+  // Refresca los datos
+  refreshData(event: CustomEvent<RefresherEventDetail>) {
+    console.log('Refrescando...');
+    window.location.reload();
 
+    // Simula un delay para el refresco
+    setTimeout(() => {
+      const refresher = event.target;
+
+      if (refresher instanceof IonRefresher) {
+        refresher.complete();  // Indica que el refresco se completó
+      }
+    }, 2000);
+  }
 }

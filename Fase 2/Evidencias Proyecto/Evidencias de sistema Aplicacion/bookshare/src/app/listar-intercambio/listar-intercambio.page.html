@@ -13,45 +13,73 @@
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  
-  <ion-list *ngIf="intercambiosComoSolicitante.length > 0; else noSolicitante">
-    <ion-list-header>
-      <ion-label>Intercambios como Solicitante</ion-label>
-    </ion-list-header>
-    <ion-item *ngFor="let intercambio of intercambiosComoSolicitante">
-      <ion-label>
-        <h2>Libro solicitud: {{ intercambio.libro_titulo }}</h2>
-        <p>Intercambio usuario: {{ intercambio.ofertante }}</p>
-        <p>Estado: {{ intercambio.estado }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
 
-  <ng-template #noSolicitante>
-    <ion-item>
-      <ion-label>No tienes intercambios como solicitante.</ion-label>
-    </ion-item>
-  </ng-template>
+  <ion-segment value="solicitante" (ionChange)="cambiarSegmento($event)">
+    <ion-segment-button value="solicitante">
+      Solicitante
+    </ion-segment-button>
+    <ion-segment-button value="prestamista">
+      Prestamista
+    </ion-segment-button>
+  </ion-segment>
 
-  <ion-list *ngIf="intercambiosComoPrestamista.length > 0; else noPrestamista">
-    <ion-list-header>
-      <ion-label>Intercambios como Prestamista</ion-label>
-    </ion-list-header>
-    <ion-item *ngFor="let intercambio of intercambiosComoPrestamista">
-      <ion-label>
-        <h2>Libro prestado: {{ intercambio.libro_titulo }}</h2>
-        <p>Intercambio usuario: {{ intercambio.solicitante }}</p>
-        <p>Estado: {{ intercambio.estado }}</p>
-        <ion-button (click)="irAIntercambioUsuario(intercambio.id_solicitante,intercambio.id_intercambio)">
-          Ver intercambios de solicitante
-        </ion-button>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <!-- Lista de intercambios como Solicitante -->
+  <ng-container *ngIf="segmentoSeleccionado === 'solicitante'">
+    <ion-list *ngIf="intercambiosComoSolicitante.length > 0; else noSolicitante">
+      <ion-card *ngFor="let intercambio of intercambiosComoSolicitante">
+        <ion-card-header>
+          <ion-card-title>Intercambios como Solicitante</ion-card-title>
+        </ion-card-header>
 
-  <ng-template #noPrestamista>
-    <ion-item>
-      <ion-label>No tienes intercambios como prestamista.</ion-label>
-    </ion-item>
-  </ng-template>
+        <ion-card-content>
+          <p>Libro solicitud: {{ intercambio.libro_titulo }}</p>
+          <p>Intercambio usuario: {{ intercambio.ofertante }}</p>
+          <p>Estado: {{ intercambio.estado }}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+
+    <ng-template #noSolicitante>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>No hay solicitudes 🥲</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Actualmente no tienes solicitudes de intercambio como solicitante.</p>
+        </ion-card-content>
+      </ion-card>
+    </ng-template>
+  </ng-container>
+
+  <!-- Lista de intercambios como Prestamista -->
+  <ng-container *ngIf="segmentoSeleccionado === 'prestamista'">
+    <ion-list *ngIf="intercambiosComoPrestamista.length > 0; else noPrestamista">
+      <ion-card *ngFor="let intercambio of intercambiosComoPrestamista">
+        
+      <ion-card-header>
+        <ion-card-title>Intercambios como Prestamista</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <p>Libro prestado: {{ intercambio.libro_titulo }}</p>
+          <p>Intercambio usuario: {{ intercambio.solicitante }}</p>
+          <p>Estado: {{ intercambio.estado }}</p>
+
+          <ion-button (click)="irAIntercambioUsuario(intercambio.id_solicitante, intercambio.id_intercambio)">
+            Ver intercambios de solicitante
+          </ion-button>
+
+
+      </ion-card-content>
+      </ion-card>
+    </ion-list>
+
+    <ng-template #noPrestamista>
+      <ion-item>
+        <ion-label>No tienes intercambios como prestamista.</ion-label>
+      </ion-item>
+    </ng-template>
+
+  </ng-container>
 </ion-content>
