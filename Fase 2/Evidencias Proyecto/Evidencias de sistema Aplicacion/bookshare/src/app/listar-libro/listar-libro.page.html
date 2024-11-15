@@ -13,10 +13,12 @@
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+
   <ion-searchbar placeholder="Buscar..." class="search-bar" inputmode="search" (ionInput)="buscarLibros($event)">
   </ion-searchbar>
+
   <ion-item>
-    <ion-label>Género</ion-label>
+    <ion-label position="stacked">Género</ion-label>
     <ion-select class="opcion" placeholder="Seleccione una opción" [(ngModel)]="genero" name="genero" required (ionChange)="filtrarPorGenero()">
       <ion-select-option value="">Todos</ion-select-option>
       <ion-select-option value="Aventura">Aventura</ion-select-option>

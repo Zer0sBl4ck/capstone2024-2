@@ -23,12 +23,10 @@
 }
 
 ion-content {
-
     --background: #ebe7e7;
     display: flex;
     justify-content: center;
     align-items: center;
-
 
     ion-searchbar {
         --background: #e96a24;
@@ -43,6 +41,29 @@ ion-content {
         display: block;
     }
 
+    ion-item {
+        --background: transparent;
+        width: 100%;
+        max-width: 80%;
+        margin-left: 3%;
+        display: flex;
+        margin-left: 15rem;
+        padding: 5px;
+        box-sizing: border-box;
+        --border-radius: 15px;
+        --ion-item-border-color: transparent;
+
+        ion-label {
+            color: #000000;
+            font-size: 1rem;
+            font-family: Helvetica, sans-serif;
+        }
+        .opcion {
+            color: #000000;
+            font-size: 15px;
+            font-family: Helvetica, sans-serif;
+        }
+    }
     .listargrid {
         display: block;
         justify-content: center;
@@ -50,9 +71,7 @@ ion-content {
         margin-left: 5.5rem;
 
         ion-row {
-
             ion-col {
-
                 ion-card {
                     --background: #ffffff;
                     width: 100%;
@@ -120,7 +139,7 @@ ion-content {
                         }
 
                         ion-buttons {
-                            
+
 
                             .agregar {
                                 color: #ffffff;
@@ -221,6 +240,33 @@ ion-content {
             font-size: 1rem;
             margin: 0 auto;
             display: block;
+        }
+
+        ion-item {
+            --background: transparent;
+        width: 100%;
+        max-width: 80%;
+        margin-left: 3%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 3.5rem;
+        padding: 5px;
+        box-sizing: border-box;
+        --border-radius: 15px;
+        --ion-item-border-color: transparent;
+
+        ion-label {
+            color: #000000;
+            font-size: 1rem;
+            font-family: Helvetica, sans-serif;
+        }
+        .opcion {
+            color: #000000;
+            font-size: 15px;
+            font-family: Helvetica, sans-serif;
+        }
         }
 
         .listargrid {
