@@ -59,14 +59,8 @@ export class ListarLibroPage implements OnInit {
     );
   }
 
-  async goToBookDetail(isbn: string) {
-    const popover = await this.popoverController.create({
-      component: VistaLibroPage,
-      componentProps: { isbn: isbn }, // Pasa el ISBN al popover
-      cssClass: 'custom-popover',
-      translucent: true,
-    });
-    return await popover.present();
+  goToBookDetail(isbn: string) {
+    this.router.navigate(['/vista-libro'], { queryParams: { isbn: isbn } });
   }
 
   async agregarLibroABiblioteca(libro: Libro) {
