@@ -107,7 +107,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.9rem;
                     width: 100%;
-                    max-width: 15%;
+                    max-width: 9%;
                 }
 
                 .rechazar {
@@ -116,7 +116,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.9rem;
                     width: 100%;
-                    max-width: 15%;
+                    max-width: 9%;
                 }
 
                 .chatear {
@@ -125,7 +125,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.9rem;
                     width: 100%;
-                    max-width: 25%;
+                    max-width: 11%;
                 }
 
                 .devolucion {
@@ -134,7 +134,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.75rem;
                     width: 100%;
-                    max-width: 25%;
+                    max-width: 10%;
                 }
 
                 .rechaza {
@@ -153,7 +153,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.8rem;
                     width: 100%;
-                    max-width: 23%;
+                    max-width: 11%;
                 }
 
                 .repsoli {
@@ -162,7 +162,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.8rem;
                     width: 100%;
-                    max-width: 23%;
+                    max-width: 11%;
                 }
 
                 .condev {
@@ -171,7 +171,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.8rem;
                     width: 100%;
-                    max-width: 24%;
+                    max-width: 11%;
                 }
 
                 .resena {
@@ -180,7 +180,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.8rem;
                     width: 100%;
-                    max-width: 30%;
+                    max-width: 11%;
                 }
             }
         }
@@ -240,7 +240,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.9rem;
                     width: 100%;
-                    max-width: 24%;
+                    max-width: 12%;
                 }
 
                 .cancela {
@@ -249,7 +249,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.8rem;
                     width: 100%;
-                    max-width: 21%;
+                    max-width: 11%;
                 }
 
                 .chat {
@@ -258,7 +258,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.9rem;
                     width: 100%;
-                    max-width: 21%;
+                    max-width: 11%;
                 }
 
                 .repdue {
@@ -267,7 +267,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.8rem;
                     width: 100%;
-                    max-width: 23%;
+                    max-width: 11%;
                 }
 
                 .recepcion {
@@ -276,7 +276,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.8rem;
                     width: 100%;
-                    max-width: 23%;
+                    max-width: 11%;
                 }
 
                 .devolver {
@@ -285,7 +285,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.8rem;
                     width: 100%;
-                    max-width: 30%;
+                    max-width: 11%;
                 }
 
                 .resenalibro {
@@ -294,7 +294,7 @@ ion-content {
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.8rem;
                     width: 100%;
-                    max-width: 23%;
+                    max-width: 11%;
                 }
             }
         }
@@ -334,10 +334,6 @@ ion-content {
     }
 }
 
-
-@media (max-width: 2560px),
-(max-width: 1920px) {}
-
 @media (max-width: 600px) {
     ion-content {
         --background: #ebe7e7;
@@ -375,13 +371,11 @@ ion-content {
             width: 100%;
             max-width: 95%;
             margin-top: 0.5rem;
-            margin-left: 2.5%;
+
             border: 3px solid #e96a24;
             border-radius: 7px;
             justify-content: center;
             align-items: center;
-            display: flex;
-            flex-direction: column;
 
             ion-card {
                 --background: transparent;
@@ -515,7 +509,7 @@ ion-content {
             justify-content: center;
             align-items: center;
             display: flex;
-            flex-direction: column;
+
 
             ion-card {
                 --background: transparent;
@@ -653,4 +647,313 @@ ion-content {
 }
 
 
-@media (max-height: 900px) {}
+@media (max-height: 900px) {
+    ion-content {
+        --background: #ebe7e7;
+
+        ion-segment {
+            --background: transparent;
+            --ion-color-primary: transparent;
+            width: 100%;
+            max-width: 95%;
+            margin-top: 1rem;
+            margin-left: 1.3rem;
+            position: center;
+            justify-content: center;
+            align-items: center;
+
+            .reci,
+            .reali {
+                --background: #e96a24;
+                color: #000000;
+                width: 100%;
+                max-width: 90%;
+                border: 1px solid #e96a24;
+                border-radius: 4px;
+                font-size: 0.7rem;
+                font-family: "Rethink Sans", sans-serif;
+                position: center;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        /*Mostrar solicitudes recibidas*/
+        .rec {
+            background: #4d4d4d;
+            width: 100%;
+            max-width: 95%;
+            margin-top: 0.5rem;
+            margin-left: 2.5%;
+            border: 3px solid #e96a24;
+            border-radius: 7px;
+            left: 10%;
+
+            ion-card {
+                --background: transparent;
+                width: 100%;
+                max-width: 95%;
+                height: auto;
+                border-radius: 2rem;
+                border: 0.1rem solid #e96a24;
+
+                ion-card-header {
+                    ion-card-title {
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        /*color: #e96a24;*/
+                    }
+                }
+
+                ion-card-content {
+                    background: transparent;
+
+                    .estado,
+                    .correo,
+                    .fechadev,
+                    .nomusu {
+                        font-size: 0.9rem;
+                        font-family: "Rethink Sans", sans-serif;
+                        /*color: #e96a24;*/
+                    }
+                }
+
+                ion-buttons {
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+
+                    .aceptar {
+                        --background: #e96a24;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.9rem;
+                        width: 100%;
+                        max-width: 15%;
+                    }
+
+                    .rechazar {
+                        --background: #ff0000;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.9rem;
+                        width: 100%;
+                        max-width: 15%;
+                    }
+
+                    .chatear {
+                        --background: #2442e9;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.9rem;
+                        width: 100%;
+                        max-width: 25%;
+                    }
+
+                    .devolucion {
+                        --background: #e96a24;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.75rem;
+                        width: 100%;
+                        max-width: 25%;
+                    }
+
+                    .rechaza {
+                        --background: #ff0000;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 50%;
+                        top: 10%;
+                    }
+
+                    .entregado {
+                        --background: #176e17;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 23%;
+                    }
+
+                    .repsoli {
+                        --background: #8d4e1b;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 23%;
+                    }
+
+                    .condev {
+                        --background: #176e17;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 24%;
+                    }
+
+                    .resena {
+                        --background: #176e17;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
+                }
+            }
+        }
+
+        /*Mostrar solicitudes realizadas*/
+        .rea {
+            background: #4d4d4d;
+            width: 100%;
+            max-width: 95%;
+            margin-top: 0.5rem;
+            margin-right: 5%;
+            border: 3px solid #e96a24;
+            border-radius: 7px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+
+            ion-card {
+                --background: transparent;
+                width: 100%;
+                max-width: 95%;
+                height: auto;
+                border-radius: 2rem;
+                border: 0.1rem solid #e96a24;
+
+                ion-card-header {
+                    ion-card-title {
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        /*color: #e96a24;*/
+                    }
+                }
+
+                ion-card-content {
+                    background: transparent;
+
+                    .estado,
+                    .correo,
+                    .fecha {
+                        font-size: 0.9rem;
+                        font-family: "Rethink Sans", sans-serif;
+                        /*color: #e96a24;*/
+                    }
+                }
+
+                ion-buttons {
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+
+                    .cancelar {
+                        --background: #ff0000;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.9rem;
+                        width: 100%;
+                        max-width: 24%;
+                    }
+
+                    .cancela {
+                        --background: #ff0000;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 21%;
+                    }
+
+                    .chat {
+                        --background: #2442e9;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.9rem;
+                        width: 100%;
+                        max-width: 21%;
+                    }
+
+                    .repdue {
+                        --background: #8d4e1b;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 23%;
+                    }
+
+                    .recepcion {
+                        --background: #176e17;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 23%;
+                    }
+
+                    .devolver {
+                        --background: #176e17;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 30%;
+                    }
+
+                    .resenalibro {
+                        --background: #176e17;
+                        color: #ffffff;
+                        font-family: "Rethink Sans", sans-serif;
+                        font-size: 0.8rem;
+                        width: 100%;
+                        max-width: 23%;
+                    }
+                }
+            }
+        }
+
+        /*Mostrar que no hay solicitudes */
+        ion-card {
+            --background: #e96a24;
+            width: 100%;
+            max-width: 95%;
+            height: auto;
+            border-radius: 2rem;
+            border: 0.1rem solid #e96a24;
+            margin-left: 2.5%;
+
+            ion-card-header {
+                ion-card-title {
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 1rem;
+                    color: #ffffff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            ion-card-content {
+                p {
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 1rem;
+                    color: #ffffff;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}
