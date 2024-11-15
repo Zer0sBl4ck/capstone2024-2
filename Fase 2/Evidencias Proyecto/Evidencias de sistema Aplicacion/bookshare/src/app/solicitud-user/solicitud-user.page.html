@@ -58,22 +58,7 @@
       </ion-button>
       <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'Libro devuelto'"
       (click)="cambiarEstado(solicitud.id_prestamo,'Devolucion confirmada')">Confirmar devolucion</ion-button>
-      <ion-button *ngIf="solicitud.estado_prestamo !== 'pendiente'" (click)="obtenerIdChat(solicitud.id_prestamo)">CHATEAR</ion-button>
-
-       
-
-
-
-        <ion-button *ngIf="solicitud.estado_prestamo === 'Por entregar'"
-          [routerLink]="['/chat', solicitud.id_prestamo]">
-          Chat
-        </ion-button>
-
-        <ion-button class="msj" *ngIf="solicitud.estado_prestamo === 'Entregado'"
-          [routerLink]="['/chat', solicitud.id_prestamo]">
-          Chat
-        </ion-button>
-      
+      <ion-button *ngIf="solicitud.estado_prestamo !== 'pendiente'" (click)="obtenerIdChat(solicitud.id_prestamo)">CHATEAR</ion-button>      
         <ion-button class="aceptar" *ngIf="solicitud.estado_prestamo === 'aceptado'"
           (click)="cambiarEstado(solicitud.id_prestamo,'Por entregar')">
           Prestar
@@ -119,16 +104,15 @@
           (click)="eliminarSolicitud(solicitud.id_prestamo)">
           Eliminar
         </ion-button>
-       <!-- <ion-button *ngIf="mostrarBotonDevolver(solicitud.fecha_prestamo) && esSolicitante(solicitud)"
-            (click)="devolverLibro(solicitud.id_prestamo)">
-            Devolver Libro
-          </ion-button>-->
-        <!-- Botón para agregar reseña, solo visible si el estado es 'Entregado' y es el solicitante -->
         <ion-button *ngIf="solicitud.estado_prestamo === 'Devolucion confirmada' && esSolicitante(solicitud)"
           (click)="irAResena(solicitud.id_prestamo)">
           Agregar Reseña libro
         </ion-button>
         <ion-button *ngIf="solicitud.estado_prestamo !== 'pendiente'" (click)="obtenerIdChat(solicitud.id_prestamo)">CHATEAR</ion-button>
+        <ion-button (click)="reportarUsuario(solicitud.id_prestamista,solicitud.id_solicitante)"
+        *ngIf="solicitud.estado_prestamo === 'Por entregar'|| solicitud.estado_prestamo === 'entregado'|| solicitud.estado_prestamo === 'Libro devuelto'  || solicitud.estado_prestamo === 'Entrega confirmada' ">
+        Reportar dueño
+      </ion-button>
       </ion-item>
     </ion-list>
     <ng-template #noSolicitudesRealizadas>
