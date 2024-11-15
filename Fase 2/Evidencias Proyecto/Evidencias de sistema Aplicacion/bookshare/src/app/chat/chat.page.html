@@ -21,12 +21,14 @@
   <!-- contenedor chat-->
   <div *ngIf="chats.length > 0" class="listado-chat">
     <ion-list class="listado-chat">
+      
       <ion-item *ngFor="let chat of chats" class="listado-chat">
+        <img class="imagen" *ngIf="chat.foto_solicitante"
+        [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del libro"  width="60px" height="60px"/>
         <ion-label class="listado-chat">
           <h2>📚 {{chat.titulo}} ({{chat.tipo_chat}})</h2>
           <p>Solicitante: {{ chat.correo_usuario_prestamista }}</p>
           <p>Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
-          
         </ion-label>
         <ion-button (click)="irAlChat(chat.id_chat)" >
           <ion-icon name="chatbubble-ellipses-outline"></ion-icon>

@@ -1232,7 +1232,9 @@ router.get('/listar-chats/:correo_usuario', async (req, res) => {
            u1.nombre_usuario AS correo_usuario_prestamista, 
            u2.nombre_usuario AS correo_usuario_solicitante,
            l.titulo,
-           c.tipo_chat
+           c.tipo_chat,
+           TO_BASE64(u1.foto_perfil) AS foto_prestamista,
+           TO_BASE64(u2.foto_perfil) AS foto_solicitante
     FROM chat c
     JOIN prestamo p ON c.id_estado = p.id_prestamo
     JOIN biblioteca_usuario bu ON bu.id_biblioteca=p.id_biblioteca
