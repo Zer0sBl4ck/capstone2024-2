@@ -1,21 +1,26 @@
-<ion-header [translucent]="true">
+<ion-header class="fondo">
   <ion-toolbar>
-    <ion-title>Listar Intercambio Usuario</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/listar-intercambio">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="titulo">Listar Intercambio Usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Libros Disponibles para Intercambio</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
   <ion-list>
-    <ion-item *ngFor="let libro of librosDisponiblesIntercambio">
+    <ion-list-header>
+      <ion-title size="large">Libros Disponibles para Intercambio</ion-title>
+    </ion-list-header>
+    
+    <ion-card *ngFor="let libro of librosDisponiblesIntercambio">
+
       <ion-thumbnail slot="start">
         <img *ngIf="libro.imagen_libro" [src]="'data:image/jpeg;base64,' + libro.imagen_libro" alt="Imagen del libro">
       </ion-thumbnail>
@@ -26,11 +31,12 @@
         <p><strong>Género:</strong> {{ libro.genero }}</p>
         <p><strong>ID Biblioteca:</strong> {{ libro.id_biblioteca }}</p>
       </ion-label>
+
       <!-- Botón para actualizar el intercambio -->
       <ion-button (click)="actualizarIntercambio(libro.id_biblioteca)">
         Actualizar Intercambio
       </ion-button>
-    </ion-item>
+    </ion-card>
   </ion-list>
 
   <ion-text *ngIf="librosDisponiblesIntercambio.length === 0">
