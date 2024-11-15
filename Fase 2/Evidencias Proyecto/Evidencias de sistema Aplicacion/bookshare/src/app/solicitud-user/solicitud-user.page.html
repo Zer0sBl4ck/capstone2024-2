@@ -82,7 +82,7 @@
               (click)="cambiarEstado(solicitud.id_prestamo,'Por entregar')">
               Prestar
             </ion-button>
-
+        
             <ion-button class="rechazar"
               *ngIf="solicitud.estado_prestamo === 'desarrollo' || solicitud.estado_prestamo === 'aceptado'"
               (click)="eliminarSolicitud(solicitud.id_prestamo)">
@@ -109,7 +109,7 @@
 
   <!-- Mostrar solicitudes realizadas -->
   <ng-container *ngIf="!mostrarRecibidas">
-    <ion-list class="rea" *ngIf="solicitudesRealizadas.length > 0; else noSolicitudesRealizadas">
+    <ion-list id="solicitudes-realizadas"class="rea" *ngIf="solicitudesRealizadas.length > 0; else noSolicitudesRealizadas">
 
       <ion-card *ngFor="let solicitud of solicitudesRealizadas">
         <ion-card-header>

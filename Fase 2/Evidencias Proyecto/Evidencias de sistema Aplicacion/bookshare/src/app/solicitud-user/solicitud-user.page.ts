@@ -2,7 +2,7 @@
 import { AuthService } from '../services/auth.service'; // Asegúrate de que la ruta sea correcta
 import { ActionSheetController } from '@ionic/angular';
 import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
-import { Router } from '@angular/router'; 
+import { Router, ActivatedRoute } from '@angular/router'; 
 import { LocalNotifications } from '@capacitor/local-notifications';
 @Component({
   selector: 'app-solicitud-user',
@@ -15,7 +15,8 @@ export class SolicitudUserPage implements OnInit {
   solicitudesRealizadas: any[] = []; // Array para almacenar solicitudes realizadas
   mostrarRecibidas: boolean = true;  // Variable para alternar entre recibidas y realizadas
   private refreshInterval: any;
-  constructor(private authService: AuthService, private actionSheetController: ActionSheetController, private router: Router) { }
+  segmentValue: string = 'recibidas'; // Valor por defecto
+  constructor(private authService: AuthService, private actionSheetController: ActionSheetController, private router: Router,  private route: ActivatedRoute) { }
 
   
   ngOnInit() {
@@ -28,6 +29,16 @@ export class SolicitudUserPage implements OnInit {
       this.cargarSolicitudesRealizadas();
       this.verificarFechasDevolucion();
     }, 3000); // 3000 ms = 3 segundos
+    this.route.queryParams.subscribe(params => {
+      if (params['section'] === 'realizadas') {
+        this.segmentValue = 'realizadas';
+        this.mostrarRecibidas = false;
+      } else {
+        this.segmentValue = 'recibidas';
+        this.mostrarRecibidas = true;
+      }
+    });
+  
   }
 
   // Cargar solicitudes recibidas (donde el usuario es prestamista)
@@ -143,6 +154,7 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
+  
   cancelarSolicitud(id_prestamo: number): void {
     this.authService.cancelarSolicitud(id_prestamo).subscribe(
       (response) => {
