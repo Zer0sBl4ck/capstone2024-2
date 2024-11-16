@@ -1676,25 +1676,55 @@ router.put('/actualizarBibliotecaPrestamista', (req, res) => {
   });
 });
 
-router.post('/reportar', (req, res) => {
+router.post('/reportar', async (req, res) => {
   const { usuario_reportado, usuario_reportante } = req.body;
+
+  if (!usuario_reportado || !usuario_reportante) {
+    return res.status(400).json({ error: 'Faltan campos requeridos.' });
+  }
 
   // Llamar al procedimiento ReportarUsuario
   const query = 'CALL ReportarUsuario(?, ?)';
 
-  db.query(query, [usuario_reportado, usuario_reportante], (error, results) => {
-    if (error) {
-      console.error('Error al reportar usuario:', error);
-      if (error.code === 'ER_SIGNAL_EXCEPTION' && error.sqlState === '45000') {
-        return res.status(400).json({ error: 'Este usuario ya ha reportado a este usuario.' });
-      }
-      return res.status(500).json({ error: 'Hubo un error al reportar al usuario.' });
-    }
+  try {
+    await db.query(query, [usuario_reportado, usuario_reportante]);
 
-    // Si todo sale bien, respondemos con éxito
-    res.status(200).json({ message: 'Reporte realizado correctamente', results });
-  });
+    // Contar los reportes del usuario reportado
+    const countQuery = 'SELECT COUNT(*) AS reportes FROM reportar_usuario WHERE id_usuario_reportado = ?';
+    const [countResults] = await db.query(countQuery, [usuario_reportado]);
+    const reportes = countResults[0].reportes;
+
+    // Lógica para enviar la notificación al usuario reportado
+    const notificacionQuery = 'SELECT correo FROM usuario WHERE id_usuario = ?';
+    const [notificacionResults] = await db.query(notificacionQuery, [usuario_reportado]);
+
+    if (notificacionResults.length > 0) {
+      const correo = notificacionResults[0].correo;
+      const mensaje = `Has sido reportado. Tu cuenta está en peligro. Llevas ${reportes} reportes. Si Acumulas 3, tu cuenta sera suspendida`;
+
+      // Insertar notificación en la tabla notificacion
+      const insertNotificacionQuery = `
+        INSERT INTO notificacion (correo, titulo, descripcion, tipo) 
+        VALUES (?, ?, ?, 'Reporte de usuario')
+      `;
+      await db.query(insertNotificacionQuery, [correo, 'Reporte de usuario', mensaje]);
+
+      enviarNotificacion(correo, mensaje);
+      console.log('Notificación enviada al usuario reportado con éxito.');
+      return res.status(201).json({ message: 'Reporte realizado correctamente y notificación enviada', reportes, notificacion: 'Notificación enviada al usuario reportado con éxito.' });
+    } else {
+      return res.status(404).json({ message: 'Usuario reportado no encontrado' });
+    }
+  } catch (error) {
+    console.error('Error al reportar usuario:', error);
+    return res.status(500).json({ error: 'Hubo un error al reportar al usuario.' });
+  }
 });
+
+function enviarNotificacion(correo, mensaje) {
+  // Simulación de envío de notificación por correo electrónico
+  console.log(`Enviando notificación a ${correo}: ${mensaje}`);
+}
 
 router.get('/promedio-calificacion-sin-isbn/:id_usuario', async (req, res) => {
   const { id_usuario } = req.params;  // Obtienes el id_usuario desde los parámetros de la URL

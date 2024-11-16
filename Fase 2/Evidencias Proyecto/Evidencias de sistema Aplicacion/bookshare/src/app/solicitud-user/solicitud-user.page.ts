@@ -4,6 +4,7 @@ import { ActionSheetController } from '@ionic/angular';
 import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router'; 
 import { LocalNotifications } from '@capacitor/local-notifications';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-solicitud-user',
   templateUrl: './solicitud-user.page.html',
@@ -16,7 +17,7 @@ export class SolicitudUserPage implements OnInit {
   mostrarRecibidas: boolean = true;  // Variable para alternar entre recibidas y realizadas
   private refreshInterval: any;
   segmentValue: string = 'recibidas'; // Valor por defecto
-  constructor(private authService: AuthService, private actionSheetController: ActionSheetController, private router: Router,  private route: ActivatedRoute) { }
+  constructor(private authService: AuthService, private actionSheetController: ActionSheetController, private router: Router,  private route: ActivatedRoute,   private alertController: AlertController) { }
 
   
   ngOnInit() {
@@ -154,7 +155,7 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
-  
+
   cancelarSolicitud(id_prestamo: number): void {
     this.authService.cancelarSolicitud(id_prestamo).subscribe(
       (response) => {
@@ -166,15 +167,51 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
-  abrirFormularioResena(solicitud: any) {
-    const calificacion = prompt('Ingrese la calificación (1-5):');
-    const comentario = prompt('Ingrese el comentario:');
-  
-    if (calificacion && comentario) {
-      this.agregarResenaSolicitante(solicitud.id_prestamo, parseInt(calificacion), comentario, solicitud);
-    } else {
-      alert('Por favor, complete la calificación y el comentario.');
-    }
+ async abrirFormularioResena(solicitud: any) {
+    const alert = await this.alertController.create({
+      header: 'Reseña',
+      inputs: [
+        {
+          name: 'calificacion',
+          type: 'number',
+          placeholder: 'Ingrese la calificación (1-5)',
+          min: 1,
+          max: 5
+        },
+        {
+          name: 'comentario',
+          type: 'textarea',
+          placeholder: 'Ingrese el comentario'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Formulario cancelado');
+          }
+        },
+        {
+          text: 'Enviar',
+          handler: (data) => {
+            const calificacion = data.calificacion;
+            const comentario = data.comentario;
+            if (calificacion && comentario) {
+              this.agregarResenaSolicitante(solicitud.id_prestamo, parseInt(calificacion), comentario, solicitud);
+            } else {
+              this.alertController.create({
+                header: 'Error',
+                message: 'Por favor, complete la calificación y el comentario.',
+                buttons: ['OK']
+              }).then(alert => alert.present());
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
   
   agregarResenaSolicitante(id_prestamo: number, calificacion: number, comentario: string, solicitud: any): void {
@@ -479,6 +516,8 @@ export class SolicitudUserPage implements OnInit {
     this.authService.reportarUsuario(usuarioReportado, usuarioReportante).subscribe(
       (response) => {
         console.log('Usuario reportado correctamente:', response);
+        const reportes = response.reportes;
+        alert(`Usuario reportado correctamente. El usuario reportado lleva ${reportes} reportes.`);
         // Puedes mostrar un mensaje de éxito o actualizar el UI aquí
       },
       (error) => {
@@ -486,6 +525,7 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
+  
   cambiarEstado(id: string, nuevoEstado: string) {
     this.authService.actualizarEstadoSolicitudx(id, nuevoEstado).subscribe(
       (response) => {

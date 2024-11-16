@@ -427,7 +427,6 @@ marcarEstadoComoEntregado(id_prestamo: number): Observable<any> {
 
   reportarUsuario(usuarioReportado: number, usuarioReportante: number): Observable<any> {
     console.log('Reportando usuario:', usuarioReportado, usuarioReportante);
-  
     return this.http.post<any>(`${this.apiUrl}/reportar`, {
       usuario_reportado: usuarioReportado,
       usuario_reportante: usuarioReportante
