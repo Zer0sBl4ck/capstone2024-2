@@ -98,10 +98,7 @@
             <img *ngIf="book.imagen_libro" [src]="book.imagen_libro" alt="Libro {{ book.titulo }}" />
             <p>{{ book.titulo }}</p>
             <p>{{ book.autor }}</p>
-            <div class="rating">
-              <span *ngFor="let star of stars; let starIndex = index" class="star" (click)="rateBook(i, starIndex + 1)"
-                [innerHTML]="starIndex < book.selectedRating ? '&#9733;' : '&#9734;'"></span>
-            </div>
+            
           </swiper-slide>
         </swiper-container>
         <ion-title class="reseñas">Reseñas</ion-title>
