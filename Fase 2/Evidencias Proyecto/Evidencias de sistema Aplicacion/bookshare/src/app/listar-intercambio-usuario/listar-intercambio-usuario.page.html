@@ -5,7 +5,7 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="titulo">Listado Intercambio Usuario</ion-title>
+    <ion-title class="titulo">Libros disponibles</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -28,12 +28,12 @@
       <ion-card-content>
         <p class="libro">{{ libro.autor }}</p>
         <p class="genero"><strong>Género:</strong> {{ libro.genero }}</p>
-        <p class="biblioteca"><strong>ID Biblioteca:</strong> {{ libro.id_biblioteca }}</p>
+        <!--  <p class="biblioteca"><strong>ID Biblioteca:</strong> {{ libro.id_biblioteca }}</p> -->
 
         <!-- Botones para actualizar el intercambio y ver personas con el libro -->
         <ion-buttons>
           <ion-button class="actualizar" (click)="actualizarIntercambio(libro.id_biblioteca)">
-            Actualizar Intercambio
+            Seleccionar
           </ion-button>
 
           <ion-button class="ver" expand="block" (click)="irAPersonasConLibro(libro.isbn)">

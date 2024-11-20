@@ -28,7 +28,7 @@
               <img [src]="'data:image/jpeg;base64,' + libro.imagen" alt="Imagen del libro" class="imagen" />
             </div>
             <p *ngIf="!libro.imagen" class="noimagen">No hay imagen disponible</p>
-            <p class="isbn">ISBN: {{ libro.isbn }}</p>
+            <!-- <p class="isbn">ISBN: {{ libro.isbn }}</p> -->
 
             <ion-buttons>
               <ion-button [routerLink]="['/personas-ownerbook', libro.isbn]" class="ver">

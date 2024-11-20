@@ -87,4 +87,8 @@ export class ChatContactoPage implements OnInit, OnDestroy {
       }
     }, 2000);
   }
+
+  retroceder() {
+    window.history.back();
+  }
 }

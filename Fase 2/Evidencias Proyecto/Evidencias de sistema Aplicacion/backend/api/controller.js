@@ -1700,7 +1700,7 @@ router.post('/reportar', async (req, res) => {
 
     if (notificacionResults.length > 0) {
       const correo = notificacionResults[0].correo;
-      const mensaje = `Has sido reportado. Tu cuenta está en peligro. Llevas ${reportes} reportes. Si Acumulas 3, tu cuenta sera suspendida`;
+      const mensaje = `Has sido reportado. Tu cuenta está en peligro. Llevas ${reportes} reportes. Si Acumulas 5, tu cuenta sera suspendida`;
 
       // Insertar notificación en la tabla notificacion
       const insertNotificacionQuery = `

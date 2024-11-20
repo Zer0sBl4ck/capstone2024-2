@@ -17,7 +17,7 @@
   <ion-segment value="solicitante" (ionChange)="cambiarSegmento($event)">
     <ion-segment-button value="solicitante">Solicitante
     </ion-segment-button>
-    <ion-segment-button value="prestamista">Prestamista
+    <ion-segment-button value="prestamista">Intercambio
     </ion-segment-button>
   </ion-segment>
 
@@ -26,11 +26,11 @@
     <ion-list class="solicitante" *ngIf="intercambiosComoSolicitante.length > 0; else noSolicitante">
       <ion-card *ngFor="let intercambio of intercambiosComoSolicitante">
         <ion-card-header>
-          <ion-card-title>Libro solicitud: {{ intercambio.libro_titulo }}</ion-card-title>
+          <ion-card-title>Libro: {{ intercambio.libro_titulo }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
-          <p class="ofertante">Intercambio usuario: {{ intercambio.ofertante }}</p>
+          <p class="ofertante">Usuario: {{ intercambio.ofertante }}</p>
           <p class="estado">Estado: {{ intercambio.estado }}</p>
         </ion-card-content>
       </ion-card>
@@ -54,15 +54,15 @@
       <ion-card *ngFor="let intercambio of intercambiosComoPrestamista">
 
         <ion-card-header>
-          <ion-card-title>Libro prestado: {{ intercambio.libro_titulo }}</ion-card-title>
+          <ion-card-title>Libro: {{ intercambio.libro_titulo }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
-          <p class="solicitante">Intercambio usuario: {{ intercambio.solicitante }}</p>
+          <p class="solicitante">Usuario: {{ intercambio.solicitante }}</p>
           <p class="estado">Estado: {{ intercambio.estado }}</p>
 
           <ion-button (click)="irAIntercambioUsuario(intercambio.id_solicitante, intercambio.id_intercambio)">
-            Ver intercambios de solicitante
+            Escoge tu preferencia
           </ion-button>
 
 

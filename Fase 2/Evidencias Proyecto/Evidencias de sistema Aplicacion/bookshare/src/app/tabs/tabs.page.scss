@@ -1,3 +1,8 @@
+ion-tab {
+  background: #e96c26 !important;
+}
+
+
 ion-tab-bar {
   --background: #e96c26 !important;  // Fondo de la barra de tabs
   --color: #fff !important;           // Color de texto por defecto
@@ -14,6 +19,7 @@ ion-tab-button {
   display: flex;      // Asegura que los iconos y etiquetas estén alineados correctamente
   justify-content: center;
   align-items: center;
+  background: #e96c26;
 }
 
 ion-icon {
@@ -29,6 +35,5 @@ ion-badge {
   font-size: 10px;  // Tamaño de la fuente del badge
   position: absolute;  // Asegura que el badge esté alineado sobre el icono
   top: 2px;
-  right: -5px;
   background-color: red;  // Cambiar color del badge si es necesario
 }

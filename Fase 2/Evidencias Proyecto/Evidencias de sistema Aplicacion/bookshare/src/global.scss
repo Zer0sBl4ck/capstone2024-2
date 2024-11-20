@@ -39,7 +39,7 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 :root {
-    --ion-tab-bar-background: #229E88; // Cambia el color de fondo de la barra de tabs
+    --ion-tab-bar-background: #e96c26; // Cambia el color de fondo de la barra de tabs
     --ion-tab-bar-border-color: transparent; // Cambia el color del borde de la barra de tabs
     --ion-tab-bar-color: white; // Cambia el color de los iconos y texto no seleccionados
     --ion-tab-bar-color-selected: #ff4081; // Cambia el color de los iconos y texto seleccionados
@@ -50,7 +50,7 @@ ion-tabs {
   }
   
   ion-tab-bar {
-    background-color: #229E88; // Cambia el color de fondo de la barra de tabs
+    background-color: #e96c26; // Cambia el color de fondo de la barra de tabs
     color: white; // Cambia el color del texto de los tabs
   }
   

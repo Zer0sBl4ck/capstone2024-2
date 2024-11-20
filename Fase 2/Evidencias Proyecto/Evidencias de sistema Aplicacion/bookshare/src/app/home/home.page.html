@@ -19,12 +19,12 @@
 
         <ion-button routerLink="/addbook" *ngIf="userRole === 'admin'">
           <ion-icon name="add-outline" slot="start"></ion-icon>
-          Agregar libro admin
+          Agregar libro
         </ion-button>
 
         <ion-button (click)="goAddBookuser()" *ngIf="userRole === 'usuario'">
           <ion-icon name="add-outline" slot="start"></ion-icon>
-          Agregar libro
+          Solicitud de libro
         </ion-button>
 
         

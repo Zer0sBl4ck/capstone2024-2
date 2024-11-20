@@ -64,4 +64,8 @@ export class ResenaLibroPage implements OnInit {
       alert('Por favor, complete la calificación y el comentario.');
     }
   }
+
+  retroceder() {
+    window.history.back();
+  }
 }

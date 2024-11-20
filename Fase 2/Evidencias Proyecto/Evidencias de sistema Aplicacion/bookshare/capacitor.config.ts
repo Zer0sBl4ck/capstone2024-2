@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'bookshare',
   webDir: 'www',
   server: {
-    url: 'http://192.168.1.26:8100', 
+    url: 'http://192.168.123.79:8100', //http://192.168.1.26:8100 http://192.168.123.79:8100
     cleartext: true, 
   },
   plugins: {

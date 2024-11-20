@@ -150,8 +150,7 @@ ion-app {
 .ion-page#main-content .recomendaciones {
     
   bottom: 20px; /* Distancia desde el fondo */
-
-  font-size: 21px; /* Tamaño de la fuente */
+  font-size: 1.5rem; /* Tamaño de la fuente */
   color: #000000; /* Color del texto */
   font-family: "Rethink Sans", sans-serif; /* Fuente Roboto */
   font-weight: 300;
@@ -260,9 +259,11 @@ ion-app {
 }
 ion-title.reseñas {
   color: white;
-  font-size: 24px;
+  font-size: 1rem;
   text-align: center;
   margin-top: 10px;
+  font-style: italic;
+  font-family: "Rethink Sans", sans-serif;
 }
 
 swiper-container {

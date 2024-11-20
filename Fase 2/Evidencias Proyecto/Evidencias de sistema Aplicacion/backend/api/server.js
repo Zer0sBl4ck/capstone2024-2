@@ -15,8 +15,7 @@ app.use(cors({
   origin: [
     'http://localhost:8100',  // Frontend en desarrollo
     'http://192.168.1.26:8100',  // IP wifi casa negro
-    'http://192.168.137.1:8100',  // IP local 2
-    'http://192.168.123.79:8100'  // IP local 3
+    'http://192.168.123.79:8100'  // IP local celu negro
     // Añade más IPs si es necesario
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos que quieres permitir
