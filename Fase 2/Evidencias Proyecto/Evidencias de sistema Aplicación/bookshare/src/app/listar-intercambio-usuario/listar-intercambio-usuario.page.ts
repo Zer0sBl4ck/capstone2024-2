@@ -63,6 +63,25 @@ export class ListarIntercambioUsuarioPage implements OnInit {
     } else {
       console.error('ID de intercambio no válido:', this.idIntercambio);
     }
+    this.router.navigate(['/listar-intercambio']);
+  }
+  actualizarEstadoIntercambio(): void {
+    const nuevoEstado = "libro seleccionado"; // Estado definido dentro de la función
+  
+    if (this.idIntercambio) {
+      const idIntercambioNumber = Number(this.idIntercambio);
+  
+      this.authService.actualizarEstadoIntercambio(idIntercambioNumber, nuevoEstado).subscribe(
+        (response) => {
+          console.log('Estado del intercambio actualizado a "libro seleccionado":', response);
+        },
+        (error) => {
+          console.error('Error al actualizar el estado del intercambio:', error);
+        }
+      );
+    } else {
+      console.error('ID de intercambio no válido:', this.idIntercambio);
+    }
   }
 
   irAPersonasConLibro(isbn: string): void {

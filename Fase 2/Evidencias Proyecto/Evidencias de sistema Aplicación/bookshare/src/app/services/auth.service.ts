@@ -444,7 +444,19 @@ marcarEstadoComoEntregado(id_prestamo: number): Observable<any> {
     const url = `${this.apiUrl}/promedio-calificacion-sin-isbn/${idUsuario}`;
     return this.http.get(url);
   }
-  
+
+  actualizarEstadoIntercambio(id_intercambio: number, estado: string): Observable<any> {
+    const url = `${this.apiUrl}/actualizarEstadoIntercambio/${id_intercambio}`;
+    return this.http.put(url, { estado });
+  }
+  crearChatIntercambio(idIntercambio: string): Observable<any> {
+    console.log(idIntercambio);
+    const url = `${this.apiUrl}/crear-chat-intercambio/${idIntercambio}`;
+    return this.http.post<any>(url, {}); // Pasamos un objeto vacío ya que no estamos pasando datos adicionales
+  }
+  listarChatsIntercambio(correo_usuario: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/listar-chats-intercambio/${correo_usuario}`);
+  }
   
   
   

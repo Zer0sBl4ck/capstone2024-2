@@ -3,41 +3,60 @@
     <ion-buttons slot="start">
       <ion-button routerLink="/tabs/home">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
-    </ion-button>
+      </ion-button>
     </ion-buttons>
     <ion-title class="titulo">Mis Chats</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
 
-  <!-- contenedor chat-->
+  <!-- Chats de préstamo -->
   <div *ngIf="chats.length > 0" class="listado-chat">
-    <ion-list class="listado-chat">
-      
+    <h2>Chats de Préstamo</h2>
+    <ion-list>
       <ion-item *ngFor="let chat of chats" class="listado-chat">
         <img class="imagen" *ngIf="chat.foto_solicitante"
-        [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del libro"  width="60px" height="60px"/>
+          [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del libro" width="60px" height="60px"/>
         <ion-label class="listado-chat">
-          <h2>📚 {{chat.titulo}} ({{chat.tipo_chat}})</h2>
+          <h3>📚 {{ chat.titulo }} (Préstamo)</h3>
           <p>Solicitante: {{ chat.correo_usuario_prestamista }}</p>
           <p>Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
         </ion-label>
-        <ion-button (click)="irAlChat(chat.id_chat)" >
+        <ion-button (click)="irAlChat(chat.id_chat)">
           <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
         </ion-button>
       </ion-item>
     </ion-list>
   </div>
 
-  <div *ngIf="chats.length === 0 && !errorMessage">
+  <!-- Chats de intercambio -->
+  <div *ngIf="chatsIntercambio.length > 0" class="listado-chat">
+    <h2>Chats de Intercambio</h2>
+    <ion-list>
+      <ion-item *ngFor="let chat of chatsIntercambio" class="listado-chat">
+        <img class="imagen" *ngIf="chat.foto_solicitante"
+          [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del libro" width="60px" height="60px"/>
+        <ion-label class="listado-chat">
+          <h3>📚 {{ chat.titulo }} (Intercambio)</h3>
+          <p>Solicitante: {{ chat.correo_usuario_prestamista }}</p>
+          <p>Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
+        </ion-label>
+        <ion-button (click)="irAlChat(chat.id_chat)">
+          <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="(chats.length === 0 && chatsIntercambio.length === 0) && !errorMessage">
     <p>No tienes chats disponibles.</p>
   </div>
 </ion-content>

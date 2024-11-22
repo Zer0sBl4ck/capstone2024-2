@@ -63,6 +63,7 @@ export class ListarIntercambioPage implements OnInit {
     console.log(idSolicitante);
     this.router.navigate(['/listar-intercambio-usuario', idSolicitante, id_intercambio]);
   }
+  
 
   // Refresca los datos
   refreshData(event: CustomEvent<RefresherEventDetail>) {
@@ -77,5 +78,36 @@ export class ListarIntercambioPage implements OnInit {
         refresher.complete();  // Indica que el refresco se completó
       }
     }, 2000);
+  }
+  actualizarEstadoIntercambio(idIntercambio: string, estado: string): void {
+    if (idIntercambio) {
+      const idIntercambioNumber = Number(idIntercambio); // Convertir a número si es necesario
+  
+      this.authService.actualizarEstadoIntercambio(idIntercambioNumber, estado).subscribe(
+        (response) => {
+          console.log('Estado del intercambio actualizado a "' + estado + '":', response);
+        },
+        (error) => {
+          console.error('Error al actualizar el estado del intercambio:', error);
+        }
+      );
+    } else {
+      console.error('ID de intercambio no válido:', idIntercambio);
+    }
+  }
+  crearChatDeIntercambio(idIntercambio: string): void {
+    console.log("hola");
+    if (idIntercambio) {
+      this.authService.crearChatIntercambio(idIntercambio).subscribe(
+        (response) => {
+          console.log('Chat de intercambio creado con éxito:', response);
+        },
+        (error) => {
+          console.error('Error al crear el chat de intercambio:', error);
+        }
+      );
+    } else {
+      console.error('ID de intercambio no válido:', idIntercambio);
+    }
   }
 }
