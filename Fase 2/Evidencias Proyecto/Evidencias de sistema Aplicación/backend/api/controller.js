@@ -1242,7 +1242,6 @@ router.get('/listar-chats/:correo_usuario', async (req, res) => {
     LEFT JOIN usuario u1 ON p.id_usuario_prestamista = u1.id_usuario
     LEFT JOIN usuario u2 ON p.id_usuario_solicitante = u2.id_usuario
     WHERE (u1.correo = ? OR u2.correo = ?) 
-    AND c.tipo_chat = 'prestamo'  -- Filtrar solo por chats de tipo 'prestamo'
   `;
 
   try {
@@ -1564,7 +1563,7 @@ router.get('/intercambios-solicitante/:id_usuario', async (req, res) => {
   try {
     const query = `
   SELECT
-      i.id_intercambio,
+      i.id_intercambio AS id_intercambio,
       i.id_usuario_ofertante AS id_ofertante,
       i.id_usuario_solicitante AS id_solicitante,
       i.id_biblioteca_prestamista,
@@ -1572,12 +1571,15 @@ router.get('/intercambios-solicitante/:id_usuario', async (req, res) => {
       i.estado,
       us.nombre_usuario AS solicitante,
       u.nombre_usuario AS ofertante,
-      l.titulo AS libro_titulo
+      l.titulo AS libro_titulo,
+      lx.titulo AS libro_titulo2
  FROM intercambio i
  JOIN usuario u ON u.id_usuario = i.id_usuario_ofertante
  JOIN usuario us ON us.id_usuario = i.id_usuario_solicitante
- JOIN biblioteca_usuario bup ON bup.id_biblioteca = i.id_biblioteca_prestamista
- JOIN libro l ON l.isbn = bup.isbn
+ LEFT JOIN biblioteca_usuario bup ON bup.id_biblioteca = i.id_biblioteca_prestamista
+ LEFT JOIN biblioteca_usuario bupp ON bupp.id_biblioteca = i.id_biblioteca_solicitante
+ LEFT JOIN libro l ON l.isbn = bup.isbn
+ LEFT JOIN libro lx ON lx.isbn = bupp.isbn
     WHERE i.id_usuario_solicitante = ?`;
       
     const [rows] = await db.execute(query, [id_usuario]);
@@ -1604,12 +1606,15 @@ router.get('/intercambios-prestamista/:id_usuario', async (req, res) => {
       i.estado,
       us.nombre_usuario AS solicitante,
       u.nombre_usuario AS ofertante,
-      l.titulo AS libro_titulo
+      l.titulo AS libro_titulo,
+      lx.titulo AS libro_titulo2
  FROM intercambio i
  JOIN usuario u ON u.id_usuario = i.id_usuario_ofertante
  JOIN usuario us ON us.id_usuario = i.id_usuario_solicitante
  JOIN biblioteca_usuario bup ON bup.id_biblioteca = i.id_biblioteca_prestamista
+ LEFT JOIN biblioteca_usuario bupp ON bupp.id_biblioteca = i.id_biblioteca_solicitante
  JOIN libro l ON l.isbn = bup.isbn
+ LEFT JOIN libro lx ON lx.isbn = bupp.isbn
       WHERE i.id_usuario_ofertante = ?`;
     const [rows] = await db.execute(query, [id_usuario]);
 
@@ -1772,6 +1777,122 @@ router.get('/obtener-id-chat/:id_estado', async (req, res) => {
     res.status(500).json({ message: 'Error al obtener el id_chat' });
   }
 });
+router.put('/actualizarEstadoIntercambio/:id_intercambio', async (req, res) => {
+  const { id_intercambio } = req.params;
+  const { estado } = req.body;
+
+  try {
+      // Validar que los parámetros estén presentes
+      if (!id_intercambio || !estado) {
+          return res.status(400).json({ message: 'Faltan parámetros requeridos.' });
+      }
+
+      // Actualizar el estado en la base de datos
+      const query = `
+          UPDATE intercambio 
+          SET estado = ? 
+          WHERE id_intercambio = ?
+      `;
+      const result = await db.query(query, [estado, id_intercambio]);
+
+      // Verificar si se realizó alguna modificación
+      if (result.affectedRows === 0) {
+          return res.status(404).json({ message: 'Intercambio no encontrado.' });
+      }
+
+      res.status(200).json({ message: 'Estado actualizado correctamente.' });
+  } catch (error) {
+      console.error('Error al actualizar el estado del intercambio:', error);
+      res.status(500).json({ message: 'Error del servidor.' });
+  }
+});
+router.post('/crear-chat-intercambio/:id', async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'El id del intercambio es requerido.' });
+  }
+
+  // Consulta para obtener los datos del intercambio
+  const getIntercambioQuery = `
+    SELECT id_intercambio, id_biblioteca_solicitante, id_biblioteca_prestamista, estado
+    FROM intercambio
+    WHERE id_intercambio = ?
+  `;
+
+  // Consulta para insertar el nuevo chat, usando id_biblioteca_usuario_ofertante
+  const createChatQuery = `
+    INSERT INTO chat (id_biblioteca_usuario_ofertante, id_biblioteca_usuario_solicitante, tipo_chat, id_estado)
+    VALUES (?, ?, ?, ?)
+  `;
+
+  try {
+    // Obtener los detalles del intercambio
+    const [intercambio] = await db.query(getIntercambioQuery, [id]);
+
+    if (intercambio.length === 0) {
+      return res.status(404).json({ message: 'No se encontró el intercambio.' });
+    }
+
+    const { id_intercambio, id_biblioteca_solicitante, id_biblioteca_prestamista, estado } = intercambio[0];
+
+    // Verificar si el estado es "pendiente" o el que corresponda para permitir crear el chat
+   
+
+    // Crear el chat en la base de datos, usando id_biblioteca_prestamista como ofertante
+    const [result] = await db.query(createChatQuery, [
+      id_biblioteca_prestamista,  // Se usa id_biblioteca_prestamista como ofertante
+      id_biblioteca_solicitante,  // Se usa id_biblioteca_solicitante como solicitante
+      'intercambio',              // El tipo de chat es 'intercambio'
+      id_intercambio              // Asociar el id del intercambio como id_estado
+    ]);
+
+    // Responder con el chat creado
+    res.status(201).json({ message: 'Chat de intercambio creado exitosamente', chatId: result.insertId });
+  } catch (error) {
+    console.error('Error al crear el chat:', error);
+    return res.status(500).json({ error: 'Error al crear el chat' });
+  }
+});
+
+router.get('/listar-chats-intercambio/:correo_usuario', async (req, res) => {
+  const { correo_usuario } = req.params;
+
+  if (!correo_usuario) {
+    return res.status(400).json({ error: 'El correo del usuario es requerido.' });
+  }
+
+  // Consulta para obtener los chats de tipo 'intercambio' en los que el usuario está involucrado
+  const listarChatsIntercambioQuery = `
+    SELECT c.id_chat, 
+           u1.nombre_usuario AS correo_usuario_prestamista, 
+           u2.nombre_usuario AS correo_usuario_solicitante,
+           c.tipo_chat,
+           TO_BASE64(u1.foto_perfil) AS foto_prestamista,
+           TO_BASE64(u2.foto_perfil) AS foto_solicitante
+    FROM chat c
+    JOIN intercambio i ON c.id_estado = i.id_intercambio
+    LEFT JOIN usuario u1 ON i.id_usuario_ofertante = u1.id_usuario
+    LEFT JOIN usuario u2 ON i.id_usuario_solicitante = u2.id_usuario
+    WHERE (u1.correo = ? OR u2.correo = ?)
+  `;
+
+  try {
+    // Usamos el correo_usuario como parámetro para la consulta
+    const [chats] = await db.query(listarChatsIntercambioQuery, [correo_usuario, correo_usuario]);
+
+    if (chats.length === 0) {
+      return res.status(404).json({ message: 'No se encontraron chats de intercambio.' });
+    }
+
+    res.status(200).json({ chats });
+  } catch (error) {
+    console.error('Error al listar los chats de intercambio:', error);
+    return res.status(500).json({ error: 'Error al listar los chats de intercambio' });
+  }
+});
+
+
 
 
 

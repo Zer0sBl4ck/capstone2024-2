@@ -31,7 +31,19 @@
 
         <ion-card-content>
           <p class="ofertante">Usuario: {{ intercambio.ofertante }}</p>
+          <p>Libro prestado: {{ intercambio.libro_titulo2 }}</p>
+          <p class="ofertante">Intercambio usuario: {{ intercambio.ofertante }}</p>
           <p class="estado">Estado: {{ intercambio.estado }}</p>
+          <ion-button *ngIf="intercambio.estado==='libro seleccionado'" (click)="actualizarEstadoIntercambio(intercambio.id_intercambio, 'Seleccion confirmada');crearChatDeIntercambio(intercambio.id_intercambio);">
+            CONFIRMAR
+          </ion-button>
+         
+          <ion-button *ngIf="intercambio.estado!=='Intercambio rechazado' && intercambio.estado!=='Intercambio finalizado' "(click)="actualizarEstadoIntercambio(intercambio.id_intercambio, 'Intercambio rechazado')"> 
+            CANCELAR
+          </ion-button>
+          <ion-button *ngIf="intercambio.estado==='Seleccion confirmada'" (click)="actualizarEstadoIntercambio(intercambio.id_intercambio, 'Intercambio realizado')">
+            Intercambiado
+          </ion-button>
         </ion-card-content>
       </ion-card>
     </ion-list>
@@ -63,9 +75,19 @@
 
           <ion-button (click)="irAIntercambioUsuario(intercambio.id_solicitante, intercambio.id_intercambio)">
             Escoge tu preferencia
+          <p>Libro prestado: {{ intercambio.libro_titulo2 }}</p>
+          <p class="solicitante">Intercambio usuario: {{ intercambio.solicitante }}</p>
+          <p class="estado">Estado: {{ intercambio.estado }}</p>
+
+          <ion-button *ngIf="intercambio.estado==='Pendiente'" (click)="irAIntercambioUsuario(intercambio.id_solicitante, intercambio.id_intercambio)">
+            Ver libros del solicitante
           </ion-button>
-
-
+          <ion-button *ngIf="intercambio.estado!=='Intercambio rechazado' && intercambio.estado!=='Intercambio finalizado' "(click)="actualizarEstadoIntercambio(intercambio.id_intercambio, 'Intercambio rechazado')"> 
+            CANCELAR
+          </ion-button>
+          <ion-button *ngIf="intercambio.estado==='Intercambio realizado'" (click)="actualizarEstadoIntercambio(intercambio.id_intercambio, 'Intercambio finalizado')">
+            Confirmar intercambio
+          </ion-button>
         </ion-card-content>
       </ion-card>
     </ion-list>
