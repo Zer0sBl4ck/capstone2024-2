@@ -28,14 +28,6 @@
       <ion-card-content>
         <p class="libro">{{ libro.autor }}</p>
         <p class="genero"><strong>Género:</strong> {{ libro.genero }}</p>
-        <!--  <p class="biblioteca"><strong>ID Biblioteca:</strong> {{ libro.id_biblioteca }}</p> -->
-
-        <!-- Botones para actualizar el intercambio y ver personas con el libro -->
-        <ion-buttons>
-          <ion-button class="actualizar" (click)="actualizarIntercambio(libro.id_biblioteca)">
-            Seleccionar
-        <p class="biblioteca"></p>
-
         <!-- Botones para actualizar el intercambio y ver personas con el libro -->
         <ion-buttons>
           <ion-button class="actualizar" (click)="actualizarIntercambio(libro.id_biblioteca);actualizarEstadoIntercambio();">
@@ -61,6 +53,4 @@
       </ion-card-content>
     </ion-card>
   </ng-container>
-  
-  
 </ion-content>
