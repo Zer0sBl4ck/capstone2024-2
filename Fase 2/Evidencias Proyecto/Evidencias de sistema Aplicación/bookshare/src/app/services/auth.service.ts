@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private apiUrl = 'http://192.168.123.79:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api (wifi casa) //http://192.168.123.79:3000/api (wifi celu)
+  private apiUrl = 'http://localhost:3000/api'; //http://localhost:3000/api ip http://192.168.1.26:3000/api (wifi casa) //http://192.168.123.79:3000/api (wifi celu)
 
 
   constructor(private http: HttpClient) { }
