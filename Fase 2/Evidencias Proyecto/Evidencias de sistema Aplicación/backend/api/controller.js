@@ -365,28 +365,68 @@ router.get('/resenas1', async (req, res) => {
 });
 // Ruta para agregar una nueva reseña
 // Ruta para agregar una nueva reseña
-router.post('/resenas', async (req, res) => {
-  const { id_usuario, isbn, calificacion, comentario } = req.body;
-
-  if (!id_usuario || !isbn || !calificacion || comentario === undefined) {
-    return res.status(400).json({ message: 'Faltan campos requeridos' });
-  }
-
-  const creado_en = new Date();
+router.post('/resenas-usuario', async (req, res) => {
+  const { userEmail } = req.body;
 
   try {
-    const [result] = await db.query(
-      'INSERT INTO resena (id_usuario, isbn, calificacion, comentario, creado_en) VALUES (?, ?, ?, ?, ?)',
-      [id_usuario, isbn, calificacion, comentario, creado_en]
+    const [rows] = await db.query(
+      `SELECT r.id_resena, r.isbn, r.calificacion, r.comentario, r.creado_en, u.nombre_usuario, u.foto_perfil, l.titulo, l.autor
+       FROM resena r
+       JOIN usuario u ON r.id_usuario = u.id_usuario
+       JOIN libro l ON r.isbn = l.isbn
+       WHERE u.correo = ?`,
+      [userEmail]
     );
 
-    return res.status(201).json({ message: 'Reseña agregada exitosamente', id_resena: result.insertId });
+    const resenas = rows.map(row => ({
+      id_resena: row.id_resena,
+      isbn: row.isbn,
+      calificacion: row.calificacion,
+      comentario: row.comentario,
+      creado_en: row.creado_en,
+      nombreUsuario: row.nombre_usuario,
+      imagenUsuario: row.foto_perfil ? `data:image/jpeg;base64,${row.foto_perfil.toString('base64')}` : 'assets/imagenes/default-avatar.png',
+      titulo: row.titulo,
+      autor: row.autor
+    }));
+
+    return res.status(200).json(resenas);
   } catch (error) {
-    console.error('Error al agregar la reseña:', error);
-    return res.status(500).json({ message: 'Error al agregar la reseña' });
+    console.error('Error al obtener las reseñas del usuario:', error);
+    return res.status(500).json({ message: 'Error interno del servidor.' });
   }
 });
+router.get('/resenas', async (req, res) => {
+  const { userEmail } = req.query;
 
+  try {
+    const [rows] = await db.query(
+      `SELECT r.id_resena, r.isbn, r.calificacion, r.comentario, r.creado_en, u.nombre_usuario, u.foto_perfil, l.titulo, l.autor
+       FROM resenas r
+       JOIN usuario u ON r.id_usuario = u.id_usuario
+       JOIN libros l ON r.isbn = l.isbn
+       WHERE u.correo = ?`,
+      [userEmail]
+    );
+
+    const resenas = rows.map(row => ({
+      id_resena: row.id_resena,
+      isbn: row.isbn,
+      calificacion: row.calificacion,
+      comentario: row.comentario,
+      creado_en: row.creado_en,
+      nombreUsuario: row.nombre_usuario,
+      imagenUsuario: row.foto_perfil ? `data:image/jpeg;base64,${row.foto_perfil.toString('base64')}` : 'assets/imagenes/default-avatar.png',
+      titulo: row.titulo,
+      autor: row.autor
+    }));
+
+    return res.status(200).json(resenas);
+  } catch (error) {
+    console.error('Error al obtener las reseñas del usuario:', error);
+    return res.status(500).json({ message: 'Error interno del servidor.' });
+  }
+});
 // Ruta para obtener todas las reseñas de un libro por ISBN
 router.get('/resenas/:isbn', async (req, res) => {
   const { isbn } = req.params;

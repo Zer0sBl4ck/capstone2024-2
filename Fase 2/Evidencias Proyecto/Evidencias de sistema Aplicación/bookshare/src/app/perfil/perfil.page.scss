@@ -16,7 +16,78 @@
         }
     }
 }
-
+.fondo {
+    ion-toolbar {
+      --background: #e96a24 !important;
+      color: #ffffff;
+  
+      ion-title {
+        font-weight: bold;
+        color: #ffffff;
+        text-align: center;
+        font-family: Helvetica;
+        display: flex;
+      }
+  
+      ion-icon {
+        color: #ffffff;
+      }
+    }
+  }
+  
+  ion-content {
+    --background: #ebe7e7 !important;
+  
+    ion-card {
+      --background: #ebe7e7 !important;
+      border-radius: 2rem;
+      margin-top: 10rem;
+      width: 100%;
+  
+      .foto {
+        display: flex;
+      }
+    }
+  
+    .reseñas {
+      margin-top: 2rem;
+  
+      ion-list {
+        background: #ffffff;
+        border-radius: 1rem;
+        padding: 1rem;
+  
+        ion-item {
+          --background: #f9f9f9;
+          border-radius: 0.5rem;
+          margin-bottom: 1rem;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+          ion-label {
+            h2 {
+              font-size: 1.2rem;
+              font-weight: bold;
+              color: #333;
+            }
+  
+            p {
+              font-size: 1rem;
+              color: #666;
+              margin: 0.5rem 0;
+            }
+  
+            .calificacion {
+              font-size: 0.9rem;
+              color: #e96a24;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  
 ion-content {
     --background: #ebe7e7 !important;
 
@@ -51,7 +122,8 @@ ion-content {
         font-size: 0.9rem;
         text-align: center;
     }
-
+   
+      
     .btn-editar {
         color: #ffffff;
         --background: #e96a24;

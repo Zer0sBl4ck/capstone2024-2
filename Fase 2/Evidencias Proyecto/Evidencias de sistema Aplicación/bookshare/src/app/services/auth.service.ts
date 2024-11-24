@@ -91,6 +91,10 @@ export class AuthService {
   getPrestamoPorId(id_prestamo: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/prestamo/${id_prestamo}`);
   }
+  obtenerResenasUsuario(userEmail: string): Observable<any> {
+    const body = { userEmail };
+    return this.http.post(`${this.apiUrl}/resenas-usuario`, body);
+  }
 
   // Otros métodos que uses, por ejemplo, para obtener los detalles del libro
   getDetallesLibroPorIsbn(isbn: string): Observable<any> {

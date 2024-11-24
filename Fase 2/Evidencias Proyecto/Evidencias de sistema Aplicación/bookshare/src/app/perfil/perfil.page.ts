@@ -15,11 +15,14 @@ export class PerfilPage implements OnInit {
   correoLogueado: string | null = '';  
   promedioCalificacion: number | null = null;
   estrellas: string[] = []; // Para almacenar el estado de las estrellas
-
+  reviews: any[] = [];
+  displayedReviews: any[] = []; // Propiedad para almacenar las reseñas mostradas
+  showMore: boolean = false; 
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
     private router: Router 
+    
   ) { }
 
   ngOnInit() {
@@ -36,22 +39,55 @@ export class PerfilPage implements OnInit {
             console.error('Error al obtener los datos del perfil:', error);
           }
         );
-
+  
         // Obtener el promedio de calificación del usuario
         this.authService.obtenerPromedioCalificacion(this.correo).subscribe(
           (data) => {
             this.promedioCalificacion = data.promedio_calificacion;
-            this.establecerEstrellas(); // Actualizar las estrellas
+            this.establecerEstrellas(); // Asegúrate de establecer las estrellas después de obtener el promedio
           },
           (error) => {
             console.error('Error al obtener el promedio de calificación:', error);
-            this.promedioCalificacion = null;
           }
         );
+  
+        // Obtener las reseñas del usuario
+        this.obtenerResenasUsuario(); // Asegúrate de llamar a esta función
       }
     });
   }
+  obtenerResenasUsuario() {
+    console.log('Llamando al servicio para obtener reseñas del usuario'); // Log adicional para verificar la llamada al servicio
+    this.authService.obtenerResenasUsuario(this.correo).subscribe(
+      (response) => {
+        console.log('Reseñas del usuario recibidas:', response); // Log para verificar las reseñas recibidas
+        this.reviews = response.map((resena: any) => ({
+          id_resena: resena.id_resena,
+          isbn: resena.isbn,
+          calificacion: resena.calificacion,
+          comentario: resena.comentario,
+          creado_en: resena.creado_en,
+          nombreUsuario: resena.nombreUsuario,
+          imagenUsuario: resena.imagenUsuario ? 'data:image/jpeg;base64,' + resena.imagenUsuario : 'assets/imagenes/default-avatar.png',
+          titulo: resena.titulo,
+          autor: resena.autor,
+        }));
+        this.displayedReviews = this.reviews.slice(0, 4); // Mostrar solo las primeras 4 reseñas inicialmente
+      },
+      (error) => {
+        console.error('Error al obtener las reseñas del usuario:', error);
+      }
+    );
+  }
 
+  toggleShowMore() {
+    this.showMore = !this.showMore;
+    if (this.showMore) {
+      this.displayedReviews = this.reviews; // Mostrar todas las reseñas
+    } else {
+      this.displayedReviews = this.reviews.slice(0, 4); // Mostrar solo las primeras 4 reseñas
+    }
+  }
   // Establecer las estrellas según el promedio
   establecerEstrellas() {
     const calificacion = this.promedioCalificacion || 0;

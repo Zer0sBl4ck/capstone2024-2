@@ -54,4 +54,24 @@
       </ion-button>
     </ion-card-content>
   </ion-card>
+
+
+  
+  <div class="reseñas">
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Reseñas del Usuario</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let review of displayedReviews">
+        <ion-label>
+          <h2>{{ review.titulo }}</h2>
+          <p>{{ review.comentario }}</p>
+          <p class="calificacion"><strong>Calificación:</strong> {{ review.calificacion }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-button *ngIf="reviews.length > 4" (click)="toggleShowMore()" class="btn-editar">
+      {{ showMore ? 'Mostrar menos' : 'Mostrar más' }}
+    </ion-button>
+  </div>
 </ion-content>
