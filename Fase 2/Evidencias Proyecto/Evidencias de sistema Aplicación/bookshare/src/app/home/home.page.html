@@ -91,8 +91,9 @@
         <div class="book-cover">
           <img class="banner-image" src="assets/imagenes/banner-02.jpg" alt="">
         </div>
+        <br>
         <ion-title class="recomendaciones">Recomendaciones</ion-title>
-
+<br>
         <swiper-container [modules]="swiperModules" [slidesPerView]="3" [loop]="true" navigation pagination>
           <swiper-slide *ngFor="let book of books; let i = index" (click)="goToBookDetail(book.isbn)">
             <img *ngIf="book.imagen_libro" [src]="book.imagen_libro" alt="Libro {{ book.titulo }}" />
@@ -101,7 +102,9 @@
             
           </swiper-slide>
         </swiper-container>
-        <ion-title class="reseñas">Reseñas</ion-title>
+        <br>
+        <ion-title class="recomendaciones">Reseñas</ion-title>
+        <br>
     <swiper-container [modules]="swiperModules" [slidesPerView]="1" [loop]="true" navigation pagination>
       <swiper-slide *ngFor="let resena of resenas">
         <ion-card>

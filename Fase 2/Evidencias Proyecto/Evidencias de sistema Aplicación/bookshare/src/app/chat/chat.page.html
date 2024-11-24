@@ -20,13 +20,13 @@
 
   <!-- Chats de préstamo -->
   <div *ngIf="chats.length > 0" class="listado-chat">
-    <h2>Chats de Préstamo</h2>
+    <h2 class="titulo">Chats de Préstamo</h2>
     <ion-list>
       <ion-item *ngFor="let chat of chats" class="listado-chat">
-        <img class="imagen" *ngIf="chat.foto_solicitante"
+        <img class="imagen-circular" *ngIf="chat.foto_solicitante"
           [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del libro" width="60px" height="60px"/>
         <ion-label class="listado-chat">
-          <h3>📚 {{ chat.titulo }} (Préstamo)</h3>
+          <h3 class="chat-titulo"> {{ chat.titulo }} (Préstamo)📚</h3>
           <p>Solicitante: {{ chat.correo_usuario_prestamista }}</p>
           <p>Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
         </ion-label>
@@ -39,13 +39,13 @@
 
   <!-- Chats de intercambio -->
   <div *ngIf="chatsIntercambio.length > 0" class="listado-chat">
-    <h2>Chats de Intercambio</h2>
+    <h2 class="titulo">Chats de Intercambio</h2>
     <ion-list>
       <ion-item *ngFor="let chat of chatsIntercambio" class="listado-chat">
-        <img class="imagen" *ngIf="chat.foto_solicitante"
+        <img class="imagen-circular" *ngIf="chat.foto_solicitante"
           [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del libro" width="60px" height="60px"/>
         <ion-label class="listado-chat">
-          <h3>📚 {{ chat.titulo }} (Intercambio)</h3>
+          <h3 class="chat-titulo"> {{ chat.titulo }} (Intercambio)📚</h3>
           <p>Solicitante: {{ chat.correo_usuario_prestamista }}</p>
           <p>Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
         </ion-label>
