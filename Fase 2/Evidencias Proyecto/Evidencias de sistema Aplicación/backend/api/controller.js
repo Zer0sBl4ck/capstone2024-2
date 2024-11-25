@@ -427,6 +427,27 @@ router.get('/resenas', async (req, res) => {
     return res.status(500).json({ message: 'Error interno del servidor.' });
   }
 });
+router.post('/resenas', async (req, res) => {
+  const { id_usuario, isbn, calificacion, comentario } = req.body;
+
+  if (!id_usuario || !isbn || !calificacion || comentario === undefined) {
+    return res.status(400).json({ message: 'Faltan campos requeridos' });
+  }
+
+  const creado_en = new Date();
+
+  try {
+    const [result] = await db.query(
+      'INSERT INTO resena (id_usuario, isbn, calificacion, comentario, creado_en) VALUES (?, ?, ?, ?, ?)',
+      [id_usuario, isbn, calificacion, comentario, creado_en]
+    );
+
+    return res.status(201).json({ message: 'Reseña agregada exitosamente', id_resena: result.insertId });
+  } catch (error) {
+    console.error('Error al agregar la reseña:', error);
+    return res.status(500).json({ message: 'Error al agregar la reseña' });
+  }
+});
 // Ruta para obtener todas las reseñas de un libro por ISBN
 router.get('/resenas/:isbn', async (req, res) => {
   const { isbn } = req.params;
