@@ -1932,6 +1932,30 @@ router.get('/listar-chats-intercambio/:correo_usuario', async (req, res) => {
   }
 });
 
+router.get('/obtener-id-cha/:id_estado', async (req, res) => {
+  const { id_estado } = req.params;  // Obtienes el id_estado desde los parámetros de la URL
+  const tipo_chat = 'intercambio';  // Tipo de chat fijo a 'intercambio'
+  console.log(id_estado,tipo_chat)
+  try {
+    const query = `
+      SELECT id_chat
+      FROM chat
+      WHERE id_estado = ? AND tipo_chat = ?
+      LIMIT 1`;  // Limitamos la consulta a un solo chat
+
+    const [rows] = await db.execute(query, [id_estado, tipo_chat]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'No se encontró el id_chat con el estado y tipo de chat dados' });
+    }
+
+    res.status(200).json({ id_chat: rows[0].id_chat });
+  } catch (error) {
+    console.error('Error al obtener el id_chat:', error);
+    res.status(500).json({ message: 'Error al obtener el id_chat' });
+  }
+});
+
 
 
 

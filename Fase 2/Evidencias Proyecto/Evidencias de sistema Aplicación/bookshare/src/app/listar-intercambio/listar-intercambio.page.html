@@ -44,6 +44,8 @@
                       (click)="actualizarEstadoIntercambio(intercambio.id_intercambio, 'Intercambio realizado')">
             Intercambiado
           </ion-button>
+          <ion-button (click)="obtenerChat(intercambio.id_intercambio)" *ngIf="intercambio.estado==='Intercambio realizado'">CHATEAR</ion-button>
+          <ion-button (click)="reportarUsuario(intercambio.id_ofertante, intercambio.id_solicitante)" *ngIf="intercambio.estado==='Intercambio realizado'">REPORTAR</ion-button>
         </ion-card-content>
       </ion-card>
     </ion-list>
@@ -66,6 +68,7 @@
       <ion-card *ngFor="let intercambio of intercambiosComoPrestamista">
         <ion-card-header>
           <ion-card-title>Libro: {{ intercambio.libro_titulo }}</ion-card-title>
+          <ion-card-title>Libro: {{ intercambio.libro_titulo }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
@@ -85,6 +88,8 @@
                       (click)="actualizarEstadoIntercambio(intercambio.id_intercambio, 'Intercambio finalizado')">
             Confirmar intercambio
           </ion-button>
+          <ion-button (click)="obtenerChat(intercambio.id_intercambio)" *ngIf="intercambio.estado==='Intercambio realizado'">CHATEAR</ion-button>
+          <ion-button (click)="reportarUsuario(intercambio.id_solicitante, intercambio.id_ofertante)" *ngIf="intercambio.estado==='Intercambio realizado'">REPORTAR</ion-button>
         </ion-card-content>
       </ion-card>
     </ion-list>
