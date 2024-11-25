@@ -5,6 +5,7 @@ import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router'; 
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-solicitud-user',
   templateUrl: './solicitud-user.page.html',
@@ -23,7 +24,7 @@ export class SolicitudUserPage implements OnInit {
   ngOnInit() {
     this.cargarSolicitudesRecibidas();   // Cargar solicitudes recibidas al iniciar
     this.cargarSolicitudesRealizadas();  // Cargar solicitudes realizadas al iniciar
-
+    this.mostrarAdvertencia();
     // Configurar el intervalo para refrescar la página cada 3 segundos (3000 ms)
     this.refreshInterval = setInterval(() => {
       this.cargarSolicitudesRecibidas();
@@ -41,7 +42,20 @@ export class SolicitudUserPage implements OnInit {
     });
   
   }
+  async mostrarAdvertencia() {
+    const advertenciaMostrada = localStorage.getItem('advertenciaMostrada');
+    if (!advertenciaMostrada) {
+      const alert = await this.alertController.create({
+        header: 'Advertencia',
+        message: 'Los préstamos son bajo responsabilidad del usuario y BookShare no se hace responsable.',
+        buttons: ['OK'],
+        cssClass: 'custom-alert'
+      });
 
+      await alert.present();
+      localStorage.setItem('advertenciaMostrada', 'true');
+    }
+  }
   // Cargar solicitudes recibidas (donde el usuario es prestamista)
   cargarSolicitudesRecibidas(): void {
     const correo = this.authService.getUserEmail();
