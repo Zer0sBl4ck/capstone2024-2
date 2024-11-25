@@ -461,6 +461,10 @@ marcarEstadoComoEntregado(id_prestamo: number): Observable<any> {
   listarChatsIntercambio(correo_usuario: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/listar-chats-intercambio/${correo_usuario}`);
   }
+  obtenerIdCha(id_estado: number): Observable<any> {
+    const url = `${this.apiUrl}/obtener-id-cha/${id_estado}`;
+    return this.http.get(url);
+  }
   
   
   

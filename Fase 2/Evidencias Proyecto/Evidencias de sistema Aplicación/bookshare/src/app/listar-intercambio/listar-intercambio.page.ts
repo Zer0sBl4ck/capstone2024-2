@@ -110,4 +110,28 @@ export class ListarIntercambioPage implements OnInit {
       console.error('ID de intercambio no válido:', idIntercambio);
     }
   }
+  obtenerChat(id_estado: number): void {
+    this.authService.obtenerIdCha(id_estado).subscribe({
+      next: (response) => {
+        this.router.navigate(['/chat-contacto', response.id_chat]);
+        console.log('ID del Chat:', response.id_chat);
+      },
+      error: (err) => {
+        console.error('Error al obtener el chat:', err);
+      }
+    });
+  }
+  reportarUsuario(usuarioReportado: number, usuarioReportante: number): void {
+    this.authService.reportarUsuario(usuarioReportado, usuarioReportante).subscribe(
+      (response) => {
+        console.log('Usuario reportado correctamente:', response);
+        const reportes = response.reportes;
+        alert(`Usuario reportado correctamente. El usuario reportado lleva ${reportes} reportes.`);
+        // Puedes mostrar un mensaje de éxito o actualizar el UI aquí
+      },
+      (error) => {
+        console.error('Error al reportar usuario:', error);
+      }
+    );
+  }
 }
