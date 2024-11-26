@@ -27,9 +27,9 @@
         <img class="imagen-circular" *ngIf="chat.foto_solicitante"
           [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del libro" width="60px" height="60px"/>
         <ion-label class="listado-chat">
-          <h3 class="chat-titulo"> {{ chat.titulo }} (Préstamo)📚</h3>
-          <p>Solicitante: {{ chat.correo_usuario_prestamista }}</p>
-          <p>Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
+          <h3 class="chat-titulo" > {{ chat.titulo }} </h3>
+          <p  class="chat-dueño-soli" > Solicitante: {{ chat.correo_usuario_prestamista }}</p>
+          <p  class="chat-dueño-soli" > Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
         </ion-label>
         <ion-button (click)="irAlChat(chat.id_chat)">
           <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
@@ -46,7 +46,7 @@
         <img class="imagen-circular" *ngIf="chat.foto_solicitante"
           [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del libro" width="60px" height="60px"/>
         <ion-label class="listado-chat">
-          <h3 class="chat-titulo"> {{ chat.titulo }} (Intercambio)📚</h3>
+          <h3 class="chat-titulo"> {{ chat.titulo }} </h3>
           <p>Solicitante: {{ chat.correo_usuario_prestamista }}</p>
           <p>Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
         </ion-label>

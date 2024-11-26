@@ -188,7 +188,7 @@ ion-content {
         --background: #ebe7e7;
 
         ion-segment {
-            --background: trasnparent;
+            --background: trasparent;
             --ion-color-primary: transparent;
             width: 100%;
             max-width: 95%;
@@ -199,11 +199,12 @@ ion-content {
             align-items: center;
 
             ion-segment-button {
-                --background: #e96a24;
-                color: #000000;
+                --background: #2f4858;
+                --background-activated: #f57c00;
+                color: #ffffff;
                 width: 100%;
                 max-width: 90%;
-                border: 1px solid #e96a24;
+                border: 1px solid #2f4858;
                 border-radius: 1rem;
                 font-size: 0.7rem;
                 font-family: "Rethink Sans", sans-serif;
@@ -211,6 +212,10 @@ ion-content {
                 justify-content: center;
                 align-items: center;
             }
+
+
+
+
         }
 
         /*Mostrar solicitudes como solicitante*/
@@ -225,11 +230,11 @@ ion-content {
             flex-direction: column;
 
             ion-card {
-                --background: #4d4d4dbe;
-                width: 100%;
-                max-width: 95%;
-                height: auto;
-                border-radius: 1rem;
+            --background: #2f4858;
+            width: 100%;
+            max-width: 95%;
+            height: auto;
+            border-radius: 2rem;
 
                 ion-card-header {
                     ion-card-title {
@@ -267,11 +272,11 @@ ion-content {
             flex-direction: column;
 
             ion-card {
-                --background: #4d4d4dbe;
-                width: 100%;
-                max-width: 95%;
-                height: auto;
-                border-radius: 1rem;
+            --background: #2f4858;
+            width: 100%;
+            max-width: 95%;
+            height: auto;
+            border-radius: 2rem;
 
                 ion-card-header {
                     ion-card-title {
@@ -385,11 +390,11 @@ ion-content {
 
 
             ion-card {
-                --background: #4d4d4dbe;
-                width: 100%;
-                max-width: 95%;
-                height: auto;
-                border-radius: 1rem;
+            --background: #2f4858;
+            width: 100%;
+            max-width: 95%;
+            height: auto;
+            border-radius: 2rem;
 
                 ion-card-header {
                     ion-card-title {
@@ -427,11 +432,11 @@ ion-content {
             flex-direction: column;
 
             ion-card {
-                --background: #4d4d4dbe;
-                width: 100%;
-                max-width: 95%;
-                height: auto;
-                border-radius: 1rem;
+            --background: #2f4858;
+            width: 100%;
+            max-width: 95%;
+            height: auto;
+            border-radius: 2rem;
 
                 ion-card-header {
                     ion-card-title {
