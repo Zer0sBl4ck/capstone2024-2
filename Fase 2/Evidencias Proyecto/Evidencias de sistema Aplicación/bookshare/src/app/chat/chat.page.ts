@@ -30,7 +30,8 @@ export class ChatPage implements OnInit {
   listarChats(correoUsuario: string): void {
     this.authService.listarChats(correoUsuario).subscribe(
       (response) => {
-        this.chats = response.chats;
+        // Ordenar los chats por id_chat de mayor a menor (más reciente primero)
+        this.chats = response.chats.sort((a: any, b: any) => b.id_chat - a.id_chat);
       },
       (error) => {
         console.error('Error al listar los chats de préstamo:', error);
@@ -42,7 +43,8 @@ export class ChatPage implements OnInit {
   listarChatsIntercambio(correoUsuario: string): void {
     this.authService.listarChatsIntercambio(correoUsuario).subscribe(
       (response) => {
-        this.chatsIntercambio = response.chats;
+        // Ordenar los chats de intercambio por id_chat de mayor a menor (más reciente primero)
+        this.chatsIntercambio = response.chats.sort((a: any, b: any) => b.id_chat - a.id_chat);
       },
       (error) => {
         console.error('Error al listar los chats de intercambio:', error);
@@ -50,6 +52,43 @@ export class ChatPage implements OnInit {
       }
     );
   }
+
+
+    // Método para eliminar un chat
+  eliminarChat(chatId: number): void {
+    // Llamada a tu servicio para eliminar el chat
+    this.authService.eliminarChat(chatId).subscribe(
+      () => {
+        // Si el chat se elimina correctamente, se elimina de la lista
+        this.chats = this.chats.filter(chat => chat.id_chat !== chatId);
+        console.log('Chat eliminado');
+      },
+      (error) => {
+        console.error('Error al eliminar el chat:', error);
+      }
+    );
+  }
+  // En tu archivo .ts donde gestionas los chats
+
+eliminarChatIntercambio(idChat: string): void {
+  this.authService.eliminarChatIntercambio(idChat).subscribe(
+    (response) => {
+      // Elimina el chat de la lista de chats de intercambio
+      this.chatsIntercambio = this.chatsIntercambio.filter(chat => chat.id_chat !== idChat);
+      console.log('Chat de intercambio eliminado con éxito:', idChat);
+    },
+    (error) => {
+      console.error('Error al eliminar el chat de intercambio:', error);
+    }
+  );
+}
+
+
+  
+
+  
+
+  
 
   irAlChat(idChat: number) {
     this.router.navigate([`/chat-contacto/${idChat}`]);

@@ -5,11 +5,12 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="titulo">Solicitudes de Préstamo</ion-title>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-title class="titulo">Préstamos</ion-title>
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -17,7 +18,7 @@
   <ion-segment value="recibi" (ionChange)="alternarSolicitudes($event)">
     <ion-segment-button class="reci" value="recibidas">Solicitudes Recibidas
     </ion-segment-button>
-    <ion-segment-button class="reali" value="realizadas">Solicitudes Realizadas
+    <ion-segment-button class="reali" value="realizadas">Mis Solicitudes
     </ion-segment-button>
   </ion-segment>
 
@@ -31,10 +32,12 @@
         </ion-card-header>
 
         <ion-card-content>
+          
+          <p class="correo">Correo: {{ solicitud.correo_2 }}</p>
           <p class="estado">Estado: {{ solicitud.estado_prestamo }}</p>
-          <p class="correo">Correo solicitante: {{ solicitud.correo_2 }}</p>
           <p class="fechadev">Fecha devolución: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
           <p class="nomusu">{{ solicitud.nombre_usuario }}</p>
+          
 
           <!-- BOTONES -->
           <!-- Aceptar y Rechazar 'pendiente'-->
@@ -115,8 +118,8 @@
         </ion-card-header>
 
         <ion-card-content>
+          <p class="correo">Correo: {{ solicitud.correo }}</p>
           <p class="estado">Estado: {{ solicitud.estado_prestamo }}</p>
-          <p class="correo">Correo prestamista: {{ solicitud.correo }}</p>
           <p class="fecha">Fecha: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
 
           <ion-buttons>

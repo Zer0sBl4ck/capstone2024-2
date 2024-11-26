@@ -132,6 +132,8 @@ ion-content {
 @media (max-width: 600px) {
     ion-content {
         .libro-detalle {
+            display: flex;
+            flex-direction: column; /* Asegura que los elementos estén en columna */
 
             h2 {
                 font-size: 1.2rem;
@@ -139,7 +141,7 @@ ion-content {
 
             .autor,
             .genero,
-            .isbn {
+            .descripcion {
                 font-size: 1rem;
             }
 
@@ -149,11 +151,16 @@ ion-content {
                 p {
                     font-size: 0.9rem;
                 }
+            }
 
+            .isbn {
+                
+                margin-top: 20rem; /* Añade espacio si es necesario  pero hay que cambiarlo para agregar botontes despues*/
             }
         }
     }
 }
+
 
 @media (max-height: 900px) {
     ion-content {

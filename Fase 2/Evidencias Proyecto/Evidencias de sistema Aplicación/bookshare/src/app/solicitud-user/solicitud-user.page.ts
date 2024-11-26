@@ -30,7 +30,7 @@ export class SolicitudUserPage implements OnInit {
       this.cargarSolicitudesRecibidas();
       this.cargarSolicitudesRealizadas();
       this.verificarFechasDevolucion();
-    }, 3000); // 3000 ms = 3 segundos
+    }, 2000); // 2000 ms = 2 segundos
     this.route.queryParams.subscribe(params => {
       if (params['section'] === 'realizadas') {
         this.segmentValue = 'realizadas';
@@ -62,7 +62,11 @@ export class SolicitudUserPage implements OnInit {
     if (correo) {
       this.authService.getSolicitudesPrestamo(correo).subscribe(
         (response) => {
-          this.solicitudesRecibidas = response; // Guardar las solicitudes recibidas
+          // Asegurarse de que las solicitudes estén ordenadas de la más reciente a la más antigua
+          this.solicitudesRecibidas = response.sort((a: any, b: any) => {
+            // Aseguramos que 'fecha_prestamo' sea una fecha válida
+            return new Date(b.fecha_prestamo).getTime() - new Date(a.fecha_prestamo).getTime();
+          });
         },
         (error) => {
           console.error('Error al obtener las solicitudes recibidas:', error);
@@ -70,6 +74,8 @@ export class SolicitudUserPage implements OnInit {
       );
     }
   }
+  
+  
 
   // Cargar solicitudes realizadas (donde el usuario es solicitante)
   cargarSolicitudesRealizadas(): void {
@@ -77,7 +83,11 @@ export class SolicitudUserPage implements OnInit {
     if (correo) {
       this.authService.getSolicitudesSolicitante(correo).subscribe(
         (response) => {
-          this.solicitudesRealizadas = response; // Guardar las solicitudes realizadas
+          // Asegurarse de que las solicitudes estén ordenadas de la más reciente a la más antigua
+          this.solicitudesRealizadas = response.sort((a: any, b: any) => {
+            // Aseguramos que 'fecha_prestamo' sea una fecha válida
+            return new Date(b.fecha_prestamo).getTime() - new Date(a.fecha_prestamo).getTime();
+          });
         },
         (error) => {
           console.error('Error al obtener las solicitudes realizadas:', error);
@@ -85,6 +95,7 @@ export class SolicitudUserPage implements OnInit {
       );
     }
   }
+  
   verificarFechasDevolucion(): void {
     const fechaActual = new Date();
     this.solicitudesRecibidas.forEach(solicitud => {
@@ -181,7 +192,7 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
- async abrirFormularioResena(solicitud: any) {
+  async abrirFormularioResena(solicitud: any) {
     const alert = await this.alertController.create({
       header: 'Reseña',
       inputs: [
@@ -195,7 +206,7 @@ export class SolicitudUserPage implements OnInit {
         {
           name: 'comentario',
           type: 'textarea',
-          placeholder: 'Ingrese el comentario'
+          placeholder: 'Ingrese el comentario (opcional)'
         }
       ],
       buttons: [
@@ -211,12 +222,15 @@ export class SolicitudUserPage implements OnInit {
           handler: (data) => {
             const calificacion = data.calificacion;
             const comentario = data.comentario;
-            if (calificacion && comentario) {
-              this.agregarResenaSolicitante(solicitud.id_prestamo, parseInt(calificacion), comentario, solicitud);
+  
+            // Solo validamos la calificación
+            if (calificacion) {
+              // Si el comentario no se ingresó, pasamos un valor vacío
+              this.agregarResenaSolicitante(solicitud.id_prestamo, parseInt(calificacion), comentario || '', solicitud);
             } else {
               this.alertController.create({
                 header: 'Error',
-                message: 'Por favor, complete la calificación y el comentario.',
+                message: 'Por favor, ingrese una calificación válida.',
                 buttons: ['OK']
               }).then(alert => alert.present());
             }
@@ -224,9 +238,10 @@ export class SolicitudUserPage implements OnInit {
         }
       ]
     });
-
+  
     await alert.present();
   }
+  
   
   agregarResenaSolicitante(id_prestamo: number, calificacion: number, comentario: string, solicitud: any): void {
   this.authService.agregarResenaSolicitante(id_prestamo, calificacion, comentario).subscribe(

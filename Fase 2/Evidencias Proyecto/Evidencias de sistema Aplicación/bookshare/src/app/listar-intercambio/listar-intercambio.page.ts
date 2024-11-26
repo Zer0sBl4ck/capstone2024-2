@@ -13,6 +13,8 @@ export class ListarIntercambioPage implements OnInit {
   intercambiosComoPrestamista: any[] = []; // Almacenará los intercambios donde el usuario es prestamista
   idUsuarioLogeado: number | undefined; // ID del usuario logueado
   segmentoSeleccionado: string = 'solicitante'; // Controla el segmento seleccionado
+  private refreshInterval: any;
+  
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -24,33 +26,47 @@ export class ListarIntercambioPage implements OnInit {
     } else {
       console.error('No se pudo obtener el ID del usuario logueado.');
     }
+    this.cargarIntercambiosComoPrestamista();
+    this.cargarIntercambiosComoSolicitante();
+    this.refreshInterval = setInterval(() => {
+      this.cargarIntercambiosComoPrestamista();
+      this.cargarIntercambiosComoSolicitante();
+
+    },2000);
+
   }
 
-  // Carga los intercambios como solicitante
-  cargarIntercambiosComoSolicitante(): void {
-    this.authService.obtenerIntercambiosSolicitante(this.idUsuarioLogeado!).subscribe(
-      (response) => {
-        this.intercambiosComoSolicitante = response;
-        console.log('Intercambios como solicitante:', this.intercambiosComoSolicitante);
-      },
-      (error) => {
-        console.error('Error al cargar intercambios como solicitante:', error);
-      }
-    );
-  }
+  
 
-  // Carga los intercambios como prestamista
-  cargarIntercambiosComoPrestamista(): void {
-    this.authService.obtenerIntercambiosPrestamista(this.idUsuarioLogeado!).subscribe(
-      (response) => {
-        this.intercambiosComoPrestamista = response;
-        console.log('Intercambios como prestamista:', this.intercambiosComoPrestamista);
-      },
-      (error) => {
-        console.error('Error al cargar intercambios como prestamista:', error);
-      }
-    );
-  }
+// Carga los intercambios como solicitante
+cargarIntercambiosComoSolicitante(): void {
+  this.authService.obtenerIntercambiosSolicitante(this.idUsuarioLogeado!).subscribe(
+    (response) => {
+      // Ordenar los intercambios como solicitante por id de mayor a menor (más reciente primero)
+      this.intercambiosComoSolicitante = response.sort((a: any, b: any) => b.id - a.id);
+      console.log('Intercambios como solicitante:', this.intercambiosComoSolicitante);
+    },
+    (error) => {
+      console.error('Error al cargar intercambios como solicitante:', error);
+    }
+  );
+}
+
+
+// Carga los intercambios como prestamista
+cargarIntercambiosComoPrestamista(): void {
+  this.authService.obtenerIntercambiosPrestamista(this.idUsuarioLogeado!).subscribe(
+    (response) => {
+      // Ordenar los intercambios como prestamista por id de mayor a menor (más reciente primero)
+      this.intercambiosComoPrestamista = response.sort((a: any, b: any) => b.id - a.id);
+      console.log('Intercambios como prestamista:', this.intercambiosComoPrestamista);
+    },
+    (error) => {
+      console.error('Error al cargar intercambios como prestamista:', error);
+    }
+  );
+}
+
 
   // Cambia el segmento seleccionado
   cambiarSegmento(event: any): void {
