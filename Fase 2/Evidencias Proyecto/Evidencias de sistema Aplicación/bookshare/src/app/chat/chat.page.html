@@ -5,11 +5,12 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="titulo">Mis Chats</ion-title>
+   
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-title class="titulo">Mis Chats</ion-title>
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -20,7 +21,7 @@
 
   <!-- Chats de préstamo -->
   <div *ngIf="chats.length > 0" class="listado-chat">
-    <h2 class="titulo">Chats de Préstamo</h2>
+    <h2 class="titulox">Chats de Préstamo</h2>
     <ion-list>
       <ion-item *ngFor="let chat of chats" class="listado-chat">
         <img class="imagen-circular" *ngIf="chat.foto_solicitante"
@@ -39,7 +40,7 @@
 
   <!-- Chats de intercambio -->
   <div *ngIf="chatsIntercambio.length > 0" class="listado-chat">
-    <h2 class="titulo">Chats de Intercambio</h2>
+    <h2 class="titulox">Chats de Intercambio</h2>
     <ion-list>
       <ion-item *ngFor="let chat of chatsIntercambio" class="listado-chat">
         <img class="imagen-circular" *ngIf="chat.foto_solicitante"

@@ -1,7 +1,7 @@
 <ion-header class="fondo">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="retroceder()">
+      <ion-button routerLink="/tabs/home">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -25,4 +25,6 @@
       <p>{{ libro.descripcion }}</p>
     </div>
   </div>
+
+  
 </ion-content>

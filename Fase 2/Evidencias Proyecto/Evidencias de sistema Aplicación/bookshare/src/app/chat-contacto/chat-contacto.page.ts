@@ -15,6 +15,7 @@ export class ChatContactoPage implements OnInit, OnDestroy {
   nuevoMensaje: string = '';
   idUsuarioActual!: number; // Usar non-null assertion
   emailUsuarioActual: string | null = null; // Cambiar la declaración aquí
+  nombreOtroUsuario: string | null = null; // Agregar variable para almacenar el nombre del otro usuario
   private intervalId: any; // Variable para almacenar el ID del intervalo
 
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
@@ -25,7 +26,9 @@ export class ChatContactoPage implements OnInit, OnDestroy {
       this.idChat = params['id_chat']; // Asegúrate de convertir el idChat a número
       this.idUsuarioActual = this.authService.getUserData().id_usuario; // Asegúrate de tener el ID del usuario
       this.emailUsuarioActual = this.authService.getUserEmail(); // Obtener el email del usuario logueado
-      this.listarMensajes(); 
+      this.nombreOtroUsuario = this.authService.getUserName();
+      this.listarMensajes();
+       
 
       // Llamar a listarMensajes cada 2 segundos
       this.intervalId = setInterval(() => {

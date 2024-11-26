@@ -13,6 +13,8 @@ export class ListarIntercambioPage implements OnInit {
   intercambiosComoPrestamista: any[] = []; // Almacenará los intercambios donde el usuario es prestamista
   idUsuarioLogeado: number | undefined; // ID del usuario logueado
   segmentoSeleccionado: string = 'solicitante'; // Controla el segmento seleccionado
+  private refreshInterval: any;
+  
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -24,7 +26,17 @@ export class ListarIntercambioPage implements OnInit {
     } else {
       console.error('No se pudo obtener el ID del usuario logueado.');
     }
+    this.cargarIntercambiosComoPrestamista();
+    this.cargarIntercambiosComoSolicitante();
+    this.refreshInterval = setInterval(() => {
+      this.cargarIntercambiosComoPrestamista();
+      this.cargarIntercambiosComoSolicitante();
+
+    },2000);
+
   }
+
+  
 
   // Carga los intercambios como solicitante
   cargarIntercambiosComoSolicitante(): void {
