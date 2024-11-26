@@ -52,6 +52,12 @@ export class AuthService {
     localStorage.setItem('role', user.rol);  
   }
 
+  // authService.ts
+  eliminarChat(chatId: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/eliminarChat/${chatId}`);
+  }
+
+
  
   getUserData(): any {
     const user = localStorage.getItem('user');

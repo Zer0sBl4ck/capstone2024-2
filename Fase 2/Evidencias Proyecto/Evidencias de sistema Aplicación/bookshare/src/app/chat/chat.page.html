@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-title class="titulo">Mis Chats</ion-title>
+  <ion-title class="titulo">Chats</ion-title>
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -19,24 +19,33 @@
     {{ errorMessage }}
   </div>
 
-  <!-- Chats de préstamo -->
-  <div *ngIf="chats.length > 0" class="listado-chat">
-    <h2 class="titulox">Chats de Préstamo</h2>
-    <ion-list>
-      <ion-item *ngFor="let chat of chats" class="listado-chat">
+<!-- Chats de préstamo -->
+<div *ngIf="chats.length > 0" class="listado-chat">
+  <h2 class="titulox">Chats de Préstamo</h2>
+  <ion-list>
+    <ion-item-sliding *ngFor="let chat of chats">
+      <ion-item>
         <img class="imagen-circular" *ngIf="chat.foto_solicitante"
           [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del libro" width="60px" height="60px"/>
         <ion-label class="listado-chat">
-          <h3 class="chat-titulo" > {{ chat.titulo }} </h3>
-          <p  class="chat-dueño-soli" > Solicitante: {{ chat.correo_usuario_prestamista }}</p>
-          <p  class="chat-dueño-soli" > Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
+          <h3 class="chat-titulo">{{ chat.titulo }}</h3>
+          <p class="chat-dueño-soli">Solicitante: {{ chat.correo_usuario_prestamista }}</p>
+          <p class="chat-dueño-soli">Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
         </ion-label>
         <ion-button (click)="irAlChat(chat.id_chat)">
           <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
         </ion-button>
       </ion-item>
-    </ion-list>
-  </div>
+
+      <!-- Acción de eliminar que aparece al deslizar hacia la izquierda -->
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="eliminarChat(chat.id_chat)">
+          <ion-icon class="ion-item-option" name="trash-outline" ></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</div>
 
   <!-- Chats de intercambio -->
   <div *ngIf="chatsIntercambio.length > 0" class="listado-chat">

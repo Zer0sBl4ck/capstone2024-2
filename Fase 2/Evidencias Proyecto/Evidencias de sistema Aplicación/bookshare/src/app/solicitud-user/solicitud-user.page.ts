@@ -192,7 +192,7 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
- async abrirFormularioResena(solicitud: any) {
+  async abrirFormularioResena(solicitud: any) {
     const alert = await this.alertController.create({
       header: 'Reseña',
       inputs: [
@@ -206,7 +206,7 @@ export class SolicitudUserPage implements OnInit {
         {
           name: 'comentario',
           type: 'textarea',
-          placeholder: 'Ingrese el comentario'
+          placeholder: 'Ingrese el comentario (opcional)'
         }
       ],
       buttons: [
@@ -222,12 +222,15 @@ export class SolicitudUserPage implements OnInit {
           handler: (data) => {
             const calificacion = data.calificacion;
             const comentario = data.comentario;
-            if (calificacion && comentario) {
-              this.agregarResenaSolicitante(solicitud.id_prestamo, parseInt(calificacion), comentario, solicitud);
+  
+            // Solo validamos la calificación
+            if (calificacion) {
+              // Si el comentario no se ingresó, pasamos un valor vacío
+              this.agregarResenaSolicitante(solicitud.id_prestamo, parseInt(calificacion), comentario || '', solicitud);
             } else {
               this.alertController.create({
                 header: 'Error',
-                message: 'Por favor, complete la calificación y el comentario.',
+                message: 'Por favor, ingrese una calificación válida.',
                 buttons: ['OK']
               }).then(alert => alert.present());
             }
@@ -235,9 +238,10 @@ export class SolicitudUserPage implements OnInit {
         }
       ]
     });
-
+  
     await alert.present();
   }
+  
   
   agregarResenaSolicitante(id_prestamo: number, calificacion: number, comentario: string, solicitud: any): void {
   this.authService.agregarResenaSolicitante(id_prestamo, calificacion, comentario).subscribe(

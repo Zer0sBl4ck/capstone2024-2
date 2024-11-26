@@ -15,6 +15,26 @@
 }
 
 
+ion-item-options {
+    width: 100%; /* Ocupa todo el ancho disponible */
+ 
+    padding-right: 0px;  /* Da más espacio para el botón de eliminación */
+      
+
+
+  }
+  
+  ion-item-option {
+    font-size: 30px; /* Aumenta el tamaño del texto y el icono */
+    padding: 0; /* Elimina el padding para que el botón ocupe todo el espacio */
+    height: 100%; /* Hace que el botón ocupe toda la altura del item */
+    display: flex; /* Utiliza flexbox para centrar el contenido */
+    justify-content: center; /* Centra el ícono */
+    align-items: center; /* Centra el ícono verticalmente */
+    background-color: #f44336; /* Fondo rojo para el botón de eliminación */
+    color: white; /* Hace que el ícono sea visible */
+  }
+  
 
 .titulo {
     font-weight: bold; /* Texto en negrita */
