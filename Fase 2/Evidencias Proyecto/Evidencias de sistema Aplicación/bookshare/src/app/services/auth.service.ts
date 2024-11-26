@@ -57,6 +57,11 @@ export class AuthService {
   return this.http.delete(`${this.apiUrl}/eliminarChat/${chatId}`);
   }
 
+  eliminarChatIntercambio(idChat: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/eliminar-chat-intercambio/${idChat}`);
+  }
+  
+
 
  
   getUserData(): any {

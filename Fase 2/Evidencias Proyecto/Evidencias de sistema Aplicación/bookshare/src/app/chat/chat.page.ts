@@ -69,6 +69,21 @@ export class ChatPage implements OnInit {
     );
   }
 
+  eliminarChatIntercambio(idChat: string): void {
+    this.authService.eliminarChatIntercambio(idChat).subscribe(
+      (response) => {
+        // Elimina el chat de la lista localmente
+        this.chatsIntercambio = this.chatsIntercambio.filter(chat => chat.id_chat !== idChat);
+        console.log('Chat de intercambio eliminado con éxito:', idChat);
+      },
+      (error) => {
+        console.error('Error al eliminar el chat de intercambio:', error);
+      }
+    );
+  }
+
+  
+
   
 
   irAlChat(idChat: number) {

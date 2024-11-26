@@ -47,11 +47,12 @@
   </ion-list>
 </div>
 
-  <!-- Chats de intercambio -->
-  <div *ngIf="chatsIntercambio.length > 0" class="listado-chat">
-    <h2 class="titulox">Chats de Intercambio</h2>
-    <ion-list>
-      <ion-item *ngFor="let chat of chatsIntercambio" class="listado-chat">
+<!-- Chats de intercambio -->
+<div *ngIf="chatsIntercambio.length > 0" class="listado-chat">
+  <h2 class="titulox">Chats de Intercambio</h2>
+  <ion-list>
+    <ion-item-sliding *ngFor="let chat of chatsIntercambio">
+      <ion-item>
         <img class="imagen-circular" *ngIf="chat.foto_solicitante"
           [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del libro" width="60px" height="60px"/>
         <ion-label class="listado-chat">
@@ -63,8 +64,17 @@
           <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
         </ion-button>
       </ion-item>
-    </ion-list>
-  </div>
+
+      <!-- Acción de eliminar que aparece al deslizar hacia la izquierda -->
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="eliminarChat(chat.id_chat)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</div>
+
 
   <div *ngIf="(chats.length === 0 && chatsIntercambio.length === 0) && !errorMessage">
     <p>No tienes chats disponibles.</p>
