@@ -5,12 +5,11 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    
+    <ion-title class="titulo">Mis Libros</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-title class="titulo">Mis Libros</ion-title>
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
