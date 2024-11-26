@@ -16,9 +16,8 @@
   
 
   <ion-item *ngFor="let libro of libros">
-    <ion-thumbnail slot="start">
-      <img class="imagen" [src]="'data:image/jpeg;base64,' + libro.imagen_base64" alt="Imagen del libro" />
-    </ion-thumbnail>
+
+    <img class="imagen" [src]="'data:image/jpeg;base64,' + libro.imagen_base64" alt="Imagen del libro" />
 
     <ion-label>
       <h2 class="titulo">{{ libro.titulo }}</h2>

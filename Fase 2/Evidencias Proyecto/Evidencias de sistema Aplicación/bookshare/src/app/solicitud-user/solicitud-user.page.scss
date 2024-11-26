@@ -49,7 +49,7 @@ ion-content {
             position: center;
             justify-content: center;
             align-items: center;
-            
+
         }
     }
 
@@ -84,6 +84,7 @@ ion-content {
 
             ion-card-content {
                 background: transparent;
+
                 .estado,
                 .correo,
                 .fechadev,
@@ -229,6 +230,7 @@ ion-content {
                 align-items: center;
                 justify-content: center;
                 display: flex;
+                border-radius: 10px;
 
                 .cancelar {
                     --background: #ff0000;
@@ -237,6 +239,7 @@ ion-content {
                     font-size: 0.9rem;
                     width: 100%;
                     max-width: 12%;
+                    border-radius: 10px;
                 }
 
                 .cancela {
@@ -377,7 +380,8 @@ ion-content {
                 max-width: 95%;
                 height: auto;
                 border-radius: 2rem;
-                box-shadow:  0 0 9px rgba(0, 0, 0, 0.6);
+                box-shadow: 0 0 9px rgba(0, 0, 0, 0.6);
+
                 ion-card-header {
                     ion-card-title {
                         font-family: "Rethink Sans", sans-serif;
@@ -397,12 +401,12 @@ ion-content {
                         font-size: 0.9rem;
                         font-family: "Rethink Sans", sans-serif;
                         color: #ffffff;
-                        font-weight: bold ;
+                        font-weight: bold;
                         padding-top: 2px;
                         padding-bottom: 5px;
-                       
+
                         ;
-                
+
                     }
                 }
 
@@ -439,7 +443,7 @@ ion-content {
                         width: 100%;
                         max-width: 25%;
                         border: 1px solid #d9d9d9;
-                        
+
                     }
 
                     .devolucion {
@@ -528,7 +532,8 @@ ion-content {
                 ion-card-header {
                     ion-card-title {
                         font-family: "Rethink Sans", sans-serif;
-                        font-size: 1.3rem;;
+                        font-size: 1.3rem;
+                        ;
                         font-weight: bold;
                         color: #ffffff;
                     }
@@ -543,7 +548,7 @@ ion-content {
                         font-size: 0.9rem;
                         font-family: "Rethink Sans", sans-serif;
                         color: #ffffff;
-                        font-weight: bold ;
+                        font-weight: bold;
                         padding-top: 2px;
                         padding-bottom: 5px;
                     }
@@ -553,6 +558,8 @@ ion-content {
                     align-items: center;
                     justify-content: center;
                     display: flex;
+                    border-radius: 10px;
+
 
                     .cancelar {
                         --background: #8f4845;
@@ -561,7 +568,8 @@ ion-content {
                         font-size: 0.9rem;
                         width: 100%;
                         max-width: 55%;
-                        border: 1px solid #d9d9d9
+                        border: 1px solid #d9d9d9;
+                        border-radius: 10px;
                     }
 
                     .cancela {

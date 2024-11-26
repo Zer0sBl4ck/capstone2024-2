@@ -9,7 +9,7 @@
         .titulo {
             font-weight: bold;
             color: #ffffff;
-            font-family: Helvetica;
+            font-family: "Rethink Sans", sans-serif;
             font-size: 1.5rem;
             text-align: center;
             width: 100%;
@@ -23,36 +23,36 @@
 }
 
 ion-content {
-
     --background: #ebe7e7;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5%;
 
     ion-item {
         --background: transparent !important;
         max-width: 70%;
         width: 100%;
-        --ion-item-border-color: transparent;
+        margin-top: 1.5rem;
+        margin-left: 15%;
         display: flex;
         justify-content: center;
         align-items: center;
+        --ion-item-border-color: #888623;
 
-
-        ion-thumbnail {
-
-            .imagen {
-                border-radius: 8%;
-            }
+        .imagen {
+            border-radius: 8%;
+            width: 100%;
+            max-width: 6%;
+            height: auto;
+            margin-left: 5%;
+            /*margin-left: 4rem;*/
         }
 
         ion-label {
-
             .titulo {
-                font-size: 14px;
+                font-size: 1.5rem;
                 color: #000000;
-                font-family: Helvetica;
+                font-family: "Rethink Sans", sans-serif;
                 font-weight: bold;
                 display: flex;
                 justify-content: center;
@@ -61,126 +61,24 @@ ion-content {
             }
 
             .prestamo,
-            .intercambio {
+            .intercambio,
+            .eliminar {
                 --background: #e96a24;
-                font-size: 0.8rem;
+                font-size: 1rem;
                 color: #ffffff;
-                font-family: Helvetica;
+                font-family: "Rethink Sans", sans-serif;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 text-align: center;
+                width: 100%;
+                max-width: 90%;
+                margin-left: 5%;
+                /*margin-left: 2rem;*/
             }
 
             .eliminar {
                 --background: #c92929;
-                font-size: 0.8rem;
-                color: #ffffff;
-                font-family: Helvetica;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-            }
-        }
-    }
-}
-
-@media (max-width: 2560px) {
-    ion-content {
-
-        --background: #ebe7e7;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem;
-
-        ion-item {
-            margin-left: 55rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            ion-thumbnail {
-                .imagen {
-                    border-radius: 8%;
-                }
-            }
-
-            ion-label {
-
-                .titulo {
-                    font-size: 14px;
-                    color: #000000;
-                    font-family: Helvetica;
-                    font-weight: bold;
-                }
-
-                .prestamo,
-                .intercambio {
-                    --background: #e96a24;
-                    font-size: 0.8rem;
-                    color: #ffffff;
-                    font-family: Helvetica;
-                }
-
-                .eliminar {
-                    --background: #c92929;
-                    font-size: 0.8rem;
-                    color: #ffffff;
-                    font-family: Helvetica;
-                }
-            }
-        }
-    }
-}
-
-
-@media (max-width: 1920px) {
-
-    ion-content {
-
-        --background: #ebe7e7;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem;
-
-        ion-item {
-            margin-left: 35rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            ion-thumbnail {
-                .imagen {
-                    border-radius: 8%;
-                }
-            }
-
-            ion-label {
-
-                .titulo {
-                    font-size: 14px;
-                    color: #000000;
-                    font-family: Helvetica;
-                    font-weight: bold;
-                }
-
-                .prestamo,
-                .intercambio {
-                    --background: #e96a24;
-                    font-size: 0.8rem;
-                    color: #ffffff;
-                    font-family: Helvetica;
-                }
-
-                .eliminar {
-                    --background: #c92929;
-                    font-size: 0.8rem;
-                    color: #ffffff;
-                    font-family: Helvetica;
-                }
             }
         }
     }
@@ -188,47 +86,32 @@ ion-content {
 
 @media (max-width: 600px) {
     ion-content {
-
-        --background: #ebe7e7;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem;
-
         ion-item {
-            margin-left: 4.5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            max-width: 85%;
+            margin-left: 5%;
 
-            ion-thumbnail {
-                .imagen {
-                    border-radius: 8%;
-                }
+            .imagen {
+                max-width: 25%;
+                height: auto;
+                margin-left: 12%;
             }
 
             ion-label {
-
                 .titulo {
-                    font-size: 14px;
-                    color: #000000;
-                    font-family: Helvetica;
-                    font-weight: bold;
+                    font-size: 0.9rem;
+                    margin-left: -2%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
                 }
 
                 .prestamo,
-                .intercambio {
-                    --background: #e96a24;
-                    font-size: 0.8rem;
-                    color: #ffffff;
-                    font-family: Helvetica;
-                }
-
+                .intercambio,
                 .eliminar {
-                    --background: #c92929;
-                    font-size: 0.8rem;
-                    color: #ffffff;
-                    font-family: Helvetica;
+                    font-size: 0.75rem;
+                    max-width: 80%;
+                    margin-left: 8%;
                 }
             }
         }
@@ -237,47 +120,28 @@ ion-content {
 
 @media (max-height: 900px) {
     ion-content {
-
-        --background: #ebe7e7;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem;
-
         ion-item {
-            margin-left: 10rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            max-width: 60%;
+            margin-left: 20%;
 
-            ion-thumbnail {
-                .imagen {
-                    border-radius: 8%;
-                }
+            .imagen {
+                max-width: 15%;
+                height: auto;
+                margin-left: 18%;
             }
 
             ion-label {
-
                 .titulo {
-                    font-size: 14px;
-                    color: #000000;
-                    font-family: Helvetica;
-                    font-weight: bold;
+                    font-size: 1rem;
+                    margin-left: -10%;
                 }
 
                 .prestamo,
-                .intercambio {
-                    --background: #e96a24;
-                    font-size: 0.8rem;
-                    color: #ffffff;
-                    font-family: Helvetica;
-                }
-
+                .intercambio,
                 .eliminar {
-                    --background: #c92929;
                     font-size: 0.8rem;
-                    color: #ffffff;
-                    font-family: Helvetica;
+                    max-width: 70%;
+                    margin-left: 5%;
                 }
             }
         }
