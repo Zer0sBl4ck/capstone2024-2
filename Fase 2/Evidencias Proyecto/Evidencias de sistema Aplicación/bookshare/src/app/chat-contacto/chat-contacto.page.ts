@@ -26,33 +26,55 @@ export class ChatContactoPage implements OnInit, OnDestroy {
       this.idChat = params['id_chat']; // Asegúrate de convertir el idChat a número
       this.idUsuarioActual = this.authService.getUserData().id_usuario; // Asegúrate de tener el ID del usuario
       this.emailUsuarioActual = this.authService.getUserEmail(); // Obtener el email del usuario logueado
-      this.nombreOtroUsuario = this.authService.getUserName();
-      this.listarMensajes();
-       
-
+      
+      this.listarMensajes(); // Obtener los mensajes
+  
       // Llamar a listarMensajes cada 2 segundos
       this.intervalId = setInterval(() => {
         this.listarMensajes();
       }, 2000);
     });
   }
-
-  salirChat() {
-    console.log('Saliendo del chat');
-    this.router.navigate(['/otra-pagina']); // Cambia 'otra-pagina' por la ruta deseada
-  }
-
+  
   listarMensajes() {
     this.authService.listarMensajes(this.idChat).subscribe(
       (data) => {
-        console.log('Datos recibidos:', data); // Verifica la respuesta aquí
+        console.log('Datos recibidos:', data); // Verifica los datos recibidos
         this.mensajes = Array.isArray(data.mensajes) ? data.mensajes : []; // Asigna el array de mensajes
+  
+        // Al obtener los mensajes, intenta obtener el nombre del otro usuario
+        this.nombreOtroUsuario = this.obtenerNombreOtroUsuario();
       },
       (error) => {
         console.error('Error al listar los mensajes:', error);
       }
     );
   }
+  
+  // Función para obtener el nombre del otro usuario en el chat
+  obtenerNombreOtroUsuario(): string | null {
+    // Verifica si los mensajes están disponibles
+    if (this.mensajes.length > 0 && this.emailUsuarioActual) {
+      // Buscar el primer mensaje cuyo correo no sea el del usuario actual
+      const otroUsuario = this.mensajes.find(mensaje => mensaje.correo_remitente !== this.emailUsuarioActual);
+      
+      // Si encontramos un mensaje de otro usuario, obtenemos su nombre
+      if (otroUsuario) {
+        return otroUsuario.nombre_usuario || 'Chats'; // Devuelve el nombre o un valor por defecto
+      }
+    }
+    
+    return 'Chats'; // Si no se encuentra el otro usuario
+  }
+  
+  
+  
+  salirChat() {
+    console.log('Saliendo del chat');
+    this.router.navigate(['/otra-pagina']); // Cambia 'otra-pagina' por la ruta deseada
+  }
+
+
 
   enviarMensaje() {
     if (this.nuevoMensaje.trim()) {
