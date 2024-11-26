@@ -57,9 +57,12 @@ export class AuthService {
   return this.http.delete(`${this.apiUrl}/eliminarChat/${chatId}`);
   }
 
+  // authService.ts
   eliminarChatIntercambio(idChat: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/eliminar-chat-intercambio/${idChat}`);
-  }
+  return this.http.delete(`${this.apiUrl}/eliminar-chat-intercambio/${idChat}`);
+}
+
+
   
 
 
