@@ -11,19 +11,21 @@
 <ion-content>
   <div *ngIf="libro" class="libro-detalle">
     <h2>{{ libro.titulo }}</h2>
+    <p class="genero"><strong></strong> {{ libro.genero }}</p>
 
     <div *ngIf="libro.imagen_libro_base64" class="imagen-libro">
       <img [src]="'data:image/jpeg;base64,' + libro.imagen_libro_base64" alt="Imagen del libro" />
     </div>
 
     <p class="autor">Autor: {{ libro.autor }}</p>
-    <p class="genero"><strong>Género:</strong> {{ libro.genero }}</p>
-    <p class="isbn"><strong>ISBN:</strong> {{ libro.isbn }}</p>
-    
     <div class="descripcion">
       <strong>Descripción:</strong>
       <p>{{ libro.descripcion }}</p>
     </div>
+
+    <p class="isbn"><strong>ISBN:</strong> {{ libro.isbn }}</p>
+    
+
   </div>
 
   
