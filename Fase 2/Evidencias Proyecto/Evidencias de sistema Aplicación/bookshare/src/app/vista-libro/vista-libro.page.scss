@@ -23,13 +23,12 @@
 }
 
 ion-content {
-    
     --background: #ebe7e7;
 
     .libro-detalle {
-        
-        padding: 16px;
-        /* Espaciado interno */
+        display: block;
+        flex-direction: column;
+        align-items: center;
 
         h2 {
             font-weight: bold;
@@ -39,8 +38,7 @@ ion-content {
         }
 
         .autor,
-        .genero,
-        .isbn {
+        .genero {
             font-weight: bold;
             color: #000000;
             text-align: center;
@@ -54,16 +52,13 @@ ion-content {
 
         .imagen-libro img {
             max-width: 100%;
-            /* Asegura que la imagen no sobrepase el ancho del contenedor */
             height: auto;
-            /* Mantiene la proporción de la imagen */
             border-radius: 10px;
         }
 
         .descripcion {
             color: #000000;
-            font-family: "Rethink Sans",
-            sans-serif;
+            font-family: "Rethink Sans", sans-serif;
             max-height: 100px;
             resize: none;
             border-radius: 8px;
@@ -74,113 +69,21 @@ ion-content {
             p {
                 color: #000000;
                 font-family: "Rethink Sans", sans-serif;
-            }         
-        }
-    }
-}
-
-@media (min-width: 2560px) {
-    ion-content {
-        .libro-detalle {
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            .autor,
-            .genero,
-            .isbn {
-                font-size: 1.7rem;
-            }
-
-            .descripcion {
-                font-size: 1.7rem;
-
-                p {
-                    font-size: 1.2rem;
-                }
             }
         }
-    }
-}
 
-@media (min-width: 1920px) {
-    ion-content { 
-        .libro-detalle {
+        .isbn {
+            margin-top: 0rem;
+            /* Ajusta la separación vertical para que quede más cerca */
+            margin-left: auto;
+            /* Asegura el centrado horizontal */
+            margin-right: auto;
+            /* Asegura el centrado horizontal */
+            font-weight: bold;
+            color: #000000;
+            text-align: center;
+            font-family: "Rethink Sans", sans-serif;
 
-            h2 {
-                font-size: 2rem;
-            }
-
-            .autor,
-            .genero,
-            .isbn {
-                font-size: 1.3rem;
-            }
-
-            .descripcion {
-                font-size: 1.3rem;
-
-                p {
-                    font-size: 1rem;
-                }
-            }
-        }
-    }
-}
-
-@media (max-width: 600px) {
-    ion-content {
-        .libro-detalle {
-            display: flex;
-            flex-direction: column; /* Asegura que los elementos estén en columna */
-
-            h2 {
-                font-size: 1.2rem;
-            }
-
-            .autor,
-            .genero,
-            .descripcion {
-                font-size: 1rem;
-            }
-
-            .descripcion {
-                font-size: 1rem;
-
-                p {
-                    font-size: 0.9rem;
-                }
-            }
-
-            .isbn {
-                
-                margin-top: 20rem; /* Añade espacio si es necesario  pero hay que cambiarlo para agregar botontes despues*/
-            }
-        }
-    }
-}
-
-
-@media (max-height: 900px) {
-    ion-content {
-        .libro-detalle {
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            .autor, .genero, .isbn {
-                font-size: 1rem;
-            }
-
-            .descripcion {
-                font-size: 1rem;
-
-                p {
-                    font-size: 0.9rem;
-                }
-            }
         }
     }
 }
