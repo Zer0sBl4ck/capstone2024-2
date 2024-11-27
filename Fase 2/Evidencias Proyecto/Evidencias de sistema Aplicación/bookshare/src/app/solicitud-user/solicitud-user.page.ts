@@ -192,110 +192,71 @@ export class SolicitudUserPage implements OnInit {
       }
     );
   }
-  async abrirFormularioResena(solicitud: any) {
-    const alert = await this.alertController.create({
-      header: 'Reseña',
-      inputs: [
-        {
-          name: 'calificacion',
-          type: 'number',
-          placeholder: 'Ingrese la calificación (1-5)',
-          min: 1,
-          max: 5
-        },
-        {
-          name: 'comentario',
-          type: 'textarea',
-          placeholder: 'Ingrese el comentario (opcional)'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {
-            console.log('Formulario cancelado');
+
+
+
+esSolicitante(solicitud: any): boolean {
+  // Compara el ID del usuario actual con el ID del solicitante de la solicitud
+  return solicitud.id_usuario_solicitante === this.authService.getCurrentUserId();
+}
+
+// Especificamos que el parámetro 'reseñasCompletas' es de tipo boolean
+irAResena(solicitud: any): void {
+  const esSolicitante = this.esSolicitante(solicitud);
+  const idUsuarioCalificado = esSolicitante
+    ? solicitud.id_duenio  // Si el solicitante es el usuario actual, califica al dueño
+    : solicitud.id_solicitante; // Si es el dueño, califica al solicitante
+
+  // Verificamos si ambos usuarios han completado sus reseñas
+  this.authService.verificarReseñasCompletas(solicitud.id_prestamo).subscribe(
+    (reseñasCompletas: { prestamista: boolean, solicitante: boolean }) => {
+      // Si ambos usuarios han dejado reseña, actualizamos el estado de la solicitud
+      if (reseñasCompletas.prestamista && reseñasCompletas.solicitante) {
+        this.authService.actualizarEstadoResena(solicitud.id_prestamo).subscribe(
+          (response) => {
+            console.log('Estado de la solicitud actualizado a "Reseña Exitosa":', response);
+          },
+          (error) => {
+            console.error('Error al actualizar el estado de la solicitud:', error);
           }
-        },
-        {
-          text: 'Enviar',
-          handler: (data) => {
-            const calificacion = data.calificacion;
-            const comentario = data.comentario;
-  
-            // Solo validamos la calificación
-            if (calificacion) {
-              // Si el comentario no se ingresó, pasamos un valor vacío
-              this.agregarResenaSolicitante(solicitud.id_prestamo, parseInt(calificacion), comentario || '', solicitud);
-            } else {
-              this.alertController.create({
-                header: 'Error',
-                message: 'Por favor, ingrese una calificación válida.',
-                buttons: ['OK']
-              }).then(alert => alert.present());
-            }
-          }
-        }
-      ]
-    });
-  
-    await alert.present();
-  }
-  
-  
-  agregarResenaSolicitante(id_prestamo: number, calificacion: number, comentario: string, solicitud: any): void {
-  this.authService.agregarResenaSolicitante(id_prestamo, calificacion, comentario).subscribe(
-    (response) => {
-      console.log('Reseña agregada:', response);
-      solicitud.estado_prestamo = 'Reseña Agregada'; // Actualiza el estado de la solicitud
-      this.cargarSolicitudesRecibidas();
-      this.cargarSolicitudesRealizadas();
+        );
+      } else {
+        // Si aún no ambos han reseñado, no cambiamos el estado
+        console.log('Aún falta que ambos usuarios reseñen');
+      }
     },
     (error) => {
-      console.error('Error al agregar la reseña:', error);
+      console.error('Error al verificar las reseñas completas:', error);
+    }
+  );
+
+  // Luego, obtenemos los detalles del libro y navegamos a la página de reseñas
+  this.authService.obtenerDetallesLibroPorPrestamo(solicitud.id_prestamo).subscribe(
+    (detalleLibro) => {
+      console.log('Datos del libro obtenidos:', detalleLibro);
+
+      // Navega a la página de reseñas pasando los datos necesarios
+      this.router.navigate(['/resena-libro'], {
+        queryParams: {
+          id_prestamo: solicitud.id_prestamo,
+          isbn: detalleLibro.isbn,
+          titulo: detalleLibro.titulo,
+          autor: detalleLibro.autor,
+          descripcion: detalleLibro.descripcion,
+          genero: detalleLibro.genero,
+          prestamista: detalleLibro.nombre_usuario,
+          idUsuarioCalificado: idUsuarioCalificado, // ID del usuario a calificar
+          esSolicitante: esSolicitante // Indica si el usuario actual es solicitante o dueño
+        }
+      });
+    },
+    (error) => {
+      console.error('Error al obtener los detalles del libro:', error);
     }
   );
 }
 
-  esSolicitante(solicitud: any): boolean {
-    // Compara el ID del usuario actual con el ID del solicitante de la solicitud
-    return solicitud.id_usuario_solicitante === this.authService.getCurrentUserId();
-  }
-  irAResena(id_prestamo: number): void {
-    // Llamada para actualizar el estado de la reseña
-    this.authService.actualizarEstadoResena(id_prestamo).subscribe(
-      (response) => {
-        console.log('Estado de la solicitud actualizado a "Reseña Exitosa":', response);
-  
-        // Luego, obtenemos los detalles del libro y navegamos a la página de reseñas
-        this.authService.obtenerDetallesLibroPorPrestamo(id_prestamo).subscribe(
-          (response) => {
-          console.log('Datos del libro obtenidos:', response); // Log para  los datos obtenidos
-            
-            // Navega a la página de reseñas pasando todos los datos del libro
-            this.router.navigate(['/resena-libro'], {
-              queryParams: {
-                id_prestamo: id_prestamo,
-                isbn: response.isbn,
-                titulo: response.titulo,
-                autor: response.autor,
-                descripcion: response.descripcion,
-                genero: response.genero,
-                prestamista: response.nombre_usuario
-              }
-            });
-          },
-          (error) => {
-            console.error('Error al obtener los detalles del libro:', error);
-          }
-        );
-      },
-      (error) => {
-        console.error('Error al actualizar el estado de la solicitud:', error);
-      }
-    );
-  }
-  
+
 
   // Función para actualizar el estado de una solicitud recibida a 'desarrollo'
   modificarEstadoSolicitud(id_prestamo: number): void {

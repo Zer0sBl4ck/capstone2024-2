@@ -5,11 +5,12 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="titulo">Reseña del libro</ion-title>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-title class="titulo">Reseña del libro</ion-title>
   <!-- Mostrar los detalles del libro si están disponibles -->
   <ion-list *ngIf="libro">
 
@@ -34,7 +35,7 @@
     </ion-item>
 
     <ion-item class="opcion">
-      <ion-label position="stacked"><strong>Calificación</strong></ion-label>
+      <ion-label position="stacked"><strong>Califica el estado del libro</strong></ion-label>
       <ion-select [(ngModel)]="calificacionLibro">
         <ion-select-option value="1">1</ion-select-option>
         <ion-select-option value="2">2</ion-select-option>
@@ -45,16 +46,19 @@
     </ion-item>
 
     <ion-item class="opcion">
-      <ion-label position="stacked"><strong>Comentario</strong></ion-label>
+      <ion-label position="stacked"><strong>razon</strong></ion-label>
       <ion-select [(ngModel)]="comentarioLibro">
-        <ion-select-option value="supero las expectativas">Superó las expectativas</ion-select-option>
-        <ion-select-option value="cumplio con las expectativas">Cumplió con las expectativas</ion-select-option>
-        <ion-select-option value="no cumplio con las expectativas">No cumplió con las expectativas</ion-select-option>
+        <ion-select-option value="estado_como_nuevo">El libro estaba como nuevo</ion-select-option>
+        <ion-select-option value="estado_buenas_condiciones">El libro estaba en buenas condiciones</ion-select-option>
+        <ion-select-option value="estado_sucio">El libro estaba sucio</ion-select-option>
+        <ion-select-option value="estado_roto">El libro estaba roto</ion-select-option>
+        <ion-select-option value="estado_paginas_faltantes">El libro contenía páginas faltantes</ion-select-option>
+        <ion-select-option value="estado_sin_portada">El libro estaba sin portada</ion-select-option>        
       </ion-select>
     </ion-item>
     
     <ion-item class="opcion">
-      <ion-label position="stacked"><strong>Calificación del Prestamista</strong></ion-label>
+      <ion-label position="stacked"><strong>Califica al Prestamista</strong></ion-label>
       <ion-select [(ngModel)]="calificacionPrestamista">
         <ion-select-option value="1">1</ion-select-option>
         <ion-select-option value="2">2</ion-select-option>
@@ -65,11 +69,15 @@
     </ion-item>
     
     <ion-item class="opcion">
-      <ion-label position="stacked"><strong>Comentario del Prestamista</strong></ion-label>
+      <ion-label position="stacked"><strong>razon</strong></ion-label>
       <ion-select [(ngModel)]="comentarioPrestamista">
-        <ion-select-option value="supero las expectativas">Superó las expectativas</ion-select-option>
-        <ion-select-option value="cumplio con las expectativas">Cumplió con las expectativas</ion-select-option>
-        <ion-select-option value="no cumplio con las expectativas">No cumplió con las expectativas</ion-select-option>
+        <ion-select-option value="no_se_presento">No se presentó al encuentro</ion-select-option>
+        <ion-select-option value="llego_tarde">Llegó tarde</ion-select-option>
+        <ion-select-option value="llego_a_tiempo">Llegó a la hora</ion-select-option>
+        <ion-select-option value="trato_amable">Trato amable</ion-select-option>
+        <ion-select-option value="trato_descortes">Trato descortés</ion-select-option>
+        <ion-select-option value="dificil_contactar">Difícil de contactar</ion-select-option>
+        <ion-select-option value="comunicacion_clara">Comunicación clara</ion-select-option>        
       </ion-select>
     </ion-item>
 

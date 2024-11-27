@@ -30,6 +30,12 @@
 ion-content {
     --background: #ebe7e7;
 
+    .resena {
+        --background: #2f8479;
+        color: #ffffff;
+        font-family: "Rethink Sans", sans-serif;
+    }
+
     ion-segment {
         --background: transparent;
         --ion-color-primary: transparent;
@@ -178,14 +184,8 @@ ion-content {
                     max-width: 11%;
                 }
 
-                .resena {
-                    --background: #176e17;
-                    color: #ffffff;
-                    font-family: "Rethink Sans", sans-serif;
-                    font-size: 0.8rem;
-                    width: 100%;
-                    max-width: 11%;
-                }
+              
+                
             }
         }
     }

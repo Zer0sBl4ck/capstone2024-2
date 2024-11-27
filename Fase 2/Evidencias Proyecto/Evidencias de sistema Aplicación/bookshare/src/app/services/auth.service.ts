@@ -60,13 +60,14 @@ export class AuthService {
   // authService.ts
   eliminarChatIntercambio(idChat: string): Observable<any> {
   return this.http.delete(`${this.apiUrl}/eliminar-chat-intercambio/${idChat}`);
-}
+  }
 
-
+  verificarReseñasCompletas(id_prestamo: number): Observable<{ prestamista: boolean, solicitante: boolean }> {
+    return this.http.get<{ prestamista: boolean, solicitante: boolean }>(`${this.apiUrl}/verificar-resenas-completas/${id_prestamo}`);
+  }
+  
   
 
-
- 
   getUserData(): any {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
@@ -123,6 +124,8 @@ export class AuthService {
     };
     return this.http.post(`${this.apiUrl}/resenas-prestamista`, body);
   }
+
+  
   agregarResena(id_usuario: number, isbn: string, calificacion: number, comentario: string): Observable<any> {
     const resena = { id_usuario, isbn, calificacion, comentario };
     return this.http.post(`${this.apiUrl}/resenas`, resena);

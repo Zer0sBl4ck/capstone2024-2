@@ -48,10 +48,20 @@
             <ion-button class="rechazar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
               (click)="eliminarSolicitud(solicitud.id_prestamo)">Rechazar</ion-button>
 
-            <ion-button class="resena" *ngIf="solicitud.estado_prestamo === 'Reseña Exitosa'"
-              (click)="abrirFormularioResena(solicitud)">
-              Dar Reseña
-            </ion-button>
+
+
+
+        
+
+
+            <ion-button class="resena" *ngIf="solicitud.estado_prestamo === 'Devolucion confirmada'"
+              (click)="irAResena(solicitud)">Dar Reseña</ion-button>
+
+
+    
+
+
+
 
             <!-- Rechazar y Devolución 'desarollo' -->
             <ion-button class="rechaza" *ngIf="solicitud.estado_prestamo === 'desarollo'"
@@ -140,11 +150,8 @@
               Eliminar
             </ion-button>
 
-            <ion-button class="resenalibro"
-              *ngIf="solicitud.estado_prestamo === 'Devolucion confirmada' && esSolicitante(solicitud)"
-              (click)="irAResena(solicitud.id_prestamo)">
-              Reseñar libro
-            </ion-button>
+            <ion-button class="resena" *ngIf="solicitud.estado_prestamo === 'Devolucion confirmada'"
+            (click)="irAResena(solicitud)">Dar Reseña</ion-button>
 
             <ion-button class="chat" *ngIf="solicitud.estado_prestamo !== 'pendiente'"
               (click)="obtenerIdChat(solicitud.id_prestamo)">CHATEAR</ion-button>
