@@ -35,7 +35,7 @@
 
     <ion-item class="opcion">
       <ion-label position="stacked"><strong>Calificación</strong></ion-label>
-      <ion-select [(ngModel)]="calificacion">
+      <ion-select [(ngModel)]="calificacionLibro">
         <ion-select-option value="1">1</ion-select-option>
         <ion-select-option value="2">2</ion-select-option>
         <ion-select-option value="3">3</ion-select-option>
@@ -46,13 +46,33 @@
 
     <ion-item class="opcion">
       <ion-label position="stacked"><strong>Comentario</strong></ion-label>
-      <ion-select [(ngModel)]="comentario">
+      <ion-select [(ngModel)]="comentarioLibro">
         <ion-select-option value="supero las expectativas">Superó las expectativas</ion-select-option>
         <ion-select-option value="cumplio con las expectativas">Cumplió con las expectativas</ion-select-option>
         <ion-select-option value="no cumplio con las expectativas">No cumplió con las expectativas</ion-select-option>
       </ion-select>
     </ion-item>
     
+    <ion-item class="opcion">
+      <ion-label position="stacked"><strong>Calificación del Prestamista</strong></ion-label>
+      <ion-select [(ngModel)]="calificacionPrestamista">
+        <ion-select-option value="1">1</ion-select-option>
+        <ion-select-option value="2">2</ion-select-option>
+        <ion-select-option value="3">3</ion-select-option>
+        <ion-select-option value="4">4</ion-select-option>
+        <ion-select-option value="5">5</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item class="opcion">
+      <ion-label position="stacked"><strong>Comentario del Prestamista</strong></ion-label>
+      <ion-select [(ngModel)]="comentarioPrestamista">
+        <ion-select-option value="supero las expectativas">Superó las expectativas</ion-select-option>
+        <ion-select-option value="cumplio con las expectativas">Cumplió con las expectativas</ion-select-option>
+        <ion-select-option value="no cumplio con las expectativas">No cumplió con las expectativas</ion-select-option>
+      </ion-select>
+    </ion-item>
+
       <ion-button expand="block" (click)="agregarResena()">Enviar Reseña</ion-button>
       
   </ion-list>

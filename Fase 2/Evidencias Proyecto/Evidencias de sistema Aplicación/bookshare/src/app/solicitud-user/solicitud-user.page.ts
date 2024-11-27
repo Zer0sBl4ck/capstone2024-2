@@ -421,30 +421,14 @@ export class SolicitudUserPage implements OnInit {
   
   modificarFechaDevolucion(id_prestamo: number, correoSolicitante: string): void {
     const actionSheet = this.actionSheetController.create({
-      header: 'Selecciona la duración de la devolución',
+      header: 'Fecha de devolucion del libro predeterminada', 
       buttons: [
         {
-          text: '1 Semana',
+          text: '31 Días',
           handler: () => {
-            this.actualizarFechaDevolucion(id_prestamo, 1);
+            this.actualizarFechaDevolucion(id_prestamo, 31);
             this.cambiarEstado(String(id_prestamo), 'Por entregar');
-            this.programarNotificacionDevolucion(id_prestamo, 7, correoSolicitante);
-          }
-        },
-        {
-          text: '2 Semanas',
-          handler: () => {
-            this.actualizarFechaDevolucion(id_prestamo, 2);
-            this.cambiarEstado(String(id_prestamo), 'Por entregar');
-            this.programarNotificacionDevolucion(id_prestamo, 14, correoSolicitante);
-          }
-        },
-        {
-          text: '3 Semanas',
-          handler: () => {
-            this.actualizarFechaDevolucion(id_prestamo, 3);
-            this.cambiarEstado(String(id_prestamo), 'Por entregar');
-            this.programarNotificacionDevolucion(id_prestamo, 21, correoSolicitante);
+            this.programarNotificacionDevolucion(id_prestamo, 31, correoSolicitante);
           }
         },
         {
@@ -458,7 +442,8 @@ export class SolicitudUserPage implements OnInit {
     });
     actionSheet.then(sheet => sheet.present());
   }
-  programarNotificacionDevolucion(id_prestamo: number, dias: number, correoSolicitante: string): void {
+
+programarNotificacionDevolucion(id_prestamo: number, dias: number, correoSolicitante: string): void {
     console.log(`Programando notificación para el préstamo ID: ${id_prestamo}, días: ${dias}`);
     const titulo = 'Recordatorio de Devolución';
     const descripcion = `El libro debe devolverse en ${dias} días.`;

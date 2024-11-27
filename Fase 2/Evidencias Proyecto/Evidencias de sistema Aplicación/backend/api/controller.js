@@ -337,6 +337,49 @@ router.post('/resenas-solicitante', async (req, res) => {
     return res.status(500).json({ message: 'Error al agregar la reseña' });
   }
 });
+// Endpoint para agregar una reseña del prestamista
+// Endpoint para agregar una reseña del prestamista
+router.post('/resenas-prestamista', async (req, res) => {
+  const { id_prestamo, calificacion, comentario } = req.body;
+
+  if (!id_prestamo || !calificacion || comentario === undefined) {
+    return res.status(400).json({ message: 'Faltan campos requeridos' });
+  }
+
+  const creado_en = new Date();
+
+  try {
+    // Obtener el id_usuario del prestamista a partir del id_prestamo
+    const [prestamista] = await db.query(
+      'SELECT id_usuario_prestamista FROM prestamo WHERE id_prestamo = ?',
+      [id_prestamo]
+    );
+
+    if (prestamista.length === 0) {
+      return res.status(404).json({ message: 'No se encontró el prestamista para el préstamo proporcionado' });
+    }
+
+    const id_usuario = prestamista[0].id_usuario_prestamista;
+
+    // Insertar la reseña
+    const [result] = await db.query(
+      'INSERT INTO resena (id_usuario, calificacion, comentario, creado_en) VALUES (?, ?, ?, ?)',
+      [id_usuario, calificacion, comentario, creado_en]
+    );
+
+    // Actualizar el estado de la solicitud
+    await db.query(
+      'UPDATE prestamo SET estado_prestamo = "Reseña Agregada" WHERE id_prestamo = ?',
+      [id_prestamo]
+    );
+
+    return res.status(201).json({ message: 'Reseña del prestamista agregada exitosamente', id_resena: result.insertId });
+  } catch (error) {
+    console.error('Error al agregar la reseña del prestamista:', error);
+    return res.status(500).json({ message: 'Error al agregar la reseña del prestamista' });
+  }
+});
+
 router.get('/resenas1', async (req, res) => {
   try {
     const [resenas] = await db.query(`
