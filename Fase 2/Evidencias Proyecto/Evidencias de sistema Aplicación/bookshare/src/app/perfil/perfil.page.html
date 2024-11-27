@@ -5,43 +5,39 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    
+    <ion-title class="titulo">Mi Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="userProfile">
-  <ion-title class="titulo">Perfil de usuario</ion-title>
+
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+
   <ion-card>
 
     <ion-card-header>
       <div class="foto">
-        <img *ngIf="userProfile.foto_perfil_base64" [src]="'data:image/jpeg;base64,' + userProfile.foto_perfil_base64" alt="Foto de perfil" />
+        <img *ngIf="userProfile.foto_perfil_base64" [src]="'data:image/jpeg;base64,' + userProfile.foto_perfil_base64"
+          alt="Foto de perfil" />
       </div>
     </ion-card-header>
 
     <ion-card-content>
-      <ion-card-title class="titulo-card">
+      <ion-card-title class="nomusuario">
         {{ userProfile.nombre_usuario }}
       </ion-card-title>
-      <p class="dato">
-        <strong>Correo:</strong> {{ userProfile.correo }}
-      </p>
-      <p class="dato">
-        <strong>Teléfono:</strong> {{ userProfile.telefono }}
-      </p>
-      <p class="dato">
-        <strong>Ubicación:</strong> {{ userProfile.ubicacion }}
-      </p>
+      <p> <strong>Correo:</strong> {{ userProfile.correo }} </p>
+      <p> <strong>Teléfono:</strong> {{ userProfile.telefono }} </p>
+      <p> <strong>Ubicación:</strong> {{ userProfile.ubicacion }} </p>
 
       <!-- Mostrar el promedio de calificación con estrellas -->
       <div *ngIf="promedioCalificacion !== null">
         <div class="estrellas" style="text-align: center;">
           <ion-icon *ngFor="let estrella of estrellas"
-                     [name]="estrella === 'filled' ? 'star' : (estrella === 'half' ? 'star-half' : 'star-outline')"
-                     [style.color]="estrella === 'filled' ? '#e96a24' : (estrella === 'half' ? '#e96a24' : 'gray')">
+            [name]="estrella === 'filled' ? 'star' : (estrella === 'half' ? 'star-half' : 'star-outline')"
+            [style.color]="estrella === 'filled' ? '#e96a24' : (estrella === 'half' ? '#e96a24' : 'gray')">
           </ion-icon>
         </div>
       </div>
@@ -56,12 +52,10 @@
     </ion-card-content>
   </ion-card>
 
-
-  
-  <div class="reseñas">
+  <div class="resena">
     <ion-list>
       <ion-list-header>
-        <ion-label class="resenas-usuario-label">Reseñas del Usuario</ion-label>
+        <ion-label class="resenas-usuario">Reseñas del Usuario</ion-label>
       </ion-list-header>
       <ion-item *ngFor="let review of displayedReviews">
         <ion-label>

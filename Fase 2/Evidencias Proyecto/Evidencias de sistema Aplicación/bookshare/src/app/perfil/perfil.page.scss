@@ -1,15 +1,3 @@
-.titulo {
-    font-weight: bold; /* Texto en negrita */
-    color: #111b21; /* Color del texto */
-    font-family: "Rethink Sans", sans-serif; /* Fuente similar a WhatsApp */
-    text-align: left; /* Alineación a la izquierda */
-    font-size: 2.25rem; /* Tamaño cómodo */
-    line-height: 1.5; /* Mejora la separación vertical */
-    margin: 16px 16px 0; /* Separación hacia los lados y arriba */
-    padding: 8px 0; /* Separación adicional dentro del título */
-}
-
-
 .fondo {
     ion-toolbar {
         --background: #e96a24 !important;
@@ -19,8 +7,9 @@
             font-weight: bold;
             color: #ffffff;
             text-align: center;
-            font-family: Helvetica;
+            font-family: "Rethink Sans", sans-serif;
             display: flex;
+            font-size: 1.5rem;
         }
 
         ion-icon {
@@ -28,311 +17,267 @@
         }
     }
 }
-.fondo {
-    ion-toolbar {
-      --background: #e96a24 !important;
-      color: #ffffff;
-  
-      ion-title {
-        font-weight: bold;
-        color: #ffffff;
-        text-align: center;
-        font-family: Helvetica;
-        display: flex;
-      }
-  
-      ion-icon {
-        color: #ffffff;
-      }
-    }
-  }
-  
-  ion-content {
-    --background: #ebe7e7 !important;
-  
-    ion-card {
-      --background: #ebe7e7 !important;
-      border-radius: 2rem;
-      margin-top: 10rem;
-      width: 100%;
-  
-      .foto {
-        display: flex;
-      }
-    }
-  
-    .reseñas {
-      margin-top: 2rem;
-  
-      ion-list {
-        background: #ffffff;
-        border-radius: 1rem;
-        padding: 1rem;
-  
-        ion-item {
-          --background: #f9f9f9;
-          border-radius: 0.5rem;
-          margin-bottom: 1rem;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
-          ion-label {
-            h2 {
-              font-size: 1.2rem;
-              font-weight: bold;
-              color: #333;
-            }
-  
-            p {
-              font-size: 1rem;
-              color: #666;
-              margin: 0.5rem 0;
-            }
-  
-            .calificacion {
-              font-size: 0.9rem;
-              color: #e96a24;
-              font-weight: bold;
-              
-              
-            }
-          }
-        }
-      }
-    }
-  }
-  .resenas-usuario-label {
-    font-size: 1.5rem !important; /* Ajusta el tamaño de la fuente según sea necesario */
-    font-weight: bold !important; /* Negrita para el texto */
-    color: #ffffff !important; /* Color del texto */
-    text-align: center !important; /* Centra el texto */
-    background: #e96a24 !important; /* Fondo transparente */
-    padding: 10px !important; /* Espaciado interno */
-    border: 0px solid var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, var(--ion-background-color-step-150, rgba(0, 0, 0, 0.13))))) !important; /* Borde */
-    border-radius: 5px !important; /* Bordes redondeados */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important; /* Sombra */
-  }
-  
-  
+
+
 ion-content {
-    --background: #ebe7e7 !important;
+    --background: #ebe7e7;
 
     ion-card {
-        --background: #ffffff !important;
+        --background: #ebe7e7;
         border-radius: 2rem;
-        margin-top: 10rem;
+        margin-top: 1rem;
         width: 100%;
+        max-width: 40%;
+        height: auto;
+        display: block;
+        justify-items: center;
+        align-items: center;
+        margin-left: 30%;
+
+        ion-card-header {
+            .foto {
+                display: flex;
+                justify-content: center;
+
+                img {
+                    width: 100%;
+                    max-width: 40%;
+                    height: auto;
+                    border-radius: 1.5rem;
+                }
+            }
+        }
+
+        ion-card-content {
+            .nomusuario {
+                color: #000000;
+                font-size: 1.5rem;
+                font-weight: bold;
+                text-align: center;
+                margin-top: 1rem;
+                font-family: "Rethink Sans", sans-serif;
+            }
+
+            p {
+                color: #000000;
+                font-size: 1.2rem;
+                font-family: "Rethink Sans", sans-serif;
+                text-align: center;
+            }
+
+            .btn-editar {
+                color: #ffffff;
+                --background: #e96a24;
+                border-radius: 5px;
+                font-family: "Rethink Sans", sans-serif;
+                margin-top: 1rem;
+                width: 100%;
+                max-width: 27%;
+                font-size: 1.2rem;
+                font-weight: bold;
+                margin-left: 35%;
+            }
+        }
+    }
+
+    .resena {
+        --background: inherit;;
+        border-radius: 1rem;
+        width: 100%;
+        max-width: 90%;
+        margin-left: 5%;
+
         
 
-        .foto {
-            display: flex;
-            justify-content: center;
 
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 1.5rem;
+        ion-list-header {
+            margin-left: -0.5%;
+
+            .resenas-usuario {
+                font-size: 1.5rem;
+                /* Ajusta el tamaño de la fuente según sea necesario */
+                font-weight: bold;
+                /* Negrita para el texto */
+                color: #ffffff;
+                text-align: center;
+                background: #e96a24;
+                padding: 10px;
+                border-radius: 5px;
+                font-family: "Rethink Sans", sans-serif;
             }
         }
-    }
 
-    .titulo-card {
-        color: #000000;
-        font-size: 1.5rem;
-        font-weight: bold;
-        text-align: center;
-    }
+        ion-item {
+            --background: #ebe7e7;
+            margin-bottom: 1rem;
 
-    .dato {
-        color: #000000;
-        font-size: 0.9rem;
-        text-align: center;
-    }
-   
-      
-    .btn-editar {
-        color: #ffffff;
-        --background: #e96a24;
-        border-radius: 5px;
-        font-family: Helvetica;
-        margin-top: 16px;
-        padding: 12px 16px;
-        width: 100%;
-        font-size: 16px;
-        font-weight: bold;
-    }
-}
+            ion-label {
+                h2 {
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: "Rethink Sans", sans-serif;
+                }
 
-@media (min-width: 2560px) {
-    ion-content {
-    
-        ion-card {
-            --background: #ffffff !important;
-            border-radius: 2rem;
-            margin-top: 10rem;
-            max-width: 40%;
-            margin-left: 50%;
-    
-            .foto {
-                display: flex;
-                justify-content: center;
-    
-                img {
-                    max-width: 20%;
-                    max-height: 20%;
-                    object-fit: cover;
+                p {
+                    font-size: 1rem;
+                    color: #000000;
+                    font-family: "Rethink Sans", sans-serif;
+                }
 
+                .calificacion {
+                    font-size: 0.9rem;
+                    color: #e96a24;
+                    font-weight: bold;
+                    font-family: "Rethink Sans", sans-serif;
                 }
             }
         }
-    
-        .titulo-card {
-            color: #000000;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
-        }
-    
-        .dato {
-            color: #000000;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-    
-        .btn-editar {
-            max-width: 25%;
-            margin-left: 37%;
-        }
     }
-
-}
-
-@media (min-width: 1920px) {
-
-    ion-content {
-    
-        ion-card {
-            border-radius: 2rem;
-            margin-top: 10rem;
-            max-width: 50%;
-            margin-left: 30rem;
-    
-            .foto {
-                display: flex;
-                justify-content: center;
-    
-                img {
-                    max-width: 20%;
-                    max-height: 20%;
-                    object-fit: cover;
-
-                }
-            }
-        }
-    
-        .titulo-card {
-            color: #000000;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
-        }
-    
-        .dato {
-            color: #000000;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-    
-        .btn-editar {
-            max-width: 25%;
-            margin-left: 37%;
-        }
+    .resena ion-list {
+        background: inherit;
+        margin: 0;
+        padding: 0;
+        border-radius: inherit;
     }
 }
+
+
 
 @media (max-width: 600px) {
 
     ion-content {
-    
-        ion-card {
-            border-radius: 2rem;
-            margin-top: 2rem;
-            max-width: 90%;
-            margin-left: 1.5rem;
-    
-            .foto {
-                display: flex;
-                justify-content: center;
-    
-                img {
-                    max-width: 50%;
-                    max-height: 50%;
-                    object-fit: cover;
 
+        ion-card {
+            max-width: 90%;
+            height: auto;
+            display: flex;
+            justify-items: center;
+            margin-left: 5%;
+
+            ion-card-header {
+                .foto {
+
+                    img {
+                        max-width: 100%;
+                    }
+                }
+            }
+
+            ion-card-content {
+                .nomusuario {
+                    font-size: 1.5rem;
+                }
+
+                p {
+                    font-size: 0.8rem;
+                    text-align: justify;
+                }
+
+                .btn-editar {
+                    max-width: 100%;
+                    font-size: 1rem;
+                    margin-left: 0%;
                 }
             }
         }
-    
-        .titulo-card {
-            color: #000000;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
-        }
-    
-        .dato {
-            color: #000000;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-    
-        .btn-editar {
-            max-width: 60%;
-            margin-left: 21%;
+
+        .resena {
+            margin-left: 5%;
+
+            ion-list-header {
+                margin-left: -2%;
+
+                .resenas-usuario {
+                    font-size: 1rem;
+
+                }
+            }
+
+            ion-item {
+
+                ion-label {
+                    h2 {
+                        font-size: 1rem;
+
+                    }
+
+                    p {
+                        font-size: 0.8rem;
+                    }
+
+                    .calificacion {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
         }
     }
 }
 
-
 @media (max-height: 900px) {
 
     ion-content {
-    
-        ion-card {
-            border-radius: 2rem;
-            margin-top: 10rem;
-            max-width: 80%;
-            margin-left: 5.5rem;
-    
-            .foto {
-                display: flex;
-                justify-content: center;
-    
-                img {
-                    max-width: 40%;
-                    max-height: 40%;
-                    object-fit: cover;
 
+        ion-card {
+            max-width: 50%;
+            height: auto;
+            display: flex;
+            justify-items: center;
+
+            ion-card-header {
+                .foto {
+
+                    img {
+                        max-width: 100%;
+                    }
+                }
+            }
+
+            ion-card-content {
+                .nomusuario {
+                    font-size: 1.5rem;
+                }
+
+                p {
+                    font-size: 0.8rem;
+                    text-align: justify;
+                }
+
+                .btn-editar {
+                    max-width: 100%;
+                    font-size: 1rem;
+                    margin-left: 0%;
                 }
             }
         }
-    
-        .titulo-card {
-            color: #000000;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
-        }
-    
-        .dato {
-            color: #000000;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-    
-        .btn-editar {
-            max-width: 30%;
-            margin-left: 35%;
+
+        .resena {
+            max-width: 90%;
+
+            ion-list-header {
+                .resenas-usuario {
+                    font-size: 1rem;
+
+                }
+            }
+
+            ion-item {
+
+                ion-label {
+                    h2 {
+                        font-size: 1rem;
+                    }
+
+                    p {
+                        font-size: 0.8rem;
+                    }
+
+                    .calificacion {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
         }
     }
 }
