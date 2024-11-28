@@ -440,11 +440,11 @@ programarNotificacionDevolucion(id_prestamo: number, dias: number, correoSolicit
   }
 
   
-  actualizarFechaDevolucion(id_prestamo: number, semanas: number): void {
+  actualizarFechaDevolucion(id_prestamo: number, dias: number = 31): void {
     // Obtener la fecha actual
     const fechaActual = new Date();
-    // Sumar las semanas seleccionadas
-    fechaActual.setDate(fechaActual.getDate() + (semanas * 7));
+    // Sumar los días seleccionados
+    fechaActual.setDate(fechaActual.getDate() + dias);
   
     // Formatear la fecha a formato 'yyyy-mm-dd'
     const fechaISO = fechaActual.toISOString().split('T')[0];
@@ -459,7 +459,6 @@ programarNotificacionDevolucion(id_prestamo: number, dias: number, correoSolicit
       }
     );
   }
-
   // Función para validar el formato de fecha dd-mm-yyyy
   private validarFechaFormato(fecha: string): boolean {
     const regex = /^(\d{2})-(\d{2})-(\d{4})$/;
