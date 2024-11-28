@@ -116,6 +116,7 @@ export class AuthService {
     return this.http.get<any>(`${this.apiUrl}/libro/${isbn}`);
   }
 
+  
   agregarResenaPrestamista(id_prestamo: number, calificacion: number, comentario: string): Observable<any> {
     const body = {
       id_prestamo,
@@ -126,10 +127,20 @@ export class AuthService {
   }
 
   
+  // Método para obtener las reseñas de un usuario sobre otro
+  obtenerResenasDeUsuarioSobreElUsuario(correo: string): Observable<any> {
+    return this.http.get<any>(`/api/resenas/usuario/${correo}`); // Cambia esta URL por la correcta de tu backend
+  }
+
+
+
   agregarResena(id_usuario: number, isbn: string, calificacion: number, comentario: string): Observable<any> {
     const resena = { id_usuario, isbn, calificacion, comentario };
     return this.http.post(`${this.apiUrl}/resenas`, resena);
   }
+
+
+
   getLibroPorIsbn(isbn: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/libro/${isbn}`);
   }
@@ -306,10 +317,16 @@ export class AuthService {
   }
 
 
+
+
+
   agregarResenaSolicitante(id_prestamo: number, calificacion: number, comentario: string): Observable<any> {
     const body = { id_prestamo, calificacion, comentario };
     return this.http.post(`${this.apiUrl}/resenas-solicitante`, body);
   }
+
+
+
 
   getSolicitudesPrestamo(correo: string): Observable<any> {
     const url = `${this.apiUrl}/ps/${correo}`;

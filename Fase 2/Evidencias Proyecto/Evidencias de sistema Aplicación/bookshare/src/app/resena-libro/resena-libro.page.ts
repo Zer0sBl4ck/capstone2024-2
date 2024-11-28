@@ -43,7 +43,7 @@ export class ResenaLibroPage implements OnInit {
   agregarResena(): void {
     const id_usuario_solicitante = this.authService.getUserData()?.id_usuario; // Obtén el ID del usuario actual
     console.log('ID del usuario que agrega la reseña:', id_usuario_solicitante);  // Log
-
+  
     // Validación de calificación y comentario antes de hacer la llamada al servicio
     if (this.calificacionLibro && this.comentarioLibro && this.calificacionPrestamista && this.comentarioPrestamista) {
       console.log('Enviando reseña con calificación del libro:', this.calificacionLibro, 'y comentario del libro:', this.comentarioLibro);  // Log
@@ -53,17 +53,28 @@ export class ResenaLibroPage implements OnInit {
       this.authService.agregarResena(id_usuario_solicitante, this.libro.isbn, this.calificacionLibro, this.comentarioLibro).subscribe(
         (response) => {
           console.log('Reseña del libro agregada con éxito:', response);  // Log
-
+  
           // Llamada al servicio para agregar la reseña del prestamista
           this.authService.agregarResenaPrestamista(this.idPrestamo, this.calificacionPrestamista, this.comentarioPrestamista).subscribe(
-            (response) => {
-              console.log('Reseña del prestamista agregada con éxito:', response);  // Log
-              alert('¡Reseña agregada con éxito!');
-              // Redirigir o realizar alguna otra acción (ej. volver a la página de libros o al perfil)
-              this.router.navigate(['/solicitud-user']);
+            (responsePrestamista) => {
+              console.log('Reseña del prestamista agregada con éxito:', responsePrestamista);  // Log
+              
+              // Llamada al servicio para agregar la reseña del solicitante (también)
+              this.authService.agregarResenaSolicitante(this.idPrestamo, this.calificacionPrestamista, this.comentarioPrestamista).subscribe(
+                (responseSolicitante) => {
+                  console.log('Reseña del solicitante agregada con éxito:', responseSolicitante);  // Log
+                  alert('¡Reseña agregada con éxito!');
+                  // Redirigir o realizar alguna otra acción (ej. volver a la página de libros o al perfil)
+                  this.router.navigate(['/solicitud-user']);
+                },
+                (errorSolicitante) => {
+                  console.error('Error al agregar la reseña del solicitante:', errorSolicitante);
+                  alert('Hubo un error al agregar la reseña del solicitante.');
+                }
+              );
             },
-            (error) => {
-              console.error('Error al agregar la reseña del prestamista:', error);
+            (errorPrestamista) => {
+              console.error('Error al agregar la reseña del prestamista:', errorPrestamista);
               alert('Hubo un error al agregar la reseña del prestamista.');
             }
           );
@@ -78,6 +89,7 @@ export class ResenaLibroPage implements OnInit {
       alert('Por favor, complete todas las calificaciones y comentarios.');
     }
   }
+  
 
   retroceder() {
     window.history.back();
