@@ -6,15 +6,6 @@
         justify-content: center;
         align-items: center;
 
-        /* .titulo {
-            font-weight: bold;
-            color: #ffffff;
-            font-family: "Rethink Sans", sans-serif;
-            font-size: 1.5rem;
-            text-align: center;
-            width: 100%;
-            max-width: 95%;
-        }*/
 
         ion-icon {
             color: #ffffff;
@@ -40,15 +31,7 @@
 ion-content {
     --background: #ebe7e7;
 
-    ion-title {
-        font-weight: bold;
-        color: #272727;
-        font-family: "Rethink Sans", sans-serif;
-        font-size: 1.8rem;
-        text-align: center;
-        width: 100%;
-        max-width: 95%;
-    }
+    
 
     .listado-chat {
         h2 {
