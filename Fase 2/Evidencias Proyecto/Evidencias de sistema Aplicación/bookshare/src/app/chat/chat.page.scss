@@ -6,7 +6,15 @@
         justify-content: center;
         align-items: center;
 
-      
+        /* .titulo {
+            font-weight: bold;
+            color: #ffffff;
+            font-family: "Rethink Sans", sans-serif;
+            font-size: 1.5rem;
+            text-align: center;
+            width: 100%;
+            max-width: 95%;
+        }*/
 
         ion-icon {
             color: #ffffff;
@@ -15,111 +23,104 @@
 }
 
 
-ion-item-options {
-    width: 100%; /* Ocupa todo el ancho disponible */
- 
-    padding-right: 0px;  /* Da más espacio para el botón de eliminación */
-      
-
-
-  }
-  
-  ion-item-option {
-    font-size: 30px; /* Aumenta el tamaño del texto y el icono */
-    padding: 0; /* Elimina el padding para que el botón ocupe todo el espacio */
-    height: 100%; /* Hace que el botón ocupe toda la altura del item */
-    display: flex; /* Utiliza flexbox para centrar el contenido */
-    justify-content: center; /* Centra el ícono */
-    align-items: center; /* Centra el ícono verticalmente */
-    background-color: #f44336; /* Fondo rojo para el botón de eliminación */
-    color: white; /* Hace que el ícono sea visible */
-  }
-  
-
-
-
-
-
 
 ion-content {
     --background: #ebe7e7;
 
-
-    .titulo {
-        font-weight: bold; /* Texto en negrita */
-        color: #111b21; /* Color del texto */
-        font-family: "Rethink Sans", sans-serif; /* Fuente similar a WhatsApp */
-        text-align: left; /* Alineación a la izquierda */
-        font-size: 2.25rem; /* Tamaño cómodo */
-        line-height: 1.5; /* Mejora la separación vertical */
-        margin: 16px 16px 0; /* Separación hacia los lados y arriba */
-        padding: 8px 0; /* Separación adicional dentro del título */
+    h1 {
+        font-weight: bold;
+        color: #272727;
+        font-family: "Rethink Sans", sans-serif;
+        font-size: 1.5rem;
+        text-align: center;
+        width: 100%;
+        max-width: 95%;
     }
 
-    .imagen-circular {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%; /* Hace que la imagen sea circular */
-        object-fit: fill; /* Asegura que la imagen se ajuste bien dentro del contenedor circular */
-        margin-right: 10px;
-        
-      }
-      .chat-titulo {
-        font-size: 1.1rem; /* Ajusta el tamaño de la fuente según sea necesario */
-        font-weight: bold; /* Opcional: agrega negrita al título */
-        color: #444444; /* Opcional: cambia el color del título */
-      }
-      .titulox {
-        font-size: 1.5rem; /* Ajusta el tamaño de la fuente según sea necesario */
-        font-weight: 400; /* Opcional: agrega negrita al título */
-        color: #444444; /* Opcional: cambia el color del título */
-        text-align: center;
-        background-color: #a1a1a1; /* Color de fondo gris */
-        padding: 10px; /* Espaciado interno */
-        border-radius: 5px; /* Bordes redondeados */
-        margin: 10px 0;
-        box-shadow: 0 6px 13px rgba(0, 0, 0, 0.2) /* Sombra suave */
-      }
-          ion-list {
-        background: transparent;
-        width: 90%;
-        margin-top: 1%;
-        
-        border-radius: 7px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-left: 5%;
+    .listado-chat {
+        h2 {
+            font-size: 1.3rem;
+            font-weight: bold;
+            font-family: "Rethink Sans", sans-serif;
+            color: #444444;
+            text-align: center;
+            background-color: #a1a1a1;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-shadow: 0 6px 13px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 60%;
+            margin-left: 20%;
+        }
 
-        ion-item {
-            --background: transparent;
-            width: 95%;
-            --ion-item-border-color: #cacaca;
-            margin-top: 5px;
-            margin-left:-4%;
+        ion-list {
+            background: transparent;
+            width: 100%;
+            max-width: 90%;
+            margin-top: 1%;
+            border-radius: 7px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-left: 5%;
+            border: 3px solid #2f4858;
 
-            ion-label {
-                h2 {
-                    font-family: "Rethink Sans", sans-serif;
-                    color: #444444;
-                    font-size: 1rem;
+            ion-item-sliding {
+                ion-item {
+                    --background: transparent;
+                    width: 100%;
+                    max-width: 95%;
+                    --ion-item-border-color: #2f4858;
+                    margin-top: 0.5rem;
+                    margin-left: 1%;
+
+                    img {
+                        width: 100%;
+                        max-width: 60px;
+                        border-radius: 50%;
+                        object-fit: fill;
+                        margin-right: 5%;
+                    }
+
+                    ion-label {
+
+                        h3,
+                        p {
+                            font-family: "Rethink Sans", sans-serif;
+                            color: #444444;
+                            font-size: 1rem;
+                        }
+                    }
+
+                    ion-button {
+                        --background: #2f4858;
+
+                        ion-icon {
+                            color: #ffffff;
+                            font-size: 1rem;
+                        }
+                    }
                 }
 
-                p {
-                    font-family: "Rethink Sans", sans-serif;
-                    color: #444444;
-                    font-size: 1rem;
-                }
-            }
+                ion-item-options {
+                    ion-item-option {
+                        color: #ff0000;
+                        --ion-item-border-color: #ff0000;
+                        width: 100%;
+                        max-width: 5%;
 
-            ion-button {
-                --background: #2f4858;
-
-                ion-icon {
-                    color: #ffffff;
-                    font-size: 1rem;
+                        ion-icon {
+                            color: #ffffff;
+                            font-size: 2rem;
+                        }
+                    }
                 }
+
+
+
+
             }
         }
     }
@@ -129,4 +130,13 @@ ion-content {
         color: #ffffff;
         font-size: 1rem;
     }
+
 }
+
+
+
+
+
+@media (max-width: 600px) {}
+
+@media (max-height: 900px) {}
