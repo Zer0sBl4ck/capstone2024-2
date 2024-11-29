@@ -35,7 +35,7 @@ export class ChatPage implements OnInit {
       },
       (error) => {
         console.error('Error al listar los chats de préstamo:', error);
-        this.errorMessage = 'Error al listar los chats. Inténtalo de nuevo más tarde.';
+
       }
     );
   }
@@ -48,7 +48,7 @@ export class ChatPage implements OnInit {
       },
       (error) => {
         console.error('Error al listar los chats de intercambio:', error);
-        this.errorMessage = 'Error al listar los chats de intercambio. Inténtalo de nuevo más tarde.';
+
       }
     );
   }
