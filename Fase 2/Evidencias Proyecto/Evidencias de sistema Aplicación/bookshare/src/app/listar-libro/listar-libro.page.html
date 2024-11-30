@@ -79,7 +79,7 @@
             <ion-button class="vista" expand="block" [routerLink]="['/vista-libro', libro.isbn]">
               Detalle</ion-button>
 
-            <ion-buttons class="botonesusu"  *ngIf="rol === 'usuario'">
+            <ion-buttons style="align-items: center; display: flex; justify-content: center;"  *ngIf="rol === 'usuario'">
               <ion-button class="agregar" expand="block" 
                 (click)="agregarLibroABiblioteca(libro); $event.stopPropagation()">
                 <ion-icon name="add-outline"></ion-icon>
@@ -96,13 +96,13 @@
               </ion-button>
             </ion-buttons>
 
-            <ion-buttons class="botonesada" *ngIf="rol === 'admin'">
+            <ion-buttons style="align-items: center; display: flex; justify-content: center;" *ngIf="rol === 'admin'">
               <ion-button class="modificar" routerLink="/modificar-libro" expand="block"
                 (click)="$event.stopPropagation()">
                 <ion-icon name="pencil-outline"></ion-icon><!--modificar libro-->
               </ion-button>
 
-              <ion-button class="ver" expand="block"
+              <ion-button class="veradmin" expand="block"
                 (click)="irAPersonasConLibro(libro.isbn); $event.stopPropagation()">
                 <ion-icon name="eye-outline"></ion-icon><!--ver personas con este libro -->
               </ion-button>

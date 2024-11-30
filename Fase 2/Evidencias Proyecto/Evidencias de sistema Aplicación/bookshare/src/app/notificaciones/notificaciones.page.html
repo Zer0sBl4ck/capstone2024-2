@@ -9,12 +9,12 @@
 </ion-header>
 
 <ion-content>
-  <ion-title class="titulo">notificaciones</ion-title>
+  <ion-title class="titulo">Notificaciones</ion-title>
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list class="noti" *ngIf="notificaciones.length > 0; else noNotificaciones" >
+  <ion-list class="noti" *ngIf="notificaciones.length > 0; else noNotificaciones">
 
     <ion-card *ngFor="let notificacion of notificaciones" (click)="onNotificacionClick(notificacion)">
 
@@ -24,18 +24,20 @@
 
       <ion-card-content>
 
-          <p class="descrip">{{ notificacion.descripcion }}</p>
-          <p class="nueva" *ngIf="!notificacion.visto" nueva>Nueva</p>
+        <p class="descrip">{{ notificacion.descripcion }}</p>
+        <p class="nueva" *ngIf="!notificacion.visto" nueva>Nueva</p>
 
         <ion-buttons style="align-items: center; display: flex; justify-content: center; margin-top: 1rem;">
-          <ion-button class="visto" (click)="marcarComoVisto(notificacion.id_notificacion); $event.stopPropagation()" *ngIf="!notificacion.visto">
+          <ion-button class="visto" (click)="marcarComoVisto(notificacion.id_notificacion); $event.stopPropagation()"
+            *ngIf="!notificacion.visto">
             Marcar visto
           </ion-button>
 
-          <ion-button class="eliminar" (click)="eliminarNotificacion(notificacion.id_notificacion); $event.stopPropagation()">
+          <ion-button class="eliminar"
+            (click)="eliminarNotificacion(notificacion.id_notificacion); $event.stopPropagation()">
             Eliminar
           </ion-button>
-          
+
         </ion-buttons>
 
       </ion-card-content>
@@ -43,7 +45,7 @@
     </ion-card>
   </ion-list>
 
-  <ng-template  #noNotificaciones>
+  <ng-template #noNotificaciones>
     <ion-card>
       <ion-card-header>
         <ion-card-title>Sin notificaciones</ion-card-title>
