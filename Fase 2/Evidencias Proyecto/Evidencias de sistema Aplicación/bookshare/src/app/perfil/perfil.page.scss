@@ -41,22 +41,24 @@ ion-content {
         border-radius: 2rem;
         margin-top: 1rem;
         width: 100%;
-        max-width: 40%;
+        max-width: 30%;
         height: auto;
-        display: block;
+        display: flex;
         justify-items: center;
         align-items: center;
-        margin-left: 30%;
+        margin-left: 35%;
 
         ion-card-header {
             .foto {
-                display: flex;
+                display: block;
                 justify-content: center;
+                margin-left: 25%;
 
                 img {
                     width: 100%;
-                    max-width: 40%;
-                    height: auto;
+                    max-width: 25rem;
+                    height: 100%;
+                    max-height: 25rem;
                     border-radius: 1.5rem;
                 }
             }
@@ -86,7 +88,7 @@ ion-content {
                 font-family: "Rethink Sans", sans-serif;
                 margin-top: 1rem;
                 width: 100%;
-                max-width: 27%;
+                max-width: 12rem;
                 font-size: 1.2rem;
                 font-weight: bold;
                 margin-left: 35%;
@@ -100,10 +102,7 @@ ion-content {
         width: 100%;
         max-width: 90%;
         margin-left: 5%;
-
         
-
-
         ion-list-header {
             margin-left: -0.5%;
 
@@ -159,67 +158,52 @@ ion-content {
 
 
 @media (max-width: 600px) {
-
     ion-content {
-
         ion-card {
             max-width: 90%;
             height: auto;
             display: flex;
             justify-items: center;
             margin-left: 5%;
-
             ion-card-header {
                 .foto {
-
+                    margin-left:0rem;
                     img {
-                        max-width: 100%;
+                        max-width: 50rem;
                     }
                 }
             }
-
             ion-card-content {
                 .nomusuario {
                     font-size: 1.5rem;
                 }
-
                 p {
                     font-size: 0.8rem;
                     text-align: justify;
                 }
-
                 .btn-editar {
-                    max-width: 100%;
-                    font-size: 1rem;
+                    max-width: 8rem;
+                    font-size: 0.8rem;
                     margin-left: 0%;
                 }
             }
         }
-
         .resena {
             margin-left: 5%;
-
             ion-list-header {
                 margin-left: -2%;
-
                 .resenas-usuario {
                     font-size: 1rem;
-
                 }
             }
-
             ion-item {
-
                 ion-label {
                     h2 {
                         font-size: 1rem;
-
                     }
-
                     p {
                         font-size: 0.8rem;
                     }
-
                     .calificacion {
                         font-size: 0.8rem;
                     }
@@ -230,34 +214,29 @@ ion-content {
 }
 
 @media (max-height: 900px) {
-
     ion-content {
-
         ion-card {
             max-width: 50%;
             height: auto;
             display: flex;
             justify-items: center;
-
+            margin-left: 25%;
             ion-card-header {
                 .foto {
-
+                    margin-left: 10%;
                     img {
-                        max-width: 100%;
+                        max-width: 30rem;
                     }
                 }
             }
-
             ion-card-content {
                 .nomusuario {
                     font-size: 1.5rem;
                 }
-
                 p {
                     font-size: 0.8rem;
                     text-align: justify;
                 }
-
                 .btn-editar {
                     max-width: 100%;
                     font-size: 1rem;
@@ -265,28 +244,21 @@ ion-content {
                 }
             }
         }
-
         .resena {
             max-width: 90%;
-
             ion-list-header {
                 .resenas-usuario {
                     font-size: 1rem;
-
                 }
             }
-
             ion-item {
-
                 ion-label {
                     h2 {
                         font-size: 1rem;
                     }
-
                     p {
                         font-size: 0.8rem;
                     }
-
                     .calificacion {
                         font-size: 0.8rem;
                     }
