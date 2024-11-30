@@ -27,7 +27,7 @@
           <p class="descrip">{{ notificacion.descripcion }}</p>
           <p class="nueva" *ngIf="!notificacion.visto" nueva>Nueva</p>
 
-        <ion-buttons>
+        <ion-buttons style="align-items: center; display: flex; justify-content: center; margin-top: 1rem;">
           <ion-button class="visto" (click)="marcarComoVisto(notificacion.id_notificacion); $event.stopPropagation()" *ngIf="!notificacion.visto">
             Marcar visto
           </ion-button>
@@ -35,7 +35,9 @@
           <ion-button class="eliminar" (click)="eliminarNotificacion(notificacion.id_notificacion); $event.stopPropagation()">
             Eliminar
           </ion-button>
+          
         </ion-buttons>
+
       </ion-card-content>
 
     </ion-card>

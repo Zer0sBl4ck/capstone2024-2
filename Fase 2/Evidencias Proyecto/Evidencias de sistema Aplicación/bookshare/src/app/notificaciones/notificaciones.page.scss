@@ -15,14 +15,22 @@
 }
 
 .titulo {
-    font-weight: bold; /* Texto en negrita */
-    color: #111b21; /* Color del texto */
-    font-family: "Rethink Sans", sans-serif; /* Fuente similar a WhatsApp */
-    text-align: left; /* Alineación a la izquierda */
-    font-size: 2.25rem; /* Tamaño cómodo */
-    line-height: 1.5; /* Mejora la separación vertical */
-    margin: 16px 16px 0; /* Separación hacia los lados y arriba */
-    padding: 8px 0; /* Separación adicional dentro del título */
+  font-weight: bold;
+  /* Texto en negrita */
+  color: #111b21;
+  /* Color del texto */
+  font-family: "Rethink Sans", sans-serif;
+  /* Fuente similar a WhatsApp */
+  text-align: left;
+  /* Alineación a la izquierda */
+  font-size: 2.25rem;
+  /* Tamaño cómodo */
+  line-height: 1.5;
+  /* Mejora la separación vertical */
+  margin: 16px 16px 0;
+  /* Separación hacia los lados y arriba */
+  padding: 8px 0;
+  /* Separación adicional dentro del título */
 }
 
 ion-content {
@@ -42,7 +50,7 @@ ion-content {
     margin-left: 2%;
 
     ion-card {
-      --background: #4d4d4dbe;
+      --background: #2f4858;
       width: 100%;
       max-width: 95%;
       height: auto;
@@ -66,31 +74,29 @@ ion-content {
         color: #ffffff;
       }
 
-      ion-buttons {
-        align-items: center;
-        justify-content: center;
-        display: flex;
-
-        .visto {
-          color: #000000;
-          font-family: "Rethink Sans", sans-serif;
-          font-size: 0.9rem;
-          width: 100%;
-        }
-
-        .eliminar {
-          color: #ff0000;
-          font-family: "Rethink Sans", sans-serif;
-          font-size: 0.9rem;
-          width: 100%;
-          
-        }
+      .visto {
+        color: #000000;
+        --background: transparent;
+        font-family: "Rethink Sans", sans-serif;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 8.1rem;
       }
+
+      .eliminar {
+        color: #ff0000;
+        --background: transparent;
+        font-family: "Rethink Sans", sans-serif;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 7rem;
+      }
+
     }
   }
 
   ion-card {
-    --background: #e96a24;
+    --background: #2f4858;
     width: 100%;
     max-width: 95%;
     height: auto;
@@ -98,25 +104,25 @@ ion-content {
     margin-left: 2.5%;
 
     ion-card-header {
-        ion-card-title {
-            font-family: "Rethink Sans", sans-serif;
-            font-size: 1rem;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      ion-card-title {
+        font-family: "Rethink Sans", sans-serif;
+        font-size: 1rem;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
 
     ion-card-content {
-        p {
-            font-family: "Rethink Sans", sans-serif;
-            font-size: 1rem;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      p {
+        font-family: "Rethink Sans", sans-serif;
+        font-size: 1rem;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
-}
+  }
 }
