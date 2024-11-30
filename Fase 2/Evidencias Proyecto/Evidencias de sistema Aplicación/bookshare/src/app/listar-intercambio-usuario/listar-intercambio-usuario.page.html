@@ -5,7 +5,6 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="titulo">Libros disponibles</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,6 +12,8 @@
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+
+  <ion-title class="titulo">Libros disponibles</ion-title>
 
   <ion-list>
     <ion-card *ngFor="let libro of librosDisponiblesIntercambio">
@@ -26,11 +27,13 @@
       </ion-card-header>
 
       <ion-card-content>
-        <p class="libro">{{ libro.autor }}</p>
-        <p class="genero"><strong>Género:</strong> {{ libro.genero }}</p>
+        <p>{{ libro.autor }}</p>
+        <p><strong>Género:</strong> {{ libro.genero }}</p>
         <!-- Botones para actualizar el intercambio y ver personas con el libro -->
-        <ion-buttons>
-          <ion-button class="actualizar" (click)="actualizarIntercambio(libro.id_biblioteca);actualizarEstadoIntercambio();">
+
+        <ion-buttons style="align-items: center; display: flex; justify-content: center; margin-top: 1rem;">
+          <ion-button class="seleccionar"
+            (click)="actualizarIntercambio(libro.id_biblioteca);actualizarEstadoIntercambio();">
             Seleccionar libro
           </ion-button>
 
@@ -38,6 +41,7 @@
             <ion-icon name="eye-outline"></ion-icon> Vista del libro
           </ion-button>
         </ion-buttons>
+
       </ion-card-content>
 
     </ion-card>

@@ -52,7 +52,6 @@ ion-content {
             align-items: center;
         }
     }
-
     /*Mostrar solicitudes recibidas*/
     .rec {
         background: transparent;
@@ -94,7 +93,6 @@ ion-content {
                     color: #ffffff;
                 }
             }
-
             /*----------------BOTONES----------------*/
             .aceptar {
                 --background: #e96a24;
@@ -175,11 +173,9 @@ ion-content {
                 max-width: 5rem;
                 --border-radius: 20px;
             }
-
             /*--------------------------------------*/
         }
     }
-
     /*Mostrar solicitudes realizadas*/
     .rea {
         background: transparent;
@@ -222,7 +218,6 @@ ion-content {
             }
 
             /*----------------BOTONES----------------*/
-
             .cancelar {
                 --background: #ff0000;
                 color: #ffffff;
@@ -282,7 +277,6 @@ ion-content {
                 max-width: 5rem;
                 --border-radius: 20px;
             }
-
             /*--------------------------------------*/
         }
     }
@@ -318,246 +312,3 @@ ion-card {
         }
     }
 }
-
-/*
-@media (max-width: 600px) {
-    ion-content {
-<<<<<<< HEAD
-        ion-title {
-            font-size: 1.5rem;
-=======
-        --background: #ebe7e7;
-
-        ion-segment {
-            --background: transparent;
-            --ion-color-primary: transparent;
-            width: 100%;
-            max-width: 95%;
-            margin-top: 1rem;
-            margin-left: 1.3rem;
-            position: center;
-            justify-content: center;
-            align-items: center;
-
-            .reci,
-            .reali {
-                --background: #2f4858;
-                color: #ffffff;
-                width: 100%;
-                max-width: 90%;
-                border: 1px solid #2f4858;
-                border-radius: 1rem;
-                font-size: 0.7rem;
-                font-family: "Rethink Sans", sans-serif;
-                position: center;
-                justify-content: center;
-                align-items: center;
-            }
-            
-            
->>>>>>> 936df297c69ec6deb64170e4ad1ebb883af1be53
-        }
-        /*Mostrar solicitudes recibidas*/
-/* .rec {
-            ion-card {
-                ion-card-header {
-                    ion-card-title {
-                        font-size: 1rem;
-                    }
-                }
-                ion-card-content {
-                    .estado,
-                    .correo,
-                    .fechadev,
-                    .nomusu {
-                        font-size: 0.8rem;
-                    }
-                }
-                /*----------------BOTONES----------------
-                .aceptar {
-                    font-size: 0.7rem;
-                    max-width: 22%;
-                }
-                .rechazar {
-                    font-size: 0.7rem;
-                    max-width: 20%;
-                }
-                .devolucion {
-                    font-size: 0.7rem;
-                    max-width: 44%;
-                }
-                .chatear {
-                    font-size: 0.7rem;
-                    max-width: 12%;
-                }
-                .entregado {
-                    font-size: 0.7rem;
-                    max-width: 11%;
-                }
-                .repsoli {
-                    font-size: 0.7rem;
-                    max-width: 12%;
-                }
-                .condev {
-                    font-size: 0.7rem;
-                    max-width: 13%;
-                }
-                .resena {
-                    font-size: 0.7rem;
-                    max-width: 7%;
-                }
-                /*--------------------------------------*
-            }
-        }
-        /*Mostrar solicitudes realizadas*
-        .rea {
-            ion-card {
-                ion-card-header {
-                    ion-card-title {
-                        font-size: 1rem;
-                    }
-                }
-                ion-card-content {
-                    .estado,
-                    .correo,
-                    .fecha {
-                        font-size: 0.8rem;
-                    }
-                }
-                /*----------------BOTONES----------------*
-                .cancelar {
-                    font-size: 0.7rem;
-                    max-width: 45%;
-                }
-                .chat {
-                    font-size: 0.7rem;
-                    max-width: 12%;
-                }
-                .repdue {
-                    font-size: 0.7rem;
-                    max-width: 36%;
-                }
-                .recepcion {
-                    font-size: 0.7rem;
-                    max-width: 11%;
-                }
-                .devolver {
-                    font-size: 0.7rem;
-                    max-width: 8%;
-                }
-                .resena {
-                    font-size: 0.7rem;
-                    max-width: 7%;
-                }
-                /*--------------------------------------*
-            }
-        }
-    }
-}
-
-@media (max-height: 900px) {
-    ion-content {
-        ion-title {
-            font-size: 1.5rem;
-        }
-        /*Mostrar solicitudes recibidas*
-        .rec {
-            ion-card {
-                ion-card-header {
-                    ion-card-title {
-                        font-size: 1rem;
-                    }
-                }
-                ion-card-content {
-                    .estado,
-                    .correo,
-                    .fechadev,
-                    .nomusu {
-                        font-size: 0.8rem;
-                    }
-                }
-                /*----------------BOTONES----------------*
-                .aceptar {
-                    font-size: 0.8rem;
-                    max-width: 15%;
-                }
-                .rechazar {
-                    font-size: 0.8rem;
-                    max-width: 12%;
-                }
-                .devolucion {
-                    font-size: 0.7rem;
-                    max-width: 20%;
-                }
-                .chatear {
-                    font-size: 0.9rem;
-                    max-width: 8%;
-                }
-                .entregado {
-                    font-size: 0.7rem;
-                    max-width: 20%;
-                }
-                .repsoli {
-                    font-size: 0.8rem;
-                    max-width: 24%;
-                }
-                .condev {
-                    font-size: 0.8rem;
-                    max-width: 25%;
-                }
-                .resena {
-                    font-size: 0.8rem;
-                    max-width: 13%;
-                }
-                /*--------------------------------------*
-            }
-        }
-        /*Mostrar solicitudes realizadas*
-        .rea {
-            ion-card {
-                ion-card-header {
-                    ion-card-title {
-                        font-size: 1rem;
-                    }
-                }
-                ion-card-content {
-                    .estado,
-                    .correo,
-                    .fecha {
-                        font-size: 0.8rem;
-                    }
-                }
-                /*----------------BOTONES----------------*
-                .cancelar {
-                    font-size: 0.8rem;
-                    max-width: 15%;
-                }
-                .cancela {
-                    font-size: 0.8rem;
-                    max-width: 15%;
-                }
-                .chat {
-                    font-size: 0.8rem;
-                    max-width: 8%;
-                }
-                .repdue {
-                    font-size: 0.8rem;
-                    max-width: 18%;
-                }
-                .recepcion {
-                    font-size: 0.8rem;
-                    max-width: 23%;
-                }
-                .devolver {
-                    font-size: 0.8rem;
-                    max-width: 17%;
-                }
-                .resena {
-                    font-size: 0.8rem;
-                    max-width: 13%;
-                }
-                /*--------------------------------------*
-            }
-        }
-    }
-}*/

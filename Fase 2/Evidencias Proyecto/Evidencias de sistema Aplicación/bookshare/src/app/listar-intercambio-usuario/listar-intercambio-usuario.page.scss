@@ -6,15 +6,6 @@
         justify-content: center;
         align-items: center;
 
-        .titulo {
-            font-weight: bold;
-            color: #ffffff;
-            font-family: "Rethink Sans", sans-serif;
-            text-align: center;
-            width: 100%;
-            max-width: 95%;
-        }
-
         ion-icon {
             color: #ffffff;
         }
@@ -23,6 +14,17 @@
 
 ion-content {
     --background: #ebe7e7;
+
+    ion-title {
+        font-weight: bold;
+        color: #272727;
+        font-family: "Rethink Sans", sans-serif;
+        font-size: 2rem;
+        text-align: start;
+        width: 100%;
+        max-width: 95%;
+        margin-top: 0.5rem;
+    }
 
     ion-list {
         background: transparent;
@@ -36,11 +38,19 @@ ion-content {
         flex-direction: column;
 
         ion-card {
-            --background: #4d4d4dbe;
+            --background: #2f4858;
             width: 100%;
             max-width: 95%;
             height: auto;
             border-radius: 1rem;
+
+            ion-card-header {
+                ion-card-title {
+                    font-family: "Rethink Sans", sans-serif;
+                    font-size: 1.1rem;
+                    color: #ffffff;
+                }
+            }
 
             ion-card-title {
                 font-family: "Rethink Sans", sans-serif;
@@ -52,10 +62,7 @@ ion-content {
             }
 
             ion-card-content {
-
-                .libro,
-                .genero,
-                .biblioteca {
+                p {
                     font-size: 0.9rem;
                     font-family: "Rethink Sans", sans-serif;
                     color: #ffffff;
@@ -63,33 +70,38 @@ ion-content {
                     justify-content: center;
                     align-items: center;
                 }
+            }
 
-                ion-buttons {
-                    align-items: center;
-                    justify-content: center;
-                    display: flex;
+            /*----------------BOTONES----------------*/
+            .seleccionar {
+                --background: #e96a24;
+                color: #ffffff;
+                font-family: "Rethink Sans", sans-serif;
+                font-size: 0.8rem;
+                width: 100%;
+                max-width: 8rem;
+                --border-radius: 20px;
+            }
 
-                    .actualizar {
-                        --background: #e96a24;
-                        color: #ffffff;
-                        font-family: "Rethink Sans", sans-serif;
-                        font-size: 0.8rem;
-                        width: 100%;
-                        max-width: 30%;
-                    }
+            .ver {
+                --background: #176e17;
+                color: #ffffff;
+                font-family: "Rethink Sans", sans-serif;
+                font-size: 0.8rem;
+                width: 100%;
+                max-width: 7rem;
+                --border-radius: 20px;
 
-                    .ver {
-                        --background: #176e17;
-                        color: #ffffff;
-                        font-family: "Rethink Sans", sans-serif;
-                        font-size: 0.8rem;
-                        width: 100%;
-                        max-width: 30%;
-                    }
+                ion-icon {
+                    font-size: 1.5rem;
+                    color: #ffffff;
                 }
             }
+
+            /*---------------------------------------*/
         }
     }
+
     ion-card {
         --background: #e96a24;
         width: 100%;

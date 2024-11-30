@@ -39,7 +39,7 @@
 
           <!-- BOTONES -->
           <!-- Aceptar y Rechazar 'pendiente'-->
-          <ion-buttons style="align-items: center; display: flex; justify-content: center;">
+          <ion-buttons style="align-items: center; display: flex; justify-content: center; margin-top: 1rem;">
             <ion-button class="aceptar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
               (click)="modificarEstadoSolicitud(solicitud.id_prestamo)">Aceptar</ion-button>
 
@@ -119,7 +119,7 @@
           <p class="estado">Estado: {{ solicitud.estado_prestamo }}</p>
           <p class="fecha">Fecha: {{ solicitud.fecha_prestamo | date: 'dd-MM-yyyy' }}</p>
 
-          <ion-buttons style="align-items: center; display: flex; justify-content: center;">
+          <ion-buttons style="align-items: center; display: flex; justify-content: center; margin-top: 1rem;">
             <ion-button class="cancelar" *ngIf="solicitud.estado_prestamo === 'pendiente'"
               (click)="eliminarSolicitud1(solicitud.id_prestamo)">Cancelar solicitud</ion-button>
 
