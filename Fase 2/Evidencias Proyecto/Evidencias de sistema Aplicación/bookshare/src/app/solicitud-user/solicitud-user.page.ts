@@ -381,27 +381,10 @@ irAResena(solicitud: any): void {
   
   
   modificarFechaDevolucion(id_prestamo: number, correoSolicitante: string): void {
-    const actionSheet = this.actionSheetController.create({
-      header: 'Fecha de devolucion del libro predeterminada', 
-      buttons: [
-        {
-          text: '31 Días',
-          handler: () => {
-            this.actualizarFechaDevolucion(id_prestamo, 31);
-            this.cambiarEstado(String(id_prestamo), 'Por entregar');
-            this.programarNotificacionDevolucion(id_prestamo, 31, correoSolicitante);
-          }
-        },
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {
-            console.log('Selección cancelada');
-          }
-        }
-      ]
-    });
-    actionSheet.then(sheet => sheet.present());
+    // Aplicar directamente los 31 días
+    this.actualizarFechaDevolucion(id_prestamo, 31);
+    this.cambiarEstado(String(id_prestamo), 'Por entregar');
+    this.programarNotificacionDevolucion(id_prestamo, 31, correoSolicitante);
   }
 
 programarNotificacionDevolucion(id_prestamo: number, dias: number, correoSolicitante: string): void {

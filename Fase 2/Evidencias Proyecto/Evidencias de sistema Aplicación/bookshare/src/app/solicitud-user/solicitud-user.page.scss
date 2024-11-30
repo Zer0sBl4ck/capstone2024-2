@@ -322,8 +322,40 @@ ion-card {
 /*
 @media (max-width: 600px) {
     ion-content {
+<<<<<<< HEAD
         ion-title {
             font-size: 1.5rem;
+=======
+        --background: #ebe7e7;
+
+        ion-segment {
+            --background: transparent;
+            --ion-color-primary: transparent;
+            width: 100%;
+            max-width: 95%;
+            margin-top: 1rem;
+            margin-left: 1.3rem;
+            position: center;
+            justify-content: center;
+            align-items: center;
+
+            .reci,
+            .reali {
+                --background: #2f4858;
+                color: #ffffff;
+                width: 100%;
+                max-width: 90%;
+                border: 1px solid #2f4858;
+                border-radius: 1rem;
+                font-size: 0.7rem;
+                font-family: "Rethink Sans", sans-serif;
+                position: center;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            
+>>>>>>> 936df297c69ec6deb64170e4ad1ebb883af1be53
         }
         /*Mostrar solicitudes recibidas*/
 /* .rec {
