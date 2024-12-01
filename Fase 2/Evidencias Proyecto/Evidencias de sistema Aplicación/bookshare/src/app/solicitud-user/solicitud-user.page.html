@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-title>Préstamos</ion-title>
+  <ion-title class="titulo" >Préstamos</ion-title>
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -145,7 +145,7 @@
 
             <ion-button class="repdue" (click)="reportarUsuario(solicitud.id_prestamista,solicitud.id_solicitante)"
               *ngIf="solicitud.estado_prestamo === 'Por entregar'|| solicitud.estado_prestamo === 'entregado'|| solicitud.estado_prestamo === 'Libro devuelto'  || solicitud.estado_prestamo === 'Entrega confirmada' ">
-              Reportar dueño
+              Reportar prestamo
             </ion-button>
           </ion-buttons>
 

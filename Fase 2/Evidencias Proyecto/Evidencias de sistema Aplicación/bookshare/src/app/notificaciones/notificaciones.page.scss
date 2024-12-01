@@ -13,16 +13,16 @@
 }
 
 .titulo {
-  font-weight: bold;
-  color: #272727;
-  font-family: "Rethink Sans", sans-serif;
-  font-size: 2rem;
-  text-align: start;
-  width: 100%;
-  max-width: 95%;
-  margin-top: 0.5rem;
-}
+  font-weight: bold; /* Texto en negrita */
+  color: #111b21; /* Color del texto */
+  font-family: "Rethink Sans", sans-serif; /* Fuente similar a WhatsApp */
+  text-align: left; /* Alineación a la izquierda */
+  font-size: 2.25rem; /* Tamaño cómodo */
+  line-height: 1.5; /* Mejora la separación vertical */
+  margin: 16px 16px ; /* Separación hacia los lados y arriba */
+  padding: 8px 0; /* Separación adicional dentro del título */
 
+}  
 ion-content {
   --background: #ebe7e7;
 
