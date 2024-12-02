@@ -117,6 +117,8 @@ export class PersonasOwnerbookPage implements OnInit {
     const titulo = 'Solicitud de Intercambio de Libro';
     const fechaActual = new Date().toLocaleString(); // Formateamos la fecha actual
     const descripcion = `Se ha solicitado un intercambio de libros el ${fechaActual}.`;
+    const payload = { correo, titulo, descripcion };
+    console.log('Enviando notificación:', payload); // Log de los datos que se envían
     this.authService.crearNotificacionPrestamo(correo, titulo, descripcion).subscribe(
       (notificacionResponse) => {
         console.log('Notificación creada con éxito:', notificacionResponse);
@@ -151,14 +153,20 @@ export class PersonasOwnerbookPage implements OnInit {
   }
   confirmarIntercambio(isbn: string, id_usuario_prestamista: number): void {
     const id_usuario_solicitante = this.authService.getUserData()?.id_usuario;
+    
     if (id_usuario_solicitante) {
       this.authService.obtenerIdBiblioteca(isbn, id_usuario_prestamista).subscribe(
         (response) => {
           const id_biblioteca_prestamista = response.id_biblioteca;
+          const correoPrestamista = response.correo; // Obtener el correo del prestamista desde la respuesta
           this.authService.insertarIntercambio(id_usuario_prestamista, id_usuario_solicitante, id_biblioteca_prestamista)
             .subscribe(
               (response) => {
                 console.log('Intercambio insertado exitosamente:', response);
+                
+                // Enviar la notificación después de insertar el intercambio
+                this.notificacion_intercambio(correoPrestamista);
+  
                 this.router.navigate(['/listar-intercambio'], { replaceUrl: true });
               },
               (error) => {

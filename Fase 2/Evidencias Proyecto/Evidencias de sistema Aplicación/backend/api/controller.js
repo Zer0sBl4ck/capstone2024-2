@@ -978,7 +978,46 @@ module.exports = (io) => {
       return res.status(500).json({ error: 'Error al insertar las notificaciones' });
     }
   });
-
+  router.post('/notificacion_intercambio', async (req, res) => {
+    // Aquí recibimos los campos enviados desde el frontend
+    const { correo, titulo, descripcion, correoPrestamista } = req.body;
+  
+    // Asegúrate de que el backend reciba tanto el correo del solicitante como el del prestamista
+    if (!correo || !titulo || !descripcion || !correoPrestamista) {
+      return res.status(400).json({ error: 'Faltan campos requeridos.' });
+    }
+  
+    // Asignamos el correo prestamista y correo solicitante de acuerdo a los datos recibidos
+    const correoSolicitante = correo; // Suponiendo que "correo" es el del solicitante
+  
+    // Inserción de notificación para el prestamista
+    const insertNotificacionPrestamistaQuery = `
+      INSERT INTO notificacion (correo, titulo, descripcion, tipo) 
+      VALUES (?, ?, ?, 'Intercambio recibido')
+    `;
+  
+    try {
+      // Insertar notificación para el prestamista
+      await db.query(insertNotificacionPrestamistaQuery, [correoPrestamista, titulo, descripcion]);
+  
+      console.log('Notificación de intercambio insertada para el prestamista con éxito.');
+  
+      // Insertar notificación para el solicitante
+      const insertNotificacionSolicitanteQuery = `
+        INSERT INTO notificacion (correo, titulo, descripcion, tipo) 
+        VALUES (?, ?, ?, 'Intercambio solicitado')
+      `;
+  
+      await db.query(insertNotificacionSolicitanteQuery, [correoSolicitante, titulo, descripcion]);
+  
+      console.log('Notificación de intercambio insertada para el solicitante con éxito.');
+      return res.status(201).json({ message: 'Notificaciones de intercambio insertadas con éxito' });
+  
+    } catch (error) {
+      console.error('Error al insertar las notificaciones de intercambio:', error);
+      return res.status(500).json({ error: 'Error al insertar las notificaciones de intercambio' });
+    }
+  });
   // Endpoint para obtener notificaciones de un usuario
   router.get('/notificaciones/:correo', async (req, res) => {
     const { correo } = req.params;
@@ -1654,23 +1693,32 @@ WHERE p.id_usuario_prestamista = (
     const { isbn, id_usuario } = req.params;
 
     try {
-      const query = `
-      SELECT id_biblioteca 
-      FROM biblioteca_usuario 
-      WHERE isbn = ? AND id_usuario = ?`;
+        const query = `
+        SELECT 
+          biblioteca_usuario.id_biblioteca, 
+          usuario.correo 
+        FROM 
+          biblioteca_usuario 
+        JOIN 
+          usuario ON biblioteca_usuario.id_usuario = usuario.id_usuario 
+        WHERE 
+          biblioteca_usuario.isbn = ? AND biblioteca_usuario.id_usuario = ?`;
 
-      const [rows] = await db.execute(query, [isbn, id_usuario]);
+        const [rows] = await db.execute(query, [isbn, id_usuario]);
 
-      if (rows.length === 0) {
-        return res.status(404).json({ message: 'No se encontró la biblioteca para este libro y usuario' });
-      }
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'No se encontró la biblioteca para este libro y usuario' });
+        }
 
-      res.status(200).json({ id_biblioteca: rows[0].id_biblioteca });
+        res.status(200).json({ 
+            id_biblioteca: rows[0].id_biblioteca,
+            correo: rows[0].correo 
+        });
     } catch (error) {
-      console.error('Error al obtener la id_biblioteca:', error);
-      res.status(500).json({ message: 'Error al obtener la id_biblioteca' });
+        console.error('Error al obtener la id_biblioteca:', error);
+        res.status(500).json({ message: 'Error al obtener la id_biblioteca' });
     }
-  });
+});
 
   router.get('/intercambios-solicitante/:id_usuario', async (req, res) => {
     const { id_usuario } = req.params;

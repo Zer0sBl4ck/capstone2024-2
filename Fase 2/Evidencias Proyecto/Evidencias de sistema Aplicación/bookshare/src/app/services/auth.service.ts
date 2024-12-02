@@ -190,10 +190,12 @@ export class AuthService {
   
   
   // Crear una nueva notificación
-  crearNotificacion(correo: string, titulo: string, descripcion: string, tipo: string): Observable<any> {
-    const payload = { correo, titulo, descripcion, tipo };
-    return this.http.post<any>(`${this.apiUrl}/notificaciones`, payload);
-  }
+  // Crear una nueva notificación
+crearNotificacion(correo: string, titulo: string, descripcion: string, tipo: string): Observable<any> {
+  const payload = { correo, titulo, descripcion, tipo };
+  console.log('Enviando notificación:', payload); // Log de los datos que se envían
+  return this.http.post<any>(`${this.apiUrl}/notificaciones`, payload);
+}
  // Llama al backend para obtener la cantidad de notificaciones no leídas
  getNotificacionesNoLeidas(correo: string): Observable<number> {
   return this.http.get<number>(`${this.apiUrl}/notificaciones/no-leidas?correo=${correo}`);
@@ -316,7 +318,9 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/resenas1`);
   }
 
-
+  crearNotificacionIntercambio(payload: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/notificacion_intercambio`, payload);
+  }
 
 
 
