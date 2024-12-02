@@ -5,7 +5,7 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    
+
   </ion-toolbar>
 </ion-header>
 
@@ -20,7 +20,8 @@
 
   <ion-item>
     <ion-label position="stacked">Género</ion-label>
-    <ion-select class="opcion" placeholder="Seleccione una opción" [(ngModel)]="genero" name="genero" required (ionChange)="filtrarPorGenero()">
+    <ion-select class="opcion" placeholder="Seleccione una opción" [(ngModel)]="genero" name="genero" required
+      (ionChange)="filtrarPorGenero()">
       <ion-select-option value="">Todos</ion-select-option>
       <ion-select-option value="Aventura">Aventura</ion-select-option>
       <ion-select-option value="Autoayuda">Autoayuda</ion-select-option>
@@ -52,7 +53,7 @@
       <ion-select-option value="Suspenso">Suspenso</ion-select-option>
     </ion-select>
   </ion-item>
-  
+
   <!-- Vista para el Admin -->
   <ion-grid class="listargrid">
     <ion-row>
@@ -68,25 +69,22 @@
           <ion-card-content>
             <ion-card-title class="titulo"> {{ libro.titulo }} </ion-card-title>
 
-            <ion-card-subtitle class="autor">
-              <strong>Autor:</strong> {{ libro.autor }}
-            </ion-card-subtitle>
+            <p><strong>Autor:</strong> {{ libro.autor }}</p>
 
-            <p class="genero"><strong>Género:</strong> {{ libro.genero }}</p>
-            <p class="isbn">ISBN: {{ libro.isbn }}</p>
+            <p><strong>Género:</strong> {{ libro.genero }}</p>
+            <p>ISBN: {{ libro.isbn }}</p>
 
             <!-- Botones-->
             <ion-button class="vista" expand="block" [routerLink]="['/vista-libro', libro.isbn]">
               Detalle</ion-button>
 
-            <ion-buttons style="align-items: center; display: flex; justify-content: center;"  *ngIf="rol === 'usuario'">
-              <ion-button class="agregar" expand="block" 
+            <ion-buttons style="align-items: center; display: flex; justify-content: center;" *ngIf="rol === 'usuario'">
+              <ion-button class="agregar" expand="block"
                 (click)="agregarLibroABiblioteca(libro); $event.stopPropagation()">
                 <ion-icon name="add-outline"></ion-icon>
               </ion-button>
 
-              <ion-button class="favoritos" expand="block" 
-                (click)="agregarAFavoritos(libro); $event.stopPropagation()">
+              <ion-button class="favoritos" expand="block" (click)="agregarAFavoritos(libro); $event.stopPropagation()">
                 <ion-icon name="heart-outline"></ion-icon>
               </ion-button>
 
