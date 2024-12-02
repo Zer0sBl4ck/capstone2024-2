@@ -259,62 +259,72 @@ irAResena(solicitud: any): void {
 
 
   // Función para actualizar el estado de una solicitud recibida a 'desarrollo'
-  modificarEstadoSolicitud(id_prestamo: number): void {
-    // Obtener los detalles del préstamo
-    this.authService.obtenerDetallesPrestamo(id_prestamo).subscribe(
-      (prestamo) => {
-        const correoSolicitante = prestamo.correo_solicitante; // Obtener el correo del solicitante
-  
-        if (!correoSolicitante) {
-          console.error('No se pudo obtener el correo del solicitante');
-          return; // Salir si no se puede obtener el correo
-        }
-  
-        // Actualizar el estado de la solicitud a "Aceptado"
-        this.authService.actualizarEstadoSolicitud(id_prestamo).subscribe(
-          (response) => {
-            console.log('Estado de la solicitud actualizado a "Aceptado":', response);
-  
-            const titulo = 'Préstamo Aceptado';
-            const descripcion = 'Tu solicitud de préstamo ha sido aceptada. Dirígete al chat para más detalles.';
-  
-            // Verificar los datos antes de enviar la solicitud
-            console.log('Datos de la notificación:', { correo: correoSolicitante, titulo, descripcion });
-  
-            // Llamar al servicio para crear la notificación de aceptación solo para el solicitante
-            this.authService.crearNotificacionAceptacion(correoSolicitante, titulo, descripcion).subscribe(
-              (notifResponse) => {
-                console.log('Notificación de aceptación enviada al solicitante:', notifResponse);
-              },
-              (notifError) => {
-                console.error('Error al enviar la notificación de aceptación al solicitante:', notifError);
-              }
-            );
-  
-            // Crear el chat después de actualizar el estado
-            this.authService.crearChatPrestamo(id_prestamo).subscribe(
-              (chatResponse) => {
-                console.log('Chat creado exitosamente:', chatResponse);
-                // Aquí puedes agregar código adicional si necesitas manejar el chat creado
-              },
-              (chatError) => {
-                console.error('Error al crear el chat:', chatError);
-              }
-            );
-  
-            // Recargar las solicitudes después de modificar el estado
-            this.cargarSolicitudesRecibidas();
-          },
-          (error) => {
-            console.error('Error al actualizar el estado de la solicitud:', error);
-          }
-        );
-      },
-      (error) => {
-        console.error('Error al obtener los detalles del préstamo:', error);
+modificarEstadoSolicitud(id_prestamo: number): void {
+  // Obtener los detalles del préstamo
+  this.authService.obtenerDetallesPrestamo(id_prestamo).subscribe(
+    (prestamo) => {
+      const correoSolicitante = prestamo.correo_solicitante; // Obtener el correo del solicitante
+
+      if (!correoSolicitante) {
+        console.error('No se pudo obtener el correo del solicitante');
+        return; // Salir si no se puede obtener el correo
       }
-    );
-  }
+
+      // Actualizar el estado de la solicitud a "Aceptado"
+      this.authService.actualizarEstadoSolicitud(id_prestamo).subscribe(
+        (response) => {
+          console.log('Estado de la solicitud actualizado a "Aceptado":', response);
+
+          const titulo = 'Préstamo Aceptado';
+          const descripcion = 'Tu solicitud de préstamo ha sido aceptada. Dirígete al chat para más detalles.';
+
+          // Verificar los datos antes de enviar la solicitud
+          console.log('Datos de la notificación:', { correo: correoSolicitante, titulo, descripcion });
+
+          // Llamar al servicio para crear la notificación de aceptación solo para el solicitante
+          this.authService.crearNotificacionAceptacion(correoSolicitante, titulo, descripcion).subscribe(
+            (notifResponse) => {
+              console.log('Notificación de aceptación enviada al solicitante:', notifResponse);
+
+              // Crear el chat después de actualizar el estado
+              this.authService.crearChatPrestamo(id_prestamo).subscribe(
+                (chatResponse) => {
+                  console.log('Chat creado exitosamente:', chatResponse);
+                  // Aquí puedes agregar código adicional si necesitas manejar el chat creado
+
+                  // Aplicar directamente los 31 días y cambiar el estado a "Por entregar"
+                  this.modificarFechaDevolucion(id_prestamo, correoSolicitante);
+                },
+                (chatError) => {
+                  console.error('Error al crear el chat:', chatError);
+                }
+              );
+
+              // Recargar las solicitudes después de modificar el estado
+              this.cargarSolicitudesRecibidas();
+            },
+            (notifError) => {
+              console.error('Error al enviar la notificación de aceptación al solicitante:', notifError);
+            }
+          );
+        },
+        (error) => {
+          console.error('Error al actualizar el estado de la solicitud:', error);
+        }
+      );
+    },
+    (error) => {
+      console.error('Error al obtener los detalles del préstamo:', error);
+    }
+  );
+}
+
+modificarFechaDevolucion(id_prestamo: number, correoSolicitante: string): void {
+  // Aplicar directamente los 31 días
+  this.actualizarFechaDevolucion(id_prestamo, 31);
+  this.cambiarEstado(String(id_prestamo), 'Por entregar');
+  this.programarNotificacionDevolucion(id_prestamo, 31, correoSolicitante);
+}
   
 
   
@@ -380,12 +390,7 @@ irAResena(solicitud: any): void {
   
   
   
-  modificarFechaDevolucion(id_prestamo: number, correoSolicitante: string): void {
-    // Aplicar directamente los 31 días
-    this.actualizarFechaDevolucion(id_prestamo, 31);
-    this.cambiarEstado(String(id_prestamo), 'Por entregar');
-    this.programarNotificacionDevolucion(id_prestamo, 31, correoSolicitante);
-  }
+ 
 
 programarNotificacionDevolucion(id_prestamo: number, dias: number, correoSolicitante: string): void {
     console.log(`Programando notificación para el préstamo ID: ${id_prestamo}, días: ${dias}`);
