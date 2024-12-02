@@ -27,7 +27,7 @@
 
   <!-- Contenido de Chats de Préstamo -->
   <div *ngIf="selectedSegment === 'prestamo'" class="listado-chat">
-    <h2 class="titulox">Chats de Préstamo</h2>
+  
     <ion-list>
       <ion-item-sliding *ngFor="let chat of chats">
         <ion-item>
@@ -54,7 +54,7 @@
 
   <!-- Contenido de Chats de Intercambio -->
   <div *ngIf="selectedSegment === 'intercambio'" class="listado-chat">
-    <h2 class="titulox">Chats de Intercambio</h2>
+
     <ion-list>
       <ion-item-sliding *ngFor="let chat of chatsIntercambio">
         <ion-item>

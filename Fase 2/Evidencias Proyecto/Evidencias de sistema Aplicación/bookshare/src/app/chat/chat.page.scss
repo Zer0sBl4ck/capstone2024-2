@@ -26,10 +26,17 @@
 }   
 
 
+.segment-button-checked {
+    background: #00101a; // Azul al hacer clic
+    color: white; // Texto blanco para contraste
+  }
+
+
 
 
 ion-content {
     --background: #ebe7e7;
+    
 
     ion-segment {
         --background: transparent;
@@ -41,11 +48,12 @@ ion-content {
         position: center;
         justify-content: center;
         align-items: center;
+        
 
         .prestamo,
         .intercambio {
             --background: #2f4858;
-            color: #979797;
+            color: #ffffff;
             width: 100%;
             max-width: 90%;
             border: 1px solid #2f4858;
@@ -75,6 +83,7 @@ ion-content {
             width: 100%;
             max-width: 60%;
             margin-left: 20%;
+            
         }
 
         ion-list {
@@ -88,17 +97,17 @@ ion-content {
             justify-content: center;
             align-items: center;
             margin-left: 5%;
-            border: 3px solid #2f4858;
+            //border: 3px solid #2f4858;
 
             ion-item-sliding {
                 ion-item {
                     --background: transparent;
                     width: 100%;
                     max-width: 95%;
-                    --ion-item-border-color: #2f4858;
+                    --ion-item-border-color: #d3d3d3;
                     margin-top: 0.5rem;
                     margin-left: 1%;
-
+                    
                     img {
                         width: 100%;
                         max-width: 60px;

@@ -24,6 +24,12 @@
 
 }  
 
+.segment-button-checked {
+    background: #00101a; // Azul al hacer clic
+    color: white; // Texto blanco para contraste
+  }
+  
+
 ion-content {
     --background: #ebe7e7;
 
@@ -42,7 +48,7 @@ ion-content {
         .reci,
         .reali {
             --background: #2f4858;
-            color: #979797;
+            color: #ffffff;
             width: 100%;
             max-width: 90%;
             border: 1px solid #2f4858;
@@ -52,6 +58,8 @@ ion-content {
             position: center;
             justify-content: center;
             align-items: center;
+     
+              
         }
     }
     /*Mostrar solicitudes recibidas*/
@@ -66,6 +74,7 @@ ion-content {
         align-items: center;
         display: flex;
         flex-direction: column;
+        
 
         ion-card {
             --background: #2f4858;
