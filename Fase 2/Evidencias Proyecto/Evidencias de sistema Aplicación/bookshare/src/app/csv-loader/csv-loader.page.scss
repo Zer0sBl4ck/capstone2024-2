@@ -1,0 +1,100 @@
+.fondo {
+    ion-toolbar {
+        --background: #e96a24 !important;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.fondobody{
+    --background: #ebe7e7;
+}
+
+.titulo {
+    font-weight: bold; /* Texto en negrita */
+    color: #111b21; /* Color del texto */
+    font-family: "Rethink Sans", sans-serif; /* Fuente similar a WhatsApp */
+    text-align: left; /* Alineación a la izquierda */
+    font-size: 2.25rem; /* Tamaño cómodo */
+    line-height: 1.5; /* Mejora la separación vertical */
+    margin: 16px 16px ; /* Separación hacia los lados y arriba */
+    padding: 8px 0; /* Separación adicional dentro del título */
+  
+}  
+
+
+.cargarcsv {
+    --background: #ebe7e7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1rem; // Bordes más redondeados estilo iOS
+    padding: 1rem auto; // Espaciado interno amplio
+    margin: 0.75rem auto; // Centrado horizontal
+    max-width: 25rem; // Ancho máximo para pantallas grandes
+    --inner-border-width: 0rem;
+    
+  
+    input[type='file'] {
+      background-color: #f7f7f7; // Fondo claro
+      border: 2px solid #35353554;
+      border-radius: 0.75rem; // Bordes redondeados estilo iOS
+      padding: 0.625rem; // Espaciado interno
+      font-size: 0.95rem; // Tamaño del texto adecuado
+      color: #555555; // Color del texto gris oscuro
+      box-shadow: inset 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05); // Sombra interna suave
+      cursor: pointer; // Cambia el cursor al pasar el mouse
+      transition: background-color 0.3s ease;
+     
+  
+      &:hover {
+        background-color: #e9e9e9; // Fondo más oscuro al pasar el mouse
+      }
+      &:active {
+        background-color: #dddddd; // Fondo más oscuro al hacer clic
+      }
+
+
+
+    }
+}
+  
+
+
+.botonsubircsv {
+    // Fondo y bordes
+    --background: #e96a24; // Fondo naranja
+    border-radius: 2rem; // Bordes redondeados
+    --inner-border-width: 0rem; // Sin bordes internos
+  
+    // Texto
+    color: #000000; // Texto en negro oscuro
+    font-size: 1rem; // Tamaño del texto ajustado (16px)
+  
+    // Tamaño y diseño
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 1.5rem; // Espaciado interno
+    margin: 0.75rem auto; // Margen centrado horizontal
+    max-width: 12rem; // Ancho máximo
+  
+    // Efectos de hover e interacción
+    &:hover {
+      --background: #d95c1f; // Fondo ligeramente más oscuro al pasar el cursor
+      cursor: pointer;
+    }
+  
+    // Estilo para botón deshabilitado
+    &[disabled] {
+      --background: #35353554; // Fondo gris claro
+      color: #000000; // Texto gris
+      cursor: not-allowed;
+    }
+  
+    // Transición suave
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+  
