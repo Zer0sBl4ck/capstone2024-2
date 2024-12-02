@@ -11,6 +11,10 @@
 <ion-content>
   <ion-title class="titulo">Chats</ion-title>
 
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <!-- Segmento para alternar entre Préstamo e Intercambio -->
   <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
     <ion-segment-button value="prestamo" class="prestamo">

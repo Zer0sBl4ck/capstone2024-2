@@ -16,20 +16,28 @@
             color: #ffffff;
         }
 
- 
-        
+
+
     }
 }
 
 .titulo {
-    font-weight: bold; /* Texto en negrita */
-    color: #111b21; /* Color del texto */
-    font-family: "Rethink Sans", sans-serif; /* Fuente similar a WhatsApp */
-    text-align: left; /* Alineación a la izquierda */
-    font-size: 2.25rem; /* Tamaño cómodo */
-    line-height: 1.5; /* Mejora la separación vertical */
-    margin: 16px 16px 0; /* Separación hacia los lados y arriba */
-    padding: 8px 0; /* Separación adicional dentro del título */
+    font-weight: bold;
+    /* Texto en negrita */
+    color: #111b21;
+    /* Color del texto */
+    font-family: "Rethink Sans", sans-serif;
+    /* Fuente similar a WhatsApp */
+    text-align: left;
+    /* Alineación a la izquierda */
+    font-size: 2.25rem;
+    /* Tamaño cómodo */
+    line-height: 1.5;
+    /* Mejora la separación vertical */
+    margin: 16px 16px 0;
+    /* Separación hacia los lados y arriba */
+    padding: 8px 0;
+    /* Separación adicional dentro del título */
 }
 
 
@@ -97,12 +105,13 @@ ion-content {
     }
 
     .resena {
-        --background: inherit;;
+        --background: inherit;
+        ;
         border-radius: 1rem;
         width: 100%;
         max-width: 90%;
         margin-left: 5%;
-        
+
         ion-list-header {
             margin-left: -0.5%;
 
@@ -147,6 +156,7 @@ ion-content {
             }
         }
     }
+
     .resena ion-list {
         background: inherit;
         margin: 0;
@@ -165,22 +175,27 @@ ion-content {
             display: flex;
             justify-items: center;
             margin-left: 5%;
+
             ion-card-header {
                 .foto {
-                    margin-left:0rem;
+                    margin-left: 0rem;
+
                     img {
                         max-width: 50rem;
                     }
                 }
             }
+
             ion-card-content {
                 .nomusuario {
                     font-size: 1.5rem;
                 }
+
                 p {
                     font-size: 0.8rem;
                     text-align: justify;
                 }
+
                 .btn-editar {
                     max-width: 8rem;
                     font-size: 0.8rem;
@@ -188,22 +203,28 @@ ion-content {
                 }
             }
         }
+
         .resena {
             margin-left: 5%;
+
             ion-list-header {
                 margin-left: -2%;
+
                 .resenas-usuario {
                     font-size: 1rem;
                 }
             }
+
             ion-item {
                 ion-label {
                     h2 {
                         font-size: 1rem;
                     }
+
                     p {
                         font-size: 0.8rem;
                     }
+
                     .calificacion {
                         font-size: 0.8rem;
                     }
@@ -221,22 +242,27 @@ ion-content {
             display: flex;
             justify-items: center;
             margin-left: 25%;
+
             ion-card-header {
                 .foto {
                     margin-left: 10%;
+
                     img {
                         max-width: 30rem;
                     }
                 }
             }
+
             ion-card-content {
                 .nomusuario {
                     font-size: 1.5rem;
                 }
+
                 p {
                     font-size: 0.8rem;
                     text-align: justify;
                 }
+
                 .btn-editar {
                     max-width: 100%;
                     font-size: 1rem;
@@ -244,21 +270,26 @@ ion-content {
                 }
             }
         }
+
         .resena {
             max-width: 90%;
+
             ion-list-header {
                 .resenas-usuario {
                     font-size: 1rem;
                 }
             }
+
             ion-item {
                 ion-label {
                     h2 {
                         font-size: 1rem;
                     }
+
                     p {
                         font-size: 0.8rem;
                     }
+
                     .calificacion {
                         font-size: 0.8rem;
                     }

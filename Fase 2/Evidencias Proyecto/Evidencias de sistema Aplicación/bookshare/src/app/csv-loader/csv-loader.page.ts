@@ -40,4 +40,8 @@ export class CsvLoaderPage {
       }
     );
   }
+
+  retroceder() {
+    window.history.back();
+  }
 }
