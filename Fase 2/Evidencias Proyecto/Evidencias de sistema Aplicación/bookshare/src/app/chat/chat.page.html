@@ -5,78 +5,72 @@
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-   
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-title class="titulo">Chats</ion-title>
-  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
 
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
+  <!-- Segmento para alternar entre Préstamo e Intercambio -->
+  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="prestamo" class="prestamo">
+      <ion-label>Préstamo</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="intercambio" class="intercambio">
+      <ion-label>Intercambio</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Contenido de Chats de Préstamo -->
+  <div *ngIf="selectedSegment === 'prestamo'" class="listado-chat">
+    <h2 class="titulox">Chats de Préstamo</h2>
+    <ion-list>
+      <ion-item-sliding *ngFor="let chat of chats">
+        <ion-item>
+          <img class="imagen-circular" *ngIf="chat.foto_solicitante"
+            [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del solicitante" width="60px"
+            height="60px" />
+          <ion-label>
+            <h3 class="chat-titulo">{{ chat.titulo }}</h3>
+            <p>Solicitante: {{ chat.correo_usuario_prestamista }}</p>
+            <p>Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
+          </ion-label>
+          <ion-button (click)="irAlChat(chat.id_chat)">
+            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="eliminarChat(chat.id_chat)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
   </div>
 
-<!-- Chats de préstamo -->
-<div *ngIf="chats.length > 0" class="listado-chat">
-  <h2 class="titulox">Chats de Préstamo</h2>
-  <ion-list>
-    <ion-item-sliding *ngFor="let chat of chats">
-      <ion-item>
-        <img class="imagen-circular" *ngIf="chat.foto_solicitante"
-          [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del libro" width="60px" height="60px"/>
-        <ion-label class="listado-chat">
-          <h3 class="chat-titulo">{{ chat.titulo }}</h3>
-          <p class="chat-dueño-soli">Solicitante: {{ chat.correo_usuario_prestamista }}</p>
-          <p class="chat-dueño-soli">Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
-        </ion-label>
-        <ion-button (click)="irAlChat(chat.id_chat)">
-          <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-        </ion-button>
-      </ion-item>
-
-      <!-- Acción de eliminar que aparece al deslizar hacia la izquierda -->
-      <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="eliminarChat(chat.id_chat)">
-          <ion-icon class="ion-item-option" name="trash-outline" ></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-</div>
-
-<!-- Chats de intercambio -->
-<div *ngIf="chatsIntercambio.length > 0" class="listado-chat">
-  <h2 class="titulox">Chats de Intercambio</h2>
-  <ion-list>
-    <ion-item-sliding *ngFor="let chat of chatsIntercambio">
-      <ion-item>
-        <img class="imagen-circular" *ngIf="chat.foto_solicitante"
-          [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del libro" width="60px" height="60px"/>
-        <ion-label class="listado-chat">
-          <h3 class="chat-titulo"> {{ chat.titulo }} </h3>
-          <p>Solicitante: {{ chat.correo_usuario_prestamista }}</p>
-          <p>Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
-        </ion-label>
-        <ion-button (click)="irAlChat(chat.id_chat)">
-          <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-        </ion-button>
-      </ion-item>
-
-      <!-- Acción de eliminar que aparece al deslizar hacia la izquierda -->
-      <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="eliminarChatIntercambio(chat.id_chat)">
-          <ion-icon class="ion-item-option" name="trash-outline"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-</div>
-
-
-  <div *ngIf="(chats.length === 0 && chatsIntercambio.length === 0) && !errorMessage">
-    <p>No tienes chats disponibles.</p>
+  <!-- Contenido de Chats de Intercambio -->
+  <div *ngIf="selectedSegment === 'intercambio'" class="listado-chat">
+    <h2 class="titulox">Chats de Intercambio</h2>
+    <ion-list>
+      <ion-item-sliding *ngFor="let chat of chatsIntercambio">
+        <ion-item>
+          <img class="imagen-circular" *ngIf="chat.foto_solicitante"
+            [src]="'data:image/jpeg;base64,' + chat.foto_solicitante" alt="Imagen del libro" />
+          <ion-label>
+            <h3 class="chat-titulo">{{ chat.titulo }}</h3>
+            <p>Solicitante: {{ chat.correo_usuario_prestamista }}</p>
+            <p>Dueño: {{ chat.correo_usuario_solicitante || 'N/A' }}</p>
+          </ion-label>
+          <ion-button (click)="irAlChat(chat.id_chat)">
+            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="eliminarChatIntercambio(chat.id_chat)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
   </div>
 </ion-content>

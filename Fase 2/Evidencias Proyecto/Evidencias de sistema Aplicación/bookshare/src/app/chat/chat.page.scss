@@ -31,6 +31,33 @@
 ion-content {
     --background: #ebe7e7;
 
+    ion-segment {
+        --background: transparent;
+        --ion-color-primary: transparent;
+        width: 100%;
+        max-width: 95%;
+        margin-top: 1rem;
+        margin-left: 1.3rem;
+        position: center;
+        justify-content: center;
+        align-items: center;
+
+        .prestamo,
+        .intercambio {
+            --background: #2f4858;
+            color: #979797;
+            width: 100%;
+            max-width: 90%;
+            border: 1px solid #2f4858;
+            border-radius: 1rem;
+            font-size: 0.7rem;
+            font-family: "Rethink Sans", sans-serif;
+            position: center;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
     
 
     .listado-chat {

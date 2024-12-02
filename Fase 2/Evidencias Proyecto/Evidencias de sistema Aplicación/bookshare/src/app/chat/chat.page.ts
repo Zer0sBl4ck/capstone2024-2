@@ -9,10 +9,11 @@ import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
   styleUrls: ['./chat.page.scss'],
 })
 export class ChatPage implements OnInit {
-  chats: any[] = [];
-  chatsIntercambio: any[] = [];
+  chats: any[] = []; // Lista de chats de préstamo
+  chatsIntercambio: any[] = []; // Lista de chats de intercambio
   errorMessage: string | null = null;
   correoUsuario: string | null = null;
+  selectedSegment: string = 'prestamo'; // Segmento seleccionado por defecto
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -20,46 +21,50 @@ export class ChatPage implements OnInit {
     this.correoUsuario = this.authService.getUserEmail();
 
     if (this.correoUsuario) {
-      this.listarChats(this.correoUsuario);           // Para los chats de préstamo
-      this.listarChatsIntercambio(this.correoUsuario); // Para los chats de intercambio
+      // Carga los chats de préstamo e intercambio
+      this.listarChats(this.correoUsuario); 
+      this.listarChatsIntercambio(this.correoUsuario);
     } else {
       this.errorMessage = 'No se encontró el correo del usuario logeado.';
     }
   }
 
+  // Cambia el segmento seleccionado
+  segmentChanged(event: any) {
+    console.log('Segmento seleccionado:', this.selectedSegment);
+  }
+
+  // Listar chats de préstamo
   listarChats(correoUsuario: string): void {
     this.authService.listarChats(correoUsuario).subscribe(
       (response) => {
-        // Ordenar los chats por id_chat de mayor a menor (más reciente primero)
+        // Ordenar los chats por id_chat de mayor a menor
         this.chats = response.chats.sort((a: any, b: any) => b.id_chat - a.id_chat);
       },
       (error) => {
         console.error('Error al listar los chats de préstamo:', error);
-
       }
     );
   }
 
+  // Listar chats de intercambio
   listarChatsIntercambio(correoUsuario: string): void {
     this.authService.listarChatsIntercambio(correoUsuario).subscribe(
       (response) => {
-        // Ordenar los chats de intercambio por id_chat de mayor a menor (más reciente primero)
+        // Ordenar los chats por id_chat de mayor a menor
         this.chatsIntercambio = response.chats.sort((a: any, b: any) => b.id_chat - a.id_chat);
       },
       (error) => {
         console.error('Error al listar los chats de intercambio:', error);
-
       }
     );
   }
 
-
-    // Método para eliminar un chat
+  // Eliminar un chat de préstamo
   eliminarChat(chatId: number): void {
-    // Llamada a tu servicio para eliminar el chat
     this.authService.eliminarChat(chatId).subscribe(
       () => {
-        // Si el chat se elimina correctamente, se elimina de la lista
+        // Eliminar de la lista de chats de préstamo
         this.chats = this.chats.filter(chat => chat.id_chat !== chatId);
         console.log('Chat eliminado');
       },
@@ -68,32 +73,27 @@ export class ChatPage implements OnInit {
       }
     );
   }
-  // En tu archivo .ts donde gestionas los chats
 
-eliminarChatIntercambio(idChat: string): void {
-  this.authService.eliminarChatIntercambio(idChat).subscribe(
-    (response) => {
-      // Elimina el chat de la lista de chats de intercambio
-      this.chatsIntercambio = this.chatsIntercambio.filter(chat => chat.id_chat !== idChat);
-      console.log('Chat de intercambio eliminado con éxito:', idChat);
-    },
-    (error) => {
-      console.error('Error al eliminar el chat de intercambio:', error);
-    }
-  );
-}
+  // Eliminar un chat de intercambio
+  eliminarChatIntercambio(idChat: string): void {
+    this.authService.eliminarChatIntercambio(idChat).subscribe(
+      () => {
+        // Eliminar de la lista de chats de intercambio
+        this.chatsIntercambio = this.chatsIntercambio.filter(chat => chat.id_chat !== idChat);
+        console.log('Chat de intercambio eliminado con éxito:', idChat);
+      },
+      (error) => {
+        console.error('Error al eliminar el chat de intercambio:', error);
+      }
+    );
+  }
 
-
-  
-
-  
-
-  
-
+  // Navegar al chat seleccionado
   irAlChat(idChat: number) {
     this.router.navigate([`/chat-contacto/${idChat}`]);
   }
 
+  // Refrescar datos de la página
   refreshData(event: CustomEvent<RefresherEventDetail>) {
     console.log('Refrescando...');
     window.location.reload();
