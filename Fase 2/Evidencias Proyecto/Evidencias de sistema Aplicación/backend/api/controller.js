@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require('../api/db');
 const router = express.Router();
+const multer = require('multer');
+const csvParser = require('csv-parser');
+const fs = require('fs');
 
 module.exports = (io) => {
   // Manejo del evento de conexión de Socket.IO
@@ -2029,9 +2032,63 @@ WHERE p.id_usuario_prestamista = (
       res.status(500).json({ message: 'Error al obtener el id_chat' });
     }
   });
+//subir libros
+const upload = multer({ dest: 'uploads/' });
 
+router.post('/subir-csv', upload.single('archivo'), async (req, res) => {
+  const archivo = req.file;
 
+  if (!archivo) {
+    return res.status(400).json({ message: 'Debe subir un archivo CSV' });
+  }
 
+  const libros = [];
+
+  try {
+    // Leer el archivo CSV
+    fs.createReadStream(archivo.path)
+      .pipe(csvParser())
+      .on('data', (row) => {
+        libros.push(row); // Cada fila se agrega como un objeto
+      })
+      .on('end', async () => {
+        // Insertar los libros en la base de datos
+        for (const libro of libros) {
+          const { isbn, titulo, autor, descripcion, genero, imagen_libro } = libro;
+
+          // Verifica que todos los campos obligatorios estén presentes
+          if (!isbn || !titulo || !autor || !descripcion || !genero) {
+            console.error(`Faltan datos para el libro con ISBN: ${isbn}`);
+            continue;
+          }
+
+          // Convertir imagen en base64 (si está presente)
+          let imageBuffer = null;
+          if (imagen_libro) {
+            imageBuffer = Buffer.from(imagen_libro, 'base64');
+          }
+
+          try {
+            await db.query(
+              `INSERT INTO libro (isbn, titulo, autor, descripcion, genero, imagen_libro, estado) 
+              VALUES (?, ?, ?, ?, ?, ?, ?)`,
+              [isbn, titulo, autor, descripcion, genero, imageBuffer, true]
+            );
+          } catch (err) {
+            console.error(`Error al insertar el libro con ISBN ${isbn}:`, err);
+          }
+        }
+
+        // Elimina el archivo temporal
+        fs.unlinkSync(archivo.path);
+
+        res.status(200).json({ message: 'Libros cargados exitosamente', total: libros.length });
+      });
+  } catch (err) {
+    console.error('Error al procesar el archivo CSV:', err);
+    res.status(500).json({ message: 'Error al procesar el archivo CSV' });
+  }
+});
 
 
 
