@@ -12,19 +12,21 @@
     }
 }
 
+.titulo {
+    font-weight: bold; /* Texto en negrita */
+    color: #111b21; /* Color del texto */
+    font-family: "Rethink Sans", sans-serif; /* Fuente similar a WhatsApp */
+    text-align: left; /* Alineación a la izquierda */
+    font-size: 2.25rem; /* Tamaño cómodo */
+    line-height: 1.5; /* Mejora la separación vertical */
+    margin: 16px 16px ; /* Separación hacia los lados y arriba */
+    padding: 8px 0; /* Separación adicional dentro del título */
+
+}  
+
 ion-content {
     --background: #ebe7e7;
 
-    ion-title {
-        font-weight: bold;
-        color: #272727;
-        font-family: "Rethink Sans", sans-serif;
-        font-size: 2rem;
-        text-align: start;
-        width: 100%;
-        max-width: 95%;
-        margin-top: 0.5rem;
-    }
 
     ion-segment {
         --background: transparent;
@@ -95,7 +97,7 @@ ion-content {
             }
             /*----------------BOTONES----------------*/
             .aceptar {
-                --background: #e96a24;
+                --background: #001c2e;
                 color: #ffffff;
                 font-family: "Rethink Sans", sans-serif;
                 font-size: 0.7rem;
@@ -105,7 +107,7 @@ ion-content {
             }
 
             .rechazar {
-                --background: #ff0000;
+                --background: #b30000;
                 color: #ffffff;
                 font-family: "Rethink Sans", sans-serif;
                 font-size: 0.7rem;
@@ -115,7 +117,7 @@ ion-content {
             }
 
             .devolucion {
-                --background: #e96a24;
+                --background: #001c2e;
                 color: #ffffff;
                 font-family: "Rethink Sans", sans-serif;
                 font-size: 0.7rem;
@@ -135,7 +137,7 @@ ion-content {
             }
 
             .entregado {
-                --background: #176e17;
+                --background: #001c2e;
                 color: #ffffff;
                 font-family: "Rethink Sans", sans-serif;
                 font-size: 0.7rem;
@@ -145,7 +147,7 @@ ion-content {
             }
 
             .repsoli {
-                --background: #8d4e1b;
+                --background: #b30000;
                 color: #ffffff;
                 font-family: "Rethink Sans", sans-serif;
                 font-size: 0.7rem;
@@ -155,7 +157,7 @@ ion-content {
             }
 
             .condev {
-                --background: #176e17;
+                --background: #001c2e;
                 color: #ffffff;
                 font-family: "Rethink Sans", sans-serif;
                 font-size: 0.7rem;
@@ -219,7 +221,7 @@ ion-content {
 
             /*----------------BOTONES----------------*/
             .cancelar {
-                --background: #ff0000;
+                --background: #b30000;
                 color: #ffffff;
                 font-family: "Rethink Sans", sans-serif;
                 font-size: 0.7rem;
@@ -229,7 +231,7 @@ ion-content {
             }
 
             .chat {
-                --background: #2442e9;
+                --background: #2473e9;
                 color: #ffffff;
                 font-family: "Rethink Sans", sans-serif;
                 font-size: 0.7rem;
@@ -239,7 +241,7 @@ ion-content {
             }
 
             .repdue {
-                --background: #8d4e1b;
+                --background: #b30000;
                 color: #ffffff;
                 font-family: "Rethink Sans", sans-serif;
                 font-size: 0.7rem;
@@ -249,7 +251,7 @@ ion-content {
             }
 
             .recepcion {
-                --background: #176e17;
+                --background: #001c2e;
                 color: #ffffff;
                 font-family: "Rethink Sans", sans-serif;
                 font-size: 0.7rem;
@@ -259,7 +261,7 @@ ion-content {
             }
 
             .devolver {
-                --background: #176e17;
+                --background: #001c2e;
                 color: #ffffff;
                 font-family: "Rethink Sans", sans-serif;
                 font-size: 0.7rem;

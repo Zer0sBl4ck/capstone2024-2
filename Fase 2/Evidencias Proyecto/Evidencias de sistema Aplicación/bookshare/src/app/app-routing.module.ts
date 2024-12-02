@@ -95,6 +95,10 @@ const routes: Routes = [
   {
     path: 'notificaciones',
     loadChildren: () => import('./notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
+  },
+  {
+    path: 'csv-loader',
+    loadChildren: () => import('./csv-loader/csv-loader.module').then( m => m.CsvLoaderPageModule)
   }
 
 

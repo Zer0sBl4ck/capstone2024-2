@@ -507,6 +507,10 @@ marcarEstadoComoEntregado(id_prestamo: number): Observable<any> {
     const url = `${this.apiUrl}/obtener-id-cha/${id_estado}`;
     return this.http.get(url);
   }
+  subirCSV(formData: FormData): Observable<any> {
+    const url = `${this.apiUrl}/subir-csv`; // Endpoint del backend
+    return this.http.post(url, formData);
+  }
   
   
   

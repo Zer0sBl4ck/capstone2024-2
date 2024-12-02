@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>CSV Loader</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label>Seleccionar archivo CSV</ion-label>
+      <input type="file" (change)="onFileChange($event)" accept=".csv" required />
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!csvFile">
+      Cargar CSV
+    </ion-button>
+  </form>
+</ion-content>

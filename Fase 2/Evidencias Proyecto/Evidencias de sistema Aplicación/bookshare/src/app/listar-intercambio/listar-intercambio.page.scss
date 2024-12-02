@@ -12,19 +12,21 @@
     }
 }
 
+.titulo {
+    font-weight: bold; /* Texto en negrita */
+    color: #111b21; /* Color del texto */
+    font-family: "Rethink Sans", sans-serif; /* Fuente similar a WhatsApp */
+    text-align: left; /* Alineación a la izquierda */
+    font-size: 2.25rem; /* Tamaño cómodo */
+    line-height: 1.5; /* Mejora la separación vertical */
+    margin: 16px 16px ; /* Separación hacia los lados y arriba */
+    padding: 8px 0; /* Separación adicional dentro del título */
+
+}  
+
 ion-content {
     --background: #ebe7e7;
 
-    .titulo {
-        font-weight: bold;
-        color: #111b21;
-        font-family: "Rethink Sans", sans-serif;
-        text-align: start;
-        font-size: 2rem;
-        line-height: 1.5;
-        margin: 16px 16px 0;
-        padding: 8px 0;
-    }
 
     ion-segment {
         --background: transparent;
@@ -57,11 +59,12 @@ ion-content {
         background: transparent;
         width: 100%;
         max-width: 95%;
-        margin-top: 0.5rem;
-        border-radius: 7px;
+        margin-top: 1rem;
+        margin-left: 1rem;
+        border-radius: 1rem;
         justify-content: center;
         align-items: center;
-        margin-left: 2%;
+        display: flex;
         flex-direction: column;
 
 
@@ -69,8 +72,12 @@ ion-content {
             --background: #2f4858;
             width: 100%;
             max-width: 95%;
+            
             height: auto;
-            border-radius: 1rem;
+            border-radius: 2rem;
+       
+       
+           
 
             ion-card-header {
                 ion-card-title {
@@ -90,7 +97,7 @@ ion-content {
 
                 /*----------------BOTONES----------------*/
                 .confirmar {
-                    --background: #e96a24;
+                    --background: #001c2e;
                     color: #ffffff;
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.7rem;
@@ -100,7 +107,7 @@ ion-content {
                 }
                 
                 .cancelar {
-                    --background: #ff0000;
+                    --background: #b30000;
                     color: #ffffff;
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.7rem;
@@ -110,7 +117,7 @@ ion-content {
                 }
 
                 .intercambiado {
-                    --background: #2f8479;
+                    --background: #001c2e;
                     color: #ffffff;
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.7rem;
@@ -149,7 +156,7 @@ ion-content {
         width: 100%;
         max-width: 95%;
         margin-top: 0.5rem;
-        margin-left: 2%;
+        margin-left: 2.5%;
         border-radius: 7px;
         justify-content: center;
         align-items: center;
@@ -161,7 +168,7 @@ ion-content {
             width: 100%;
             max-width: 95%;
             height: auto;
-            border-radius: 1rem;
+            border-radius: 2rem;
 
             ion-card-header {
                 ion-card-title {
@@ -181,7 +188,7 @@ ion-content {
 
                 /*----------------BOTONES----------------*/
                 .verlibros {
-                    --background: #e96a24;
+                    --background: #001c2e;
                     color: #ffffff;
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.7rem;
@@ -191,7 +198,7 @@ ion-content {
                 }
     
                 .cancelar {
-                    --background: #ff0000;
+                    --background: #b30000;
                     color: #ffffff;
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.7rem;
@@ -201,10 +208,10 @@ ion-content {
                 }
 
                 .confirmar {
-                    --background: #e96a24;
+                    --background: #001c2e;
                     color: #ffffff;
                     font-family: "Rethink Sans", sans-serif;
-                    font-size: 0.7rem;
+                    font-size: 0.6rem;
                     width: 100%;
                     max-width: 5rem;
                     --border-radius: 20px;
@@ -221,7 +228,7 @@ ion-content {
                 }
 
                 .reportarsoli {
-                    --background: #8d4e1b;
+                    --background: #b30000;
                     color: #ffffff;
                     font-family: "Rethink Sans", sans-serif;
                     font-size: 0.7rem;
@@ -235,12 +242,12 @@ ion-content {
     }
 
     ion-card {
-        --background: #2f4858;
+        background: #2f4858;
         width: 100%;
         max-width: 95%;
         height: auto;
-        border-radius: 1rem;
-        margin-left: 2.5%;
+        border-radius: 2rem;
+ 
 
         ion-card-header {
             ion-card-title {
