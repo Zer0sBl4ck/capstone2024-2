@@ -22,6 +22,7 @@ interface Libro {
   styleUrls: ['./listar-libro.page.scss'],
 })
 export class ListarLibroPage implements OnInit {
+  generos: string[] = []; // Lista de géneros disponibles
   libros: Libro[] = []; // Cambiar el tipo de libros a Libro[]
   esAdmin: boolean = false;
   rol: string | null = null; // Variable para almacenar el rol del usuario
@@ -38,6 +39,7 @@ export class ListarLibroPage implements OnInit {
   ngOnInit() {
     this.cargarLibros(); 
     this.rol = this.authService.getUserRole(); 
+    this.cargarGeneros();
     this.verificarRol(); // Asegurarse de verificar el rol del usuario
     this.userEmail = this.authService.getUserEmail(); 
   }
@@ -186,5 +188,15 @@ export class ListarLibroPage implements OnInit {
     this.librosFiltrados = this.genero
       ? this.libros.filter(libro => libro.genero === this.genero)
       : this.libros;
+  }
+  cargarGeneros() {
+    this.authService.obtenerGeneros().subscribe(
+      (data) => {
+        this.generos = data.map((genero: any) => genero.nombre); // Asume que los géneros tienen un campo `nombre`
+      },
+      (error) => {
+        console.error('Error al cargar los géneros:', error);
+      }
+    );
   }
 }
