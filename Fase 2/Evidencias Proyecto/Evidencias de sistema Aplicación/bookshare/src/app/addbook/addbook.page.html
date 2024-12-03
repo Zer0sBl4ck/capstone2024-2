@@ -66,34 +66,9 @@
     <ion-item>
       <ion-label position="stacked">Género</ion-label>
       <ion-select class="opcion" placeholder="Seleccione una opción" [(ngModel)]="genero" name="genero" required>
-        <ion-select-option value="Aventura">Aventura</ion-select-option>
-        <ion-select-option value="Autoayuda">Autoayuda</ion-select-option>
-        <ion-select-option value="Bibliografia y autobiografia">Bibliografía y autobiografía</ion-select-option>
-        <ion-select-option value="Ciencia Ficción">Ciencia ficción</ion-select-option>
-        <ion-select-option value="Comics y Novela grafica">Comics y novela gráfica</ion-select-option>
-        <ion-select-option value="Divulgacion Cientifica">Divulgación científica</ion-select-option>
-        <ion-select-option value="Drama">Drama</ion-select-option>
-        <ion-select-option value="Educativo">Educativo</ion-select-option>
-        <ion-select-option value="Ensayo">Ensayo</ion-select-option>
-        <ion-select-option value="Fantasia">Fantasia</ion-select-option>
-        <ion-select-option value="Ficción">Ficción</ion-select-option>
-        <ion-select-option value="Ficcion Contemporanea">Ficción contemporánea</ion-select-option>
-        <ion-select-option value="Historia">Historia</ion-select-option>
-        <ion-select-option value="Historico">Histórico</ion-select-option>
-        <ion-select-option value="Horror">Horror</ion-select-option>
-        <ion-select-option value="Humor">Humor</ion-select-option>
-        <ion-select-option value="Juvenil">Juvenil</ion-select-option>
-        <ion-select-option value="Literatura clasica">Literatura clásica</ion-select-option>
-        <ion-select-option value="Misterio">Misterio</ion-select-option>
-        <ion-select-option value="Novela historica">Novela histórica</ion-select-option>
-        <ion-select-option value="Poesia">Poesía</ion-select-option>
-        <ion-select-option value="Policiaco">Policíaco</ion-select-option>
-        <ion-select-option value="Psicologia">Psicología</ion-select-option>
-        <ion-select-option value="Religioso y espiritual">Religioso y espiritual</ion-select-option>
-        <ion-select-option value="Romance">Romance</ion-select-option>
-        <ion-select-option value="Terror">Terror</ion-select-option>
-        <ion-select-option value="Thriller">Thriller</ion-select-option>
-        <ion-select-option value="Suspenso">Suspenso</ion-select-option>
+        <ion-select-option *ngFor="let genero of generos" [value]="genero.nombre">
+          {{ genero.nombre }}
+        </ion-select-option>
       </ion-select>
     </ion-item>
     <div class="aviso" *ngIf="libroForm.controls['genero']?.invalid && (libroForm.controls['genero']?.touched || libroForm.submitted)">

@@ -2137,7 +2137,45 @@ router.post('/subir-csv', upload.single('archivo'), async (req, res) => {
     res.status(500).json({ message: 'Error al procesar el archivo CSV' });
   }
 });
+router.post('/generos', async (req, res) => {
+  const { nombre } = req.body; // Corregir para acceder directamente al campo `nombre`
+  
+  if (!nombre || typeof nombre !== 'string' || nombre.trim() === '') {
+    return res.status(400).json({ message: 'El nombre del género es obligatorio y debe ser una cadena válida' });
+  }
 
+  try {
+    // Insertar el género en la base de datos
+    const result = await db.query(
+      'INSERT INTO genero (nombre) VALUES (?)',
+      [nombre.trim()] // Asegurarse de limpiar espacios en blanco
+    );
+
+    res.status(201).json({
+      message: 'Género insertado exitosamente',
+      id_genero: result.insertId, // Devuelve el ID generado
+    });
+  } catch (err) {
+    console.error('Error al insertar el género:', err);
+    
+    // Manejar errores específicos, por ejemplo, género duplicado
+    if (err.code === 'ER_DUP_ENTRY') {
+      return res.status(409).json({ message: 'El género ya existe' });
+    }
+
+    res.status(500).json({ message: 'Error al insertar el género' });
+  }
+});
+
+router.get('/generos', async (req, res) => {
+  try {
+    const [generos] = await db.query('SELECT * FROM genero');
+    res.status(200).json(generos);
+  } catch (err) {
+    console.error('Error al obtener los géneros:', err);
+    res.status(500).json({ message: 'Error al obtener los géneros' });
+  }
+});
 
 
 

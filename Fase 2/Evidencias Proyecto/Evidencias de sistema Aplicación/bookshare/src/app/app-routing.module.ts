@@ -99,6 +99,10 @@ const routes: Routes = [
   {
     path: 'csv-loader',
     loadChildren: () => import('./csv-loader/csv-loader.module').then( m => m.CsvLoaderPageModule)
+  },
+  {
+    path: 'add-genero',
+    loadChildren: () => import('./add-genero/add-genero.module').then( m => m.AddGeneroPageModule)
   }
 
 

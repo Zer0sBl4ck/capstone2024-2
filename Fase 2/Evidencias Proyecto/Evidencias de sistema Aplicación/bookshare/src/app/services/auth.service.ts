@@ -515,6 +515,14 @@ marcarEstadoComoEntregado(id_prestamo: number): Observable<any> {
     const url = `${this.apiUrl}/subir-csv`; // Endpoint del backend
     return this.http.post(url, formData);
   }
+  obtenerGeneros(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/generos`);
+  }
+
+  agregarGenero(nombre: string): Observable<any> {
+    console.log(nombre)
+    return this.http.post(`${this.apiUrl}/generos`, { nombre });
+  }
   
   
   

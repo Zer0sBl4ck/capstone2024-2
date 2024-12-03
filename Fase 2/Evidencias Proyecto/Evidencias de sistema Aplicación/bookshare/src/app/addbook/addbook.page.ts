@@ -16,10 +16,12 @@ export class AddbookPage implements OnInit {
   descripcion: string = '';
   genero: string = '';
   imagen_libro: string | null = null; 
+  generos: any[] = [];
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.cargarGeneros();
   }
 
   onFileSelected(event: Event) {
@@ -76,6 +78,16 @@ export class AddbookPage implements OnInit {
         refresher.complete();  // Indica que el refresco se completó
       }
     }, 2000);
+  }
+  cargarGeneros() {
+    this.authService.obtenerGeneros().subscribe(
+      (data) => {
+        this.generos = data;
+      },
+      (error) => {
+        console.error('Error al cargar géneros:', error);
+      }
+    );
   }
   
 }
