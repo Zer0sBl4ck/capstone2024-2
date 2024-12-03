@@ -6,7 +6,7 @@
         justify-content: center;
         align-items: center;
 
-        
+
 
         ion-icon {
             color: #ffffff;
@@ -21,24 +21,29 @@ ion-content {
     align-items: center;
 
     .titulo {
-        font-weight: bold; /* Texto en negrita */
-        color: #111b21; /* Color del texto */
-        font-family: "Rethink Sans", sans-serif; /* Fuente similar a WhatsApp */
-        text-align: left; /* Alineación a la izquierda */
-        font-size: 2.25rem; /* Tamaño cómodo */
-        line-height: 1.5; /* Mejora la separación vertical */
-        margin: 16px 16px ; /* Separación hacia los lados y arriba */
-        padding: 8px 0; /* Separación adicional dentro del título */
+        font-weight: bold;
+        /* Texto en negrita */
+        color: #111b21;
+        /* Color del texto */
+        font-family: "Rethink Sans", sans-serif;
+        /* Fuente similar a WhatsApp */
+        text-align: left;
+        /* Alineación a la izquierda */
+        font-size: 2.25rem;
+        /* Tamaño cómodo */
+        line-height: 1.5;
+        /* Mejora la separación vertical */
+        margin: 16px 16px;
+        /* Separación hacia los lados y arriba */
+        padding: 8px 0;
+        /* Separación adicional dentro del título */
         margin-bottom: 2rem;
-    }   
-
-    
-
-    
+    }
 
     ion-item {
         --background: #ffffff !important;
-        max-width: 80%; /* Cambia el ancho máximo */
+        max-width: 80%;
+        /* Cambia el ancho máximo */
         width: 100%;
         margin-left: 10%;
         justify-content: center;
@@ -47,81 +52,86 @@ ion-content {
         justify-content: center;
         box-sizing: border-box;
         align-items: center;
-        border-radius: 1rem; /* Bordes redondeados */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-        transition: transform 0.2s, box-shadow 0.2s; /* Animación suave al interactuar */
+        border-radius: 1rem;
+        /* Bordes redondeados */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Sombra ligera */
+        transition: transform 0.2s, box-shadow 0.2s;
+        /* Animación suave al interactuar */
         --ion-item-border-color: transparent;
-        
+
     }
-    
+
     /* Efectos al interactuar */
     ion-item:hover {
-        transform: scale(1.02); /* Pequeño aumento */
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+        transform: scale(1.02);
+        /* Pequeño aumento */
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        /* Sombra más pronunciada */
     }
-        
 
-        .imagen {
-            border-radius: 8%;
+
+    .imagen {
+        border-radius: 1rem;
+        width: 100%;
+        height: 100%;
+        max-width: 121rem;
+        max-height: 200px;
+        /*margin-left: 4rem;*/
+    }
+
+    ion-label {
+        .titulo {
+            font-size: 1.5rem;
+            color: #000000;
+            font-family: "Rethink Sans", sans-serif;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .prestamo,
+        .intercambio,
+        .eliminar {
+            --background: #e96a24;
+            font-size: 1rem;
+            color: #ffffff;
+            font-family: "Rethink Sans", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
             width: 100%;
-            max-width: 6%;
-            height: auto;
+            max-width: 90%;
             margin-left: 5%;
-            /*margin-left: 4rem;*/
+            /*margin-left: 2rem;*/
         }
 
-        ion-label {
-            .titulo {
-                font-size: 1.5rem;
-                color: #000000;
-                font-family: "Rethink Sans", sans-serif;
-                font-weight: bold;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-            }
-
-            .prestamo,
-            .intercambio,
-            .eliminar {
-                --background: #e96a24;
-                font-size: 1rem;
-                color: #ffffff;
-                font-family: "Rethink Sans", sans-serif;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-                width: 100%;
-                max-width: 90%;
-                margin-left: 5%;
-                /*margin-left: 2rem;*/
-            }
-
-            .eliminar {
-                --background: #c92929;
-            }
+        .eliminar {
+            --background: #c92929;
         }
     }
+}
 
 
 @media (max-width: 600px) {
     ion-content {
         ion-item {
             max-width: 85%;
-            margin-left: 5%;
+            margin-left: 8%;
 
             .imagen {
-                max-width: 25%;
-                height: auto;
-                margin-left: 12%;
+                max-width: 121px;
+                max-height: 200px;
+                margin-left: 0%;
             }
 
             ion-label {
                 .titulo {
                     font-size: 0.9rem;
-                    margin-left: -2%;
+                    margin-left: 1%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -147,24 +157,23 @@ ion-content {
             margin-left: 20%;
 
             .imagen {
-                max-width: 15%;
-                height: auto;
-                margin-left: 18%;
+                max-width: 121px;
+                max-height: 200px;
+            }
+        }
+
+        ion-label {
+            .titulo {
+                font-size: 1rem;
+                margin-left: -10%;
             }
 
-            ion-label {
-                .titulo {
-                    font-size: 1rem;
-                    margin-left: -10%;
-                }
-
-                .prestamo,
-                .intercambio,
-                .eliminar {
-                    font-size: 0.8rem;
-                    max-width: 70%;
-                    margin-left: 5%;
-                }
+            .prestamo,
+            .intercambio,
+            .eliminar {
+                font-size: 0.8rem;
+                max-width: 70%;
+                margin-left: 5%;
             }
         }
     }

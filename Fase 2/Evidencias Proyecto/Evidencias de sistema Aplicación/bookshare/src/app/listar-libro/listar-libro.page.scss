@@ -106,10 +106,10 @@ ion-content {
                             .imagen {
                                 object-fit: cover;
                                 border-radius: 1rem;
-                                width: 100%;
+                                width: 121;
                                 max-width: 8rem;
                                 height: 100%;
-                                max-height: 12rem;
+                                max-height: 200px;
                                 margin-top: 0.5rem;
                             }
                         }
@@ -230,14 +230,6 @@ ion-content {
             ion-row {
                 ion-col {
                     ion-card {
-                        ion-card-header {
-                            .libro {
-                                .imagen {
-                                    max-width: 8rem;
-                                    max-height: 12rem;
-                                }
-                            }
-                        }
                         ion-card-content {
                             .titulo {
                                 font-size: 0.8rem;
