@@ -41,11 +41,13 @@
 
           <ion-card-content>
             <ion-card-title class="titulo"> {{ libro.titulo }} </ion-card-title>
+            <p><strong>Autor</strong> </p>
+            <p> {{ libro.autor }}</p>
 
-            <p><strong>Autor:</strong> {{ libro.autor }}</p>
+            <p><strong>Género</strong> </p>
+            <p> {{ libro.genero }}</p>
 
-            <p><strong>Género:</strong> {{ libro.genero }}</p>
-            <p>ISBN: {{ libro.isbn }}</p>
+            
 
             <!-- Botones-->
             <ion-button class="vista" expand="block" [routerLink]="['/vista-libro', libro.isbn]">
