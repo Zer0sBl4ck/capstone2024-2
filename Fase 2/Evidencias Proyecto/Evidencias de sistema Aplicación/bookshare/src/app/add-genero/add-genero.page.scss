@@ -1,0 +1,56 @@
+.fondo {
+    ion-toolbar {
+        --background: #e96a24 !important;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.fondobody{
+    --background: #ebe7e7;
+}
+
+.titulo {
+    font-weight: bold; /* Texto en negrita */
+    color: #111b21; /* Color del texto */
+    font-family: "Rethink Sans", sans-serif; /* Fuente similar a WhatsApp */
+    text-align: left; /* Alineación a la izquierda */
+    font-size: 2.25rem; /* Tamaño cómodo */
+    line-height: 1.5; /* Mejora la separación vertical */
+    margin: 16px 16px ; /* Separación hacia los lados y arriba */
+    padding: 8px 0; /* Separación adicional dentro del título */
+  
+}  
+
+ion-card {
+    margin: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+  
+  ion-card-header {
+    background-color: #ffffff;
+    padding: 13px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    text-align: center;
+  
+    ion-card-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #333;
+    }
+  } 
+
+  ion-item {
+    --background: transparent;
+    color: #111b21;
+    --border-radius: 8px;
+    --padding-start: 10px;
+    --padding-end: 10px;
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+

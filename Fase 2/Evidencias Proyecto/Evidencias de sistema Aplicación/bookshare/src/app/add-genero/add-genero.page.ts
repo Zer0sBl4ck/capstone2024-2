@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';  // Importamos ToastController
 
 @Component({
   selector: 'app-add-genero',
@@ -10,11 +11,15 @@ import { Router } from '@angular/router';
 export class AddGeneroPage implements OnInit {
   nuevoGenero: string = ''; // Variable para almacenar el nuevo género
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastController: ToastController // Inyectamos ToastController
+  ) {}
 
   ngOnInit() {}
 
-  onSubmit() {
+  async onSubmit() {
     if (this.nuevoGenero.trim() === '') {
       console.error('El género no puede estar vacío');
       return;
@@ -22,16 +27,33 @@ export class AddGeneroPage implements OnInit {
 
     // Llamar al servicio para agregar el género
     this.authService.agregarGenero(this.nuevoGenero).subscribe(
-      (response) => {
+      async (response) => {
         console.log('Género agregado:', response);
-        alert('Género agregado exitosamente');
+        // Mostrar la alerta de éxito usando ion-toast
+        const toast = await this.toastController.create({
+          message: 'Género agregado exitosamente',
+          duration: 2000,
+          color: 'success',
+        });
+        toast.present();
         this.nuevoGenero = ''; // Limpiar el campo después de agregar
         this.router.navigate(['/']); // Redirigir al inicio u otra página
       },
       (error) => {
         console.error('Error al agregar género:', error);
-        alert('Hubo un error al agregar el género');
+        // Mostrar alerta de error
+        this.showErrorToast();
       }
     );
+  }
+
+  // Método para mostrar un toast de error
+  async showErrorToast() {
+    const toast = await this.toastController.create({
+      message: 'Hubo un error al agregar el género',
+      duration: 2000,
+      color: 'danger',
+    });
+    toast.present();
   }
 }
