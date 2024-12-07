@@ -19,8 +19,9 @@ export class AddbookUserPage implements OnInit {
   toastMessage = { isOpen: false, message: '', color: '' }; // Manejo del toast
 
   constructor(private authService: AuthService, private router: Router, private toastController: ToastController) { }
-
+  generos: any[] = [];
   ngOnInit() {
+    this.cargarGeneros();
   }
 
   // Maneja la selección de archivo para la imagen
@@ -96,5 +97,16 @@ export class AddbookUserPage implements OnInit {
         refresher.complete();  // Indica que el refresco se completó
       }
     }, 2000);
+  }
+  cargarGeneros() {
+    this.authService.obtenerGeneros().subscribe(
+      (data) => {
+        this.generos = data;
+        console.log(this.generos)
+      },
+      (error) => {
+        console.error('Error al cargar los géneros', error);
+      }
+    );
   }
 }
