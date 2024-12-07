@@ -68,7 +68,7 @@
             <ion-button class="condev" *ngIf="solicitud.estado_prestamo === 'Libro devuelto'"
               (click)="cambiarEstado(solicitud.id_prestamo,'Devolucion confirmada')">Confirmar devolucion</ion-button>
 
-            <ion-button class="chatear" *ngIf="solicitud.estado_prestamo !== 'pendiente'"
+            <ion-button class="chatear" *ngIf="solicitud.estado_prestamo !== 'pendiente' && solicitud.estado_prestamo !== 'Devolucion confirmada' && solicitud.estado_prestamo !== 'Reseña Agregada'  "
               (click)="obtenerIdChat(solicitud.id_prestamo)">chat</ion-button>
 
             <!--'aceptado' -->
@@ -137,7 +137,7 @@
             <ion-button class="resena" *ngIf="solicitud.estado_prestamo === 'Devolucion confirmada'"
               (click)="irAResena(solicitud)">Dar Reseña</ion-button>
 
-            <ion-button class="chat" *ngIf="solicitud.estado_prestamo !== 'pendiente'"
+            <ion-button class="chat" *ngIf="solicitud.estado_prestamo !== 'pendiente' && solicitud.estado_prestamo !== 'Devolucion confirmada' && solicitud.estado_prestamo !== 'Reseña Agregada'"
               (click)="obtenerIdChat(solicitud.id_prestamo)">chat</ion-button>
 
             <ion-button class="repdue" (click)="reportarUsuario(solicitud.id_prestamista,solicitud.id_solicitante)"

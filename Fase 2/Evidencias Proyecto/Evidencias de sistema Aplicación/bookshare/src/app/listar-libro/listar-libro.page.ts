@@ -3,7 +3,6 @@ import { AuthService } from '../services/auth.service';
 import { AlertController } from '@ionic/angular'; 
 import { Router } from '@angular/router'; 
 import { PopoverController } from '@ionic/angular';
-import { VistaLibroPage } from '../vista-libro/vista-libro.page'; // Importa el componente
 import { RefresherEventDetail, IonRefresher } from '@ionic/angular';
 
 
@@ -142,14 +141,12 @@ export class ListarLibroPage implements OnInit {
 
   // Función para buscar libros
   buscarLibros(event: any) {
-    const query = event.target.value.toLowerCase();
-    this.authService.getLibros().subscribe((data) => {
-      this.libros = data.filter((libro: Libro) => // Especificar el tipo aquí
-        libro.titulo.toLowerCase().includes(query) || 
-        libro.autor.toLowerCase().includes(query)|| 
-        libro.genero.toLowerCase().includes(query) 
-      );
-    });
+    const query = event.target.value?.toLowerCase() || ''; // Maneja el caso de query vacío
+    this.librosFiltrados = this.libros.filter((libro: Libro) =>
+      libro.titulo.toLowerCase().includes(query) ||
+      libro.autor.toLowerCase().includes(query) ||
+      libro.genero.toLowerCase().includes(query)
+    );
   }
   async agregarAFavoritos(libro: Libro) {
     const usuario = this.authService.getUserData(); // Obtener datos del usuario

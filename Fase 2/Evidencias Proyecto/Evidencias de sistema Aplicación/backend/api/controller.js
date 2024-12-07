@@ -420,7 +420,8 @@ module.exports = (io) => {
        FROM resena r
        JOIN usuario u ON r.id_usuario = u.id_usuario
        JOIN libro l ON r.isbn = l.isbn
-       WHERE u.correo = ?`,
+       WHERE u.correo = ? 
+       ORDER BY r.creado_en DESC`,
         [userEmail]
       );
 
