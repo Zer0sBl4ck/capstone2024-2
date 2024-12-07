@@ -31,7 +31,9 @@ export class ListarLibroSolicitudPage implements OnInit {
   modificarEstado(isbn: string): void {
     this.authService.modificarLibroEstado(isbn).subscribe(
       () => {
-        this.cargarLibros(); // Recargar la lista después de modificar el estado
+        this.cargarLibros();
+        alert("Libro agregado correctamente")
+        window.location.reload();
       },
       (error) => {
         console.error('Error al modificar el estado del libro:', error);
@@ -43,6 +45,8 @@ export class ListarLibroSolicitudPage implements OnInit {
     this.authService.eliminarLibro(isbn).subscribe(
       () => {
         this.cargarLibros(); // Recargar la lista después de eliminar
+        alert("libro rechazado")
+        window.location.reload();
       },
       (error) => {
         console.error('Error al eliminar el libro:', error);

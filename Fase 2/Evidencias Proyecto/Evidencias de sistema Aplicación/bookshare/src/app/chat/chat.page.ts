@@ -16,7 +16,7 @@ export class ChatPage implements OnInit {
   selectedSegment: string = 'prestamo'; // Segmento seleccionado por defecto
 
   constructor(private authService: AuthService, private router: Router) { }
-
+  private refreshInterval: any;
   ngOnInit() {
     this.correoUsuario = this.authService.getUserEmail();
 
@@ -27,6 +27,17 @@ export class ChatPage implements OnInit {
     } else {
       this.errorMessage = 'No se encontró el correo del usuario logeado.';
     }
+  
+    this.refreshInterval = setInterval(() => {
+      if (this.correoUsuario) {
+        this.listarChats(this.correoUsuario);
+        this.listarChatsIntercambio(this.correoUsuario);
+      } else {
+        console.error("correoUsuario es null");
+      }
+    }, 3000);
+
+
   }
 
   // Cambia el segmento seleccionado
